@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 22:19:55 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/02 15:25:54 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/03 18:23:10 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,5 @@ ssize_t			get_next_line(const int fd, char **line)
 		ft_lstdel(&gnl.fd_lst, fd_lst_clear);
 	if (!(*gnl.cur_fd)->buf && !gnl.read_ret)
 		clear_fd_node(&gnl);
-	if (gnl.ret > 0)
-		gnl.ret = 1;
 	return (gnl.ret);
 }
