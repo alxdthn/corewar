@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printer.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 18:08:26 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/03 18:24:54 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/03 18:58:07 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int		main(int ac, char **av)
 	char	*str;
 	int		fd;
 	size_t	ret;
+	int		j;
 
 	i = 0;
 	str = 0;
@@ -25,7 +26,10 @@ int		main(int ac, char **av)
 	ret = get_next_line(fd, &str);
 	while (i < ret)
 	{
-		ft_printf("%#.5b", str[i++]);
+		ft_printf("%.2hhx", str[i++]);
+		ft_printf("%.2hhx ", str[i]);
+		i++;
 	}
+	ft_printf("\n");
 	return (0);
 }
