@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 18:08:26 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/03 18:24:54 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/03 18:32:07 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int		main(int ac, char **av)
 	char	*str;
 	int		fd;
 	size_t	ret;
+	int		j;
 
 	i = 0;
 	str = 0;
@@ -25,7 +26,10 @@ int		main(int ac, char **av)
 	ret = get_next_line(fd, &str);
 	while (i < ret)
 	{
-		ft_printf("%#.5b", str[i++]);
+		j = 0;
+		while (j < 16)
+			ft_printf("%.4x ", str[i] << (j += 4) & 0xFF000000);
+		i++;
 	}
 	return (0);
 }
