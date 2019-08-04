@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:12:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/03 21:23:12 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/04 14:29:49 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 # define COREWAR_H
 # include "libft.h"
 # include "ft_printf.h"
+# include "op.h"
 /*
 **	common part
 */
-void	printer(char *av);
+void	print_memory(char *av);
 /*
 **	asm part
 */

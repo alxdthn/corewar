@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/03 20:54:43 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/04 14:07:05 by nalexand         ###   ########.fr        #
+#    Updated: 2019/08/04 14:38:07 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ override ARFLAGS = rcs
 CFLAGS = -g
 
 HEADER = -I includes -I libftprintf/includes
-INCLUDES = corewar.h
+INCLUDES = corewar.h op.h
 
 CORE = corewar
 ASM = asm
@@ -32,7 +32,8 @@ LIBFT = libftprintf/libftprintf.a
 OBJ_DIR = obj/
 LIB_DIR = lib/
 
-COM_SRC =	printer.c
+COM_SRC =	print_memory.c \
+			op.c
 
 CORE_SRC =	corewar.c
 

@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:10:58 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/03 21:12:28 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/04 14:38:55 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		main(int ac, char **av)
 {
 	if (ac == 2)
-		printer(av[1]);
+		print_memory(av[1]);
 	else
 		ft_putstr("no arg!\n");
 	return (0);
