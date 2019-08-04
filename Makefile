@@ -6,7 +6,7 @@
 #    By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/03 20:54:43 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/04 15:39:33 by skrystin         ###   ########.fr        #
+#    Updated: 2019/08/04 15:44:43 by skrystin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ COM_LIB = lib/common.a
 CORE_LIB = lib/corewar.a
 ASM_LIB = lib/asm.a
 LIBFT = lib/libftprintf.a
+LIBFT_PATH = lib/libftprintf/
 
 OBJ_DIR = obj/
 LIB_DIR = lib/
@@ -56,11 +57,11 @@ $(ASM_LIB):: $(OBJ_DIR) $(LIB_DIR)
 $(ASM_LIB):: $(ASM_LIB)($(ASM_OBJ))
 $(COM_LIB):: $(OBJ_DIR) $(LIB_DIR)
 $(COM_LIB):: $(COM_LIB)($(COM_OBJ))
-$(LIBFT): lib/libftprintf/libftprintf.a
-	cp lib/libftprintf/libftprintf.a lib/
+$(LIBFT): $(LIBFT_PATH)libftprintf.a
+	cp $< lib/
 
-lib/libftprintf/libftprintf.a:
-	make -C lib/libftprintf
+$(LIBFT_PATH)libftprintf.a:
+	make -C $(LIBFT_PATH)
 
 $(OBJ_DIR):
 	mkdir -p $@
