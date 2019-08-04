@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:10:58 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/04 17:37:40 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/04 17:41:32 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int		main(int ac, char **av)
 	if ((fd = open(av[ac - 1],O_RDONLY)) < 3)
 		return (0);
 	ft_read_to_str(fd, &file, 10);
+	ft_printf("%s\n", file);
 //	tranlator(per_str = ft_strsplit(file, '\n'));
 	// fd = 0;
 	// while (per_str[fd])
