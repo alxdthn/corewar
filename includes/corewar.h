@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:12:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/04 17:30:16 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/04 19:49:30 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 # include "libft.h"
 # include "ft_printf.h"
 # include "op.h"
+
+# define MEM_ERROR "Error: mem alloc error!"
+# define OPEN_ERR "Error: can't open file!"
+# define INPUT_ERR "Error: input error!"
+
+# define STR(var) ((char *)var->content)
+
 /*
 **	common part
 */
@@ -33,7 +40,7 @@ typedef struct	s_op
 
 t_op    		op_tab[17];
 
-void			print_memory(char *av);
+void			print_memory(char *mem, ssize_t size);
 /*
 **	asm part
 */
@@ -45,6 +52,11 @@ typedef struct	s_core
 {
 	char		map[MEM_SIZE];
 	t_list		*input;
+	void		(*exit)(struct s_core *, const char *, const int);
 }				t_core;
+
+void			cw_clear_exit(t_core *core, const char *message, const int fd);
+void			print_map(char *map);
+void			print_input(t_list *tmp);
 
 #endif

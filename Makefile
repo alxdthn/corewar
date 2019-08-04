@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+         #
+#    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/03 20:54:43 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/04 17:30:31 by skrystin         ###   ########.fr        #
+#    Updated: 2019/08/04 18:49:19 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,9 @@ LIB_DIR = lib/
 COM_SRC =	print_memory.c \
 			op.c
 
-COR_SRC =	corewar.c
+COR_SRC =	corewar.c \
+			cw_clear_exit.c \
+			cw_debug.c
 
 ASM_SRC =	asm.c
 
@@ -70,7 +72,7 @@ $(LIB_DIR):
 	mkdir -p $@
 
 $(OBJ_DIR)%.o: %.c $(INCLUDES)
-	gcc $(CFLAGS) -c $< -o $@ $(HEADER)
+	@gcc $(CFLAGS) -c $< -o $@ $(HEADER)
 
 clean:
 	@rm -rf $(OBJ_DIR)

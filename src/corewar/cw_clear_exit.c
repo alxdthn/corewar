@@ -1,34 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.c                                              :+:      :+:    :+:   */
+/*   cw_clear_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/03 21:10:58 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/04 19:49:58 by nalexand         ###   ########.fr       */
+/*   Created: 2019/08/04 18:01:23 by nalexand          #+#    #+#             */
+/*   Updated: 2019/08/04 18:27:24 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-// void	translator(char **f, )
-
-int		main(int ac, char **av)
+void	cw_clear_exit(t_core *core, const char *message, const int fd)
 {
-	char	*file;
-	char	**per_str;
-	int		fd;
-
-	if (ac == 1)
-		return (0);
-	if ((fd = open(av[ac - 1],O_RDONLY)) < 3)
-		return (0);
-	ft_read_to_str(fd, &file, 10);
-	ft_printf("%s\n", file);
-//	tranlator(per_str = ft_strsplit(file, '\n'));
-	// fd = 0;
-	// while (per_str[fd])
-	// 	ft_printf("%s\n", per_str[fd++]);
-	return (0);
+	ft_lstdel(&core->input, ft_lstclear);
+	if (message)
+		ft_putendl_fd(message, fd);
+	if (fd == 2)
+		exit(EXIT_FAILURE);
+	exit(EXIT_SUCCESS);	
 }

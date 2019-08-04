@@ -6,44 +6,47 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:19:35 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/04 17:46:53 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/04 19:49:14 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static void	print_map(char *map)
+static int	validate_input(char *input, ssize_t ret)
 {
-	unsigned int	i;
-	unsigned int	j;
-	unsigned int	line_size;
-	unsigned int	bar;
-
-	line_size = MEM_SIZE / 64;
-	i = 0;
-	j = line_size;
-	bar = 4;
-	while (i < MEM_SIZE / bar)
-	{
-		ft_printf("%.2x", map[i++]);
-		if (--j)
-			ft_putchar(' ');
-		else
-			ft_putchar('\n');
-		if (!j)
-			j = line_size;
-	}
+	if (ret < 2195)
+		return (0);
+	ft_printf("%zu\n", ret);
+	return (1);
 }
 
-static void	read_input(t_core *core, int ac, char **av)
+static void	read_input(t_core *core, const int ac, const char **av)
 {
 	int		fd;
-	char	*str;
+	int		i;
+	t_list	*node;
+	ssize_t	ret;
 
-	fd = open(av[1], O_RDONLY);
-	ft_read_to_str(fd, &str, 10);
-	ft_printf("%s", str);
-	ft_strdel(&str);
+	i = 0;
+	while (++i < ac)
+	{
+		if ((fd = open(av[i], O_RDONLY)) < 3)
+		{
+			ft_printf("%s\n", av[i]);
+			core->exit(core, OPEN_ERR, 2);
+		}
+		if (!(node = ft_lstnew(NULL, 0))
+		|| (ret = ft_read_to_str(fd, (char **)&node->content, 10)) < 0)
+			core->exit(core, MEM_ERROR, 2);
+		print_memory(node->content, ret);
+		if (!(validate_input(node->content, ret)))
+		{
+			ft_printf("%s\n", av[i]);
+			core->exit(core, INPUT_ERR, 2);
+		}
+		node->content_size = ret;
+		ft_lstadd(&core->input, node);
+	}
 }
 
 int		main(int ac, char **av)
@@ -51,8 +54,10 @@ int		main(int ac, char **av)
 	t_core	core;
 
 	ft_bzero(&core, sizeof(t_core));
-	read_input(&core, ac, av);
-	print_map(core.map);
+	core.exit = &cw_clear_exit;
+	read_input(&core, (const int)ac, (const char **)av);
+	print_input(core.input);
+	//print_map(core.map);
 	ft_printf("COREWAAAR!!!\n");
 	return (0);
 }
