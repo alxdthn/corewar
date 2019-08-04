@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/03 20:54:43 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/04 14:38:07 by nalexand         ###   ########.fr        #
+#    Updated: 2019/08/04 15:00:21 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ override ARFLAGS = rcs
 
 CFLAGS = -g
 
-HEADER = -I includes -I libftprintf/includes
+HEADER = -I includes -I lib/libftprintf/includes
 INCLUDES = corewar.h op.h
 
 CORE = corewar
@@ -27,7 +27,7 @@ ASM = asm
 COM_LIB = lib/common.a
 CORE_LIB = lib/corewar.a
 ASM_LIB = lib/asm.a
-LIBFT = libftprintf/libftprintf.a
+LIBFT = lib/libftprintf/libftprintf.a
 
 OBJ_DIR = obj/
 LIB_DIR = lib/
@@ -46,9 +46,9 @@ ASM_OBJ = $(addprefix $(OBJ_DIR), $(patsubst %.c, %.o, $(ASM_SRC)))
 all: $(CORE) $(ASM)
 
 $(CORE): $(COM_LIB) $(CORE_LIB) $(LIBFT)
-	gcc -o $@ $^
+	gcc $(CFLAGS) -o $@ $^
 $(ASM): $(COM_LIB) $(ASM_LIB) $(LIBFT)
-	gcc -o $@ $^
+	gcc $(CFLAGS) -o $@ $^
 
 $(CORE_LIB):: $(OBJ_DIR) $(LIB_DIR)
 $(CORE_LIB):: $(CORE_LIB)($(CORE_OBJ))
@@ -56,8 +56,9 @@ $(ASM_LIB):: $(OBJ_DIR) $(LIB_DIR)
 $(ASM_LIB):: $(ASM_LIB)($(ASM_OBJ))
 $(COM_LIB):: $(OBJ_DIR) $(LIB_DIR)
 $(COM_LIB):: $(COM_LIB)($(COM_OBJ))
-$(LIBFT):
-	make -C libftprintf
+$(LIBFT): lib/libftprintf.a
+	make -C lib/libftprintf
+	cp lib/libftprintf/libftprintf.a ../
 
 $(OBJ_DIR):
 	mkdir -p $@
@@ -68,15 +69,17 @@ $(OBJ_DIR)%.o: %.c $(INCLUDES)
 	gcc $(CFLAGS) -c $< -o $@ $(HEADER)
 
 clean:
-	rm -rf $(OBJ_DIR)
-	rm -rf $(LIB_DIR)
-	rm -rf *.dSYM
+	@rm -rf $(OBJ_DIR)
+	@rm -f $(COM_LIB)
+	@rm -f $(COR_LIB)
+	@rm -f $(ASM_LIB)
+	@rm -rf *.dSYM
 
 fclean: clean
-	rm -f $(CORE)
-	rm -f $(ASM)
+	@rm -f $(CORE)
+	@rm -f $(ASM)
 
 re: fclean all
 
 relib:
-	make -C libftprintf re
+	make -C lib/libftprintf re
