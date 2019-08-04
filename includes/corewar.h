@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:12:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/04 15:27:23 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/04 17:11:55 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ typedef struct	s_op
 	char		carry;
 }				t_op;
 
-void			print_memory(char *av);
 t_op    		op_tab[17];
+
+void			print_memory(char *av);
 /*
 **	asm part
 */
@@ -40,5 +41,10 @@ t_op    		op_tab[17];
 /*
 **	corewar part
 */
+typedef struct	s_core
+{
+	char		map[MEM_SIZE];
+	t_list		*input;
+}				t_core;
 
 #endif
