@@ -6,34 +6,35 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 21:48:03 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/04 17:25:03 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/04 17:29:27 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static ssize_t	list_to_str(t_list **lst, size_t size, char **str)
+static ssize_t	list_to_str(t_list **lst, ssize_t size, char **str)
 {
-	char	*res;
 	t_list	*tmp;
+	ssize_t	ofset;
 
-	res = NULL;
-	if (!size || !(res = (char *)malloc(sizeof(char) * (size + 1))))
+	*str = NULL;
+	ofset = size;
+	if (!size || !(*str = (char *)malloc(sizeof(char) * (size + 1))))
 	{
 		ft_lstdel(lst, ft_lstclear);
 		return (-1);
 	}
-	res[size] = '\0';
-	while (size)
+	*str[size] = '\0';
+	while (ofset)
 	{
-		size -= (*lst)->content_size;
-		ft_memcpy(res + size, (*lst)->content, (*lst)->content_size);
+		ofset -= (*lst)->content_size;
+		ft_memcpy(*str + ofset, (*lst)->content, (*lst)->content_size);
 		tmp = (*lst)->next;
 		free((*lst)->content);
 		free(*lst);
 		*lst = tmp;
 	}
-	return (res);
+	return (size);
 }
 
 ssize_t		ft_read_to_str(int fd, char **str, size_t b_size)
