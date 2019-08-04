@@ -9,3 +9,5 @@
 generator
 test.c
 vm_champs/
+/asm
+/corewar

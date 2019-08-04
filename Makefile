@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/03 20:54:43 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/03 21:29:52 by nalexand         ###   ########.fr        #
+#    Updated: 2019/08/04 14:07:05 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,12 +24,13 @@ INCLUDES = corewar.h
 CORE = corewar
 ASM = asm
 
-COM_LIB = common.a
-CORE_LIB = corewar.a
-ASM_LIB = asm.a
+COM_LIB = lib/common.a
+CORE_LIB = lib/corewar.a
+ASM_LIB = lib/asm.a
 LIBFT = libftprintf/libftprintf.a
 
 OBJ_DIR = obj/
+LIB_DIR = lib/
 
 COM_SRC =	printer.c
 
@@ -48,16 +49,18 @@ $(CORE): $(COM_LIB) $(CORE_LIB) $(LIBFT)
 $(ASM): $(COM_LIB) $(ASM_LIB) $(LIBFT)
 	gcc -o $@ $^
 
-$(CORE_LIB):: $(OBJ_DIR)
+$(CORE_LIB):: $(OBJ_DIR) $(LIB_DIR)
 $(CORE_LIB):: $(CORE_LIB)($(CORE_OBJ))
-$(ASM_LIB):: $(OBJ_DIR)
+$(ASM_LIB):: $(OBJ_DIR) $(LIB_DIR)
 $(ASM_LIB):: $(ASM_LIB)($(ASM_OBJ))
-$(COM_LIB):: $(OBJ_DIR)
+$(COM_LIB):: $(OBJ_DIR) $(LIB_DIR)
 $(COM_LIB):: $(COM_LIB)($(COM_OBJ))
 $(LIBFT):
 	make -C libftprintf
 
 $(OBJ_DIR):
+	mkdir -p $@
+$(LIB_DIR):
 	mkdir -p $@
 
 $(OBJ_DIR)%.o: %.c $(INCLUDES)
@@ -65,10 +68,8 @@ $(OBJ_DIR)%.o: %.c $(INCLUDES)
 
 clean:
 	rm -rf $(OBJ_DIR)
+	rm -rf $(LIB_DIR)
 	rm -rf *.dSYM
-	rm -f $(COM_LIB)
-	rm -f $(CORE_LIB)
-	rm -f $(ASM_LIB)
 
 fclean: clean
 	rm -f $(CORE)
