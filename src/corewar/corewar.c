@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:19:35 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/04 17:36:51 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/04 17:46:53 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		main(int ac, char **av)
 	t_core	core;
 
 	ft_bzero(&core, sizeof(t_core));
-//	read_input(&core, ac, av);
+	read_input(&core, ac, av);
 	print_map(core.map);
 	ft_printf("COREWAAAR!!!\n");
 	return (0);

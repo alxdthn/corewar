@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 21:48:03 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/04 17:29:27 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/04 17:48:59 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static ssize_t	list_to_str(t_list **lst, ssize_t size, char **str)
 		ft_lstdel(lst, ft_lstclear);
 		return (-1);
 	}
-	*str[size] = '\0';
+	(*str)[size] = '\0';
 	while (ofset)
 	{
 		ofset -= (*lst)->content_size;
