@@ -1,5 +1,3 @@
 .name "gg"
 .comment "lutiy"
-
-go:
-	live %42
+.name "dfsg"

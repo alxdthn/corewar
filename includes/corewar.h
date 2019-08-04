@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:12:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/04 17:30:16 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/04 22:04:13 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,16 @@ void			print_memory(char *av);
 /*
 **	asm part
 */
-		
+typedef	struct	s_as
+{
+	char		name[129];
+	int			name_i;
+	char		comment[2049];
+	int			com_i;
+	char		read;
+	int			size;
+	t_list		*comm;
+}				t_as;
 /*
 **	corewar part
 */
