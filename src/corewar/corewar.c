@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:19:35 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/03 21:20:29 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/04 15:26:58 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int		main(void)
 {
+	ft_printf("%s\n", op_tab[1].op_name);
 	ft_printf("COREWAAAR!!!\n");
 	return (0);
 }

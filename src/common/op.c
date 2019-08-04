@@ -6,26 +6,13 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:43:01 by zaz               #+#    #+#             */
-/*   Updated: 2019/08/04 15:17:36 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/04 15:24:19 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-typedef struct	s_op
-{
-	char		*op_name;
-	char		arg_count;
-	char		args[3];
-	char		op_code;
-	int			cycle;
-	char		*description;
-	char		arg_type;
-	char		t_dir_size;
-	char		carry;
-}				t_op;
-
-t_op    		op_tab[16] =
+t_op    		op_tab[17] =
 {
 	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 4, 0},
 	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 4, 1},
@@ -48,5 +35,6 @@ t_op    		op_tab[16] =
 	{"lldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 14, 50,
 		"long load index", 1, 2, 1},
 	{"lfork", 1, {T_DIR}, 15, 1000, "long fork", 0, 2, 0},
-	{"aff", 1, {T_REG}, 16, 2, "aff", 1, 4, 0}
+	{"aff", 1, {T_REG}, 16, 2, "aff", 1, 4, 0},
+	{0, 0, {0}, 0, 0, 0, 0, 0, 0}
 };
