@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:19:35 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/04 17:16:29 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/04 17:35:47 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,15 @@ static void	print_map(char *map)
 	}
 }
 
-static void	read_input(t_list *input, int ac, char **av)
+static void	read_input(t_core *core, int ac, char **av)
 {
 	int		fd;
+	char	*str;
 
-	fd = open(av[1], )
+	fd = open(av[1], O_RDONLY);
+	ft_read_to_str(fd, &str, 10);
+	ft_printf("%s", str);
+	ft_strdel(&str);
 }
 
 int		main(int ac, char **av)
