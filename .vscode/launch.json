@@ -5,11 +5,11 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "(lldb) Launch",
+			"name": "(lldb) COREWAR",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "${workspaceFolder}/a.out",
-			"args": ["sam_2.0.cor"],
+			"program": "${workspaceFolder}/corewar",
+			"args": ["gg.s"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],
