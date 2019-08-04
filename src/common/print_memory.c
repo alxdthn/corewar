@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 18:08:26 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/04 14:10:24 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/04 17:06:01 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	print_memory(char *av)
 	while (i < ret - 1)
 	{
 		ft_printf("%.2hhx", str[i++]);
-		ft_printf("%.2hhx ", str[i]);
+		if (i < ret - 1)
+			ft_printf("%.2hhx ", str[i]);
 		i++;
 	}
 	ft_putchar('\n');

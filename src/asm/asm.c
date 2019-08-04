@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:10:58 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/04 17:29:40 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/04 17:30:59 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		printer(int ac, char **av)
 	return (0);
 }
 
-void	translator(char **f, )
+// void	translator(char **f, )
 
 int		main(int ac, char **av)
 {
@@ -34,7 +34,7 @@ int		main(int ac, char **av)
 	if ((fd = open(av[ac - 1],O_RDONLY)) < 3)
 		return (0);
 	ft_read_to_str(fd, &file, 1000);
-	tranlator(per_str = ft_strsplit(file, '\n'));
+//	tranlator(per_str = ft_strsplit(file, '\n'));
 	// fd = 0;
 	// while (per_str[fd])
 	// 	ft_printf("%s\n", per_str[fd++]);
