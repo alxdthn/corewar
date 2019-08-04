@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/03 20:54:43 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/04 15:32:41 by nalexand         ###   ########.fr        #
+#    Updated: 2019/08/04 15:37:52 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,9 +56,11 @@ $(ASM_LIB):: $(OBJ_DIR) $(LIB_DIR)
 $(ASM_LIB):: $(ASM_LIB)($(ASM_OBJ))
 $(COM_LIB):: $(OBJ_DIR) $(LIB_DIR)
 $(COM_LIB):: $(COM_LIB)($(COM_OBJ))
-$(LIBFT): lib/libftprintf/libftprintf.a
-	make -C lib/libftprintf
+$(LIBFT):
 	cp lib/libftprintf/libftprintf.a lib/
+
+lib/libftprintf/libftprintf.a:
+	make -C lib/libftprintf
 
 $(OBJ_DIR):
 	mkdir -p $@
