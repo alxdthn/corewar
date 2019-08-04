@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:10:58 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/04 17:41:32 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/04 17:49:25 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,13 @@ int		printer(int ac, char **av)
 	return (0);
 }
 
-// void	translator(char **f, )
+void	translator(char **f, int y, int x)
+{
+	while (f[y])
+	{
+		
+	}
+}
 
 int		main(int ac, char **av)
 {
@@ -35,9 +41,9 @@ int		main(int ac, char **av)
 		return (0);
 	ft_read_to_str(fd, &file, 10);
 	ft_printf("%s\n", file);
-//	tranlator(per_str = ft_strsplit(file, '\n'));
+	tranlator(per_str = ft_strsplit(file, '\n'), 0, 0);
 	// fd = 0;
 	// while (per_str[fd])
 	// 	ft_printf("%s\n", per_str[fd++]);
-	return (0);
+	// return (0);
 }
