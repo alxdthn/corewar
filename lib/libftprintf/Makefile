@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
+#    By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/11 16:58:18 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/03 15:24:28 by nalexand         ###   ########.fr        #
+#    Updated: 2019/08/04 17:38:31 by skrystin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ HEADDERS = get_next_line.h libft.h ft_printf.h
 VPATH = src/libft:src/ft_printf:src/gnl:includes
 FT_PRINTF = libftprintf.a
 LIBFT = libft.a
-override CFLAGS += -Wall -Werror -Wextra
+override CFLAGS += -Wall -Werror -Wextra -g
 HEADER = -I includes
 
 OBJ_DIR = obj/

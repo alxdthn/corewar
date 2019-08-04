@@ -6,9 +6,11 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 17:04:35 by unicolle          #+#    #+#             */
-/*   Updated: 2019/08/04 17:17:42 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/04 17:32:26 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 char				*list_to_str(t_list **lst, size_t size)
 {
