@@ -6,15 +6,26 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 18:01:23 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/04 18:27:24 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/05 19:16:50 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void	cw_clear_exit(t_core *core, const char *message, const int fd)
+static void	clear_warriors(t_core *core)
+{
+	int		i;
+
+	i = MAX_PLAYERS - 1;
+	while (i >= 0)
+		free(core->warriors[--i]);
+}
+
+void		cw_clear_exit(t_core *core, const char *message, const int fd)
 {
 	ft_lstdel(&core->input, ft_lstclear);
+	ft_lstdel(&core->carriages, ft_lstclear);
+	clear_warriors(core);
 	if (message)
 		ft_putendl_fd(message, fd);
 	if (fd == 2)
