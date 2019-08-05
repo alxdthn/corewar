@@ -6,7 +6,7 @@
 #    By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/11 16:58:18 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/04 17:38:31 by skrystin         ###   ########.fr        #
+#    Updated: 2019/08/05 13:59:54 by skrystin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,6 +108,8 @@ LFT_SRC =	ft_arraydel.c \
 			ft_power.c \
 			ft_check_file_format.c \
 			ft_lstcount.c \
+			ft_strindex.c \
+			ft_itoa_base.c
 
 GNL_SRC =	get_next_line.c \
 			clear_fd_node.c
