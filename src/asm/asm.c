@@ -6,17 +6,26 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:10:58 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/04 22:59:26 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/05 14:02:44 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
+int		to_ignore(char *str, int x)
+{
+	while (str[x] == '\t' || str[x] == ' ')
+		x++;
+	if (str[x] == '#' || str[x] == '\0')
+		return (1);
+	return (0);
+}
+
 void	ft_write_it(t_as **all, int *y, char **f, int x)
 {
 	while (f[*y][x])
 	{
-		if (f[*y][x] == '"')
+		if (f[*y][x] == '"' && to_ignore(f[*y] + x + 1, 0))
 		{
 			(*all)->read = '\0';
 			break;
@@ -31,9 +40,9 @@ void	ft_write_it(t_as **all, int *y, char **f, int x)
 			(*all)->comment[(*all)->com_i] = f[*y][x];
 			(*all)->com_i++;
 		}
-		if ((*all)->name_i > PROG_NAME_LENGTH || (*all)->com_i > COMMENT_LENGTH)
+		if ((*all)->name_i > PROG_NAME_LENGTH || (*all)->com_i > COMMENT_LENGTH || f[*y][x] == '"')
 		{
-			ft_printf("name - %d , com - %d name - %s", (*all)->name_i, (*all)->com_i, (*all)->name);
+		//	ft_printf("name - %d , com - %d name - %s", (*all)->name_i, (*all)->com_i, (*all)->name);
 			exit(0);
 		}
 		x++;
@@ -46,12 +55,12 @@ void	add_names(t_as **all, int *y, char **f, int x)
 
 	while (f[*y][x] == '\t' || f[*y][x] == ' ')
 		x++;
-	if (ft_strstr(f[*y], NAME_CMD_STRING) == f[*y] + x && !(*all)->read)
+	if (ft_strstr(f[*y], NAME_CMD_STRING) == f[*y] + x && !(*all)->read && !(*all)->name[0])
 	{
 		(*all)->read = 'n';
 		x += 5;
 	}
-	if (ft_strstr(f[*y], COMMENT_CMD_STRING) == f[*y] + x && !(*all)->read)
+	if (ft_strstr(f[*y], COMMENT_CMD_STRING) == f[*y] + x && !(*all)->read && !(*all)->comment[0])
 	{
 		(*all)->read = 'c';
 		x += 8;
@@ -86,13 +95,15 @@ void	check_to_valid(char *str, int x, t_as **all, char **f)
 
 	flag = 0;
 	counter = 0;
+//	ft_printf("%s - str, flag - %d\n", str, flag);
 	while (str[x] == '\t' || str[x] == ' ')
 		x++;
 	if (str[x] == COMMENT_CHAR || str[x] == '\0')
 		return ;
-	if (!(ft_strstr(str, NAME_CMD_STRING) || ft_strstr(str, COMMENT_CMD_STRING) || (*all)->read))
+	if (!((ft_strstr(str, NAME_CMD_STRING) && !(*all)->name[0]) || 
+	(ft_strstr(str, COMMENT_CMD_STRING) && !(*all)->comment[0]) || (*all)->read))
 		flag = 1;
-	while (counter < 16)
+	while (counter < 16 && !(*all)->read && (*all)->comment[0] && (*all)->name[0])
 	{
 		if (ft_strstr(str, op_tab[counter].op_name) == str + x)
 			flag = 0;
@@ -100,9 +111,10 @@ void	check_to_valid(char *str, int x, t_as **all, char **f)
 	}
 	if (flag == 1)
 	{
-		while (str[x] && ft_strstr(&(str[x]), LABEL_CHARS))
+		while (str[x] && ft_strindex(LABEL_CHARS, str[x]) != -1)
 			x++;
-		if(str[x] == ':')
+	//	ft_printf("%s - str, flag - %d sym - %c\n", str, flag, str[x]);
+		if (str[x] == ':' && !(*all)->read && (*all)->comment[0] && (*all)->name[0])
 			flag = 0;
 	}
 	if (flag != 1)
@@ -110,15 +122,6 @@ void	check_to_valid(char *str, int x, t_as **all, char **f)
 	ft_arraydel((void ***)&f);
 	free(*all);
 	exit(0);
-}
-
-int		to_ignore(char *str, int x)
-{
-	while (str[x] == '\t' || str[x] == ' ')
-		x++;
-	if (str[x] == '#' || str[x] == '\0')
-		return (1);
-	return (0);
 }
 
 void	translator(char **f, int y, int x, t_as *all)
@@ -132,6 +135,7 @@ void	translator(char **f, int y, int x, t_as *all)
 	while (f[y])
 	{
 		check_to_valid(f[y], 0, &all, f);
+	//	ft_printf("%s\n", f[y]);
 		if (to_ignore(f[y], 0))
 		{}
 		else if (ft_strstr(f[y], NAME_CMD_STRING) || ft_strstr(f[y], COMMENT_CMD_STRING) || all->read)
@@ -155,9 +159,9 @@ int		main(int ac, char **av)
 		return (0);
 	if ((fd = open(av[ac - 1],O_RDONLY)) < 3)
 		return (0);
-	if (ft_read_to_str(fd, &file, 10) == -1)
+	if (ft_read_to_str(fd, &file, 10) == -1 || !ft_strlen(file) || file[ft_strlen(file) - 1] != '\n')
 		return (0);// надо обработать, и предыдущие тоже
-//	ft_printf("%s\n", file);
+	ft_printf("%c\n", file[ft_strlen(file) - 1]);
 	translator(per_str = ft_strsplit(file, '\n'), 0, 0, 0);
 	free(file);
 	// fd = 0;
