@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 01:55:55 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/01 11:06:32 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/05 14:56:44 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,7 @@ unsigned long		ft_reverse_bits(unsigned long bits, size_t size);
 int					ft_atoi_base(char *nb, int base);
 size_t				ft_power(int n, int p);
 int					ft_check_file_format(char *file, char *format);
+int					ft_strindex(const char *str, int c);
+char				*ft_itoa_base(uintmax_t value, long int base);
 
 #endif

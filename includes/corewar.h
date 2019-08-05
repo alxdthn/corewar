@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:12:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/05 14:53:25 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/05 14:55:35 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,16 @@ void			print_memory(char *mem, ssize_t size);
 /*
 **	asm part
 */
-		
+typedef	struct	s_as
+{
+	char		name[129];
+	int			name_i;
+	char		comment[2049];
+	int			com_i;
+	char		read;
+	int			size;
+	t_list		*comm;
+}				t_as;
 /*
 **	corewar part
 */
