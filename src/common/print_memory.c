@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 18:08:26 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/04 19:55:32 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/04 20:00:24 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_memory(char *mem, ssize_t size)
 	while (i < size)
 	{
 		ft_printf("%.2hhx", mem[i++]);
-		if (i < size - 1)
+		if (i < size)
 			ft_printf("%.2hhx", mem[i]);
 		if (--j)
 			ft_putchar(' ');

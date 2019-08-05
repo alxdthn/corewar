@@ -6,17 +6,43 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:19:35 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/04 19:49:14 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/04 22:17:49 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static int	validate_input(char *input, ssize_t ret)
+static int	puterr(const char *file, const char *error)
 {
-	if (ret < 2195)
-		return (0);
-	ft_printf("%zu\n", ret);
+	ft_putstr_fd("Error: File ", 2);
+	ft_putstr_fd(file, 2);
+	ft_putendl_fd(error, 2);
+	return (0);
+}
+
+static int	mem_rev(int mem)
+{
+	return ((mem & 0x000000FF) << 24
+	| (mem & 0x0000FF00) << 8
+	| (mem & 0x00FF0000) >> 8
+	| (mem & 0xFF000000) >> 24);
+}
+
+static int	validate_input(const char *input, const ssize_t size, const char *file)
+{
+	int		bot_size;
+
+	ft_printf("size: %zu\n", size);
+	ft_printf("magic: %#.8x\n", mem_rev(((int *)input)[0]));
+	ft_printf("name: %s\n", input + 4);
+	bot_size = mem_rev(((int *)input)[34]);
+	ft_printf("bot_size: %d\n ", bot_size);
+	if (size < 2192)
+		return (puterr(file, " is too small to be a champion"));
+	if (mem_rev(((int *)input)[0]) != COREWAR_EXEC_MAGIC)
+		return (puterr(file, " has an invalid header"));
+	if (bot_size != size - 2192)
+		return (puterr(file, " has a code size that differ from what its header says"));
 	return (1);
 }
 
@@ -39,11 +65,8 @@ static void	read_input(t_core *core, const int ac, const char **av)
 		|| (ret = ft_read_to_str(fd, (char **)&node->content, 10)) < 0)
 			core->exit(core, MEM_ERROR, 2);
 		print_memory(node->content, ret);
-		if (!(validate_input(node->content, ret)))
-		{
-			ft_printf("%s\n", av[i]);
-			core->exit(core, INPUT_ERR, 2);
-		}
+		if (!(validate_input(node->content, ret, av[i])))
+			core->exit(core, NULL, 2);
 		node->content_size = ret;
 		ft_lstadd(&core->input, node);
 	}
