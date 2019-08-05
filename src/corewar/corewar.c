@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:19:35 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/05 22:28:12 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/05 23:04:20 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,11 @@ void	print_operation_info(char *position)
 		byte_ofset = 1;
 		while (arg_byte)
 		{
-			if ((arg_byte & (T_REG << 6)) == (T_REG << 6))
+			if ((arg_byte & 0xC0) == (REG_CODE << 6))
 				ofset += ft_printf("r%d, ", position[(byte_ofset += 1)]);
-			else if ((arg_byte & (T_DIR << 6)) == (T_DIR << 6))
+			else if ((arg_byte & 0xC0) == (DIR_CODE << 6))
 				ofset += ft_printf("%%%d, ", position[(byte_ofset += op->t_dir_size)]);
-			else if ((arg_byte & (T_IND << 6)) == (T_IND << 6))
+			else if ((arg_byte & 0xC0) == (IND_CODE << 6))
 				ofset += ft_printf("%d, ", position[(byte_ofset += 2)]);
 			arg_byte <<= 2;
 		}
