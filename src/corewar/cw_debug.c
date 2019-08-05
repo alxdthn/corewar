@@ -1,37 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_memory.c                                     :+:      :+:    :+:   */
+/*   cw_debug.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/03 18:08:26 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/04 19:55:32 by nalexand         ###   ########.fr       */
+/*   Created: 2019/08/04 18:45:18 by nalexand          #+#    #+#             */
+/*   Updated: 2019/08/04 18:47:23 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "corewar.h"
 
-void	print_memory(char *mem, ssize_t size)
+void	print_map(char *map)
 {
-	int 	i;
-	int		j;
+	unsigned int	i;
+	unsigned int	j;
+	unsigned int	line_size;
+	unsigned int	bar;
 
+	line_size = MEM_SIZE / 64;
 	i = 0;
-	j = 8;
-	while (i < size)
+	j = line_size;
+	bar = 4;
+	while (i < MEM_SIZE / bar)
 	{
-		ft_printf("%.2hhx", mem[i++]);
-		if (i < size - 1)
-			ft_printf("%.2hhx", mem[i]);
+		ft_printf("%.2x", map[i++]);
 		if (--j)
 			ft_putchar(' ');
 		else
-		{
 			ft_putchar('\n');
-			j = 8;
-		}
-		i++;
+		if (!j)
+			j = line_size;
 	}
-	ft_putchar('\n');
+}
+
+void	print_input(t_list *tmp)
+{
+	while (tmp)
+	{
+		ft_printf("%s", STR(tmp));
+		tmp = tmp->next;
+	}
 }

@@ -1,37 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_memory.c                                     :+:      :+:    :+:   */
+/*   cw_clear_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/03 18:08:26 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/04 19:55:32 by nalexand         ###   ########.fr       */
+/*   Created: 2019/08/04 18:01:23 by nalexand          #+#    #+#             */
+/*   Updated: 2019/08/04 18:27:24 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "corewar.h"
 
-void	print_memory(char *mem, ssize_t size)
+void	cw_clear_exit(t_core *core, const char *message, const int fd)
 {
-	int 	i;
-	int		j;
-
-	i = 0;
-	j = 8;
-	while (i < size)
-	{
-		ft_printf("%.2hhx", mem[i++]);
-		if (i < size - 1)
-			ft_printf("%.2hhx", mem[i]);
-		if (--j)
-			ft_putchar(' ');
-		else
-		{
-			ft_putchar('\n');
-			j = 8;
-		}
-		i++;
-	}
-	ft_putchar('\n');
+	ft_lstdel(&core->input, ft_lstclear);
+	if (message)
+		ft_putendl_fd(message, fd);
+	if (fd == 2)
+		exit(EXIT_FAILURE);
+	exit(EXIT_SUCCESS);	
 }
