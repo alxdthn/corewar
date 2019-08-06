@@ -6,12 +6,13 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:10:58 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/06 22:23:51 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/06 22:44:20 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 # define COM ((t_comm *)tmp->content)
+# define COM2 &((t_comm *)tmp->content)
 
 int		check_command(char *str, char **f, t_as **all)
 {
@@ -84,8 +85,9 @@ unsigned char	find_type_arg(char *str, int i, t_op op_tb)
 		while (*str == ' ' || *str == '\t')
 			str++;
 	}
-	res <<= ((4 - op_tb.arg_count) * 2);
+	res <<= ((3 - op_tb.arg_count) * 2);
 	//		ft_printf("arg_type - %d", op_tb.arg_count);
+	//ft_printf("byte - %hhx", res);
 	return (res);
 }
 
@@ -100,7 +102,7 @@ void	add_arg(t_comm *com, char *str, char **tmp, t_op op_tab)
 		str++;
 	tmp = ft_strsplit(str, SEPARATOR_CHAR);
 //	if (op_tab.arg_type)
-	com->arg_type = find_type_arg(str, 0, op_tab);
+	(com)->arg_type = find_type_arg(str, 0, op_tab);
 	while (tmp[x])
 	{
 		c = 0;
@@ -109,11 +111,11 @@ void	add_arg(t_comm *com, char *str, char **tmp, t_op op_tab)
 		if (tmp[x][c] == 'r' || tmp[x][c] == '%')
 			c++;
 		if (ft_isint(tmp[x] + c) && x == 0)
-			com->arg_f = ft_atoi(tmp[x] + c);
+			(com)->arg_f = ft_atoi(tmp[x] + c);
 		if (ft_isint(tmp[x] + c) && x == 1)
-			com->arg_s = ft_atoi(tmp[x] + c);
+			(com)->arg_s = ft_atoi(tmp[x] + c);
 		if (ft_isint(tmp[x] + c) && x == 2)
-			com->arg_t = ft_atoi(tmp[x] + c);
+			(com)->arg_t = ft_atoi(tmp[x] + c);
 		if (!ft_isint(tmp[x] + c) && *(tmp[x] + c) != LABEL_CHAR)
 		{
 			//ft_printf("i m here - %s", tmp[x] + c);
@@ -126,11 +128,11 @@ void	add_arg(t_comm *com, char *str, char **tmp, t_op op_tab)
 			ft_strcpy(label, tmp[x] + c);
 			// ft_printf("\n\nIM WORK EEEE - %s\n\n", label);
 			if (x == 1)
-				com->label_f = label;
+				(com)->label_f = label;
 			if (x == 2)
-				com->label_s = label;
+				(com)->label_s = label;
 			if (x == 3)
-				com->label_t = label;
+				(com)->label_t = label;
 		}
 		x++;
 	}
@@ -185,29 +187,6 @@ void	label_to_com(t_as **all, t_list *comm, t_list *tmp)
 	(*all)->labels = tmp;
 }
 
-int		command_len(t_op op_tb, unsigned char type)
-{
-	int	res;
-	int	i;
-
-	i = 3;
-	res = 1;
-	if (op_tb.arg_type)
-		res++;
-	while (i--)
-	{
-		if ((type >> 7 & 1) == 1 && (type >> 6 & 1) == 1)
-			res += 2;
-		else if ((type >> 7 & 1) == 1 && (type >> 6 & 1) != 1)
-			res++;
-		else if ((type >> 7 & 1) != 1 && (type >> 6 & 1) != 1)
-			res += op_tb.t_dir_size;
-		type >>= 2;	
-	}
-	ft_printf("%d ", res);
-	return (res);
-}
-
 void	add_command(t_as **all, t_list *tmp, char **f, char *str)
 {
 	int		counter;
@@ -227,9 +206,10 @@ void	add_command(t_as **all, t_list *tmp, char **f, char *str)
 	// ft_printf("arg - %s", str);
 	ft_bzero(COM, sizeof(t_comm));
 	COM->instr = op_tab[counter].op_name;
-	COM->len = command_len(op_tab[counter], COM->arg_type);
 	// ft_printf("arg - %s\n", str);
-	add_arg(COM, str + ft_strlen(op_tab[counter].op_name) + 1, 0, op_tab[counter]);
+	add_arg((COM), str + ft_strlen(op_tab[counter].op_name) + 1, 0, op_tab[counter]);
+	COM->len = get_arg_size(&(op_tab[counter]), COM->arg_type);
+	ft_printf("%d  byte - %hhx", COM->len, COM->arg_type);
 //	ft_printf("arg - %s", str);
 	tmp->next = 0;
 	ft_lstpushback(&(*all)->comm, tmp);
