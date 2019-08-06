@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:12:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/06 22:12:31 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/06 22:36:50 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ t_op    		op_tab[17];
 
 void			print_memory(char *mem, ssize_t size);
 int				mem_rev(int mem);
+int				get_arg_type(char byte);
 int				get_arg_size(t_op *op, t_arg_type byte);
 t_op			*get_cmd(char *cmd);
 int				get_arg_ofset(int arg, t_op *op);
@@ -121,6 +122,7 @@ typedef struct		s_core
 void				cw_clear_exit(t_core *core, const char *message, const int fd);
 void				read_input(t_core *core, const int ac, const char **av);
 void				init_warriors(t_core *core);
+void				init_carriages(t_core *core);
 
 void				print_warriros(t_core *core);
 void				print_map(unsigned char *map);

@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/03 20:54:43 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/06 22:11:49 by nalexand         ###   ########.fr        #
+#    Updated: 2019/08/06 22:37:03 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ COR_SRC =	corewar.c \
 			cw_clear_exit.c \
 			read_input.c \
 			init_warriors.c \
+			init_carriages.c \
 			cw_debug.c
 
 ASM_SRC =	asm.c
