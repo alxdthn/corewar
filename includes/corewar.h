@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:12:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/05 20:05:47 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/06 22:12:31 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 # define EXEC_CODE_OFSET 2192
 # define FALSE 0
 # define TRUE 1
+# define REG_OFSET 1
+# define IND_OFSET 2
+# define DIR_OFSET op->t_dir_size
 
 /*
 **	common part
@@ -48,6 +51,10 @@ t_op    		op_tab[17];
 
 void			print_memory(char *mem, ssize_t size);
 int				mem_rev(int mem);
+int				get_arg_size(t_op *op, t_arg_type byte);
+t_op			*get_cmd(char *cmd);
+int				get_arg_ofset(int arg, t_op *op);
+void			print_operation_info(const unsigned char *position);
 /*
 **	asm part
 */
@@ -67,6 +74,18 @@ typedef	struct	s_as
 
 #define USAGE "usage:"
 #define CARRIAGE ((t_carriage *)tmp->content)
+
+typedef union			u_arg_byte
+{
+	char				byte;
+	struct
+	{
+		unsigned char	a4 : 2;
+		unsigned char	a3 : 2;
+		unsigned char	a2 : 2;
+		unsigned char	a1 : 2;
+	}					arg;
+}						t_arg_byte;
 
 typedef struct		s_warrior
 {

@@ -6,11 +6,26 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 18:45:02 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/05 18:51:19 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/06 18:33:06 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
+static int	put_size_error(const int size, const char *file)
+{
+	char	*tmp;
+
+	tmp = NULL;
+	ft_putstr_fd("Error: File ", 2);
+	ft_putstr_fd(file, 2);
+	ft_putstr_fd(" has too large a code (", 2);
+	ft_putnbr_fd(size, 2);
+	ft_putstr_fd(" bytes > ", 2);
+	ft_putnbr_fd(CHAMP_MAX_SIZE, 2);
+	ft_putstr_fd(" bytes)\n", 2);
+	return (0);
+}
 
 static int	puterr(const char *file, const char *error)
 {
@@ -28,6 +43,8 @@ const ssize_t size, const char *file)
 	bot_size = mem_rev(*((int *)input + CODE_SIZE_OFSET));
 	if (size < EXEC_CODE_OFSET)
 		return (puterr(file, " is too small to be a champion"));
+	else if (size - EXEC_CODE_OFSET > CHAMP_MAX_SIZE)
+		return (put_size_error(size - EXEC_CODE_OFSET, file));
 	if (mem_rev(((int *)input)[0]) != COREWAR_EXEC_MAGIC)
 		return (puterr(file, " has an invalid header"));
 	if (bot_size != size - EXEC_CODE_OFSET)

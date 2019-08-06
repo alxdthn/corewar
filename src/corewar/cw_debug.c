@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 18:45:18 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/05 20:05:06 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/06 18:20:44 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,11 @@ void	print_carriage(t_list *tmp)
 {
 	int		i;
 
+	ft_printf("CARRIAGE INFO:\n");
 	ft_printf("number: %d\nposition: %d\ncycle_for_op: %d\ncycle: %d\n"\
-	"carry: %d\noperation %d\nofset: %d\nregisters:\n",
+	"carry: %d\noperation %s\nofset: %d\nregisters:\n",
 	CARRIAGE->nb, CARRIAGE->position, CARRIAGE->cycle_for_op, CARRIAGE->cycle,
-	CARRIAGE->carry, CARRIAGE->op, CARRIAGE->ofset);
+	CARRIAGE->carry, op_tab[CARRIAGE->op - 1].op_name, CARRIAGE->ofset);
 	i = 0;
 	while (i < REG_NUMBER)
 		ft_printf("%.*x ", REG_SIZE, CARRIAGE->reg[i++]);

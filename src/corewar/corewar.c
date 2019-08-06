@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:19:35 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/05 23:04:20 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/06 22:17:21 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,48 +45,58 @@ static void	init_carriages(t_core *core)
 	}
 }
 
-void	print_operation_info(char *position)
+static int	get_arg_type(char byte)
 {
-	t_op			*op;
-	int				i;
-	unsigned char	arg_byte;
-	int				ofset;
-	int				byte_ofset;
+	char	mask;
 
-	op = &op_tab[position[0] - 1];
-	ft_printf("__name__|________args_________|_carry_|__description_\n");
-	ft_printf("%-8s|", op->op_name);
-	ofset = 0;
-	if (op->arg_count == 1 && op->args[0] == T_DIR)
-		ofset += ft_printf("T_DIR{%d} ", position[4]);
-	else
+	mask = (byte & 0xC0) >> 6;
+	if (mask == DIR_CODE)
+		return (T_DIR);
+	else if (mask == IND_CODE)
+		return (T_IND);
+	else if (mask == REG_CODE)
+		return (T_REG);
+	return (0);
+}
+
+static int	validate_operation(const unsigned char *position, t_op **cur)
+{
+	t_arg_type	argbyte;
+	int			i;
+	int			byteofset;
+	char		mask;
+
+	if (!position[0] || position[0] > 16)
+		return (ft_puterr(1, "NO OPERATION"));
+	*cur = &op_tab[position[0] - 1];
+	print_operation_info(position);
+	argbyte = position[1];
+	i = 0;
+	byteofset = 0;
+	while (i < (*cur)->arg_count)
 	{
-		arg_byte = position[1];
-		byte_ofset = 1;
-		while (arg_byte)
-		{
-			if ((arg_byte & 0xC0) == (REG_CODE << 6))
-				ofset += ft_printf("r%d, ", position[(byte_ofset += 1)]);
-			else if ((arg_byte & 0xC0) == (DIR_CODE << 6))
-				ofset += ft_printf("%%%d, ", position[(byte_ofset += op->t_dir_size)]);
-			else if ((arg_byte & 0xC0) == (IND_CODE << 6))
-				ofset += ft_printf("%d, ", position[(byte_ofset += 2)]);
-			arg_byte <<= 2;
-		}
-	}
-	ofset = 21 - ofset;
-	while (--ofset >= 0)
-		ft_putchar(' ');
-	if (op->carry)
-		ft_printf("|  yes  ");
-	else
-		ft_printf("|  no   ");
-	ft_printf("|%s\n", op->description);
+		mask = get_arg_type(argbyte);
+		if ((mask & (*cur)->args[i]) != mask)
+			return (ft_puterr(1, "BAD_ARG"));
+		i++;
+		argbyte <<= 2;
+ 	}
+	return (0);
 }
 
 static void carriage_process(t_core *core, t_list *tmp)
 {
-	CARRIAGE->op = core->map[CARRIAGE->position];
+	t_op	*cur_op;
+	int		ofset;
+
+	if ((ofset = validate_operation(core->map + CARRIAGE->position, &cur_op)))
+	{
+		ft_printf("ERROR\n");
+		CARRIAGE->ofset += ofset;
+	}
+	CARRIAGE->op = cur_op->op_code;
+	//else
+		//print_carriage(tmp);
 }
 
 static void start_game(t_core *core)
@@ -97,10 +107,6 @@ static void start_game(t_core *core)
 	while (tmp)
 	{
 		carriage_process(core, tmp);
-		ft_printf("CARRIAGE INFO:\n");
-		print_carriage(tmp);
-		ft_printf("OPERATION INFO:\n");
-		print_operation_info((char *)core->map + CARRIAGE->position);
 		tmp = tmp->next;
 	}
 }
@@ -112,14 +118,15 @@ int			main(int ac, char **av)
 	ft_bzero(&core, sizeof(t_core));
 	read_input(&core, (const int)ac, (const char **)av);
 	init_warriors(&core);
-	set_exec_code(&core);
 	init_carriages(&core);
-	print_warriros(&core);
+	set_exec_code(&core);
 	start_game(&core);
-
-//	print_map(core.map);
 
 	ft_printf("\n\nCOREWAAAR!!!\n");
 	cw_clear_exit(&core, NULL, 1);
 	return (0);
 }
+
+	//print_warriros(&core);
+	//print_map(core.map);
+	//print_memory(core.input->content, core.input->content_size);
