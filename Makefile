@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/03 20:54:43 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/06 22:37:03 by nalexand         ###   ########.fr        #
+#    Updated: 2019/08/06 23:21:39 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,8 @@ COR_SRC =	corewar.c \
 			init_carriages.c \
 			cw_debug.c
 
-ASM_SRC =	asm.c
+ASM_SRC =	asm.c \
+			first_validation.c \
 
 COM_OBJ = $(addprefix $(OBJ_DIR), $(patsubst %.c, %.o, $(COM_SRC)))
 COR_OBJ = $(addprefix $(OBJ_DIR), $(patsubst %.c, %.o, $(COR_SRC)))
