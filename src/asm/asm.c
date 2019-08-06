@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:10:58 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/06 21:19:45 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/06 22:23:51 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,29 @@ void	label_to_com(t_as **all, t_list *comm, t_list *tmp)
 	(*all)->labels = tmp;
 }
 
+int		command_len(t_op op_tb, unsigned char type)
+{
+	int	res;
+	int	i;
+
+	i = 3;
+	res = 1;
+	if (op_tb.arg_type)
+		res++;
+	while (i--)
+	{
+		if ((type >> 7 & 1) == 1 && (type >> 6 & 1) == 1)
+			res += 2;
+		else if ((type >> 7 & 1) == 1 && (type >> 6 & 1) != 1)
+			res++;
+		else if ((type >> 7 & 1) != 1 && (type >> 6 & 1) != 1)
+			res += op_tb.t_dir_size;
+		type >>= 2;	
+	}
+	ft_printf("%d ", res);
+	return (res);
+}
+
 void	add_command(t_as **all, t_list *tmp, char **f, char *str)
 {
 	int		counter;
@@ -204,6 +227,7 @@ void	add_command(t_as **all, t_list *tmp, char **f, char *str)
 	// ft_printf("arg - %s", str);
 	ft_bzero(COM, sizeof(t_comm));
 	COM->instr = op_tab[counter].op_name;
+	COM->len = command_len(op_tab[counter], COM->arg_type);
 	// ft_printf("arg - %s\n", str);
 	add_arg(COM, str + ft_strlen(op_tab[counter].op_name) + 1, 0, op_tab[counter]);
 //	ft_printf("arg - %s", str);
