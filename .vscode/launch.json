@@ -4,6 +4,20 @@
 	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
 	"version": "0.2.0",
 	"configurations": [
+
+		{
+			"name": "(lldb) ASM",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/asm",
+			"args": ["gg.s"],
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+			"externalConsole": false,
+			"MIMode": "lldb"
+		}
+	,
 		{
 			"name": "(lldb) COREWAR",
 			"type": "cppdbg",

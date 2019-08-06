@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:12:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/05 14:55:35 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/06 21:19:55 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,40 @@ void			print_memory(char *mem, ssize_t size);
 */
 typedef	struct	s_as
 {
-	char		name[129];
+	char		name[PROG_NAME_LENGTH + 1];
 	int			name_i;
-	char		comment[2049];
+	char		comment[COMMENT_LENGTH + 1];
 	int			com_i;
 	char		read;
-	int			size;
+	int			comand_n;
 	t_list		*comm;
+	t_list		*labels;
 }				t_as;
+
+typedef	struct	s_comm
+{
+	char		*instr;
+	unsigned char		arg_type;
+	int			arg_f;
+	int			arg_s;
+	int			arg_t;
+	char		*label_f;
+	char		*label_s;
+	char		*label_t;
+	int			len;
+}				t_comm;
+
+typedef	struct	s_label
+{
+	char			*name;
+	struct	s_list	*link;	
+}				t_label;
+
+int				to_ignore(char *str, int x);
+void			ft_write_it(t_as **all, int *y, char **f, int x);
+void			add_names(t_as **all, int *y, char **f, int x);
+void			check_to_valid(char *str, int x, t_as **all, char **f);
+
 /*
 **	corewar part
 */
@@ -67,5 +93,6 @@ typedef struct	s_core
 void			cw_clear_exit(t_core *core, const char *message, const int fd);
 void			print_map(char *map);
 void			print_input(t_list *tmp);
+
 
 #endif

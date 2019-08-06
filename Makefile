@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
+#    By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/03 20:54:43 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/04 18:49:19 by nalexand         ###   ########.fr        #
+#    Updated: 2019/08/05 15:07:04 by skrystin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,8 @@ COR_SRC =	corewar.c \
 			cw_clear_exit.c \
 			cw_debug.c
 
-ASM_SRC =	asm.c
+ASM_SRC =	asm.c \
+			first_validation.c \
 
 COM_OBJ = $(addprefix $(OBJ_DIR), $(patsubst %.c, %.o, $(COM_SRC)))
 COR_OBJ = $(addprefix $(OBJ_DIR), $(patsubst %.c, %.o, $(COR_SRC)))
