@@ -6,12 +6,11 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/04 21:24:26 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/04 21:28:47 by nalexand         ###   ########.fr        #
+#    Updated: 2019/08/06 17:21:30 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .name "moes"
 .comment "lutiy"
 
-go:
-	live %42
+	xor %42, 21, r2

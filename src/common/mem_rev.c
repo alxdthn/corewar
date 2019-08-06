@@ -1,37 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_memory.c                                     :+:      :+:    :+:   */
+/*   mem_rev.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/03 18:08:26 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/05 17:30:57 by nalexand         ###   ########.fr       */
+/*   Created: 2019/08/05 18:43:42 by nalexand          #+#    #+#             */
+/*   Updated: 2019/08/05 18:44:06 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "corewar.h"
 
-void	print_memory(char *mem, ssize_t size)
+int		mem_rev(int mem)
 {
-	int 	i;
-	int		j;
-
-	i = 0;
-	j = 8;
-	while (i < size)
-	{
-		ft_printf("%.2hhx", mem[i++]);
-		if (i < size)
-			ft_printf("%.2hhx", mem[i]);
-		if (--j)
-			ft_putchar(' ');
-		else
-		{
-			ft_putchar('\n');
-			j = 8;
-		}
-		i++;
-	}
-	ft_putchar('\n');
+	return ((mem & 0x000000FF) << 24
+	| (mem & 0x0000FF00) << 8
+	| (mem & 0x00FF0000) >> 8
+	| (mem & 0xFF000000) >> 24);
 }

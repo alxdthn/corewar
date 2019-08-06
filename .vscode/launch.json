@@ -19,11 +19,23 @@
 		}
 	,
 		{
+			"name": "(lldb) DESTR",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/destr",
+			"args": [],
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+			"externalConsole": false,
+			"MIMode": "lldb"
+		},
+		{
 			"name": "(lldb) COREWAR",
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/corewar",
-			"args": ["gg.cor"],
+			"args": ["destr.cor"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],
