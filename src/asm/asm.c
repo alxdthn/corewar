@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:10:58 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/07 21:02:44 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/07 21:09:10 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	translator(char **f, int y, char *file, t_as *all)
 		check_to_valid(f[y], 0, &all, f);
 		if (to_ignore(f[y], 0) && y++ != -2)
 			continue;
-		ft_printf("%s\n", f[y]);
+	//	ft_printf("%s\n", f[y]);
 		if (ft_strstr(f[y], NAME_CMD_STRING) || ft_strstr(f[y], COMMENT_CMD_STRING) || all->read)
 			add_names(&all, &y, f, 0);
 		else if (add_label(&all, f, f[y], y) && !to_ignore(f[y], 0))
@@ -128,6 +128,7 @@ int		main(int ac, char **av)
 //	ft_printf("%c\n", file[ft_strlen(file) - 1]);
 	translator(per_str = ft_strsplit(file, '\n'), 0, av[ac - 1], 0);
 	free(file);
+	close(fd);
 	// fd = 0;
 	// while (per_str[fd])
 	// 	ft_printf("%s\n", per_str[fd++]);

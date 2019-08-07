@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 17:10:00 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/07 20:03:04 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/07 21:09:42 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,14 +268,14 @@ int		len_to_label(t_list *dst, t_list *label, char *find, t_list *begin_c)
 	}
 	src = ((t_label *)label->content)->link;
 	//if (dst->content)
-	ft_printf("\nSRC that - %s, DST that - %s\n", ((t_comm *)src->content)->instr, ((t_comm *)dst->content)->instr);
+	//ft_printf("\nSRC that - %s, DST that - %s\n", ((t_comm *)src->content)->instr, ((t_comm *)dst->content)->instr);
 	while (begin_c)
 	{
 		if (begin_c == src && flag == 0)
 			flag = -1;
 		else if (begin_c->content == dst->content && flag == 0)
 		{
-			ft_printf("HERE I GO AGAIN\n");
+		//	ft_printf("HERE I GO AGAIN\n");
 			flag = 1;
 		}
 		else if ((begin_c == src || begin_c->content == dst->content) && flag != 0)
@@ -286,7 +286,7 @@ int		len_to_label(t_list *dst, t_list *label, char *find, t_list *begin_c)
 		res += flag * (((t_comm *)begin_c->content)->len);
 		begin_c = begin_c->next;
 	}
-	ft_printf("I find this - %d to that name - %s\n", res, find);
+//	ft_printf("I find this - %d to that name - %s\n", res, find);
 	return (res);
 }
 
