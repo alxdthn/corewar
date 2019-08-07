@@ -25,7 +25,7 @@ hi:
 	st		r2, -176
 	st		r2, -185
 	st		r2, -194
-	st		r2, -203
-	fork	%23
-gf:
+#	st		r2, -203
+#	fork	%23
+#gf:
 #s

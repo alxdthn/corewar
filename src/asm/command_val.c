@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 17:10:00 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/07 17:10:19 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/07 20:03:04 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,11 +210,13 @@ void	add_command(t_as **all, t_list *tmp, char **f, char *str)
 	COM->instr = op_tab[counter].op_name;
 	//ft_printf("arg - %s\n", str);
 	add_arg((COM), str + ft_strlen(op_tab[counter].op_name) + 1, 0, op_tab[counter]);
+	//ft_printf("arg_f - %d\n", (COM)->arg_f);
 	COM->len = get_arg_size(&(op_tab[counter]), COM->arg_type);
 	//ft_printf("%d  byte - %hhx", COM->len, COM->arg_type);
 	// ft_printf("arg - %s", str);
 	tmp->next = 0;
 	ft_lstpushback(&(*all)->comm, tmp);
+	// ft_printf("arg_f - %d\n", ((t_comm *)((*all)->comm)->content)->arg_f);
 	label_to_com(all, tmp, 0);
 }
 
