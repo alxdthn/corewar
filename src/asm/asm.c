@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:10:58 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/07 15:08:07 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/07 15:20:38 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,14 +176,15 @@ int		check_arg(char *str, t_op op_tab)
 void	label_to_com(t_as **all, t_list *comm, t_list *tmp)
 {
 	tmp = (*all)->labels;
-	while (tmp && (*all)->labels->next)
+	while (tmp && (*all)->labels->next && ((t_label *)(*all)->labels->content)->link)
 		(*all)->labels = (*all)->labels->next;
 	// if ((*all)->labels)
 	// 	ft_printf("HI - %s", ((t_label *)(*all)->labels->content)->link);
-	if ((*all)->labels && ((t_label *)(*all)->labels->content)->link == 0)
+	while ((*all)->labels && ((t_label *)(*all)->labels->content)->link == 0)
 	{
 		// ft_printf("HI");
 		((t_label *)(*all)->labels->content)->link = comm;
+		(*all)->labels = (*all)->labels->next;
 	}
 	(*all)->labels = tmp;
 }
