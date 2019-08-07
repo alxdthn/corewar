@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 17:10:00 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/07 21:09:42 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/07 22:51:01 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,6 +243,7 @@ int		add_label(t_as **all, char **f, char *str, int y)
 	lab->link = 0;
 	if (!(tmp = ft_lstnew(lab, sizeof(t_label))))
 		exit(0);//do more
+	free(lab);
 	ft_lstpushback(&((*all)->labels), tmp);
 	// ft_printf("\nlabel - %s\n", ((t_label *)tmp->content)->name);
 	while (i >= 0)

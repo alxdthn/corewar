@@ -6,22 +6,47 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:10:58 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/07 22:14:06 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/07 22:49:44 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
+void	del_com(t_as **all, t_list *comm)
+{
+	comm = (*all)->comm;
+	while (comm)
+	{
+		(*all)->comm = (*all)->comm->next;
+		if (comm && ((t_comm *)comm->content))
+			free((comm->content));
+		if (comm)
+			free(comm);
+		comm = (*all)->comm;
+	}
+}
+
+void	del_labels(t_as **all, t_list *lab)
+{
+	lab = (*all)->labels;
+	while (lab)
+	{
+		(*all)->labels = (*all)->labels->next;
+		free(((t_label *)lab->content)->name);
+		free((t_label *)lab->content);
+		free(lab);
+		lab = (*all)->labels;
+	}
+}
+
 void	delete_asm_all(t_as **all, char **file, char ***f)
 {
 	if (f && *f)
 		ft_arraydel((void ***)f);
-	if (file && *file) 
-		free(*file);
 	if (all && *all)
 	{
-		// del_com(all, (*all)->comm);
-		// del_labels(all, (*all)->labels);
+		del_com(all, (*all)->comm);
+		del_labels(all, (*all)->labels);
 		free(*all);
 	}
 }
@@ -49,7 +74,7 @@ void	translator(char **f, int y, char *file, t_as *all)
 	label_to_nbr(&all, all->labels, all->comm, 0);
 //	ft_arraydel((void ***)&f);
 	print_to_bytecode(all, file, all->comm, code_size(all->comm, 0));
-	//delete_asm_all(&all, &file, &f);
+	delete_asm_all(&all, &file, &f);
 //	ft_printf("name - %s, int_n -%d comment - %s", all->name, all->name_i, all->comment);
 //	ft_printf("\ncomm - %s\n", ((t_comm *)all->comm->content)->instr);
 //	ft_printf("\nLabel - %s\n", ((t_comm *)((t_label *)all->labels->next->next->content)->name));
