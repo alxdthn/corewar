@@ -25,7 +25,20 @@ hi:
 	st		r2, -176
 	st		r2, -185
 	st		r2, -194
-	st		r2, -203
-	fork	%23
-gf:
+#	st		r2, -203
+#	fork	%23
+#gf:
+	ld		23, r3
+	add		r3, r5, r6
+	sub 	r3, r5, r6
+	and 	%3, 34, r8
+	or		%3, 34, r8
+	xor		r5, 34, r8
+	zjmp	%:hi
+	ldi		r5, r3, r7
+	sti		r4, 5, r4
+	lld		4566, r9
+	lldi	%324, r5, r9
+	lfork	%43
+	aff		r5
 #s

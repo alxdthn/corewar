@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 17:10:00 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/07 17:10:19 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/07 21:09:42 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,11 +210,13 @@ void	add_command(t_as **all, t_list *tmp, char **f, char *str)
 	COM->instr = op_tab[counter].op_name;
 	//ft_printf("arg - %s\n", str);
 	add_arg((COM), str + ft_strlen(op_tab[counter].op_name) + 1, 0, op_tab[counter]);
+	//ft_printf("arg_f - %d\n", (COM)->arg_f);
 	COM->len = get_arg_size(&(op_tab[counter]), COM->arg_type);
 	//ft_printf("%d  byte - %hhx", COM->len, COM->arg_type);
 	// ft_printf("arg - %s", str);
 	tmp->next = 0;
 	ft_lstpushback(&(*all)->comm, tmp);
+	// ft_printf("arg_f - %d\n", ((t_comm *)((*all)->comm)->content)->arg_f);
 	label_to_com(all, tmp, 0);
 }
 
@@ -266,14 +268,14 @@ int		len_to_label(t_list *dst, t_list *label, char *find, t_list *begin_c)
 	}
 	src = ((t_label *)label->content)->link;
 	//if (dst->content)
-	ft_printf("\nSRC that - %s, DST that - %s\n", ((t_comm *)src->content)->instr, ((t_comm *)dst->content)->instr);
+	//ft_printf("\nSRC that - %s, DST that - %s\n", ((t_comm *)src->content)->instr, ((t_comm *)dst->content)->instr);
 	while (begin_c)
 	{
 		if (begin_c == src && flag == 0)
 			flag = -1;
 		else if (begin_c->content == dst->content && flag == 0)
 		{
-			ft_printf("HERE I GO AGAIN\n");
+		//	ft_printf("HERE I GO AGAIN\n");
 			flag = 1;
 		}
 		else if ((begin_c == src || begin_c->content == dst->content) && flag != 0)
@@ -284,7 +286,7 @@ int		len_to_label(t_list *dst, t_list *label, char *find, t_list *begin_c)
 		res += flag * (((t_comm *)begin_c->content)->len);
 		begin_c = begin_c->next;
 	}
-	ft_printf("I find this - %d to that name - %s\n", res, find);
+//	ft_printf("I find this - %d to that name - %s\n", res, find);
 	return (res);
 }
 
