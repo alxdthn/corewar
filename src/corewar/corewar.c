@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:19:35 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/07 19:08:14 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/07 22:28:44 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	set_exec_code(t_core *core)
 
 static int	process(t_list *carriage)
 {
-	print_operation_info(CRG->op);
+	CRG->op_info->foo(carriage);	
 	return (get_arg_size(CRG->op_info, CRG->op[ARG_BYTE]));
 }
 
@@ -36,26 +36,27 @@ static void carriage_process(t_core *core, t_list *carriage)
 {
 	int		ofset;
 
-	CRG->op = core->map + CRG->position;
 	if ((ofset = validate_operation(carriage)))
 		CRG->position += ofset;
 	else
 	{
 		CRG->position += process(carriage);
+		CRG->op = core->map + CRG->position;
 		ft_printf("\033[32mALL GOOD\033[0m\n");
 	}
-	print_carriage(carriage);
 }
 
 static void start_game(t_core *core)
 {
-	t_list	*tmp;
+	t_list	*carriage;
 
-	tmp = core->carriages;
-	while (tmp)
+	carriage = core->carriages;
+	while (carriage)
 	{
-		carriage_process(core, tmp);
-		tmp = tmp->next;
+		CRG->op = core->map + CRG->position;
+		while (*CRG->op)
+			carriage_process(core, carriage);
+		carriage = carriage->next;
 	}
 }
 

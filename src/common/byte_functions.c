@@ -6,17 +6,17 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 22:04:27 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/07 17:11:34 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/07 22:28:10 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int		get_arg_type(char byte)
+int		get_arg_type(char arg_byte)
 {
 	char	mask;
 
-	mask = (byte & 0xC0) >> 6;
+	mask = (arg_byte & 0xC0) >> 6;
 	if (mask == DIR_CODE)
 		return (T_DIR);
 	else if (mask == IND_CODE)
@@ -26,24 +26,24 @@ int		get_arg_type(char byte)
 	return (0);
 }
 
-int		get_arg_code(char type)
+int		get_arg_code(char arg_type)
 {
-	if (type == T_DIR)
+	if (arg_type == T_DIR)
 		return (DIR_CODE);
-	else if (type == T_IND)
+	else if (arg_type == T_IND)
 		return (IND_CODE);
-	else if (type == T_REG)
+	else if (arg_type == T_REG)
 		return (REG_CODE);
 	return (0);
 }
 
-int		get_arg_ofset(int arg, t_op *op)
+int		get_arg_ofset(int arg_type, t_op *op)
 {
-	if (arg == T_DIR)
+	if (arg_type == T_DIR)
 		return (DIR_OFSET);
-	else if (arg == T_REG)
+	else if (arg_type == T_REG)
 		return (REG_OFSET);
-	else if (arg == T_IND)
+	else if (arg_type == T_IND)
 		return (IND_OFSET);
 	return (0);
 }
@@ -62,24 +62,24 @@ t_op	*get_cmd(char *cmd)
 	return (NULL);
 }
 
-int		get_arg_size(t_op *op, t_arg_type byte)
+int		get_arg_size(t_op *op, char arg_byte)
 {
 	int		size;
 	int		i;
  
 	size = 1;
 	if (op->arg_count == 1)
-		return (1 + get_arg_ofset(get_arg_type(byte), op));
+		return (1 + get_arg_ofset(op->args[0], op));
 	i = 0;
 	while (i < op->arg_count)
 	{
-		if ((byte & 0xC0) == (REG_CODE << 6))
+		if ((arg_byte & 0xC0) == (REG_CODE << 6))
 			size += REG_OFSET;
-		else if ((byte & 0xC0) == (DIR_CODE << 6))
+		else if ((arg_byte & 0xC0) == (DIR_CODE << 6))
 			size += DIR_OFSET;
-		else if ((byte & 0xC0) == (IND_CODE << 6))
+		else if ((arg_byte & 0xC0) == (IND_CODE << 6))
 			size += IND_OFSET;
-		byte <<= 2;
+		arg_byte <<= 2;
 		i++;
 	}
 	return (size + op->arg_type);

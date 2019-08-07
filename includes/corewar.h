@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:12:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/07 19:09:33 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/07 22:26:46 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,51 +45,52 @@ typedef struct	s_op
 	char		arg_type;
 	char		t_dir_size;
 	char		carry;
+	void		(*foo)(t_list *);
 }				t_op;
 
 t_op    		op_tab[17];
 
 void			print_memory(char *mem, ssize_t size);
 int				mem_rev(int mem);
-int				get_arg_code(char byte);
-int				get_arg_type(char byte);
-int				get_arg_size(t_op *op, t_arg_type byte);
 t_op			*get_cmd(char *cmd);
-int				get_arg_ofset(int arg, t_op *op);
+int				get_arg_type(char arg_byte);
+int				get_arg_code(char arg_type);
+int				get_arg_ofset(int arg_type, t_op *op);
+int				get_arg_size(t_op *op, char arg_byte);
 void			print_operation_info(char *position);
 /*
 **	asm part
 */
-typedef	struct	s_as
+typedef	struct		s_as
 {
-	char		name[PROG_NAME_LENGTH + 1];
-	int			name_i;
-	char		comment[COMMENT_LENGTH + 1];
-	int			com_i;
-	char		read;
-	int			comand_n;
-	t_list		*comm;
-	t_list		*labels;
-}				t_as;
+	char			name[PROG_NAME_LENGTH + 1];
+	int				name_i;
+	char			comment[COMMENT_LENGTH + 1];
+	int				com_i;
+	char			read;
+	int				comand_n;
+	t_list			*comm;
+	t_list			*labels;
+}					t_as;
 
-typedef	struct	s_comm
+typedef	struct		s_comm
 {
-	char		*instr;
-	unsigned char		arg_type;
-	int			arg_f;
-	int			arg_s;
-	int			arg_t;
-	char		*label_f;
-	char		*label_s;
-	char		*label_t;
-	int			len;
-}				t_comm;
+	char			*instr;
+	unsigned char	arg_type;
+	int				arg_f;
+	int				arg_s;
+	int				arg_t;
+	char			*label_f;
+	char			*label_s;
+	char			*label_t;
+	int				len;
+}					t_comm;
 
-typedef	struct	s_label
+typedef	struct		s_label
 {
 	char			*name;
 	struct	s_list	*link;	
-}				t_label;
+}					t_label;
 
 int				to_ignore(char *str, int x);
 void			ft_write_it(t_as **all, int *y, char **f, int x);
@@ -139,6 +140,7 @@ typedef struct		s_warrior
 
 typedef struct		s_carriage
 {
+	char			live;
 	int				reg[REG_NUMBER];
 	int				nb;
 	int				cycle;
@@ -157,6 +159,7 @@ typedef struct		s_core
 	t_list			*carriages;
 	t_warrior		*warriors[MAX_PLAYERS + 1];
 	int				war_count;
+	unsigned long	cycle_after_start;
 }					t_core;
 
 void				cw_clear_exit(t_core *core, const char *message, const int fd);
@@ -164,6 +167,23 @@ void				read_input(t_core *core, const int ac, const char **av);
 void				init_warriors(t_core *core);
 void				init_carriages(t_core *core);
 int					validate_operation(t_list *carriage);
+
+void				cw_live(t_list *carriage);
+void				cw_ld(t_list *carriage);
+void				cw_st(t_list *carriage);
+void				cw_add(t_list *carriage);
+void				cw_sub(t_list *carriage);
+void				cw_and(t_list *carriage);
+void				cw_or(t_list *carriage);
+void				cw_xor(t_list *carriage);
+void				cw_zjmp(t_list *carriage);
+void				cw_ldi(t_list *carriage);
+void				cw_sti(t_list *carriage);
+void				cw_fork(t_list *carriage);
+void				cw_lld(t_list *carriage);
+void				cw_lldi(t_list *carriage);
+void				cw_lfork(t_list *carriage);
+void				cw_aff(t_list *carriage);
 
 void				print_warriros(t_core *core);
 void				print_map(unsigned char *map);
