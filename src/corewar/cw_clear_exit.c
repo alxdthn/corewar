@@ -6,11 +6,15 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 18:01:23 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/05 19:16:50 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/07 18:50:09 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
+/*
+**	Функция выхода из программы.
+*/
 
 static void	clear_warriors(t_core *core)
 {

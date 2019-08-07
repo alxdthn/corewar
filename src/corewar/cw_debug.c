@@ -6,11 +6,15 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 18:45:18 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/06 18:20:44 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/07 19:06:52 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
+/*
+**	Функции для дебага, исходя из названия думаю понятно что они печатают
+*/
 
 void	print_map(unsigned char *map)
 {
@@ -63,18 +67,18 @@ void	print_warriros(t_core *core)
 	}
 }
 
-void	print_carriage(t_list *tmp)
+void	print_carriage(t_list *carriage)
 {
 	int		i;
 
 	ft_printf("CARRIAGE INFO:\n");
 	ft_printf("number: %d\nposition: %d\ncycle_for_op: %d\ncycle: %d\n"\
 	"carry: %d\noperation %s\nofset: %d\nregisters:\n",
-	CARRIAGE->nb, CARRIAGE->position, CARRIAGE->cycle_for_op, CARRIAGE->cycle,
-	CARRIAGE->carry, op_tab[CARRIAGE->op - 1].op_name, CARRIAGE->ofset);
+	CRG->nb, CRG->position, CRG->cycle_for_op, CRG->cycle,
+	CRG->carry, CRG->op_info->op_name, CRG->ofset);
 	i = 0;
 	while (i < REG_NUMBER)
-		ft_printf("%.*x ", REG_SIZE, CARRIAGE->reg[i++]);
+		ft_printf("%.*x ", REG_SIZE, CRG->reg[i++]);
 	ft_putchar('\n');
 	ft_putstr("--------------------------------\n");
 }

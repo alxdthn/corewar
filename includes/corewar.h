@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:12:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/07 17:04:27 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/07 19:03:30 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,9 @@ void			check_to_valid(char *str, int x, t_as **all, char **f);
 */
 
 #define USAGE "usage:"
-#define CARRIAGE ((t_carriage *)tmp->content)
+#define CRG ((t_carriage *)carriage->content)
+#define OPERATION_CODE 0
+#define ARG_BYTE 1
 
 typedef union			u_arg_byte
 {
@@ -133,7 +135,8 @@ typedef struct		s_carriage
 	int				cycle_for_op;
 	int				position;
 	int				ofset;
-	char			op;
+	char			*op;
+	t_op			*op_info;
 	t_bool			carry;
 }					t_carriage;
 
@@ -150,6 +153,7 @@ void				cw_clear_exit(t_core *core, const char *message, const int fd);
 void				read_input(t_core *core, const int ac, const char **av);
 void				init_warriors(t_core *core);
 void				init_carriages(t_core *core);
+int					validate_operation(t_list *carriage);
 
 void				print_warriros(t_core *core);
 void				print_map(unsigned char *map);

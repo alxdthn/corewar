@@ -6,12 +6,11 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 22:36:16 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/06 22:36:38 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/07 18:53:04 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
 
 void	init_carriages(t_core *core)
 {

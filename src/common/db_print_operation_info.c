@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 21:55:23 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/07 16:54:43 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/07 17:59:28 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	print_argbyte(char *position, t_op *op, int *byte_ofset)
 				print_ofset += ft_printf("%hd ",
 				ft_reverse_bytes(*(short *)(position + *byte_ofset), sizeof(short)));
 			else
-				print_ofset += ft_printf("%hhd ", *(position + *byte_ofset));
+				print_ofset += ft_printf("r%hhd ", *(position + *byte_ofset));
 		}
 		(*byte_ofset) += arg_ofset;
 		arg_byte <<= 2;

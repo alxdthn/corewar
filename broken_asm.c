@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 21:40:21 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/07 16:26:21 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/07 18:04:01 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,8 +141,7 @@ int		main(void)
 	char	head[SIZE];
 	char	*cmd;
 
-	system("rm -f destr.cor; touch destr.cor");
-	fd = open("destr.cor", O_RDWR);
+	fd = open("destr.cor", O_CREAT | O_RDWR);
 	ft_bzero(&head, SIZE);
 	set_magic(head);
 	set_name(head);
