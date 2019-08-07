@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:12:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/07 21:05:48 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/07 22:06:55 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,10 @@ int				add_label(t_as **all, char **f, char *str, int y);
 void			label_to_nbr(t_as **all, t_list *label, t_list *begin_c, t_list	*tmp);
 int				len_to_label(t_list *dst, t_list *label, char *find, t_list *begin_c);
 int				print_basic(t_as *all, char *file, char *head, int size);
+void			set_size_short(char *buf, int size, int i, int ofset);
+void			write_operations(int s, char *str, t_comm *com, int counter);
+void			print_to_bytecode(t_as *all, char *file, t_list *com, int size);
+int				code_size(t_list *com, int res);
 
 /*
 **	corewar part
