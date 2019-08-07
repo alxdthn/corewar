@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    moes.s                                             :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+         #
+#    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/04 21:24:26 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/07 21:06:09 by skrystin         ###   ########.fr        #
+#    Updated: 2019/08/07 22:29:40 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .name "moes"
 .comment "lutiy"
 
-	xor r1, r2, r3
+	live %-1
