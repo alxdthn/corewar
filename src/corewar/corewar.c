@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:19:35 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/06 22:17:21 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/07 15:09:50 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,58 +26,29 @@ static void	set_exec_code(t_core *core)
 	}
 }
 
-static void	init_carriages(t_core *core)
-{
-	t_carriage	new;
-	t_list		*node;
-	int			i;
-
-	i = 0;
-	ft_bzero(&new, sizeof(t_carriage));
-	while (core->warriors[i])
-	{
-		new.nb = i + 1;
-		new.reg[0] = -core->warriors[i]->nb;
-		new.position = core->warriors[i++]->start_position;
-		if (!(node = ft_lstnew(&new, sizeof(t_carriage))))
-			cw_clear_exit(core, MEM_ERROR, 2);
-		ft_lstadd(&core->carriages, node);
-	}
-}
-
-static int	get_arg_type(char byte)
-{
-	char	mask;
-
-	mask = (byte & 0xC0) >> 6;
-	if (mask == DIR_CODE)
-		return (T_DIR);
-	else if (mask == IND_CODE)
-		return (T_IND);
-	else if (mask == REG_CODE)
-		return (T_REG);
-	return (0);
-}
-
-static int	validate_operation(const unsigned char *position, t_op **cur)
+static int	validate_operation(char *position, t_op **op)
 {
 	t_arg_type	argbyte;
 	int			i;
 	int			byteofset;
-	char		mask;
+	char		arg;
 
-	if (!position[0] || position[0] > 16)
+	if (position[0] < 1 || position[0] > 16)
 		return (ft_puterr(1, "NO OPERATION"));
-	*cur = &op_tab[position[0] - 1];
+	*op = &op_tab[position[0] - 1];
 	print_operation_info(position);
 	argbyte = position[1];
 	i = 0;
-	byteofset = 0;
-	while (i < (*cur)->arg_count)
+	byteofset = (*op)->arg_type;
+	while (i < (*op)->arg_count)
 	{
-		mask = get_arg_type(argbyte);
-		if ((mask & (*cur)->args[i]) != mask)
-			return (ft_puterr(1, "BAD_ARG"));
+		arg = get_arg_type(argbyte);
+		byteofset += get_arg_ofset(arg, *op);
+		if ((arg & (*op)->args[i]) != arg)
+			return (ft_puterr(get_arg_size(*op, argbyte), "BAD_ARG"));
+		if (arg == T_REG && (position[byteofset] < 0
+		|| position[byteofset] > REG_NUMBER))
+			return (ft_puterr(get_arg_size(*op, argbyte), "BAD_REG"));
 		i++;
 		argbyte <<= 2;
  	}
@@ -90,13 +61,10 @@ static void carriage_process(t_core *core, t_list *tmp)
 	int		ofset;
 
 	if ((ofset = validate_operation(core->map + CARRIAGE->position, &cur_op)))
-	{
-		ft_printf("ERROR\n");
 		CARRIAGE->ofset += ofset;
-	}
-	CARRIAGE->op = cur_op->op_code;
-	//else
-		//print_carriage(tmp);
+	else
+		ft_printf("ALL GOOD\n");
+	print_carriage(tmp);
 }
 
 static void start_game(t_core *core)
@@ -120,6 +88,7 @@ int			main(int ac, char **av)
 	init_warriors(&core);
 	init_carriages(&core);
 	set_exec_code(&core);
+	print_memory(core.input->content, core.input->content_size);
 	start_game(&core);
 
 	ft_printf("\n\nCOREWAAAR!!!\n");
@@ -129,4 +98,3 @@ int			main(int ac, char **av)
 
 	//print_warriros(&core);
 	//print_map(core.map);
-	//print_memory(core.input->content, core.input->content_size);

@@ -35,7 +35,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/corewar",
-			"args": ["destr.cor"],
+			"args": ["moes.cor"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],
