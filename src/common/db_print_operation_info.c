@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 21:55:23 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/06 22:19:17 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/07 14:54:57 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,17 @@ static int	print_args(const unsigned char *position, t_op *op)
 	int				i;
 
 	ofset = 0;
-	if (op->arg_count == 1 && op->args[0] == T_DIR)
-		ofset += ft_printf("%d ", position[4]);
+	byte_ofset = 1 + op->arg_type;
+	if (op->arg_count == 1)
+	{
+		if (op->args[0] == T_DIR)
+			ofset += ft_printf("%%%d ", position[byte_ofset += get_arg_ofset(T_DIR, op)]);
+		else if (op->args[0] == T_REG)
+			ofset += ft_printf("r%d ", position[byte_ofset += get_arg_ofset(T_REG, op)]);
+	}
 	else
 	{
 		arg_byte = position[1];
-		byte_ofset = 1 + op->arg_type;
 		i = 0;
 		while (i < op->arg_count)
 		{

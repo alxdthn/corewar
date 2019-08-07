@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 22:04:27 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/06 23:17:57 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/07 14:45:33 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ int		get_arg_size(t_op *op, t_arg_type byte)
 	int		i;
  
 	size = 1;
-	if (op->arg_count == 1 && op->args[0] == T_DIR)
-		return (5);
+	if (op->arg_count == 1)
+		return (1 + get_arg_ofset(get_arg_type(byte), op));
 	i = 0;
 	while (i < op->arg_count)
 	{

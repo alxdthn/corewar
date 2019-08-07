@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:19:35 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/06 23:09:15 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/07 14:28:25 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,15 @@ static int	validate_operation(const unsigned char *position, t_op **op)
 	print_operation_info(position);
 	argbyte = position[1];
 	i = 0;
-	byteofset = 1;
+	byteofset = (*op)->arg_type;
 	while (i < (*op)->arg_count)
 	{
 		arg = get_arg_type(argbyte);
 		byteofset += get_arg_ofset(arg, *op);
 		if ((arg & (*op)->args[i]) != arg)
 			return (ft_puterr(get_arg_size(*op, argbyte), "BAD_ARG"));
-		if (arg == T_REG && (position[byteofset - 1] < 0
-		|| position[byteofset - 1] > REG_NUMBER))
+		if (arg == T_REG && (position[byteofset] < 0
+		|| position[byteofset] > REG_NUMBER))
 			return (ft_puterr(get_arg_size(*op, argbyte), "BAD_REG"));
 		i++;
 		argbyte <<= 2;
@@ -64,8 +64,7 @@ static void carriage_process(t_core *core, t_list *tmp)
 		CARRIAGE->ofset += ofset;
 	else
 		ft_printf("ALL GOOD\n");
-	//else
-		//print_carriage(tmp);
+	print_carriage(tmp);
 }
 
 static void start_game(t_core *core)
@@ -89,7 +88,6 @@ int			main(int ac, char **av)
 	init_warriors(&core);
 	init_carriages(&core);
 	set_exec_code(&core);
-	print_memory(core.input->content, core.input->content_size);
 	start_game(&core);
 
 	ft_printf("\n\nCOREWAAAR!!!\n");
@@ -97,5 +95,6 @@ int			main(int ac, char **av)
 	return (0);
 }
 
+	//print_memory(core.input->content, core.input->content_size);
 	//print_warriros(&core);
 	//print_map(core.map);

@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 21:40:21 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/06 23:19:07 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/07 14:55:21 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,18 +90,18 @@ char	*set_cmd(char *head, int fd)
 	int			size;
 	char		*res;
 
-	op = get_cmd("add");
+	op = get_cmd("zjmp");
 
 	argbyte.arg.a1 = (unsigned char)DIR_CODE;
-	argbyte.arg.a2 = (unsigned char)IND_CODE;
-	argbyte.arg.a3 = (unsigned char)REG_CODE;
-	argbyte.arg.a4 = (unsigned char)DIR_CODE;
+	argbyte.arg.a2 = (unsigned char)0;
+	argbyte.arg.a3 = (unsigned char)0;
+	argbyte.arg.a4 = (unsigned char)0;
 
 	size = get_arg_size(op, argbyte.byte);
 	ft_printf("%d\n", size);
 	res = (char *)ft_memalloc(size);
 	res[1] = argbyte.byte;
-	set_arg_value(21, 1, -3, op, res);
+	set_arg_value(21, 0, 0, op, res);
 	res[0] = op->op_code;
 	print_operation_info((unsigned char *)res);
 	head[139] = size;
