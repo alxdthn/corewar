@@ -6,13 +6,12 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/04 21:24:26 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/07 14:36:15 by nalexand         ###   ########.fr        #
+#    Updated: 2019/08/07 16:56:29 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .name "moes"
 .comment "lutiy"
 
-		zjmp %:loop
-loop:	live %1
+	zjmp %20000
 

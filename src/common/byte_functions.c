@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 22:04:27 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/07 14:45:33 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/07 17:11:34 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,17 @@ int		get_arg_type(char byte)
 		return (T_IND);
 	else if (mask == REG_CODE)
 		return (T_REG);
+	return (0);
+}
+
+int		get_arg_code(char type)
+{
+	if (type == T_DIR)
+		return (DIR_CODE);
+	else if (type == T_IND)
+		return (IND_CODE);
+	else if (type == T_REG)
+		return (REG_CODE);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 21:40:21 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/07 14:55:21 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/07 16:26:21 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,31 +55,57 @@ void	set_comment(char *buf)
 
 # define CMD_SIZE 7
 
-void	set_arg_value(int a1, int a2, int a3, t_op *op, char *res)
+static void	set_arg(t_arg_type *argbyte, int *ofset, char *res, int arg, t_op *op)
+{
+
+	*ofset = get_arg_ofset(get_arg_type(*argbyte), op);
+	if (*ofset == 2)
+		((short *)res)[*ofset - 1] = arg;
+	else if (*ofset == 4)
+		((int *)res)[*ofset - 1] = arg;
+	else
+		res[*ofset - 1] = arg;
+	(*argbyte) <<= 2;
+}
+
+void		set_arg_value(int a1, int a2, int a3, t_op *op, char *res)
 {
 	t_arg_type	argbyte;
+	int			byte_ofset;
 	int			ofset;
 	char		mask;
 
 	argbyte = res[1];
 	ofset = 1 + op->arg_type;
-	if (argbyte)
+	if (op->arg_count == 1)
 	{
-		ofset += get_arg_ofset(get_arg_type(argbyte), op);
-		res[ofset - 1] = a1;
-		argbyte <<= 2;
+		res[1] = 0;
+		byte_ofset = 1;
+		ofset = get_arg_ofset(op->args[0], op);
+		if (ofset == 4)
+		{
+			a1 = ft_reverse_bytes((long )a1, sizeof(int));
+			ft_memcpy(res + byte_ofset, &a1, sizeof(int));
+		}
+		else if (ofset == 2)
+		{
+			a1 = ft_reverse_bytes((long )a1, sizeof(short));
+			ft_memcpy(res + byte_ofset, &a1, sizeof(int));
+		}
+		else
+			res[byte_ofset] = a1;
+		byte_ofset += ofset;
 	}
-	if (argbyte)
+	else
 	{
-		ofset += get_arg_ofset(get_arg_type(argbyte), op);
-		res[ofset - 1] = a2;
-		argbyte <<= 2;
-	}
-	if (argbyte)
-	{
-		ofset += get_arg_ofset(get_arg_type(argbyte), op);
-		res[ofset - 1] = a3;
-		argbyte <<= 2;
+		byte_ofset = 2;
+		if (argbyte)
+			set_arg(&argbyte, &ofset, res, a1, op);
+		if (argbyte)
+			set_arg(&argbyte, &ofset, res, a2, op);
+		if (argbyte)
+			set_arg(&argbyte, &ofset, res, a3, op);
+
 	}
 }
 
@@ -90,20 +116,20 @@ char	*set_cmd(char *head, int fd)
 	int			size;
 	char		*res;
 
-	op = get_cmd("zjmp");
+	op = get_cmd("live");
 
-	argbyte.arg.a1 = (unsigned char)DIR_CODE;
-	argbyte.arg.a2 = (unsigned char)0;
-	argbyte.arg.a3 = (unsigned char)0;
-	argbyte.arg.a4 = (unsigned char)0;
+	argbyte.arg.a1 = (char)DIR_CODE;
+	argbyte.arg.a2 = (char)0;
+	argbyte.arg.a3 = (char)0;
+	argbyte.arg.a4 = (char)0;
 
 	size = get_arg_size(op, argbyte.byte);
 	ft_printf("%d\n", size);
 	res = (char *)ft_memalloc(size);
 	res[1] = argbyte.byte;
-	set_arg_value(21, 0, 0, op, res);
+	set_arg_value(2000000000, 0, 0, op, res);
 	res[0] = op->op_code;
-	print_operation_info((unsigned char *)res);
+	print_operation_info(res);
 	head[139] = size;
 	ft_printf("%d\n", size);
 	return (res);
