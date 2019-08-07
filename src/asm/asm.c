@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:10:58 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/06 22:44:20 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/07 15:20:38 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,14 @@ unsigned char	find_type_arg(char *str, int i, t_op op_tb)
 			res = res | DIR_CODE;
 			res <<= 2;
 		}
-		else if ((ft_isdigit(*str) || *str == '-') && (op_tb.args[arg] & T_IND) == T_IND)
+		else if ((ft_isdigit(*str) || *str == '-' || *str == ':') && (op_tb.args[arg] & T_IND) == T_IND)
 		{
 			res = res | IND_CODE;
 			res <<= 2;
 		}
 		else
 		{
-		//	ft_printf("i m here - %s", str);
+			ft_printf("i dont know type of this - %s", str);
 			exit(0);//do more
 		}
 		arg++;
@@ -101,6 +101,7 @@ void	add_arg(t_comm *com, char *str, char **tmp, t_op op_tab)
 	while (*str == ' ' || *str == '\t')
 		str++;
 	tmp = ft_strsplit(str, SEPARATOR_CHAR);
+	// ft_printf("This bad arg is - %s\n", tmp[x] + c);
 //	if (op_tab.arg_type)
 	(com)->arg_type = find_type_arg(str, 0, op_tab);
 	while (tmp[x])
@@ -118,7 +119,7 @@ void	add_arg(t_comm *com, char *str, char **tmp, t_op op_tab)
 			(com)->arg_t = ft_atoi(tmp[x] + c);
 		if (!ft_isint(tmp[x] + c) && *(tmp[x] + c) != LABEL_CHAR)
 		{
-			//ft_printf("i m here - %s", tmp[x] + c);
+			ft_printf("This bad arg is - %s", tmp[x] + c);
 			exit(0);//do more
 		}
 		if (!ft_isint(tmp[x] + c) && *(tmp[x] + c) == LABEL_CHAR)
@@ -126,12 +127,12 @@ void	add_arg(t_comm *com, char *str, char **tmp, t_op op_tab)
 			if (!(label = ft_strnew(ft_strlen(tmp[x] + c))))
 				exit(0);//do more
 			ft_strcpy(label, tmp[x] + c);
-			// ft_printf("\n\nIM WORK EEEE - %s\n\n", label);
-			if (x == 1)
+			// ft_printf("\n\nIM WORK EEEE - %s, nb - %d\n\n", label, x);
+			if (x == 0)
 				(com)->label_f = label;
-			if (x == 2)
+			if (x == 1)
 				(com)->label_s = label;
-			if (x == 3)
+			if (x == 2)
 				(com)->label_t = label;
 		}
 		x++;
@@ -175,14 +176,15 @@ int		check_arg(char *str, t_op op_tab)
 void	label_to_com(t_as **all, t_list *comm, t_list *tmp)
 {
 	tmp = (*all)->labels;
-	while (tmp && (*all)->labels->next)
+	while (tmp && (*all)->labels->next && ((t_label *)(*all)->labels->content)->link)
 		(*all)->labels = (*all)->labels->next;
 	// if ((*all)->labels)
 	// 	ft_printf("HI - %s", ((t_label *)(*all)->labels->content)->link);
-	if ((*all)->labels && ((t_label *)(*all)->labels->content)->link == 0)
+	while ((*all)->labels && ((t_label *)(*all)->labels->content)->link == 0)
 	{
 		// ft_printf("HI");
 		((t_label *)(*all)->labels->content)->link = comm;
+		(*all)->labels = (*all)->labels->next;
 	}
 	(*all)->labels = tmp;
 }
@@ -206,11 +208,11 @@ void	add_command(t_as **all, t_list *tmp, char **f, char *str)
 	// ft_printf("arg - %s", str);
 	ft_bzero(COM, sizeof(t_comm));
 	COM->instr = op_tab[counter].op_name;
-	// ft_printf("arg - %s\n", str);
+	//ft_printf("arg - %s\n", str);
 	add_arg((COM), str + ft_strlen(op_tab[counter].op_name) + 1, 0, op_tab[counter]);
 	COM->len = get_arg_size(&(op_tab[counter]), COM->arg_type);
-	ft_printf("%d  byte - %hhx", COM->len, COM->arg_type);
-//	ft_printf("arg - %s", str);
+	//ft_printf("%d  byte - %hhx", COM->len, COM->arg_type);
+	// ft_printf("arg - %s", str);
 	tmp->next = 0;
 	ft_lstpushback(&(*all)->comm, tmp);
 	label_to_com(all, tmp, 0);
@@ -246,6 +248,81 @@ int		add_label(t_as **all, char **f, char *str, int y)
 	return (1);
 }
 
+int		len_to_label(t_list *dst, t_list *label, char *find, t_list *begin_c)
+{
+	t_list	*src;
+	int		flag;
+	int		res;
+
+	flag = 0;
+	res = 0;
+	while (label && (ft_strncmp(((t_label *)label->content)->name, find + 1, ft_strlen(find + 1))
+	|| ft_strlen(find) != ft_strlen(((t_label *)label->content)->name)))
+		label = label->next;
+	if (!label)
+	{
+		ft_printf("This bad label is - %s\n", find);
+		exit(0);
+	}
+	src = ((t_label *)label->content)->link;
+	//if (dst->content)
+	ft_printf("\nSRC that - %s, DST that - %s\n", ((t_comm *)src->content)->instr, ((t_comm *)dst->content)->instr);
+	while (begin_c)
+	{
+		if (begin_c == src && flag == 0)
+			flag = -1;
+		else if (begin_c->content == dst->content && flag == 0)
+		{
+			ft_printf("HERE I GO AGAIN\n");
+			flag = 1;
+		}
+		else if ((begin_c == src || begin_c->content == dst->content) && flag != 0)
+		{
+			// ft_printf("IS IT WORK???????\n");
+			flag = 0;
+		}
+		res += flag * (((t_comm *)begin_c->content)->len);
+		begin_c = begin_c->next;
+	}
+	ft_printf("I find this - %d to that name - %s\n", res, find);
+	return (res);
+}
+
+void	label_to_nbr(t_as **all, t_list *label, t_list *begin_c, t_list	*tmp)
+{
+	tmp = (*all)->comm;
+	while (tmp)
+	{
+		// if (*COM->instr == 'f')
+		// 	ft_printf("FIND THIS MASAFUKER %d\n", COM->arg_f);
+		if (COM->label_f || COM->label_s || COM->label_t)
+		{
+			if (COM->label_f)
+			{
+				COM->arg_f = len_to_label(tmp, label, COM->label_f, begin_c);
+				free(COM->label_f);
+				COM->label_f = NULL;
+			}
+			if (COM->label_s)
+			{
+				COM->arg_s = len_to_label(tmp, label, COM->label_s, begin_c);
+				free(COM->label_s);
+				COM->label_s = NULL;
+			}
+			if (COM->label_t)
+			{
+				COM->arg_t = len_to_label(tmp, label, COM->label_t, begin_c);
+				free(COM->label_t);
+				COM->label_t = NULL;
+			}
+				//ft_printf("HI");
+		}
+		else
+			tmp = tmp->next;
+	}
+	(*all)->comm = begin_c;
+}
+
 void	translator(char **f, int y, int x, t_as *all)
 {
 	if (!(all = (t_as *)malloc(sizeof(t_as))))
@@ -266,8 +343,10 @@ void	translator(char **f, int y, int x, t_as *all)
 			add_command(&all, 0, f, f[y]);
 		y++;
 	}
+	label_to_nbr(&all, all->labels, all->comm, 0);
 	ft_printf("name - %s, int_n -%d comment - %s", all->name, all->name_i, all->comment);
-	ft_printf("\nlabel - %s\n", ((t_label *)all->labels->next->content)->name);
+	ft_printf("\ncomm - %s\n", ((t_comm *)all->comm->content)->instr);
+//	ft_printf("\nLabel - %s\n", ((t_comm *)((t_label *)all->labels->next->next->content)->name));
 }
 
 int		main(int ac, char **av)

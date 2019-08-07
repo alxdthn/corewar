@@ -6,7 +6,7 @@
 #    By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/03/02 20:48:59 by bguy              #+#    #+#              #
-#    Updated: 2019/08/04 21:52:15 by skrystin         ###   ########.fr        #
+#    Updated: 2019/08/07 15:24:13 by skrystin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ wall_prep:
 	ld		%0, r2
 	ld		%0, r16
 
-wall:
+wall: #fd
 	live	%4902343
 	st		r2, -50
 	st		r2, -59
@@ -35,7 +35,7 @@ wall:
 	st		r2, -95
 	st		r2, -104
 	st		r2, -113
-	st		r2, -122
+	st		r2, :wall
 	st		r2, -131
 	st		r2, -140
 	st		r2, -149
@@ -69,7 +69,7 @@ shield:
 
 machine_gun_init:
 	st		r1, 6
-
+test:
 machine_gun_gen:
 	live	%42
-	fork	%:machine_gun_gen
+	fork	%:test
