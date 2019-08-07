@@ -6,7 +6,7 @@
 #    By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/03/02 20:48:59 by bguy              #+#    #+#              #
-#    Updated: 2019/08/07 15:24:13 by skrystin         ###   ########.fr        #
+#    Updated: 2019/08/07 15:33:53 by skrystin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,7 @@ shield:
 	st		r2, 124
 	st		r2, 124
 	st		r2, 124
-	zjmp	%:shield
+	zjmp	%2147483647
 
 machine_gun_init:
 	st		r1, 6
