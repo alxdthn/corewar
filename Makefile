@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+         #
+#    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/03 20:54:43 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/07 17:52:59 by skrystin         ###   ########.fr        #
+#    Updated: 2019/08/07 19:09:46 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ COR_SRC =	corewar.c \
 			read_input.c \
 			init_warriors.c \
 			init_carriages.c \
+			validate_operation.c \
 			cw_debug.c
 
 ASM_SRC =	asm.c \

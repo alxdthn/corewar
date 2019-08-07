@@ -6,12 +6,11 @@
 #    By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/04 21:24:26 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/07 20:10:40 by skrystin         ###   ########.fr        #
+#    Updated: 2019/08/07 21:06:09 by skrystin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .name "moes"
 .comment "lutiy"
 
-	live	%4902343
-
+	xor r1, r2, r3
