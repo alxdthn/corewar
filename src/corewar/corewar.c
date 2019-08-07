@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:19:35 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/07 14:28:25 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/07 15:09:50 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	set_exec_code(t_core *core)
 	}
 }
 
-static int	validate_operation(const unsigned char *position, t_op **op)
+static int	validate_operation(char *position, t_op **op)
 {
 	t_arg_type	argbyte;
 	int			i;
@@ -88,6 +88,7 @@ int			main(int ac, char **av)
 	init_warriors(&core);
 	init_carriages(&core);
 	set_exec_code(&core);
+	print_memory(core.input->content, core.input->content_size);
 	start_game(&core);
 
 	ft_printf("\n\nCOREWAAAR!!!\n");
@@ -95,6 +96,5 @@ int			main(int ac, char **av)
 	return (0);
 }
 
-	//print_memory(core.input->content, core.input->content_size);
 	//print_warriros(&core);
 	//print_map(core.map);

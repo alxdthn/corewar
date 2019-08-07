@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:12:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/06 23:21:36 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/07 15:05:34 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int				get_arg_type(char byte);
 int				get_arg_size(t_op *op, t_arg_type byte);
 t_op			*get_cmd(char *cmd);
 int				get_arg_ofset(int arg, t_op *op);
-void			print_operation_info(const unsigned char *position);
+void			print_operation_info(char *position);
 /*
 **	asm part
 */
@@ -138,7 +138,7 @@ typedef struct		s_carriage
 
 typedef struct		s_core
 {
-	unsigned char	map[MEM_SIZE];
+	char			map[MEM_SIZE];
 	t_list			*input;
 	t_list			*carriages;
 	t_warrior		*warriors[MAX_PLAYERS + 1];
