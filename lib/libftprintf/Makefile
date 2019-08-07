@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+         #
+#    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/11 16:58:18 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/05 13:59:54 by skrystin         ###   ########.fr        #
+#    Updated: 2019/08/07 16:28:12 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,6 +68,7 @@ LFT_SRC =	ft_arraydel.c \
 			ft_puterr.c \
 			ft_read_to_str.c \
 			ft_reverse_bits.c \
+			ft_reverse_bytes.c \
 			ft_strcat.c \
 			ft_strchr.c \
 			ft_strclen.c \

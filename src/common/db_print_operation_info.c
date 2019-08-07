@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 21:55:23 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/07 15:08:52 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/07 16:54:43 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,48 +23,64 @@ static int	print_argbyte(char *position, t_op *op, int *byte_ofset)
 {
 	unsigned char	arg_byte;
 	int				i;
-	int				ofset;
+	int				print_ofset;
+	int				arg_ofset;
 
-	ofset = 0;
+	print_ofset = 0;
 	arg_byte = position[1];
 	i = 0;
 	while (i < op->arg_count)
 	{
-		if ((arg_byte & 0xC0) == (REG_CODE << 6))
-			ofset += ft_printf("r%d, ", position
-			[(*byte_ofset += REG_OFSET) - 1]);
-		else if ((arg_byte & 0xC0) == (DIR_CODE << 6))
-			ofset += ft_printf("%%%d, ", position
-			[(*byte_ofset += DIR_OFSET) - 1]);
-		else if ((arg_byte & 0xC0) == (IND_CODE << 6))
-			ofset += ft_printf("%d, ", position
-			[(*byte_ofset += IND_OFSET) - 1]);
+		arg_ofset = get_arg_ofset(get_arg_type(arg_byte), op);
+		if (get_arg_type(arg_byte) == T_DIR)
+		{
+			if (arg_ofset == 4)
+				print_ofset += ft_printf("%%%d ",
+				ft_reverse_bytes(*(int *)(position + *byte_ofset), sizeof(int)));
+			else
+				print_ofset += ft_printf("%%%hd ",
+				ft_reverse_bytes(*(short *)(position + *byte_ofset), sizeof(short)));
+		}
+		else
+		{
+			if (arg_ofset == 2)
+				print_ofset += ft_printf("%hd ",
+				ft_reverse_bytes(*(short *)(position + *byte_ofset), sizeof(short)));
+			else
+				print_ofset += ft_printf("%hhd ", *(position + *byte_ofset));
+		}
+		(*byte_ofset) += arg_ofset;
 		arg_byte <<= 2;
 		i++;
 	}
-	return (ofset);
+	return (print_ofset);
 }
 
 static int	print_args(char *position, t_op *op)
 {
-	int				ofset;
-	int				byte_ofset;
+	int		print_ofset;
+	int		byte_ofset;
+	int		arg_ofset;
 
-	ofset = 0;
-	byte_ofset = 1 + op->arg_type;
+	print_ofset = 0;
+	byte_ofset = 1 + ((op->arg_count == 1) ? 0 : 1);
 	if (op->arg_count == 1)
 	{
-		if (op->args[0] == T_DIR)
-			ofset += ft_printf("%%%d ", position
-			[byte_ofset += get_arg_ofset(T_DIR, op)]);
-		else if (op->args[0] == T_REG)
-			ofset += ft_printf("r%d ", position
-			[byte_ofset += get_arg_ofset(T_REG, op)]);
+		arg_ofset = get_arg_ofset(op->args[0], op);
+		if (arg_ofset == 4)
+			print_ofset += ft_printf("%%%d ",
+			ft_reverse_bytes(*(int *)(position + byte_ofset), sizeof(int)));
+		else if (arg_ofset == 2)
+			print_ofset += ft_printf("%%%hd ",
+			ft_reverse_bytes(*(short *)(position + byte_ofset), sizeof(short)));
+		else
+			print_ofset += ft_printf("%%%hhd ", position + byte_ofset);
+		byte_ofset += arg_ofset;
 	}
 	else
-		ofset = print_argbyte(position, op, &byte_ofset);
-	ofset = 21 - ofset;
-	while (--ofset >= 0)
+		print_ofset = print_argbyte(position, op, &byte_ofset);
+	print_ofset = 21 - print_ofset;
+	while (--print_ofset >= 0)
 		ft_putchar(' ');
 	return (byte_ofset);
 }
