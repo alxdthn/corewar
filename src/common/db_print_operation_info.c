@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 21:55:23 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/07 17:59:28 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/08 17:21:49 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	print_args(char *position, t_op *op)
 
 	print_ofset = 0;
 	byte_ofset = 1 + ((op->arg_count == 1) ? 0 : 1);
-	if (op->arg_count == 1)
+	if (op->arg_count == 1 && op->op_code != 16)
 	{
 		arg_ofset = get_arg_ofset(op->args[0], op);
 		if (arg_ofset == 4)

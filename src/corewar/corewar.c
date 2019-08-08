@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:19:35 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/07 22:29:22 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/08 19:43:32 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,6 @@ static void carriage_process(t_core *core, t_list *carriage)
 	}
 }
 
-static void start_game(t_core *core)
-{
-	t_list	*carriage;
-
-	carriage = core->carriages;
-	while (carriage)
-	{
-		CRG->op = core->map + CRG->position;
-		while (*CRG->op)
-			carriage_process(core, carriage);
-		carriage = carriage->next;
-	}
-}
-
 int			main(int ac, char **av)
 {
 	t_core	core;
@@ -69,8 +55,13 @@ int			main(int ac, char **av)
 	init_warriors(&core);
 	init_carriages(&core);
 	set_exec_code(&core);
-	//start_game(&core);
-	print_memory(core.input->content, core.input->content_size);
+
+	//print_map(core.map);
+	//print_carriage(core.carriages);
+	//print_warriros(&core);
+	
+	start_game(&core);
+	//print_memory(core.input->content, core.input->content_size);
 
 	ft_printf("\n\nCOREWAAAR!!!\n");
 	cw_clear_exit(&core, NULL, 1);

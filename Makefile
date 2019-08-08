@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/03 20:54:43 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/07 22:29:33 by nalexand         ###   ########.fr        #
+#    Updated: 2019/08/08 19:44:06 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ COR_SRC =	corewar.c \
 			init_warriors.c \
 			init_carriages.c \
 			validate_operation.c \
+			game_process.c \
 			cw_debug.c
 
 ASM_SRC =	asm.c \
