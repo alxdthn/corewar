@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:12:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/08 20:31:14 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/08 21:54:43 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int				to_ignore(char *str, int x);
 void			ft_write_it(t_as **all, int *y, char **f, int x);
 void			add_names(t_as **all, int *y, char **f, int x);
 void			check_to_valid(char *str, int x, t_as **all, char **f);
-int				check_command(char *str, char **f, t_as **all);
+int				check_command(char *str, char **f, t_as **all, int counter);
 unsigned char	find_type_arg(t_as **all, char *str, int i, t_op op_tb);
 void			add_arg(t_comm *com, char *str, t_as **all, t_op op_tab);
 int				check_arg(char *str, t_op op_tab, t_as **all);

@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 17:10:00 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/08 20:08:40 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/08 22:05:29 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 # define COM ((t_comm *)tmp->content)
 # define COM2 &((t_comm *)tmp->content)
 
-int		check_command(char *str, char **f, t_as **all)
+int				find_counter(char *str)
 {
 	int		counter;
-	int		after;
-	char	**args;
 
 	counter = 0;
 	while (counter < 16)
@@ -28,26 +26,29 @@ int		check_command(char *str, char **f, t_as **all)
 			break;
 		counter++;
 	}
-	// if (ft_strstr(str, op_tab[7].op_name))
-	// 	ft_printf("\nstr - %s,  %d\n", ft_strstr(str, op_tab[7].op_name) + ft_strlen(op_tab[7].op_name),
-	// 	*(str + ft_strlen(op_tab[7].op_name)));
+	return (counter);
+}
+
+int				check_command(char *str, char **f, t_as **all, int counter)
+{
+	int		after;
+	char	**args;
+
 	if (counter == 16)
 		invalid_comm(all, &f, str);
 	str = str + ft_strlen(op_tab[counter].op_name);
 	if (ft_strstr(str, "#"))
 		*ft_strstr(str, "#") = '\0';
 	if ((after = ft_strccount(str, SEPARATOR_CHAR)) + 1 != op_tab[counter].arg_count)
-		invalid_comm(all, &f, str);//do more
+		invalid_comm(all, &f, str);
 	while (after--)
 		str = str + ft_strindex(str, SEPARATOR_CHAR) + 1;
-	// ft_printf("hi - %s", str);
 	while (*str == ' ' || *str == '\t')
 		str++;
 	if (*str == 'r' || *str == '-' || *str == '%')
 		str++;
 	while (ft_isdigit(*str))
 		str++;
-	// ft_printf("hi - %s\n", str);
 	if (!to_ignore(str, 0) && *str != LABEL_CHAR)
 		invalid_comm(all, &f, str);
 	return (counter);
@@ -63,34 +64,24 @@ unsigned char	find_type_arg(t_as **all, char *str, int i, t_op op_tb)
 	while (str && arg < op_tb.arg_count)
 	{
 		if (*str == 'r' && (op_tb.args[arg] & T_REG) == T_REG)
-		{
 			res = res | REG_CODE;
-			res <<= 2;
-		}
 		else if (*str == '%' && (op_tb.args[arg] & T_DIR) == T_DIR)
-		{
 			res = res | DIR_CODE;
-			res <<= 2;
-		}
 		else if ((ft_isdigit(*str) || *str == '-' || *str == ':') && (op_tb.args[arg] & T_IND) == T_IND)
-		{
 			res = res | IND_CODE;
-			res <<= 2;
-		}
 		else
 			invalid_comm(all, 0, str);
+		res <<= 2;
 		arg++;
 		str += ft_strindex(str, SEPARATOR_CHAR) + 1;
 		while (*str == ' ' || *str == '\t')
 			str++;
 	}
 	res <<= ((3 - op_tb.arg_count) * 2);
-	//		ft_printf("arg_type - %d", op_tb.arg_count);
-	//ft_printf("byte - %hhx", res);
 	return (res);
 }
 
-void	add_arg(t_comm *com, char *str, t_as **all, t_op op_tab)
+void			add_arg(t_comm *com, char *str, t_as **all, t_op op_tab)
 {
 	int	x;
 	int	c;
@@ -100,8 +91,6 @@ void	add_arg(t_comm *com, char *str, t_as **all, t_op op_tab)
 	x = 0;
 	while (*str == ' ' || *str == '\t')
 		str++;
-	// ft_printf("This bad arg is - %s\n", tmp[x] + c);
-//	if (op_tab.arg_type)
 	(com)->arg_type = find_type_arg(all, str, 0, op_tab);
 	tmp = ft_strsplit(str, SEPARATOR_CHAR);
 	while (tmp[x])
@@ -122,9 +111,8 @@ void	add_arg(t_comm *com, char *str, t_as **all, t_op op_tab)
 		if (!ft_isint(tmp[x] + c) && *(tmp[x] + c) == LABEL_CHAR)
 		{
 			if (!(label = ft_strnew(ft_strlen(tmp[x] + c))))
-				invalid_comm(all, &tmp, str);//do more
+				invalid_comm(all, &tmp, str);
 			ft_strcpy(label, tmp[x] + c);
-			// ft_printf("\n\nIM WORK EEEE - %s, nb - %d\n\n", label, x);
 			if (x == 0)
 				(com)->label_f = label;
 			if (x == 1)
@@ -137,7 +125,7 @@ void	add_arg(t_comm *com, char *str, t_as **all, t_op op_tab)
 	ft_arraydel((void ***)&tmp);
 }
 
-int		check_arg(char *str, t_op op_tab, t_as **all)
+int				check_arg(char *str, t_op op_tab, t_as **all)
 {
 	char	**tmp;
 	int		i;
@@ -169,7 +157,7 @@ int		check_arg(char *str, t_op op_tab, t_as **all)
 	return (1);
 }
 
-void	label_to_com(t_as **all, t_list *comm, t_list *tmp)
+void			label_to_com(t_as **all, t_list *comm, t_list *tmp)
 {
 	tmp = (*all)->labels;
 	while (tmp && (*all)->labels->next && ((t_label *)(*all)->labels->content)->link)
@@ -185,13 +173,13 @@ void	label_to_com(t_as **all, t_list *comm, t_list *tmp)
 	(*all)->labels = tmp;
 }
 
-void	add_command(t_as **all, t_list *tmp, char **f, char *str)
+void			add_command(t_as **all, t_list *tmp, char **f, char *str)
 {
 	int		counter;
 
 	while (*str == ' ' || *str == '\t')
 		str++;
-	counter = check_command(str, f, all);
+	counter = check_command(str, f, all, find_counter(str));
 	// ft_printf("arg - %s", str);
 	if (!(tmp = (t_list *)malloc(sizeof(t_list))))
 		invalid_comm(all, &f, str);// do more
@@ -219,7 +207,7 @@ void	add_command(t_as **all, t_list *tmp, char **f, char *str)
 	label_to_com(all, tmp, 0);
 }
 
-int		add_label(t_as **all, char **f, char *str, int y)
+int				add_label(t_as **all, char **f, char *str, int y)
 {
 	char	*new;
 	t_list	*tmp;
@@ -257,7 +245,7 @@ int		add_label(t_as **all, char **f, char *str, int y)
 	return (1);
 }
 
-int		len_to_label(t_list *dst, t_list *label, char *find, t_as **all)
+int				len_to_label(t_list *dst, t_list *label, char *find, t_as **all)
 {
 	t_list	*src;
 	int		flag;
@@ -296,7 +284,7 @@ int		len_to_label(t_list *dst, t_list *label, char *find, t_as **all)
 	return (res);
 }
 
-void	label_to_nbr(t_as **all, t_list *label, t_list *begin_c, t_list	*tmp)
+void			label_to_nbr(t_as **all, t_list *label, t_list *begin_c, t_list	*tmp)
 {
 	tmp = (*all)->comm;
 	while (tmp)
