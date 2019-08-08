@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 16:39:44 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/08 20:01:58 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/08 20:42:08 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,14 @@ void	del_com(t_as **all, t_list *comm)
 	while (comm)
 	{
 		(*all)->comm = (*all)->comm->next;
-		if (comm && ((t_comm *)comm->content) && ((t_comm *)comm->content)->label_f)
+		if (comm && ((t_comm *)comm->content) &&
+		((t_comm *)comm->content)->label_f)
 			free(((t_comm *)comm->content)->label_f);
-		if (comm && ((t_comm *)comm->content) && ((t_comm *)comm->content)->label_s)
+		if (comm && ((t_comm *)comm->content) &&
+		((t_comm *)comm->content)->label_s)
 			free(((t_comm *)comm->content)->label_s);
-		if (comm && ((t_comm *)comm->content) && ((t_comm *)comm->content)->label_t)
+		if (comm && ((t_comm *)comm->content) &&
+		((t_comm *)comm->content)->label_t)
 			free(((t_comm *)comm->content)->label_t);
 		if (comm && ((t_comm *)comm->content))
 			free((comm->content));

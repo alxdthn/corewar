@@ -6,11 +6,12 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 15:04:16 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/08 20:28:33 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/08 21:40:13 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+#define KOSTYL (*all)->comment[0]
 
 int		to_ignore(char *str, int x)
 {
@@ -38,13 +39,11 @@ void	ft_write_it(t_as **all, int *y, char **f, int x)
 		if (f[*y][x] == '"' && to_ignore(f[*y] + x + 1, 0))
 		{
 			(*all)->read = '\0';
-			break;
+			break ;
 		}
-		if ((*all)->name_i > PROG_NAME_LENGTH || (*all)->com_i > COMMENT_LENGTH || f[*y][x] == '"')
-		{
-		//	ft_printf("name - %d , com - %d name - %s", (*all)->name_i, (*all)->com_i, (*all)->name);
+		if ((*all)->name_i > PROG_NAME_LENGTH ||
+		(*all)->com_i > COMMENT_LENGTH || f[*y][x] == '"')
 			valid_errors(0, &f, all, (*all)->read);
-		}
 		x++;
 	}
 }
@@ -55,28 +54,18 @@ void	add_names(t_as **all, int *y, char **f, int x)
 
 	while (f[*y][x] == '\t' || f[*y][x] == ' ')
 		x++;
-	if (ft_strstr(f[*y], NAME_CMD_STRING) == f[*y] + x && !(*all)->read && !(*all)->name[0])
-	{
+	if (ft_strstr(f[*y], NAME_CMD_STRING) == f[*y] + x &&
+	!(*all)->read && !(*all)->name[0] && (x = x + 5) != -1)
 		(*all)->read = 'n';
-		x += 5;
-	}
-	if (ft_strstr(f[*y], COMMENT_CMD_STRING) == f[*y] + x && !(*all)->read && !(*all)->comment[0])
-	{
+	if (ft_strstr(f[*y], COMMENT_CMD_STRING) == f[*y] + x &&
+	!(*all)->read && !(*all)->comment[0] && (x = x + 8) != -1)
 		(*all)->read = 'c';
-		x += 8;
-	}
 	while (f[*y][x] == '\t' || f[*y][x] == ' ')
 		x++;
-	if ((*all)->read == 'n' && f[*y][x] == '"')
-	{
+	if ((*all)->read == 'n' && f[*y][x] == '"' && (x = x + 1) != -1)
 		(*all)->read = 'N';
-		x++;
-	}
-	if ((*all)->read == 'c' && f[*y][x] == '"')
-	{
+	if ((*all)->read == 'c' && f[*y][x] == '"' && (x = x + 1) != -1)
 		(*all)->read = 'C';
-		x++;
-	}
 	if ((*all)->read == 'C' || (*all)->read == 'N')
 		ft_write_it(all, y, f, x);
 	if ((*all)->read == 'c' || (*all)->read == 'n')
@@ -86,33 +75,28 @@ void	add_names(t_as **all, int *y, char **f, int x)
 void	check_to_valid(char *str, int x, t_as **all, char **f)
 {
 	int		flag;
-	int		counter;
+	int		c;
 
 	flag = 0;
-	counter = 0;
+	c = 0;
 	while (str[x] == '\t' || str[x] == ' ')
 		x++;
 	if (str[x] == COMMENT_CHAR || str[x] == '\0')
 		return ;
-	if (!((ft_strstr(str, NAME_CMD_STRING) && !(*all)->name[0]) || 
-	(ft_strstr(str, COMMENT_CMD_STRING) && !(*all)->comment[0]) || (*all)->read))
+	if (!((ft_strstr(str, ".name") && !(*all)->name[0]) || (ft_strstr(str,
+	COMMENT_CMD_STRING) && !(*all)->comment[0]) || (*all)->read))
 		flag = 1;
-	while (counter < 16 && !(*all)->read && (*all)->comment[0] && (*all)->name[0])
+	while (c < 16 && !(*all)->read && (*all)->comment[0] && (*all)->name[0])
 	{
-		if (ft_strstr(str, op_tab[counter].op_name) == str + x)
-			flag = 0;
-		counter++;
+		if (ft_strstr(str, op_tab[c].op_name) == str + x)
+			return ;
+		c++;
 	}
-	if (flag == 1)
-	{
-		while (str[x] && ft_strindex(LABEL_CHARS, str[x]) != -1)
-			x++;
-		// ft_printf("%s - str, flag - %d sym - %c\n", str, flag, str[x]);
-		if (str[x] == ':' && !(*all)->read && (*all)->comment[0] && (*all)->name[0])
-			flag = 0;
-	}
-	// ft_printf("%s - str, flag - %d\n", str, flag);
 	if (flag != 1)
+		return ;
+	while (str[x] && ft_strindex(LABEL_CHARS, str[x]) != -1)
+		x++;
+	if (str[x] == ':' && !(*all)->read && KOSTYL && (*all)->name[0])
 		return ;
 	valid_errors(str, &f, all, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 17:51:19 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/07 21:09:58 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/08 20:43:09 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,15 +74,10 @@ int		print_basic(t_as *all, char *file, char *head, int size)
 	set_comment(head, all->comment);
 	ft_strcpy(new_f, file);
 	new_f[ft_strlen(file) + 2] = '\0';
-	new_f[ft_strlen(file )+ 1] = 'r';
+	new_f[ft_strlen(file) + 1] = 'r';
 	new_f[ft_strlen(file)] = 'o';
 	new_f[ft_strlen(file) - 1] = 'c';
 	fd = open(new_f, O_CREAT | O_WRONLY);
-	// write(fd, head, COMMENT_LENGTH + PROG_NAME_LENGTH);
 	ft_printf("Writing output program to %s\n", new_f);
-	// print_memory(head, COMMENT_LENGTH + PROG_NAME_LENGTH);
 	return (fd);
-	// while (size < COMMENT_LENGTH + PROG_NAME_LENGTH)
-	// 	ft_printf("%c", head[size++]);
-//	ft_printf("-end size - %d\n", size);
 }
