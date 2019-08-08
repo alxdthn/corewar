@@ -1,16 +1,28 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    moes.s                                             :+:      :+:    :+:    #
+#    all_ops.s                                          :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+         #
+#    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/08/04 21:24:26 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/08 20:33:10 by skrystin         ###   ########.fr        #
+#    Created: 2019/08/07 22:30:59 by nalexand          #+#    #+#              #
+#    Updated: 2019/08/07 22:34:37 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-.name "F"
-.comment "lutiy"
+.name "all_ops.s"
+.comment "ALL OPS"
 
-	aff r1
+ld		%42, r3
+add		r3, r5, r6
+sub 	r3, r5, r6
+and 	%3, 34, r8
+or		%3, 34, r8
+xor		r5, 34, r8
+zjmp	%42
+ldi		r5, r3, r7
+sti		r4, 5, r4
+lld		4566, r9
+lldi	%324, r5, r9
+lfork	%43
+aff		r5

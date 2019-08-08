@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:12:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/08 19:54:02 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/08 20:31:14 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ void			invalid_comm(t_as **all, char ***todel, char *str);
 
 #define USAGE "usage:"
 #define CRG ((t_carriage *)carriage->content)
+#define CRG_NEXT ((t_carriage *)carriage->next->content)
 #define OPERATION_CODE 0
 #define ARG_BYTE 1
 
@@ -177,6 +178,7 @@ void				read_input(t_core *core, const int ac, const char **av);
 void				init_warriors(t_core *core);
 void				init_carriages(t_core *core);
 int					validate_operation(t_list *carriage);
+void 				start_game(t_core *core);
 
 void				cw_live(t_list *carriage);
 void				cw_ld(t_list *carriage);

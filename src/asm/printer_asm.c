@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 22:05:51 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/08 20:18:28 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/08 20:32:29 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	print_to_bytecode(t_as *all, char *file, t_list *com, int size)
 	}
 	write(fd, code_str, EXEC_CODE_OFSET + size);
 	close(fd);
-//	print_memory(code_str, EXEC_CODE_OFSET + size);
+	print_memory(code_str, EXEC_CODE_OFSET + size);
 }
 
 int		code_size(t_list *com, int res)

@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 22:04:27 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/08 16:31:01 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/08 20:31:09 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,7 @@ int		get_arg_size(t_op *op, char arg_byte)
 	int		i;
  
 	size = 1;
-	if (!ft_strcmp((*op).op_name, "aff"))
-		return (3);
-	if (op->arg_count == 1)
+	if (op->arg_count == 1 && op->op_code != 16)
 		return (1 + get_arg_ofset(op->args[0], op));
 	i = 0;
 	while (i < op->arg_count)
@@ -84,5 +82,5 @@ int		get_arg_size(t_op *op, char arg_byte)
 		arg_byte <<= 2;
 		i++;
 	}
-	return (size + op->arg_type);
+	return (size + 1);
 }
