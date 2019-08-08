@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
+#    By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/03 20:54:43 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/07 22:29:33 by nalexand         ###   ########.fr        #
+#    Updated: 2019/08/08 17:06:10 by skrystin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,6 +69,8 @@ ASM_SRC =	asm.c \
 			command_val.c \
 			print_basic.c \
 			printer_asm.c \
+			deleter.c \
+			error_parse.c \
 
 COM_OBJ = $(addprefix $(OBJ_DIR), $(patsubst %.c, %.o, $(COM_SRC)))
 COR_OBJ = $(addprefix $(OBJ_DIR), $(patsubst %.c, %.o, $(COR_SRC)))

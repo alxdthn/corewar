@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   first_vakudation.c                                 :+:      :+:    :+:   */
+/*   first_validation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 15:04:16 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/05 15:04:45 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/08 20:28:33 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,6 @@ void	ft_write_it(t_as **all, int *y, char **f, int x)
 {
 	while (f[*y][x])
 	{
-		if (f[*y][x] == '"' && to_ignore(f[*y] + x + 1, 0))
-		{
-			(*all)->read = '\0';
-			break;
-		}
 		if ((*all)->read == 'N')
 		{
 			(*all)->name[(*all)->name_i] = f[*y][x];
@@ -40,10 +35,15 @@ void	ft_write_it(t_as **all, int *y, char **f, int x)
 			(*all)->comment[(*all)->com_i] = f[*y][x];
 			(*all)->com_i++;
 		}
+		if (f[*y][x] == '"' && to_ignore(f[*y] + x + 1, 0))
+		{
+			(*all)->read = '\0';
+			break;
+		}
 		if ((*all)->name_i > PROG_NAME_LENGTH || (*all)->com_i > COMMENT_LENGTH || f[*y][x] == '"')
 		{
 		//	ft_printf("name - %d , com - %d name - %s", (*all)->name_i, (*all)->com_i, (*all)->name);
-			exit(0);
+			valid_errors(0, &f, all, (*all)->read);
 		}
 		x++;
 	}
@@ -80,12 +80,7 @@ void	add_names(t_as **all, int *y, char **f, int x)
 	if ((*all)->read == 'C' || (*all)->read == 'N')
 		ft_write_it(all, y, f, x);
 	if ((*all)->read == 'c' || (*all)->read == 'n')
-	{
-		ft_printf("%c\n symbol - %c", (*all)->read, f[*y][x]);
-		ft_arraydel((void ***)&f);
-		free(*all);
-		exit(0);
-	}
+		valid_errors(0, &f, all, (*all)->read);
 }
 
 void	check_to_valid(char *str, int x, t_as **all, char **f)
@@ -95,7 +90,6 @@ void	check_to_valid(char *str, int x, t_as **all, char **f)
 
 	flag = 0;
 	counter = 0;
-//	ft_printf("%s - str, flag - %d\n", str, flag);
 	while (str[x] == '\t' || str[x] == ' ')
 		x++;
 	if (str[x] == COMMENT_CHAR || str[x] == '\0')
@@ -113,13 +107,12 @@ void	check_to_valid(char *str, int x, t_as **all, char **f)
 	{
 		while (str[x] && ft_strindex(LABEL_CHARS, str[x]) != -1)
 			x++;
-	//	ft_printf("%s - str, flag - %d sym - %c\n", str, flag, str[x]);
+		// ft_printf("%s - str, flag - %d sym - %c\n", str, flag, str[x]);
 		if (str[x] == ':' && !(*all)->read && (*all)->comment[0] && (*all)->name[0])
 			flag = 0;
 	}
+	// ft_printf("%s - str, flag - %d\n", str, flag);
 	if (flag != 1)
 		return ;
-	ft_arraydel((void ***)&f);
-	free(*all);
-	exit(0);
+	valid_errors(str, &f, all, 0);
 }

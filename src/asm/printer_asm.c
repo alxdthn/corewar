@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 22:05:51 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/07 22:06:20 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/08 20:18:28 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,11 @@ void	print_to_bytecode(t_as *all, char *file, t_list *com, int size)
 	int		start;
 	char	code_str[EXEC_CODE_OFSET + size + 1];
 
+	if (!*all->name || !*all->comment)
+	{
+		ft_printf("Invalid name or comment\n");
+		return ;
+	}
 	fd = print_basic(all, file, code_str, size);
 	// ft_printf("arg_f - %d\n", ((t_comm *)com->content)->arg_f);
 	start = EXEC_CODE_OFSET;
@@ -72,7 +77,7 @@ void	print_to_bytecode(t_as *all, char *file, t_list *com, int size)
 	}
 	write(fd, code_str, EXEC_CODE_OFSET + size);
 	close(fd);
-	print_memory(code_str, EXEC_CODE_OFSET + size);
+//	print_memory(code_str, EXEC_CODE_OFSET + size);
 }
 
 int		code_size(t_list *com, int res)
