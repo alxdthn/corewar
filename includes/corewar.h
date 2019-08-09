@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:12:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/09 04:12:38 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/09 04:49:10 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct		s_op
 	char			arg_type;
 	char			t_dir_size;
 	char			carry;
-	void			(*foo)(void *, t_list *);
+	void			(*process)(void *, t_list *);
 }					t_op;
 
 t_op    			op_tab[17];
@@ -193,7 +193,7 @@ void				cw_lfork(void *core, t_list *carriage);
 void				cw_aff(void *core, t_list *carriage);
 
 void				print_warriros(t_core *core);
-void				print_map(t_core *core);
+void				print_map(t_core *core, int bar);
 void				print_input(t_list *tmp);
 void				print_carriage(t_list *carriage);
 

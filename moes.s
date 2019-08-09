@@ -6,12 +6,20 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/04 21:24:26 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/09 04:12:45 by nalexand         ###   ########.fr        #
+#    Updated: 2019/08/09 05:09:52 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-.name "F"
+.name "moes"
 .comment "lutiy"
 
-	and		%3, %2, r3
-	zjmp	%20
+	ld	%83, r2
+	ld	%85, r3
+	ld	%75, r4
+	ld	%65, r5
+	ld	%10, r6
+	aff	r2
+	aff	r3
+	aff	r4
+	aff	r5
+	aff	r6

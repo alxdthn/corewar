@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:41:59 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/09 04:03:09 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/09 05:12:00 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	cw_aff(void *core, t_list *carriage)
 {
 	unsigned char	c;
 
-	c = *(CRG->op + 1);
+	c = CRG->reg[CRG->op[2] - 1];
 	write(1, &c, 1);
-	ft_printf("%{gre}s", "AFF IS DONE!\n");
-	print_operation_info(CRG->op);
+	//ft_printf("%{gre}s", "AFF IS DONE!\n");
+	//print_operation_info(CRG->op);
 }
