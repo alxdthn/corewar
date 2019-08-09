@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:26:36 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/07 22:09:58 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/09 00:11:12 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,51 @@
 
 /*
 **	2: ld {T_DIR | T_REG}, {T_REG} DSIZE 4
+**
+**	Задача этой операции состоит в загрузке значения в регистр.
+**	Но её поведение отличается в зависимости от типа первого аргумента:
+**
+**		Аргумент #1 — T_DIR
+**		Число переданное в качестве аргумента будет воспринято «как есть».
+**		Задачи операции:
+**		- Записать полученное число в регистр, который был передан в качестве второго аргумента.
+**
+**		Аргумент #1 — T_IND
+**		Число представляет собой адрес.
+**		Задача операции:
+**		- Определить адрес — текущая позиция + <ПЕРВЫЙ_АРГУМЕНТ> % IDX_MOD.
+**		- С полученного адреса необходимо считать 4 байта.
+**		- Записать считанное число в регистр, который был передан в качестве второго параметра.
+**
+**		Если в регистр записали число 0, то устанавливаем значение carry в 1.
+**		Если было записано не нулевое значение, то устанавливаем carry в 0.
 */
 
-void	cw_ld(t_list *carriage)
+void	cw_ld(void *core, t_list *carriage)
 {
+	int		byte_ofset;
+	int		value;
+	t_core	*ptr;
+
+	ptr = (t_core *)core;
+	byte_ofset = 0;
+	if (get_arg_type(CRG->op[ARG_BYTE]) == T_DIR)
+	{
+		byte_ofset = 5;
+		value = ft_reverse_bytes(*((int *)(CRG->op + 2)), sizeof(int));
+	}
+	else
+	{
+		byte_ofset = 3;
+		value = ft_reverse_bytes(*(int *)(ptr->map + CRG->position
+		+ ft_reverse_bytes(*((short *)(CRG->op + 2)), sizeof(short))
+		% IDX_MOD), sizeof(int));
+	}
+	CRG->reg[CRG->op[byte_ofset + 1] - 1] = value;
+	if (value == 0)
+		CRG->carry = 1;
+	else
+		CRG->carry = 0;
 	ft_printf("%{gre}s", "LD IS DONE!\n");
 	print_operation_info(CRG->op);
 }

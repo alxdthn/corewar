@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/03 20:54:43 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/08 19:44:06 by nalexand         ###   ########.fr        #
+#    Updated: 2019/08/09 04:09:59 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,10 +35,12 @@ OBJ_DIR = obj/
 LIB_DIR = lib/
 
 COM_SRC =	print_memory.c \
+			cw_clear_exit.c \
 			op.c \
 			mem_rev.c \
 			byte_functions.c \
 			db_print_operation_info.c \
+			get_arg_value.c \
 			op_a_live.c \
 			op_b_ld.c \
 			op_c_st.c \
@@ -57,7 +59,6 @@ COM_SRC =	print_memory.c \
 			op_p_aff.c
 
 COR_SRC =	corewar.c \
-			cw_clear_exit.c \
 			read_input.c \
 			init_warriors.c \
 			init_carriages.c \

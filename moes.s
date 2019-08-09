@@ -6,11 +6,12 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/04 21:24:26 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/07 22:29:40 by nalexand         ###   ########.fr        #
+#    Updated: 2019/08/09 02:32:03 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .name "moes"
 .comment "lutiy"
 
-	live %-1
+	and		%3, %2, r3
+	zjmp	%20

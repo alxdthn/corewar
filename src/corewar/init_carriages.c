@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 22:36:16 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/07 18:53:04 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/08 20:03:00 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	init_carriages(t_core *core)
 	{
 		new.nb = i + 1;
 		new.reg[0] = -core->warriors[i]->nb;
+		new.owner = core->warriors[i];
 		new.position = core->warriors[i++]->start_position;
 		if (!(node = ft_lstnew(&new, sizeof(t_carriage))))
 			cw_clear_exit(core, MEM_ERROR, 2);

@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:30:00 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/07 22:10:03 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/09 00:18:47 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,33 @@
 
 /*
 **	3: st {T_REG}, {T_REG | T_IND} DSIZE 4
+**
+**	Эта операция записывает значение из регистра,
+**	который был передан как первый параметр.
+**	Зависит от типа второго аргумента:
+**
+**		Аргумент #2 — T_REG
+**		- Из регистра аргумента #1 записываем в регистр аргумента #2.
+**
+**		Аргумент #2 — T_IND
+**		- Определить адрес — текущая позиция + <ВТОРОЙ_АРГУМЕНТ> % IDX_MOD
+**		- Записать значение из регистра,
+**		который был передан в качестве первого аргумента,
+**		в память по полученному адресу.
 */
 
-void	cw_st(t_list *carriage)
+void	cw_st(void *core, t_list *carriage)
 {
+	t_core *ptr;
+
+	ptr = (t_core *)core;
+	if (get_arg_type(CRG->op[ARG_BYTE] << 2) == T_REG)
+		CRG->reg[CRG->op[3] - 1] = CRG->reg[CRG->op[2] - 1];
+	else
+	{
+		ptr->map[CRG->position + ft_reverse_bytes(*((short *)(CRG->op + 3)),
+		sizeof(short)) % IDX_MOD] = CRG->reg[CRG->op[3] - 1];
+	}
 	ft_printf("%{gre}s", "ST IS DONE!\n");
 	print_operation_info(CRG->op);
 }

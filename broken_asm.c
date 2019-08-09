@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 21:40:21 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/07 18:04:01 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/08 22:19:45 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,18 @@
 #define SIZE 2192 //2192 min
 #define NAME "dest"
 #define COMMENT "i wanna broke your core!"
+
+typedef union			u_arg_byte
+{
+	char				byte;
+	struct
+	{
+		unsigned char	a4 : 2;
+		unsigned char	a3 : 2;
+		unsigned char	a2 : 2;
+		unsigned char	a1 : 2;
+	}					arg;
+}						t_arg_byte;
 
 void	set_magic(char *buf)
 {

@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:12:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/08 19:33:25 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/09 02:57:22 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,23 @@
 /*
 **	common part
 */
-typedef char	t_bool;
+typedef char		t_bool;
 
-typedef struct	s_op
+typedef struct		s_op
 {
-	char		*op_name;
-	char		arg_count;
-	char		args[3];
-	char		op_code;
-	int			cycle;
-	char		*description;
-	char		arg_type;
-	char		t_dir_size;
-	char		carry;
-	void		(*foo)(t_list *);
-}				t_op;
+	char			*op_name;
+	char			arg_count;
+	char			args[3];
+	char			op_code;
+	int				cycle;
+	char			*description;
+	char			arg_type;
+	char			t_dir_size;
+	char			carry;
+	void			(*foo)(void *, t_list *);
+}					t_op;
 
-t_op    		op_tab[17];
+t_op    			op_tab[17];
 
 void			print_memory(char *mem, ssize_t size);
 int				mem_rev(int mem);
@@ -121,18 +121,6 @@ int				code_size(t_list *com, int res);
 #define OPERATION_CODE 0
 #define ARG_BYTE 1
 
-typedef union			u_arg_byte
-{
-	char				byte;
-	struct
-	{
-		unsigned char	a4 : 2;
-		unsigned char	a3 : 2;
-		unsigned char	a2 : 2;
-		unsigned char	a1 : 2;
-	}					arg;
-}						t_arg_byte;
-
 typedef struct		s_warrior
 {
 	int				code_size;
@@ -153,6 +141,7 @@ typedef struct		s_carriage
 	int				position;
 	int				ofset;
 	char			*op;
+	t_warrior		*owner;
 	t_op			*op_info;
 	t_bool			carry;
 }					t_carriage;
@@ -163,6 +152,10 @@ typedef struct		s_core
 	t_list			*input;
 	t_list			*carriages;
 	t_warrior		*warriors[MAX_PLAYERS + 1];
+	int				cycle_to_die;
+	int				cycle_to_die_delta;
+	int				live_count;
+	int				live_check_count;
 	int				war_count;
 	unsigned long	cycle_after_start;
 }					t_core;
@@ -171,31 +164,31 @@ void				cw_clear_exit(t_core *core, const char *message, const int fd);
 void				read_input(t_core *core, const int ac, const char **av);
 void				init_warriors(t_core *core);
 void				init_carriages(t_core *core);
-int					validate_operation(t_list *carriage);
+int					validate_operation(t_core *core, t_list *carriage);
 void 				start_game(t_core *core);
 
-void				cw_live(t_list *carriage);
-void				cw_ld(t_list *carriage);
-void				cw_st(t_list *carriage);
-void				cw_add(t_list *carriage);
-void				cw_sub(t_list *carriage);
-void				cw_and(t_list *carriage);
-void				cw_or(t_list *carriage);
-void				cw_xor(t_list *carriage);
-void				cw_zjmp(t_list *carriage);
-void				cw_ldi(t_list *carriage);
-void				cw_sti(t_list *carriage);
-void				cw_fork(t_list *carriage);
-void				cw_lld(t_list *carriage);
-void				cw_lldi(t_list *carriage);
-void				cw_lfork(t_list *carriage);
-void				cw_aff(t_list *carriage);
+int					get_arg_value(t_list *carriage, char *op, char arg_byte, char *map);
+int					get_arg_value_debug(t_list *carriage, char *op, char arg_byte, char *map);
+void				cw_live(void *core, t_list *carriage);
+void				cw_ld(void *core, t_list *carriage);
+void				cw_st(void *core, t_list *carriage);
+void				cw_add(void *core, t_list *carriage);
+void				cw_sub(void *core, t_list *carriage);
+void				cw_and(void *core, t_list *carriage);
+void				cw_or(void *core, t_list *carriage);
+void				cw_xor(void *core, t_list *carriage);
+void				cw_zjmp(void *core, t_list *carriage);
+void				cw_ldi(void *core, t_list *carriage);
+void				cw_sti(void *core, t_list *carriage);
+void				cw_fork(void *core, t_list *carriage);
+void				cw_lld(void *core, t_list *carriage);
+void				cw_lldi(void *core, t_list *carriage);
+void				cw_lfork(void *core, t_list *carriage);
+void				cw_aff(void *core, t_list *carriage);
 
 void				print_warriros(t_core *core);
-void				print_map(unsigned char *map);
+void				print_map(t_core *core);
 void				print_input(t_list *tmp);
 void				print_carriage(t_list *carriage);
-
-
 
 #endif
