@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:12:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/08 21:54:43 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/09 17:39:49 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef	struct		s_as
 	int				com_i;
 	char			read;
 	int				comand_n;
+	int				tmp_x;
 	t_list			*comm;
 	t_list			*labels;
 }					t_as;
@@ -116,6 +117,14 @@ void			delete_asm_all(t_as **all, char **file, char ***f);
 void			first_error(char *str, char *file, char **todel);
 void			valid_errors(char *line, char ***todel, t_as **all, int flag);
 void			invalid_comm(t_as **all, char ***todel, char *str);
+int				find_counter(char *str);
+int				check_command(char *str, char **f, t_as **all, int counter);
+int				find_c(char **tmp, int x);
+void			add_arg_help(char **tmp, t_as **all, char *str, t_comm *com);
+void			add_arg(t_comm *com, char *str, t_as **all, t_op op_tab);
+int				check_arg(char *str, t_op op_tab, t_as **all);
+void			label_to_com(t_as **all, t_list *comm, t_list *tmp);
+void			create_lab(t_as **all, char *str, char **f, t_label **lab);
 
 /*
 **	corewar part
