@@ -6,11 +6,11 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/04 21:24:26 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/09 02:32:03 by nalexand         ###   ########.fr        #
+#    Updated: 2019/08/09 04:12:45 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-.name "moes"
+.name "F"
 .comment "lutiy"
 
 	and		%3, %2, r3
