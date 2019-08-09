@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 18:39:50 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/07 19:03:24 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/08 23:03:46 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 **	(Вывод ошибок временный)
 */
 
-int		validate_operation(t_list *carriage)
+int		validate_operation(t_core *core, t_list *carriage)
 {
 	t_arg_type	argbyte;
 	int			i;
@@ -26,8 +26,9 @@ int		validate_operation(t_list *carriage)
 	char		arg_type;
 
 	CRG->op_info = NULL;
+	CRG->op = core->map + CRG->position;
 	if (CRG->op[OPERATION_CODE] < 1 || CRG->op[OPERATION_CODE] > 16)
-		return (ft_puterr(1, "NO OPERATION"));
+		return (1);
 	CRG->op_info = &op_tab[CRG->op[OPERATION_CODE] - 1];
 	byte_ofset = 1 + ((CRG->op_info->arg_count == 1) ? 0 : 1);
 	argbyte = ((CRG->op_info->arg_count == 1) ? 0 : CRG->op[ARG_BYTE]);

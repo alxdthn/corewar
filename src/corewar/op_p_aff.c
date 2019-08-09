@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:41:59 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/07 22:10:34 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/09 05:12:00 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,22 @@
 
 /*
 **	16: aff {T_REG} DSIZE 4
+**
+**	Эта операция берет значение из регистра,
+**	который был передан в качестве единственного аргумента.
+**	Приводит его к типу char. И выводит на экран как ASCII-символ.
+**
+**	В оригинальной виртуальной машине corewar по умолчанию
+**	режим отображения вывода операции aff выключен.
+**	Чтобы его включить нужно воспользоваться флагом -a.
 */
 
-void	cw_aff(t_list *carriage)
+void	cw_aff(void *core, t_list *carriage)
 {
-	ft_printf("%{gre}s", "AFF IS DONE!\n");
-	print_operation_info(CRG->op);
+	unsigned char	c;
+
+	c = CRG->reg[CRG->op[2] - 1];
+	write(1, &c, 1);
+	//ft_printf("%{gre}s", "AFF IS DONE!\n");
+	//print_operation_info(CRG->op);
 }
