@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:31:08 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/09 00:28:05 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/09 20:26:03 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 
 void	cw_add(void *core, t_list *carriage)
 {
+	/*
 	core = NULL;
 	CRG->reg[CRG->op[4] - 1] = CRG->reg[CRG->op[2] - 1] + CRG->reg[CRG->op[3] - 1];
 	if (CRG->reg[CRG->op[4] - 1] == 0)
@@ -34,4 +35,5 @@ void	cw_add(void *core, t_list *carriage)
 		CRG->carry = 0;
 	ft_printf("%{gre}s", "ADD IS DONE!\n");
 	print_operation_info(CRG->op);
+	*/
 }

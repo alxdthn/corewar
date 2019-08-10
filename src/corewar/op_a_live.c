@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 20:01:46 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/09 03:20:59 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/10 17:11:54 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 
 void	cw_live(void *core, t_list *carriage)
 {
+	
+	/*
 	int		value;
 
 	value = ft_reverse_bytes(*((int *)(CRG->op + 1)), sizeof(int));
@@ -37,4 +39,5 @@ void	cw_live(void *core, t_list *carriage)
 		ft_printf("%{red}s", "LIVE IS NOT DONE!\n");
 	ft_printf("value: %d\n", value);
 	print_operation_info(CRG->op);
+	*/
 }

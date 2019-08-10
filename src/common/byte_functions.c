@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   byte_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 22:04:27 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/08 20:31:09 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/10 17:16:21 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
+int		adr(int current_adr)
+{
+	if (current_adr >= MEM_SIZE)
+		return (current_adr % MEM_SIZE);
+	else if (current_adr < 0)
+		return (MEM_SIZE + current_adr % MEM_SIZE);
+	return (current_adr);
+}
 
 int		get_arg_type(char arg_byte)
 {
@@ -62,13 +71,13 @@ t_op	*get_cmd(char *cmd)
 	return (NULL);
 }
 
-int		get_arg_size(t_op *op, char arg_byte)
+int		get_function_size(char arg_byte, t_op *op)
 {
 	int		size;
 	int		i;
  
 	size = 1;
-	if (op->arg_count == 1 && op->op_code != 16)
+	if (!op->arg_type)
 		return (1 + get_arg_ofset(op->args[0], op));
 	i = 0;
 	while (i < op->arg_count)

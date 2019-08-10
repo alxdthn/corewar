@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 19:12:39 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/09 05:11:41 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/10 17:17:13 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,9 @@ static void	introduce(t_core *core)
 static int	process(t_core *core, t_list *carriage)
 {
 	CRG->op_info->process(core, carriage);
-	return (get_arg_size(CRG->op_info, CRG->op[ARG_BYTE]));
+	if (CRG->op_info->op_code == ZJMP)
+		return (0);
+	return (get_function_size(POS(ARG_BYTE), CRG->op_info));
 }
 
 static void carriage_process(t_core *core)
@@ -89,10 +91,7 @@ static void carriage_process(t_core *core)
 			{
 				CRG->cycle_for_op--;
 				if (CRG->cycle_for_op == 0)
-				{
 					CRG->position += process(core, carriage);
-					CRG->op = core->map + CRG->position;
-				}
 			}
 		}
 		carriage = carriage->next;

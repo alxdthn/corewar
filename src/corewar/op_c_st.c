@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:30:00 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/09 00:18:47 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/09 20:26:10 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 
 void	cw_st(void *core, t_list *carriage)
 {
+	/*
 	t_core *ptr;
 
 	ptr = (t_core *)core;
@@ -43,4 +44,5 @@ void	cw_st(void *core, t_list *carriage)
 	}
 	ft_printf("%{gre}s", "ST IS DONE!\n");
 	print_operation_info(CRG->op);
+	*/
 }

@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 18:41:13 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/07 18:53:01 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/09 16:29:50 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void		init_warriors(t_core *core)
 		new->nb = nb--;
 		new->name = STR(input) + NAME_OFSET;
 		new->comment = STR(input) + COMMENT_OFSET;
-		new->code_size = mem_rev(*((int *)input->content + CODE_SIZE_OFSET));
+		new->code_size = ft_reverse_bytes(*((int *)(input->content + CODE_SIZE_OFSET)), sizeof(int));
 		new->exec_code = STR(input) + EXEC_CODE_OFSET;
 		core->warriors[--i] = new;
 		input = input->next;

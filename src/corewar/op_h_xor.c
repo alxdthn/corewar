@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:34:36 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/09 02:52:04 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/09 20:25:25 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 void	cw_xor(void *core, t_list *carriage)
 {
+	/*
 	t_core	*ptr;
 	int		value;
 	int		a;
@@ -39,4 +40,5 @@ void	cw_xor(void *core, t_list *carriage)
 
 	ft_printf("%{gre}s", "OR IS DONE!\n");
 	print_operation_info(CRG->op);
+	*/
 }

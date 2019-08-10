@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:26:36 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/09 05:19:14 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/09 20:26:16 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 
 void	cw_ld(void *core, t_list *carriage)
 {
+	/*
 	int		value;
 	t_core	*ptr;
 
@@ -48,4 +49,5 @@ void	cw_ld(void *core, t_list *carriage)
 		CRG->carry = 0;
 	//ft_printf("%{gre}s", "LD IS DONE!\n");
 	//print_operation_info(CRG->op);
+	*/
 }

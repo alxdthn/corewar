@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:12:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/09 04:49:10 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/10 17:16:06 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,38 @@
 
 # define MEM_ERROR "Error: mem alloc error!"
 
+# define LIVE 1
+# define LD 2
+# define ST 3
+# define ADD 4
+# define SUB 5
+# define AND 6
+# define OR 7
+# define XOR 8
+# define ZJMP 9
+# define LDI 10
+# define STI 11
+# define FORK 12
+# define LLD 13
+# define LLDI 14
+# define LFORK 15
+# define AFF 16
 # define STR(var) ((char *)var->content)
-# define NAME_OFSET 4
-# define COMMENT_OFSET 140
-# define CODE_SIZE_OFSET 34
-# define EXEC_CODE_OFSET 2192
+# define MAGIC_SIZE sizeof(int)
+# define NAME_OFSET MAGIC_SIZE
+# define CODE_SIZE_OFSET (NAME_OFSET + PROG_NAME_LENGTH + sizeof(int))
+# define COMMENT_OFSET (CODE_SIZE_OFSET + sizeof(int))
+# define EXEC_CODE_OFSET (COMMENT_OFSET + COMMENT_LENGTH + sizeof(int))
 # define FALSE 0
 # define TRUE 1
 # define REG_OFSET 1
 # define IND_OFSET 2
 # define DIR_OFSET op->t_dir_size
+# define POS(pos) (CRG->map[adr(pos)])
+# define CURRENT CRG->position
+# define ARG_TYPE CRG->op_info->arg_type
+# define OPER_ARGS CRG->op_info->args
+# define GET_VAL(pos, size) (ft_reverse_bytes(*((size *)(pos)), sizeof(size)))
 
 /*
 **	common part
@@ -50,13 +72,14 @@ typedef struct		s_op
 
 t_op    			op_tab[17];
 
-void			print_memory(char *mem, ssize_t size);
-int				mem_rev(int mem);
+void			print_memory(const char *mem, ssize_t size);
+int				adr(int current_adr);
+int				get_int(int *pos);
 t_op			*get_cmd(char *cmd);
 int				get_arg_type(char arg_byte);
 int				get_arg_code(char arg_type);
 int				get_arg_ofset(int arg_type, t_op *op);
-int				get_arg_size(t_op *op, char arg_byte);
+int				get_function_size(char arg_byte, t_op *op);
 void			print_operation_info(char *position);
 /*
 **	asm part
@@ -125,7 +148,7 @@ void			invalid_comm(t_as **all, char ***todel, char *str);
 #define CRG ((t_carriage *)carriage->content)
 #define CRG_NEXT ((t_carriage *)carriage->next->content)
 #define OPERATION_CODE 0
-#define ARG_BYTE 1
+#define ARG_BYTE CRG->position + 1
 
 typedef struct		s_warrior
 {
@@ -139,17 +162,16 @@ typedef struct		s_warrior
 
 typedef struct		s_carriage
 {
-	char			live;
+	t_bool			carry;
+	t_bool			live;
 	int				reg[REG_NUMBER];
 	int				nb;
 	int				cycle;
 	int				cycle_for_op;
 	int				position;
-	int				ofset;
-	char			*op;
+	char			*map;
 	t_warrior		*owner;
 	t_op			*op_info;
-	t_bool			carry;
 }					t_carriage;
 
 typedef struct		s_core
@@ -173,7 +195,7 @@ void				init_carriages(t_core *core);
 int					validate_operation(t_core *core, t_list *carriage);
 void 				start_game(t_core *core);
 
-int					get_arg_value(t_list *carriage, char *op, char arg_byte, char *map);
+int					get_arg_value(t_list *carriage, int arg);
 int					get_arg_value_debug(t_list *carriage, char *op, char arg_byte, char *map);
 void				cw_live(void *core, t_list *carriage);
 void				cw_ld(void *core, t_list *carriage);

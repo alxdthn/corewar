@@ -6,12 +6,13 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/09 02:49:21 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/09 03:08:59 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/09 20:27:38 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
+/*
 int		get_arg_value_debug(t_list *carriage, char *op, char arg_byte, char *map)
 {
 	int		arg;
@@ -53,20 +54,22 @@ int		get_arg_value_debug(t_list *carriage, char *op, char arg_byte, char *map)
 		return (arg);		
 	}
 }
-
-int		get_arg_value(t_list *carriage, char *op, char arg_byte, char *map)
+*/
+int		get_arg_value(t_list *carriage, int arg)
 {
-	if (get_arg_type(arg_byte) == T_REG)
-		return (CRG->reg[*(op + 2) - 1]);
-	else if (get_arg_type(arg_byte) == T_DIR)
-	{
-		if (CRG->op_info->t_dir_size == 4)
-			return (ft_reverse_bytes(*((int *)(op + 2)), sizeof(int)));
-		else
-			return (ft_reverse_bytes(*((short *)(op + 2)), sizeof(short)));
-	}
+	return (0);
+}
+/*
+int		get_arg_value(t_list *carriage, int arg)
+{
+	if (get_arg_type(ARG_BYTE << (2 * arg)) == T_REG)
+		return (CRG->reg[POS(CURRENT + get_arg_size(ARG_BYTE >> (2 * (arg + 1)), CRG->op_info)) - 1]);
+	else if (get_arg_type(ARG_BYTE) == T_DIR)
+		return (GET_VAL(POS(CURRENT + get_arg_size(ARG_BYTE >> (2 * (arg + 1)), CRG->op_info)), CRG->op_info->t_dir_size));
+		return (GET_VAL(POS((CURRENT + get_arg_size(ARG_BYTE >> (2 * (arg + 1)), CRG->op_info))), CRG->op_info->t_dir_size));
 	else
 		return (ft_reverse_bytes(*((short *)(map + CRG->position
 		+ ft_reverse_bytes(*((short *)(op + 2)),
 		sizeof(short)) % IDX_MOD)), sizeof(short)));
 }
+*/

@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 18:45:02 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/06 18:33:06 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/09 20:36:32 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,14 @@ static int	puterr(const char *file, const char *error)
 static int	validate_input(const char *input,
 const ssize_t size, const char *file)
 {
-	int		bot_size;
-
-	bot_size = mem_rev(*((int *)input + CODE_SIZE_OFSET));
 	if (size < EXEC_CODE_OFSET)
 		return (puterr(file, " is too small to be a champion"));
 	else if (size - EXEC_CODE_OFSET > CHAMP_MAX_SIZE)
 		return (put_size_error(size - EXEC_CODE_OFSET, file));
-	if (mem_rev(((int *)input)[0]) != COREWAR_EXEC_MAGIC)
+	if (GET_VAL(input, int) != COREWAR_EXEC_MAGIC)
 		return (puterr(file, " has an invalid header"));
-	if (bot_size != size - EXEC_CODE_OFSET)
-	{
-		return (puterr(file,
-		" has a code size that differ from what its header says"));
-	}
+	if (GET_VAL(input + CODE_SIZE_OFSET, int) != size - EXEC_CODE_OFSET)
+		return (puterr(file, " has a code size that differ from what its header says"));
 	return (1);
 }
 

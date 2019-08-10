@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:35:06 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/09 02:52:06 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/09 20:25:18 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 
 void	cw_zjmp(void *core, t_list *carriage)
 {
+	/*
 	print_operation_info(CRG->op);
 	ft_printf("current position: %d, ", CRG->position);
 	if (CRG->carry)
@@ -38,4 +39,5 @@ void	cw_zjmp(void *core, t_list *carriage)
 		% IDX_MOD;
 	ft_printf("new position: %d, arg: %d\n", CRG->position, ft_reverse_bytes(*((short *)(CRG->op + 1)), sizeof(short)));	
 	ft_printf("%{gre}s", "ZJMP IS DONE!\n");
+	*/
 }

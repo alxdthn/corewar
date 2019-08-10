@@ -6,13 +6,13 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 18:08:26 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/05 17:30:57 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/09 17:25:01 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	print_memory(char *mem, ssize_t size)
+void	print_memory(const char *mem, ssize_t size)
 {
 	int 	i;
 	int		j;

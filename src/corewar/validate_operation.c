@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 18:39:50 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/08 23:03:46 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/10 17:18:11 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,27 +20,27 @@
 
 int		validate_operation(t_core *core, t_list *carriage)
 {
-	t_arg_type	argbyte;
-	int			i;
-	int			byte_ofset;
-	char		arg_type;
+	int		i;
+	int		byte_ofset;
+	char	argbyte;
+	char	arg_type;
 
-	CRG->op_info = NULL;
-	CRG->op = core->map + CRG->position;
-	if (CRG->op[OPERATION_CODE] < 1 || CRG->op[OPERATION_CODE] > 16)
+	if (POS(CURRENT) < 1 || POS(CURRENT) > 16)
 		return (1);
-	CRG->op_info = &op_tab[CRG->op[OPERATION_CODE] - 1];
-	byte_ofset = 1 + ((CRG->op_info->arg_count == 1) ? 0 : 1);
-	argbyte = ((CRG->op_info->arg_count == 1) ? 0 : CRG->op[ARG_BYTE]);
+	if (CRG->op_info != &op_tab[POS(CURRENT) - 1])
+		CRG->cycle_for_op = 0;
+	CRG->op_info = &op_tab[POS(CURRENT) - 1];
+	byte_ofset = 1 + ARG_TYPE;
+	argbyte = ((ARG_TYPE) ? POS(ARG_BYTE) : OPER_ARGS[0]);
 	i = 0;
 	while (i < CRG->op_info->arg_count)
 	{
 		arg_type = get_arg_type(argbyte);
-		if ((arg_type & CRG->op_info->args[i]) != arg_type)
-			return (ft_puterr(get_arg_size(CRG->op_info, argbyte), "\033[31mBAD_ARG\033[0m"));
-		if (arg_type == T_REG && (CRG->op[byte_ofset] < 0
-		|| CRG->op[byte_ofset] > REG_NUMBER))
-			return (ft_puterr(get_arg_size(CRG->op_info, argbyte), "\033[31mBAD_REG\033[0m"));
+		if ((arg_type & OPER_ARGS[i]) != arg_type)
+			return (ft_puterr(get_function_size(argbyte, CRG->op_info), "\033[31mBAD_ARG\033[0m"));
+		if (arg_type == T_REG && (POS(CURRENT + byte_ofset) < 0
+		|| POS(CURRENT + byte_ofset) > REG_NUMBER))
+			return (ft_puterr(get_function_size(argbyte, CRG->op_info), "\033[31mBAD_REG\033[0m"));
 		i++;
 		argbyte <<= 2;
 		byte_ofset += get_arg_ofset(arg_type, CRG->op_info);

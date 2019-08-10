@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:32:01 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/09 00:32:37 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/09 20:25:56 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 
 void	cw_sub(void *core, t_list *carriage)
 {
+	/*
 	int		arg;
 
 	core = NULL;
@@ -36,4 +37,5 @@ void	cw_sub(void *core, t_list *carriage)
 		CRG->carry = 0;
 	ft_printf("%{gre}s", "SUB IS DONE!\n");
 	print_operation_info(CRG->op);
+	*/
 }
