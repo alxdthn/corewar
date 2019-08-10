@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/03 20:54:43 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/09 20:26:42 by nalexand         ###   ########.fr        #
+#    Updated: 2019/08/10 17:19:40 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,6 +68,8 @@ COR_SRC =	corewar.c \
 ASM_SRC =	asm.c \
 			first_validation.c \
 			command_val.c \
+			command_val2.c \
+			command_val3.c \
 			print_basic.c \
 			printer_asm.c \
 			deleter.c \
