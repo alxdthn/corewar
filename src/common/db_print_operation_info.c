@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 21:55:23 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/09 05:05:54 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/10 19:09:56 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	print_argbyte(char *position, t_op *op, int *byte_ofset)
 	return (print_ofset);
 }
 
-static int	print_args(char *position, t_op *op)
+static int	byte_print_args(char *position, t_op *op)
 {
 	int		print_ofset;
 	int		byte_ofset;
@@ -93,7 +93,7 @@ void		print_operation_info(char *position)
 	print_header();
 	op = &op_tab[position[0] - 1];
 	ft_printf("%{gre}-8s|", op->op_name);
-	size = print_args(position, op);
+	size = byte_print_args(position, op);
 	if (op->carry)
 		ft_printf("|  yes  ");
 	else

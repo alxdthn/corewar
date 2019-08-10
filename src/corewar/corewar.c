@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:19:35 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/10 17:06:56 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/10 17:26:11 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ int			main(int ac, char **av)
 	init_warriors(&core);
 	init_carriages(&core);
 	set_exec_code(&core);
+	start_game(&core);
 	//print_map(&core, 1);
-	//start_game(&core);
 
 	//print_carriage(core.carriages);
 	//print_warriros(&core);
 
-	print_memory(core.input->content, core.input->content_size);
+	//print_memory(core.input->content, core.input->content_size);
 
 	cw_clear_exit(&core, NULL, 1);
 	return (0);

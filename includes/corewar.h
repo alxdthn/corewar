@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:12:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/10 17:19:32 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/10 19:08:13 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ t_op			*get_cmd(char *cmd);
 int				get_arg_type(char arg_byte);
 int				get_arg_code(char arg_type);
 int				get_arg_ofset(int arg_type, t_op *op);
+int				get_value(char *mem, int pos, int size);
 int				get_function_size(char arg_byte, t_op *op);
 void			print_operation_info(char *position);
 /*
@@ -159,6 +160,13 @@ void			create_lab(t_as **all, char *str, char **f, t_label **lab);
 #define OPERATION_CODE 0
 #define ARG_BYTE CRG->position + 1
 
+typedef struct		s_arg
+{
+	int				type;
+	int				size;
+	int				value;
+}					t_arg;
+
 typedef struct		s_warrior
 {
 	int				code_size;
@@ -204,6 +212,8 @@ void				init_carriages(t_core *core);
 int					validate_operation(t_core *core, t_list *carriage);
 void 				start_game(t_core *core);
 
+void				init_args(t_arg *args, t_list *carriage, int count);
+void				print_args(t_arg *args, int count);
 int					get_arg_value(t_list *carriage, int arg);
 int					get_arg_value_debug(t_list *carriage, char *op, char arg_byte, char *map);
 void				cw_live(void *core, t_list *carriage);

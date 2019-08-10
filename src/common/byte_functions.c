@@ -6,11 +6,30 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 22:04:27 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/10 17:16:21 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/10 18:27:26 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
+int		get_value(char *mem, int pos, int size)
+{
+	int		i;
+	int		res;
+	int		rev_size;
+
+	i = pos;
+	res = 0;
+	rev_size = size;
+	while (size--)
+	{
+		if (i >= MEM_SIZE)
+			i = 0;
+		res <<= 8;
+		res |= mem[i++];
+	}
+	return (res);
+}
 
 int		adr(int current_adr)
 {
@@ -52,7 +71,7 @@ int		get_arg_ofset(int arg_type, t_op *op)
 		return (DIR_OFSET);
 	else if (arg_type == T_REG)
 		return (REG_OFSET);
-	else if (arg_type == T_IND)
+	else if (arg_type == T_IND || arg_type == IND_CODE)
 		return (IND_OFSET);
 	return (0);
 }

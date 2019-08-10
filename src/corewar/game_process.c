@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 19:12:39 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/10 17:17:13 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/10 17:27:05 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,7 @@ void 	start_game(t_core *core)
 	core->cycle_to_die_delta = CYCLE_DELTA;
 	cycle_to_die = core->cycle_to_die;
 	introduce(core);
-	//while (core->carriages->next)
-	while (42)
+	while (core->carriages)
 	{
 		carriage_process(core);
 		if (cycle_to_die-- <= 0)
