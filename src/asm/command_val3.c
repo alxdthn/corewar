@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_val3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/09 17:38:38 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/10 17:20:55 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/10 20:37:01 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #define KOS tmp[op_tab.arg_count - 1]
 #define KOS2 ((t_label *)label->content)->name
 #define KOS3 begin_c->content
+#define KOS4 op_tab.arg_count - 1
 
 void			add_arg(t_comm *com, char *str, t_as **all, t_op op_tab)
 {
@@ -47,13 +48,11 @@ int				check_arg(char *str, t_op op_tab, t_as **all)
 	int		i;
 	int		x;
 
-	if (ft_strccount(str, SEPARATOR_CHAR) != op_tab.arg_count - 1)
+	if (ft_strccount(str, SEPARATOR_CHAR) != KOS4 || (i = 0) == -1)
 		return (0);
 	tmp = ft_strsplit(str, SEPARATOR_CHAR);
-	i = 0;
-	while (tmp[i])
+	while (tmp[i] && (x = 0) == 0)
 	{
-		x = 0;
 		while (tmp[i][x] == ' ' || tmp[i][x] == '\t')
 			x++;
 		if (tmp[i][x] == '%' || (tmp[i][x] == 'r' && tmp[i][x + 1] != '-'))
@@ -63,6 +62,8 @@ int				check_arg(char *str, t_op op_tab, t_as **all)
 	}
 	if (!tmp[op_tab.arg_count - 1])
 		invalid_comm(all, 0, str);
+	while (ft_strstr(str, ","))
+		str = ft_strstr(str, ",") + 1;
 	str = ft_strstr(str, KOS) + ft_strlen(KOS);
 	ft_arraydel((void ***)&tmp);
 	if (!to_ignore(str, 0))
