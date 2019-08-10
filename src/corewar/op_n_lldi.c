@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:40:20 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/09 03:56:51 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/09 20:24:43 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 
 void	cw_lldi(void *core, t_list *carriage)
 {
+	/*
 	t_core	*ptr;
 	int		value;
 	int		adr;
@@ -49,4 +50,5 @@ void	cw_lldi(void *core, t_list *carriage)
 	CRG->reg[CRG->op[get_arg_size(CRG->op_info, CRG->op[ARG_BYTE]) - 1] - 1] = value;
 	ft_printf("%{gre}s", "LLDI IS DONE!\n");
 	print_operation_info(CRG->op);
+	*/
 }

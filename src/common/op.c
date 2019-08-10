@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:43:01 by zaz               #+#    #+#             */
-/*   Updated: 2019/08/08 22:22:52 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/09 20:23:50 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 t_op    		op_tab[17] =
 {
-	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 4, 0, cw_live},
-	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 4, 1, cw_ld},
+	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 4, 0, &cw_live},
+	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 4, 1, &cw_ld},
 	{"st", 2, {T_REG, T_IND | T_REG}, 3, 5, "store", 1, 4, 0, &cw_st},
 	{"add", 3, {T_REG, T_REG, T_REG}, 4, 10, "addition", 1, 4, 1, &cw_add},
 	{"sub", 3, {T_REG, T_REG, T_REG}, 5, 10, "soustraction", 1, 4, 1, &cw_sub},
@@ -38,3 +38,4 @@ t_op    		op_tab[17] =
 	{"aff", 1, {T_REG}, 16, 2, "aff", 1, 4, 0, &cw_aff},
 	{0, 0, {0}, 0, 0, 0, 0, 0, 0, 0}
 };
+

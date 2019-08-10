@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:38:47 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/09 04:07:49 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/09 20:24:57 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 
 void	cw_fork(void *core, t_list *carriage)
 {
+	/*
 	t_core	*ptr;
 	t_list	*node;
 
@@ -42,4 +43,5 @@ void	cw_fork(void *core, t_list *carriage)
 	ft_lstadd(&ptr->carriages, node);
 	ft_printf("%{gre}s", "FORK IS DONE!\n");
 	print_operation_info(CRG->op);
+	*/
 }

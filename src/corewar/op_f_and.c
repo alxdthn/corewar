@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:32:36 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/09 02:56:55 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/09 20:25:49 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 
 static void	cw_and_debug(void *core, t_list *carriage)
 {
+	/*
 	int		a;
 	int		b;
 	int		value;
@@ -57,10 +58,12 @@ static void	cw_and_debug(void *core, t_list *carriage)
 		CRG->carry = 0;
 	ft_printf("res   : r%d\n", value);
 	ft_printf("%{gre}s", "AND IS DONE!\n");
+	*/
 }
 
 void	cw_and(void *core, t_list *carriage)
 {
+	/*
 	t_core	*ptr;
 	int		value;
 	int		a;
@@ -80,4 +83,5 @@ void	cw_and(void *core, t_list *carriage)
 	//ft_printf("ORIGIN: a = %hd; b = %hd r = %d\n", a, b, CRG->reg[CRG->op[get_arg_size(CRG->op_info, CRG->op[ARG_BYTE]) - 1] - 1]);
 
 	//cw_and_debug(core, carriage);
+	*/
 }

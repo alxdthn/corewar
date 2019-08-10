@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:35:52 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/09 03:12:27 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/09 20:25:11 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 
 void	cw_ldi(void *core, t_list *carriage)
 {
+	/*
 	t_core	*ptr;
 	int		value;
 	int		adr;
@@ -55,4 +56,5 @@ void	cw_ldi(void *core, t_list *carriage)
 
 	ft_printf("%{gre}s", "LDI IS DONE!\n");
 	print_operation_info(CRG->op);
+	*/
 }

@@ -6,7 +6,7 @@
 #    By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/03 20:54:43 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/10 14:20:20 by skrystin         ###   ########.fr        #
+#    Updated: 2019/08/10 18:20:31 by skrystin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,6 @@ LIB_DIR = lib/
 COM_SRC =	print_memory.c \
 			cw_clear_exit.c \
 			op.c \
-			mem_rev.c \
 			byte_functions.c \
 			db_print_operation_info.c \
 			get_arg_value.c \

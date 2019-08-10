@@ -6,21 +6,21 @@
 #    By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/04 21:24:26 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/10 18:19:34 by skrystin         ###   ########.fr        #
+#    Updated: 2019/08/10 18:20:25 by skrystin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .name "moes"
 .comment "lutiy"
 
-	ld	%83, r2
-	ld	%85, r3
-d:	ld	%75, r4
-	ld	%65, r5
-	ld	%10, r6
-	aff	r99
-	aff	r3
-	aff	r4
-	aff	r5
-	aff	r6
-	aff r-23
+#	ld	%83, r2
+#	ld	%85, r3
+#	ld	%75, r4
+#	ld	%65, r5
+#	ld	%10, r6
+#	aff	r2
+#	aff	r3
+#	aff	r4
+#	aff	r5
+#	aff	r6
+	live %42
