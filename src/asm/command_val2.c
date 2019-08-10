@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/09 17:37:02 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/09 17:37:53 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/10 18:19:04 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,11 @@ int				check_command(char *str, char **f, t_as **all, int counter)
 	while (*str == ' ' || *str == '\t')
 		str++;
 	if (*str == 'r' || *str == '-' || *str == '%')
+	{
 		str++;
+		if (*str == '-' && *(str - 1) == '%')
+			str++;
+	}
 	while (ft_isdigit(*str))
 		str++;
 	if (!to_ignore(str, 0) && *str != LABEL_CHAR)
