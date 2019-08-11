@@ -1,0 +1,1 @@
+gcc -g -o destr destr.c -I ../lib/libftprintf/includes -I includes ../lib/libftprintf.a ../lib/common.a

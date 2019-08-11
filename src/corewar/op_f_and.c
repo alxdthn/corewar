@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:32:36 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/09 20:25:49 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/11 10:24:24 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,55 +33,54 @@
 **		Считанное по этому адресу 4-байтовое число и будет требуемым значением.
 */
 
-static void	cw_and_debug(void *core, t_list *carriage)
+static void	debug_info(t_list *carriage, t_arg *args)
 {
-	/*
-	int		a;
-	int		b;
-	int		value;
-	t_core	*ptr;
+	int		ofset;
+	int		i;
 
-	ptr = (t_core *)core;
-	ft_printf("\n");
-	print_operation_info(CRG->op);
-	ft_printf("\n");
-	ft_printf("arg #1: ");
-	a = get_arg_value_debug(carriage, CRG->op, CRG->op[ARG_BYTE], ptr->map);
-	ft_printf("arg #2: ");
-	b = get_arg_value_debug(carriage, CRG->op + get_arg_ofset(get_arg_type(CRG->op[ARG_BYTE]),
-	CRG->op_info), CRG->op[ARG_BYTE] << 2, ptr->map);
-	value = a & b;
-	CRG->reg[CRG->op[get_arg_size(CRG->op_info, CRG->op[ARG_BYTE]) - 1] - 1] = value;
-	if (value)
-		CRG->carry = 1;
-	else
-		CRG->carry = 0;
-	ft_printf("res   : r%d\n", value);
-	ft_printf("%{gre}s", "AND IS DONE!\n");
-	*/
+	ft_printf("%10s > and:   ", CRG->owner->name);
+	ofset = print_args(args, 3);
+	while (--ofset)
+		ft_putchar(' ');
+	ft_printf("|");
+	i = 0;
+	while (i < 2)
+	{
+		if (args[i].type == T_REG)
+		{
+			ft_printf(" %d(r%d)", CRG->reg[args[i].value - 1], args[i].value);
+			i++;
+		}
+		else if (args[i].type == T_DIR)
+			ft_printf(" %d", args[i++].value);
+		else
+		{
+			ft_printf(" %d(adr %d)",
+			get_value_from_adr(carriage, args[i].value, IDX_MOD),
+			adr((CURRENT + args[i].value) % IDX_MOD));
+			i++;
+		}
+		if (i == 1)
+			ft_printf(" &");
+	}
+	ft_printf(" = %d(r%d)\n", CRG->reg[args[2].value - 1], args[2].value);
 }
 
-void	cw_and(void *core, t_list *carriage)
+void		cw_and(void *core, t_list *carriage)
 {
-	/*
-	t_core	*ptr;
-	int		value;
+	t_arg	args[3];
 	int		a;
 	int		b;
 
-	ptr = (t_core *)core;
-	a = get_arg_value(carriage, CRG->op, CRG->op[ARG_BYTE], ptr->map);
-	b = get_arg_value(carriage, CRG->op + get_arg_ofset(get_arg_type(CRG->op[ARG_BYTE]),
-	CRG->op_info), CRG->op[ARG_BYTE] << 2, ptr->map);
-	value = a & b;
-	CRG->reg[CRG->op[get_arg_size(CRG->op_info, CRG->op[ARG_BYTE]) - 1] - 1] = value;
-	if (value)
-		CRG->carry = 1;
-	else
-		CRG->carry = 0;
+	init_args((t_arg *)args, carriage, 3);
+	a = get_operand(args[0], carriage, IDX_MOD);
+	b = get_operand(args[1], carriage, IDX_MOD);
+	CRG->reg[args[2].value - 1] = a & b;
 
-	//ft_printf("ORIGIN: a = %hd; b = %hd r = %d\n", a, b, CRG->reg[CRG->op[get_arg_size(CRG->op_info, CRG->op[ARG_BYTE]) - 1] - 1]);
+//################## DEBUG: ####################
+	if (DEBUG)
+		debug_info(carriage, (t_arg *)args);
+//##############################################
 
-	//cw_and_debug(core, carriage);
-	*/
+	CRG->position = adr(CURRENT + 2 + args[0].size + args[1].size + args[2].size);
 }

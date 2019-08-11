@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:40:20 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/09 20:24:43 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/11 10:25:08 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,30 @@
 **	Здесь усечение по модулю сохраняется.
 */
 
+static void	debug_info(t_list *carriage, t_arg *args)
+{
+	int		ofset;
+
+	ft_printf("%10s > lldi:  ", CRG->owner->name);
+	ofset = print_args(args, 1);
+	while (--ofset)
+		ft_putchar(' ');
+	ft_printf("| no ifno\n");
+}
+
 void	cw_lldi(void *core, t_list *carriage)
 {
-	/*
-	t_core	*ptr;
-	int		value;
-	int		adr;
+	t_arg	args[3];
 	int		a;
 	int		b;
 
-	ptr = (t_core *)core;
-	a = get_arg_value(carriage, CRG->op, CRG->op[ARG_BYTE], CRG->op);
-	b = get_arg_value(carriage, CRG->op + get_arg_ofset(get_arg_type(CRG->op[ARG_BYTE]),
-	CRG->op_info), CRG->op[ARG_BYTE] << 2, CRG->op);
-	if (get_arg_type(CRG->op[ARG_BYTE]) == T_IND)
-		adr = (CRG->position + a + b) % IDX_MOD;
-	else
-		adr = (CRG->position + a + b);
-	value = *((int *)(ptr->map + adr));
-	CRG->reg[CRG->op[get_arg_size(CRG->op_info, CRG->op[ARG_BYTE]) - 1] - 1] = value;
-	ft_printf("%{gre}s", "LLDI IS DONE!\n");
-	print_operation_info(CRG->op);
-	*/
+	init_args((t_arg *)args, carriage, 3);
+	a = get_operand(args[0], carriage, IDX_MOD);
+	b = get_operand(args[1], carriage, IDX_MOD);
+	CRG->reg[args[2].value - 1] = get_value_from_adr(carriage, a + b, 0);
+	CRG->position = adr(CURRENT + 2 + args[0].size + args[1].size + args[2].size);
+//################## DEBUG: ####################
+	if (DEBUG)
+		debug_info(carriage, (t_arg *)args);
+//##############################################
 }

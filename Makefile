@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+         #
+#    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/03 20:54:43 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/10 18:20:31 by skrystin         ###   ########.fr        #
+#    Updated: 2019/08/10 19:19:19 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,8 @@ COM_SRC =	print_memory.c \
 			op_m_lld.c \
 			op_n_lldi.c \
 			op_o_lfork.c \
-			op_p_aff.c
+			op_p_aff.c \
+			op_a_functions.c
 
 COR_SRC =	corewar.c \
 			read_input.c \

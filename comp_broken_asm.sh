@@ -1,1 +1,0 @@
-gcc -g -o destr broken_asm.c -I lib/libftprintf/includes -I includes lib/libftprintf.a lib/common.a

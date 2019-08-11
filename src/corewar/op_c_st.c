@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:30:00 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/09 20:26:10 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/11 10:24:06 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,39 @@
 **		в память по полученному адресу.
 */
 
+static void	debug_info(t_list *carriage, t_arg *args)
+{
+	int		ofset;
+
+
+	ft_printf("%10s > st:   ", CRG->owner->name);
+	ofset = print_args((t_arg *)args, 2);
+	while (--ofset)
+		ft_putchar(' ');
+	if (args[1].type == T_IND)
+		ft_printf("| set %d from r%d to adr %d\n",
+		get_value(CRG->map, adr((CURRENT + args[1].value) % IDX_MOD),
+		sizeof(int)), args[0].value,
+		adr((CURRENT + args[1].value) % IDX_MOD));
+	else
+		ft_printf("| set %d from r%d to r%d\n",
+		CRG->reg[args[1].value - 1], args[0].value, args[1].value);
+}
+
 void	cw_st(void *core, t_list *carriage)
 {
-	/*
-	t_core *ptr;
+	t_arg	args[2];
 
-	ptr = (t_core *)core;
-	if (get_arg_type(CRG->op[ARG_BYTE] << 2) == T_REG)
-		CRG->reg[CRG->op[3] - 1] = CRG->reg[CRG->op[2] - 1];
+	init_args((t_arg *)args, carriage, 2);
+	if (args[1].type == T_IND)
+		set_value_to_adr(carriage, args[1].value, IDX_MOD, CRG->reg[args[0].value - 1]);
 	else
-	{
-		ptr->map[CRG->position + ft_reverse_bytes(*((short *)(CRG->op + 3)),
-		sizeof(short)) % IDX_MOD] = CRG->reg[CRG->op[3] - 1];
-	}
-	ft_printf("%{gre}s", "ST IS DONE!\n");
-	print_operation_info(CRG->op);
-	*/
+		CRG->reg[args[1].value - 1] = CRG->reg[args[0].value - 1];
+
+//################## DEBUG: ####################
+	if (DEBUG)
+		debug_info(carriage, (t_arg *)args);
+//##############################################
+
+	CRG->position = adr(CURRENT + 2 + args[0].size + args[1].size);
 }

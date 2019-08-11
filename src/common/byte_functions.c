@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   byte_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 22:04:27 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/10 18:20:34 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/10 19:37:45 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-int		adr(int current_adr)
-{
-	if (current_adr >= MEM_SIZE)
-		return (current_adr % MEM_SIZE);
-	else if (current_adr < 0)
-		return (MEM_SIZE + current_adr % MEM_SIZE);
-	return (current_adr);
-}
 
 int		get_arg_type(char arg_byte)
 {
@@ -52,7 +43,7 @@ int		get_arg_ofset(int arg_type, t_op *op)
 		return (DIR_OFSET);
 	else if (arg_type == T_REG)
 		return (REG_OFSET);
-	else if (arg_type == T_IND)
+	else if (arg_type == T_IND || arg_type == IND_CODE)
 		return (IND_OFSET);
 	return (0);
 }

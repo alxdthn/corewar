@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:12:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/10 17:19:32 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/11 10:25:47 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,6 @@
 
 # define MEM_ERROR "Error: mem alloc error!"
 
-# define LIVE 1
-# define LD 2
-# define ST 3
-# define ADD 4
-# define SUB 5
-# define AND 6
-# define OR 7
-# define XOR 8
-# define ZJMP 9
-# define LDI 10
-# define STI 11
-# define FORK 12
-# define LLD 13
-# define LLDI 14
-# define LFORK 15
-# define AFF 16
 # define STR(var) ((char *)var->content)
 # define MAGIC_SIZE sizeof(int)
 # define NAME_OFSET MAGIC_SIZE
@@ -42,15 +26,8 @@
 # define EXEC_CODE_OFSET (COMMENT_OFSET + COMMENT_LENGTH + sizeof(int))
 # define FALSE 0
 # define TRUE 1
-# define REG_OFSET 1
-# define IND_OFSET 2
-# define DIR_OFSET op->t_dir_size
-# define POS(pos) (CRG->map[adr(pos)])
-# define CURRENT CRG->position
-# define ARG_TYPE CRG->op_info->arg_type
-# define OPER_ARGS CRG->op_info->args
-# define GET_VAL(pos, size) (ft_reverse_bytes(*((size *)(pos)), sizeof(size)))
 
+# define DEBUG 0
 /*
 **	common part
 */
@@ -79,6 +56,7 @@ t_op			*get_cmd(char *cmd);
 int				get_arg_type(char arg_byte);
 int				get_arg_code(char arg_type);
 int				get_arg_ofset(int arg_type, t_op *op);
+int				get_value(char *mem, int pos, int size);
 int				get_function_size(char arg_byte, t_op *op);
 void			print_operation_info(char *position);
 /*
@@ -153,11 +131,28 @@ void			create_lab(t_as **all, char *str, char **f, t_label **lab);
 **	corewar part
 */
 
-#define USAGE "usage:"
-#define CRG ((t_carriage *)carriage->content)
-#define CRG_NEXT ((t_carriage *)carriage->next->content)
-#define OPERATION_CODE 0
-#define ARG_BYTE CRG->position + 1
+# define PRINT_ARG_OFSET 20
+# define USAGE "usage:"
+# define REG_OFSET 1
+# define IND_OFSET 2
+# define DIR_OFSET op->t_dir_size
+# define CRG ((t_carriage *)carriage->content)
+# define CRG_NEXT ((t_carriage *)carriage->next->content)
+# define OPERATION_CODE 0
+# define ARG_BYTE CRG->position + 1
+# define PROCESS CRG->op_info->process
+# define BYTE(pos) (CRG->map[adr(pos)])
+# define CURRENT CRG->position
+# define ARG_TYPE CRG->op_info->arg_type
+# define OPER_ARGS CRG->op_info->args
+# define GET_VAL(pos, size) (ft_reverse_bytes(*((size *)(pos)), sizeof(size)))
+
+typedef struct		s_arg
+{
+	int				type;
+	int				size;
+	int				value;
+}					t_arg;
 
 typedef struct		s_warrior
 {
@@ -204,8 +199,16 @@ void				init_carriages(t_core *core);
 int					validate_operation(t_core *core, t_list *carriage);
 void 				start_game(t_core *core);
 
-int					get_arg_value(t_list *carriage, int arg);
-int					get_arg_value_debug(t_list *carriage, char *op, char arg_byte, char *map);
+void				init_args(t_arg *args, t_list *carriage, int count);
+int					print_args(t_arg *args, int count);
+int					get_operand(t_arg arg, t_list *carriage, int mod);
+
+void				set_value(char *mem, int pos, int size, int value);
+void				set_value_to_adr(t_list *carriage, int arg_value, int mod, int value);
+
+int					get_value(char *mem, int pos, int size);
+int					get_value_from_adr(t_list *carriage, int arg_value, int mod);
+
 void				cw_live(void *core, t_list *carriage);
 void				cw_ld(void *core, t_list *carriage);
 void				cw_st(void *core, t_list *carriage);
