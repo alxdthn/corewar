@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:41:59 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/09 20:24:25 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/11 10:25:17 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,26 @@
 **	Чтобы его включить нужно воспользоваться флагом -a.
 */
 
+static void	debug_info(t_list *carriage, t_arg *args)
+{
+	int		ofset;
+
+	ft_printf("%10s > aff:   ", CRG->owner->name);
+	ofset = print_args(args, 1);
+	while (--ofset)
+		ft_putchar(' ');
+	ft_printf("| no ifno\n");
+}
+
 void	cw_aff(void *core, t_list *carriage)
 {
-	/*
-	unsigned char	c;
+	t_arg	arg;
 
-	c = CRG->reg[CRG->op[2] - 1];
-	write(1, &c, 1);
-	//ft_printf("%{gre}s", "AFF IS DONE!\n");
-	//print_operation_info(CRG->op);
-	*/
+	init_args(&arg, carriage, 1);
+	write(1, &CRG->reg[arg.value - 1], 1);
+	CRG->position = adr(CURRENT + 1 + arg.size);
+//################## DEBUG: ####################
+	if (DEBUG)
+		debug_info(carriage, &arg);
+//##############################################
 }

@@ -6,11 +6,36 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 19:12:39 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/10 17:27:05 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/11 11:14:47 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
+void	ft_lstdelnode(t_list **lst, t_list *node)
+{
+	t_list	*tmp;
+
+	tmp = *lst;
+	if (*lst == node)
+	{
+		*lst = node->next;
+		free(node->content);
+		free(node);
+		return ;
+	}
+	while (tmp)
+	{
+		if (tmp->next == node)
+		{
+			tmp->next = node->next;
+			free(node->content);
+			free(node);
+			return ;
+		}
+		tmp = tmp->next;
+	}
+}
 
 static void	game_check(t_core *core, int *cycle_to_die)
 {
@@ -28,17 +53,10 @@ static void	game_check(t_core *core, int *cycle_to_die)
 	carriage = core->carriages;
 	while (carriage->next)
 	{
-		if (CRG_NEXT->live == 0)
-		{
-			tmp = carriage->next->next;
-			ft_lstdelone(&carriage->next, ft_lstclear);
-			carriage->next = tmp;
-		}
-		else
-		{
-			CRG->live = 0;
-			carriage = carriage->next;
-		}
+		if (CRG->live == FALSE)
+			ft_lstdelnode(&core->carriages, carriage);
+		CRG->live = 0;
+		carriage = carriage->next;
 	}
 }
 
@@ -58,19 +76,11 @@ static void	introduce(t_core *core)
 	i = 0;
 	while (core->warriors[i])
 	{
-		ft_printf("* Player %d, weiighing %d bytes, \"%s\" (\"%s\") !\n",
+		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n",
 		core->warriors[i]->nb, core->warriors[i]->code_size,
 		core->warriors[i]->name, core->warriors[i]->comment);
 		i++;
 	}
-}
-
-static int	process(t_core *core, t_list *carriage)
-{
-	CRG->op_info->process(core, carriage);
-	if (CRG->op_info->op_code == ZJMP)
-		return (0);
-	return (get_function_size(POS(ARG_BYTE), CRG->op_info));
 }
 
 static void carriage_process(t_core *core)
@@ -82,7 +92,7 @@ static void carriage_process(t_core *core)
 	while (carriage)
 	{
 		if ((ofset = validate_operation(core, carriage)))
-			CRG->position += ofset;
+			CRG->position = adr(CURRENT + ofset);
 		else
 		{
 			if (CRG->cycle_for_op == 0)
@@ -91,7 +101,7 @@ static void carriage_process(t_core *core)
 			{
 				CRG->cycle_for_op--;
 				if (CRG->cycle_for_op == 0)
-					CRG->position += process(core, carriage);
+					CRG->op_info->process(core, carriage);
 			}
 		}
 		carriage = carriage->next;
@@ -106,7 +116,9 @@ void 	start_game(t_core *core)
 	core->cycle_to_die_delta = CYCLE_DELTA;
 	cycle_to_die = core->cycle_to_die;
 	introduce(core);
-	while (core->carriages)
+	if (DEBUG)
+		ft_printf("DEBUG MODE ACTIVATED!\n\n");
+	while (core->carriages->next)
 	{
 		carriage_process(core);
 		if (cycle_to_die-- <= 0)

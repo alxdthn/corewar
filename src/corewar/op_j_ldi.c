@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:35:52 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/09 20:25:11 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/11 10:24:48 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,24 +37,31 @@
 **		нужно считать 4 байта по адресу — текущая позиция + <ПЕРВЫЙ_АРГУМЕНТ> % IDX_MOD.
 */
 
-void	cw_ldi(void *core, t_list *carriage)
+static void	debug_info(t_list *carriage, t_arg *args)
 {
-	/*
-	t_core	*ptr;
-	int		value;
-	int		adr;
+	int		ofset;
+
+	ft_printf("%10s > ldi:   ", CRG->owner->name);
+	ofset = print_args(args, 1);
+	while (--ofset)
+		ft_putchar(' ');
+	ft_printf("| no ifno\n");
+}
+
+void		cw_ldi(void *core, t_list *carriage)
+{
+	t_arg	*args;
 	int		a;
 	int		b;
 
-	ptr = (t_core *)core;
-	a = get_arg_value(carriage, CRG->op, CRG->op[ARG_BYTE], ptr->map);
-	b = get_arg_value(carriage, CRG->op + get_arg_ofset(get_arg_type(CRG->op[ARG_BYTE]),
-	CRG->op_info), CRG->op[ARG_BYTE] << 2, ptr->map);
-	adr = CRG->position + a + b % IDX_MOD;
-	value = *((int *)(ptr->map + adr));
-	CRG->reg[CRG->op[get_arg_size(CRG->op_info, CRG->op[ARG_BYTE]) - 1] - 1] = value;
+	init_args((t_arg *)args, carriage, 3);
+	a = get_operand(args[0], carriage, IDX_MOD);
+	b = get_operand(args[1], carriage, IDX_MOD);
+	CRG->reg[args[2].value - 1] = adr((CURRENT + a + b) % IDX_MOD);
+	CRG->position = adr(CURRENT + 2 + args[0].size + args[1].size + args[2].size);
 
-	ft_printf("%{gre}s", "LDI IS DONE!\n");
-	print_operation_info(CRG->op);
-	*/
+//################## DEBUG: ####################
+	if (DEBUG)
+		debug_info(carriage, (t_arg *)args);
+//##############################################
 }

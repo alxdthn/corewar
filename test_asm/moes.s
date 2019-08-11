@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/04 21:24:26 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/10 19:18:42 by nalexand         ###   ########.fr        #
+#    Updated: 2019/08/10 20:20:42 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,4 +23,9 @@
 #	aff	r4
 #	aff	r5
 #	aff	r6
-	ld r1, r2
+	live %-1
+	ld	%42, r2
+	ld	%21, r3
+	add r2, r3, r4
+	sub r4, r3, r2
+	and r4, r2, r3

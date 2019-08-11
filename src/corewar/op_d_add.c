@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:31:08 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/09 20:26:03 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/11 10:24:11 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,36 @@
 **	то устанавливаем carry в 1. А если сумма была не нулевой — в 0.
 */
 
+static void	debug_info(t_list *carriage, t_arg *args)
+{
+	int		ofset;
+
+	ft_printf("%10s > add:  ", CRG->owner->name);
+	ofset = print_args((t_arg *)args, 3);
+	while (--ofset)
+		ft_putchar(' ');
+	ft_printf("| %d(r%d) + %d(r%d) = %d(r%d)\n",
+	CRG->reg[args[0].value - 1], args[0].value,
+	CRG->reg[args[1].value - 1], args[1].value,
+	CRG->reg[args[2].value - 1], args[2].value);
+}
+
 void	cw_add(void *core, t_list *carriage)
 {
-	/*
-	core = NULL;
-	CRG->reg[CRG->op[4] - 1] = CRG->reg[CRG->op[2] - 1] + CRG->reg[CRG->op[3] - 1];
-	if (CRG->reg[CRG->op[4] - 1] == 0)
-		CRG->carry = 1;
+	t_arg	args[3];
+
+	init_args((t_arg *)args, carriage, 3);
+	CRG->reg[args[2].value - 1]
+	= CRG->reg[args[0].value - 1] + CRG->reg[args[1].value - 1];
+	if (CRG->reg[args[2].value - 1])
+		CRG->carry = TRUE;
 	else
-		CRG->carry = 0;
-	ft_printf("%{gre}s", "ADD IS DONE!\n");
-	print_operation_info(CRG->op);
-	*/
+		CRG->carry = FALSE;
+
+//################## DEBUG: ####################
+	if (DEBUG)
+		debug_info(carriage, (t_arg *)args);
+//##############################################
+
+	CRG->position = adr(CURRENT + 2 + args[0].size + args[1].size + args[2].size);
 }

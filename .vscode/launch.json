@@ -4,19 +4,6 @@
 	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
 	"version": "0.2.0",
 	"configurations": [
-	{
-		"name": "(lldb) Launch",
-		"type": "cppdbg",
-		"request": "launch",
-		"program": "${workspaceFolder}/a.out",
-		"args": [],
-		"stopAtEntry": false,
-		"cwd": "${workspaceFolder}",
-		"environment": [],
-		"externalConsole": false,
-		"MIMode": "lldb"
-	},
-
 		{
 			"name": "(lldb) ASM",
 			"type": "cppdbg",
@@ -28,8 +15,7 @@
 			"environment": [],
 			"externalConsole": false,
 			"MIMode": "lldb"
-		}
-	,
+		},
 		{
 			"name": "(lldb) DESTR",
 			"type": "cppdbg",
@@ -47,7 +33,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/corewar",
-			"args": ["moes.cor"],
+			"args": ["moes.cor", "sam_2.0.cor"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],

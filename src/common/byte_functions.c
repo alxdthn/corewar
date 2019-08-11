@@ -6,39 +6,11 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 22:04:27 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/10 18:27:26 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/10 19:37:45 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-int		get_value(char *mem, int pos, int size)
-{
-	int		i;
-	int		res;
-	int		rev_size;
-
-	i = pos;
-	res = 0;
-	rev_size = size;
-	while (size--)
-	{
-		if (i >= MEM_SIZE)
-			i = 0;
-		res <<= 8;
-		res |= mem[i++];
-	}
-	return (res);
-}
-
-int		adr(int current_adr)
-{
-	if (current_adr >= MEM_SIZE)
-		return (current_adr % MEM_SIZE);
-	else if (current_adr < 0)
-		return (MEM_SIZE + current_adr % MEM_SIZE);
-	return (current_adr);
-}
 
 int		get_arg_type(char arg_byte)
 {

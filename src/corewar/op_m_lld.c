@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:39:31 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/09 20:24:50 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/11 10:25:03 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,32 +25,26 @@
 **	Не применяя усечение по модулю.
 */
 
+static void	debug_info(t_list *carriage, t_arg *args)
+{
+	int		ofset;
+
+	ft_printf("%10s > lld:   ", CRG->owner->name);
+	ofset = print_args(args, 1);
+	while (--ofset)
+		ft_putchar(' ');
+	ft_printf("| no ifno\n");
+}
+
 void	cw_lld(void *core, t_list *carriage)
 {
-	/*
-	int		byte_ofset;
-	int		value;
-	t_core	*ptr;
+	t_arg	args[2];
 
-	ptr = (t_core *)core;
-	byte_ofset = 0;
-	if (get_arg_type(CRG->op[ARG_BYTE]) == T_DIR)
-	{
-		byte_ofset = 5;
-		value = ft_reverse_bytes(*((int *)(CRG->op + 2)), sizeof(int));
-	}
-	else
-	{
-		byte_ofset = 3;
-		value = ft_reverse_bytes(*(int *)(ptr->map + CRG->position
-		+ ft_reverse_bytes(*((short *)(CRG->op + 2)), sizeof(short))), sizeof(int));
-	}
-	CRG->reg[CRG->op[byte_ofset + 1] - 1] = value;
-	if (value == 0)
-		CRG->carry = 1;
-	else
-		CRG->carry = 0;
-	ft_printf("%{gre}s", "LLD IS DONE!\n");
-	print_operation_info(CRG->op);
-	*/
+	init_args((t_arg *)args, carriage, 2);
+	CRG->reg[args[1].value - 1] = get_operand(args[0], carriage, 0);
+	CRG->position = adr(CURRENT + 2 + args[0].size + args[1].size);
+//################## DEBUG: ####################
+	if (DEBUG)
+		debug_info(carriage, (t_arg *)args);
+//##############################################
 }

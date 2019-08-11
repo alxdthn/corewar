@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:33:43 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/09 20:25:32 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/11 10:24:29 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,54 @@
 **	Только в данном случае «побитовое И» заменяется на «побитовое ИЛИ».
 */
 
-void	cw_or(void *core, t_list *carriage)
+static void	debug_info(t_list *carriage, t_arg *args)
 {
-	/*
-	t_core	*ptr;
-	int		value;
+	int		ofset;
+	int		i;
+
+	ft_printf("%10s > or:    ", CRG->owner->name);
+	ofset = print_args(args, 3);
+	while (--ofset)
+		ft_putchar(' ');
+	ft_printf("|");
+	i = 0;
+	while (i < 2)
+	{
+		if (args[i].type == T_REG)
+		{
+			ft_printf(" %d(r%d)", CRG->reg[args[i].value - 1], args[i].value);
+			i++;
+		}
+		else if (args[i].type == T_DIR)
+			ft_printf(" %d", args[i++].value);
+		else
+		{
+			ft_printf(" %d(adr %d)",
+			get_value_from_adr(carriage, args[i].value, IDX_MOD),
+			adr((CURRENT + args[i].value) % IDX_MOD));
+			i++;
+		}
+		if (i == 1)
+			ft_printf(" |");
+	}
+	ft_printf(" = %d(r%d)\n", CRG->reg[args[2].value - 1], args[2].value);
+}
+
+void		cw_or(void *core, t_list *carriage)
+{
+	t_arg	args[3];
 	int		a;
 	int		b;
 
-	ptr = (t_core *)core;
-	a = get_arg_value(carriage, CRG->op, CRG->op[ARG_BYTE], ptr->map);
-	b = get_arg_value(carriage, CRG->op + get_arg_ofset(get_arg_type(CRG->op[ARG_BYTE]),
-	CRG->op_info), CRG->op[ARG_BYTE] << 2, ptr->map);
-	value = a | b;
-	CRG->reg[CRG->op[get_arg_size(CRG->op_info, CRG->op[ARG_BYTE]) - 1] - 1] = value;
-	if (value)
-		CRG->carry = 1;
-	else
-		CRG->carry = 0;
+	init_args((t_arg *)args, carriage, 3);
+	a = get_operand(args[0], carriage, IDX_MOD);
+	b = get_operand(args[1], carriage, IDX_MOD);
+	CRG->reg[args[2].value - 1] = a | b;
 
-	ft_printf("%{gre}s", "OR IS DONE!\n");
-	print_operation_info(CRG->op);
-	*/
+//################## DEBUG: ####################
+	if (DEBUG)
+		debug_info(carriage, (t_arg *)args);
+//##############################################
+
+	CRG->position = adr(CURRENT + 2 + args[0].size + args[1].size + args[2].size);
 }

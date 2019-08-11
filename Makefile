@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/03 20:54:43 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/10 19:09:10 by nalexand         ###   ########.fr        #
+#    Updated: 2019/08/10 19:19:19 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,24 @@ COR_SRC =	corewar.c \
 			init_carriages.c \
 			validate_operation.c \
 			game_process.c \
-			cw_debug.c
+			cw_debug.c \
+			get_arg_value.c \
+			op_a_live.c \
+			op_b_ld.c \
+			op_c_st.c \
+			op_d_add.c \
+			op_e_sub.c \
+			op_f_and.c \
+			op_g_or.c \
+			op_h_xor.c \
+			op_i_zjmp.c \
+			op_j_ldi.c \
+			op_k_sti.c \
+			op_l_fork.c \
+			op_m_lld.c \
+			op_n_lldi.c \
+			op_o_lfork.c \
+			op_p_aff.c 
 
 ASM_SRC =	asm.c \
 			first_validation.c \
