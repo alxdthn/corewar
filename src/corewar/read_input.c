@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 18:45:02 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/09 20:36:32 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/11 18:29:07 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void		read_input(t_core *core, const int ac, const char **av)
 	t_list	*node;
 	ssize_t	ret;
 
-	i = 0;
+	i = core->arg_ofset;
 	if (ac < 2)
 		cw_clear_exit(core, USAGE, 1);
 	else if (ac - 1 > MAX_PLAYERS)
@@ -79,6 +79,6 @@ void		read_input(t_core *core, const int ac, const char **av)
 			cw_clear_exit(core, NULL, 2);
 		node->content_size = ret;
 		ft_lstadd(&core->input, node);
+		core->war_count++;
 	}
-	core->war_count = i - 1;
 }

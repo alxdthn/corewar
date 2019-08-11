@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 19:12:39 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/11 11:14:47 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/11 20:18:59 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,35 +37,12 @@ void	ft_lstdelnode(t_list **lst, t_list *node)
 	}
 }
 
-static void	game_check(t_core *core, int *cycle_to_die)
-{
-	t_list	*carriage;
-	t_list	*tmp;
-
-	if (core->live_count >= NBR_LIVE || core->live_check_count >= MAX_CHECKS)
-	{
-		core->cycle_to_die -= core->cycle_to_die_delta;
-		core->live_check_count = 0;
-	}	
-	else
-		core->live_check_count++;
-	*cycle_to_die = core->cycle_to_die;
-	carriage = core->carriages;
-	while (carriage->next)
-	{
-		if (CRG->live == FALSE)
-			ft_lstdelnode(&core->carriages, carriage);
-		CRG->live = 0;
-		carriage = carriage->next;
-	}
-}
-
 static void	print_winner(t_core *core)
 {
 	t_list	*carriage;
 
 	carriage = core->carriages;
-	ft_printf("Contestant %d, %{gre}s, has won !\n",
+	ft_printf("Contestant %d, \"%s\", has won !\n",
 	CRG->owner->nb, CRG->owner->name);
 }
 
@@ -76,11 +53,53 @@ static void	introduce(t_core *core)
 	i = 0;
 	while (core->warriors[i])
 	{
-		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n",
+		ft_printf("Introducing contestants...\n* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n",
 		core->warriors[i]->nb, core->warriors[i]->code_size,
 		core->warriors[i]->name, core->warriors[i]->comment);
 		i++;
 	}
+}
+
+
+void		validate_op_code(t_list *carriage)
+{
+	CRG->op = BYTE(CURRENT);
+	if (CRG->op > 0 && CRG->op < 17)
+	{
+		CRG->op_info = &op_tab[CRG->op - 1];
+		CRG->cycle_for_op = CRG->op_info->cycle;
+	}
+	else
+		CRG->position = adr(CURRENT + 1);
+}
+
+static void	game_check(t_core *core, int *cycle_to_die)
+{
+	t_list	*carriage;
+	t_list	*tmp;
+
+//	ft_printf("%d\n", core->process_count);
+	core->game_check_count++;
+	if (core->live_count >= NBR_LIVE || core->game_check_count >= MAX_CHECKS)
+	{
+		core->cycle_to_die -= core->cycle_to_die_delta;
+		core->game_check_count = 0;
+	}
+	*cycle_to_die = core->cycle_to_die;
+	carriage = core->carriages;
+	while (carriage)
+	{
+		if (CRG->live == FALSE)
+		{
+			if (core->process_count == 1)
+				print_winner(core);
+			ft_lstdelnode(&core->carriages, carriage);
+			core->process_count--;
+		}
+		CRG->live = 0;
+		carriage = carriage->next;
+	}
+	core->live_count = 0;
 }
 
 static void carriage_process(t_core *core)
@@ -91,19 +110,25 @@ static void carriage_process(t_core *core)
 	carriage = core->carriages;
 	while (carriage)
 	{
-		if ((ofset = validate_operation(core, carriage)))
-			CRG->position = adr(CURRENT + ofset);
-		else
+		if (!CRG->op)
+			validate_op_code(carriage);
+		if (CRG->op_info)
 		{
+			CRG->cycle_for_op--;
 			if (CRG->cycle_for_op == 0)
-				CRG->cycle_for_op = CRG->op_info->cycle;
-			else
 			{
-				CRG->cycle_for_op--;
-				if (CRG->cycle_for_op == 0)
+				if ((ofset = validate_operation(core, carriage)))
+					CRG->position = adr(CURRENT + ofset);
+				else
+				{
 					CRG->op_info->process(core, carriage);
+					CRG->op = 0;
+					CRG->op_info = NULL;
+				}
 			}
 		}
+//		if (ofset == 1)
+//			cw_clear_exit(core, NULL, 1);
 		carriage = carriage->next;
 	}
 }
@@ -111,19 +136,24 @@ static void carriage_process(t_core *core)
 void 	start_game(t_core *core)
 {
 	int		cycle_to_die;
+	int		test;
 
 	core->cycle_to_die = CYCLE_TO_DIE;
 	core->cycle_to_die_delta = CYCLE_DELTA;
 	cycle_to_die = core->cycle_to_die;
 	introduce(core);
-	if (DEBUG)
-		ft_printf("DEBUG MODE ACTIVATED!\n\n");
-	while (core->carriages->next)
+	while (core->carriages)
 	{
+		if (core->cycle_after_start == 1104)
+			test = 0;
+		if (core->cycle_after_start == core->dump)
+		{
+			print_map(core, 1);
+			cw_clear_exit(core, NULL, 1);
+		}
 		carriage_process(core);
-		if (cycle_to_die-- <= 0)
+		if (--cycle_to_die <= 0)
 			game_check(core, &cycle_to_die);
 		core->cycle_after_start++;
 	}
-	print_winner(core);
 }

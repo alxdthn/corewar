@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:40:20 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/11 10:25:08 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/11 20:46:57 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,23 @@
 **	Здесь усечение по модулю сохраняется.
 */
 
-static void	debug_info(t_list *carriage, t_arg *args)
+static void	lldi_print_process(t_list *carriage, t_arg *args, int a, int b)
 {
-	int		ofset;
+	int		i;
 
-	ft_printf("%10s > lldi:  ", CRG->owner->name);
-	ofset = print_args(args, 1);
-	while (--ofset)
-		ft_putchar(' ');
-	ft_printf("| no ifno\n");
+	ft_printf("P%5d | %s ", CRG->nb, CRG->op_info->op_name);
+	i = 0;
+	while (i < 3)
+	{
+		if (args[i].type == T_REG && i > 1)
+			ft_putchar('r');
+		ft_printf("%d", (i > 1) ? args[i].value : CRG->reg[args[i].value - 1]);
+		if (i + 1 < 3)
+			ft_putchar(' ');
+		i++;
+	}
+	ft_putchar('\n');
+	ft_printf("       | -> load from %d + %d = %d (with pc %d)\n", a, b, a + b, CURRENT + a + b);
 }
 
 void	cw_lldi(void *core, t_list *carriage)
@@ -50,9 +58,11 @@ void	cw_lldi(void *core, t_list *carriage)
 	a = get_operand(args[0], carriage, IDX_MOD);
 	b = get_operand(args[1], carriage, IDX_MOD);
 	CRG->reg[args[2].value - 1] = get_value_from_adr(carriage, a + b, 0);
+	if (CRG->reg[args[2].value - 1] == 0)
+		CRG->carry = TRUE;
+	else
+		CRG->carry = FALSE;
+	if (((t_core *)core)->out == 4)
+		lldi_print_process(carriage, (t_arg *)args, a, b);
 	CRG->position = adr(CURRENT + 2 + args[0].size + args[1].size + args[2].size);
-//################## DEBUG: ####################
-	if (DEBUG)
-		debug_info(carriage, (t_arg *)args);
-//##############################################
 }

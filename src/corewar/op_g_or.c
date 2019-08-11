@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:33:43 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/11 10:24:29 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/11 19:28:03 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,37 +19,22 @@
 **	Только в данном случае «побитовое И» заменяется на «побитовое ИЛИ».
 */
 
-static void	debug_info(t_list *carriage, t_arg *args)
+static void	or_print_process(t_list *carriage, t_arg *args, int arg_count)
 {
-	int		ofset;
 	int		i;
 
-	ft_printf("%10s > or:    ", CRG->owner->name);
-	ofset = print_args(args, 3);
-	while (--ofset)
-		ft_putchar(' ');
-	ft_printf("|");
+	ft_printf("P%5d | %s ", CRG->nb, CRG->op_info->op_name);
 	i = 0;
-	while (i < 2)
+	while (i < arg_count)
 	{
-		if (args[i].type == T_REG)
-		{
-			ft_printf(" %d(r%d)", CRG->reg[args[i].value - 1], args[i].value);
-			i++;
-		}
-		else if (args[i].type == T_DIR)
-			ft_printf(" %d", args[i++].value);
-		else
-		{
-			ft_printf(" %d(adr %d)",
-			get_value_from_adr(carriage, args[i].value, IDX_MOD),
-			adr((CURRENT + args[i].value) % IDX_MOD));
-			i++;
-		}
-		if (i == 1)
-			ft_printf(" |");
+		if (args[i].type == T_REG && i > 1)
+			ft_putchar('r');
+		ft_printf("%d", (i < 2) ? CRG->reg[args[i].value - 1] : args[i].value);
+		if (i + 1 < arg_count)
+			ft_putchar(' ');
+		i++;
 	}
-	ft_printf(" = %d(r%d)\n", CRG->reg[args[2].value - 1], args[2].value);
+	ft_putchar('\n');
 }
 
 void		cw_or(void *core, t_list *carriage)
@@ -62,11 +47,11 @@ void		cw_or(void *core, t_list *carriage)
 	a = get_operand(args[0], carriage, IDX_MOD);
 	b = get_operand(args[1], carriage, IDX_MOD);
 	CRG->reg[args[2].value - 1] = a | b;
-
-//################## DEBUG: ####################
-	if (DEBUG)
-		debug_info(carriage, (t_arg *)args);
-//##############################################
-
+	if (CRG->reg[args[2].value - 1] == 0)
+		CRG->carry = TRUE;
+	else
+		CRG->carry = FALSE;
+	if (((t_core *)core)->out == 4)
+		or_print_process(carriage, (t_arg *)args, 3);
 	CRG->position = adr(CURRENT + 2 + args[0].size + args[1].size + args[2].size);
 }

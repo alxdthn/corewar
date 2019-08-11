@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 18:39:50 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/11 11:14:16 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/11 13:51:11 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,6 @@ int		validate_operation(t_core *core, t_list *carriage)
 	char	argbyte;
 	char	arg_type;
 
-	if (BYTE(CURRENT) < 1 || BYTE(CURRENT) > 16)
-		return (1);
-	if (CRG->op_info != &op_tab[BYTE(CURRENT) - 1])
-		CRG->cycle_for_op = 0;
-	CRG->op_info = &op_tab[BYTE(CURRENT) - 1];
 	byte_ofset = 1 + ARG_TYPE;
 	argbyte = (ARG_TYPE) ? BYTE(ARG_BYTE) : (get_arg_code(OPER_ARGS[0]) << 6);
 	i = 0;

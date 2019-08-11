@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:35:52 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/11 10:24:48 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/11 20:23:55 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,31 +37,36 @@
 **		нужно считать 4 байта по адресу — текущая позиция + <ПЕРВЫЙ_АРГУМЕНТ> % IDX_MOD.
 */
 
-static void	debug_info(t_list *carriage, t_arg *args)
+static void	ldi_print_process(t_list *carriage, t_arg *args, int a, int b)
 {
-	int		ofset;
+	int		i;
 
-	ft_printf("%10s > ldi:   ", CRG->owner->name);
-	ofset = print_args(args, 1);
-	while (--ofset)
-		ft_putchar(' ');
-	ft_printf("| no ifno\n");
+	ft_printf("P%5d | %s ", CRG->nb, CRG->op_info->op_name);
+	i = 0;
+	while (i < 3)
+	{
+		if (args[i].type == T_REG && i > 1)
+			ft_putchar('r');
+		ft_printf("%d", (i < 2) ? CRG->reg[args[i].value - 1] : args[i].value);
+		if (i + 1 < 3)
+			ft_putchar(' ');
+		i++;
+	}
+	ft_putchar('\n');
+	ft_printf("       | -> load from %d + %d = %d (with pc and mod %d)\n", a, b, a + b, CURRENT + a + b);
 }
 
 void		cw_ldi(void *core, t_list *carriage)
 {
-	t_arg	*args;
+	t_arg	args[3];
 	int		a;
 	int		b;
 
 	init_args((t_arg *)args, carriage, 3);
 	a = get_operand(args[0], carriage, IDX_MOD);
 	b = get_operand(args[1], carriage, IDX_MOD);
-	CRG->reg[args[2].value - 1] = adr((CURRENT + a + b) % IDX_MOD);
+	CRG->reg[args[2].value - 1] = get_value_from_adr(carriage, a + b, IDX_MOD);
+	if (((t_core *)core)->out == 4)
+		ldi_print_process(carriage, (t_arg *)args, a, b);
 	CRG->position = adr(CURRENT + 2 + args[0].size + args[1].size + args[2].size);
-
-//################## DEBUG: ####################
-	if (DEBUG)
-		debug_info(carriage, (t_arg *)args);
-//##############################################
 }

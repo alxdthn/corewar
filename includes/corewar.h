@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:12:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/11 10:25:47 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/11 21:03:13 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 # define FALSE 0
 # define TRUE 1
 
-# define DEBUG 0
 /*
 **	common part
 */
@@ -56,7 +55,6 @@ t_op			*get_cmd(char *cmd);
 int				get_arg_type(char arg_byte);
 int				get_arg_code(char arg_type);
 int				get_arg_ofset(int arg_type, t_op *op);
-int				get_value(char *mem, int pos, int size);
 int				get_function_size(char arg_byte, t_op *op);
 void			print_operation_info(char *position);
 /*
@@ -131,7 +129,9 @@ void			create_lab(t_as **all, char *str, char **f, t_label **lab);
 **	corewar part
 */
 
-# define PRINT_ARG_OFSET 20
+# define PRINT_ARG_OFSET 30
+# define PRINT_NAME_OFSET 10
+# define CHAR_FOR_NAME 10
 # define USAGE "usage:"
 # define REG_OFSET 1
 # define IND_OFSET 2
@@ -162,6 +162,7 @@ typedef struct		s_warrior
 	char			*name;
 	char			*comment;
 	char			*exec_code;
+	char			live;
 }					t_warrior;
 
 typedef struct		s_carriage
@@ -173,22 +174,27 @@ typedef struct		s_carriage
 	int				cycle;
 	int				cycle_for_op;
 	int				position;
-	char			*map;
+	unsigned char	*map;
 	t_warrior		*owner;
 	t_op			*op_info;
+	char			op;
 }					t_carriage;
 
 typedef struct		s_core
 {
-	char			map[MEM_SIZE];
+	unsigned char	map[MEM_SIZE];
 	t_list			*input;
 	t_list			*carriages;
 	t_warrior		*warriors[MAX_PLAYERS + 1];
 	int				cycle_to_die;
 	int				cycle_to_die_delta;
 	int				live_count;
-	int				live_check_count;
+	int				game_check_count;
 	int				war_count;
+	int				process_count;
+	int				dump;
+	int				out;
+	int				arg_ofset;
 	unsigned long	cycle_after_start;
 }					t_core;
 
@@ -200,13 +206,12 @@ int					validate_operation(t_core *core, t_list *carriage);
 void 				start_game(t_core *core);
 
 void				init_args(t_arg *args, t_list *carriage, int count);
-int					print_args(t_arg *args, int count);
 int					get_operand(t_arg arg, t_list *carriage, int mod);
 
-void				set_value(char *mem, int pos, int size, int value);
+void				set_value(unsigned char *mem, int pos, int size, int value);
 void				set_value_to_adr(t_list *carriage, int arg_value, int mod, int value);
 
-int					get_value(char *mem, int pos, int size);
+int					get_value(unsigned char *mem, int pos, int size);
 int					get_value_from_adr(t_list *carriage, int arg_value, int mod);
 
 void				cw_live(void *core, t_list *carriage);
@@ -226,9 +231,11 @@ void				cw_lldi(void *core, t_list *carriage);
 void				cw_lfork(void *core, t_list *carriage);
 void				cw_aff(void *core, t_list *carriage);
 
+void				print_info_header(t_list *carriage);
 void				print_warriros(t_core *core);
 void				print_map(t_core *core, int bar);
 void				print_input(t_list *tmp);
 void				print_carriage(t_list *carriage);
+void				print_process(t_list *carriage, t_arg *args, int arg_count);
 
 #endif

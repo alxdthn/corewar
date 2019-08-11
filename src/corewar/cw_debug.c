@@ -6,14 +6,11 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 18:45:18 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/09 20:21:19 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/11 18:57:25 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-/*
-**	Функции для дебага, исходя из названия думаю понятно что они печатают
-*/
 
 static void	print_carriage_on_map(t_core *core, int i)
 {
@@ -50,15 +47,18 @@ void	print_map(t_core *core, int bar)
 	line_size = MEM_SIZE / 64;
 	i = 0;
 	j = line_size;
+	ft_printf("0x0000 : ");
 	while (i < MEM_SIZE / bar)
 	{
-		print_carriage_on_map(core, i++);
-		if (--j)
-			ft_putchar(' ');
-		else
+		if (i >= 64 && !(i % 64))
+			ft_printf("%#.4x : ", i);
+		ft_printf("%.2hhx ",  core->map[i++]);
+		//print_carriage_on_map(core, i++);
+		if (!--j)
+		{
 			ft_putchar('\n');
-		if (!j)
 			j = line_size;
+		}
 	}
 }
 
