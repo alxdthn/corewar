@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 17:10:00 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/09 17:39:10 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/11 17:13:02 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 #define KOS tmp[op_tab.arg_count - 1]
 #define KOS2 ((t_label *)label->content)->name
 #define KOS3 begin_c->content
+#define KOS4 COM->label_f
+#define KOS5 COM->label_s
+#define KOS6 COM->label_t
 
 int				add_label(t_as **all, char **f, char *str, int y)
 {
@@ -44,6 +47,15 @@ int				add_label(t_as **all, char **f, char *str, int y)
 	while (i >= 0)
 		f[y][i--] = ' ';
 	return (1);
+}
+
+char			*fit_str(char *find)
+{
+	if (ft_strstr(find, " "))
+		find[ft_strindex(find, ' ')] = '\0';
+	if (ft_strstr(find, "\t"))
+		find[ft_strindex(find, '\t')] = '\0';
+	return (find);
 }
 
 int				len_to_label(t_list *dst, t_list *label, char *find, t_as **all)
@@ -94,17 +106,17 @@ t_list *begin_c, t_list *tmp)
 		{
 			if (COM->label_f)
 			{
-				COM->arg_f = len_to_label(tmp, label, COM->label_f, all);
+				COM->arg_f = len_to_label(tmp, label, fit_str(KOS4), all);
 				str_del_null(&COM->label_f);
 			}
 			if (COM->label_s)
 			{
-				COM->arg_s = len_to_label(tmp, label, COM->label_s, all);
+				COM->arg_s = len_to_label(tmp, label, fit_str(KOS5), all);
 				str_del_null(&COM->label_s);
 			}
 			if (COM->label_t)
 			{
-				COM->arg_t = len_to_label(tmp, label, COM->label_t, all);
+				COM->arg_t = len_to_label(tmp, label, fit_str(KOS6), all);
 				str_del_null(&COM->label_t);
 			}
 		}

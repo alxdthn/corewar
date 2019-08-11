@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/09 17:37:02 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/10 20:31:34 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/11 17:06:04 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int				find_counter(char *str)
 	while (counter < 16)
 	{
 		if (ft_strstr(str, op_tab[counter].op_name) == str
-		&& (*(str + ft_strlen(op_tab[counter].op_name))) <= 32)
+		&& ((*(str + ft_strlen(op_tab[counter].op_name))) <= 32
+		|| (*(str + ft_strlen(op_tab[counter].op_name))) <= '%'))
 			break ;
 		counter++;
 	}
@@ -114,7 +115,7 @@ void			add_arg_help(char **tmp, t_as **all, char *str, t_comm *com)
 	if (ft_isint(tmp[x] + c) && x == 2)
 		(com)->arg_t = ft_atoi(tmp[x] + c);
 	if (!ft_isint(tmp[x] + c) && *(tmp[x] + c) != LABEL_CHAR)
-		invalid_comm(all, &tmp, str);
+		invalid_comm(all, &tmp, str + c);
 	if (!ft_isint(tmp[x] + c) && *(tmp[x] + c) == LABEL_CHAR)
 	{
 		if (!(label = ft_strnew(ft_strlen(tmp[x] + c))))

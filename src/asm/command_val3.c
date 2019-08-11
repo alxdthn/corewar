@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/09 17:38:38 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/10 20:37:01 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/11 17:20:38 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,8 @@ void			add_command(t_as **all, t_list *tmp, char **f, char *str)
 		invalid_comm(all, 0, str);
 	ft_bzero(COM, sizeof(t_comm));
 	COM->instr = op_tab[counter].op_name;
-	add_arg((COM), str + ft_strlen(op_tab[counter].op_name)
-	+ 1, all, op_tab[counter]);
+	add_arg((COM), str + ft_strlen(op_tab[counter].op_name),
+	all, op_tab[counter]);
 	COM->len = get_function_size(COM->arg_type, &(op_tab[counter]));
 	tmp->next = 0;
 	ft_lstpushback(&(*all)->comm, tmp);
