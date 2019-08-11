@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/09 17:37:02 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/10 18:19:04 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/10 20:31:34 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ int				check_command(char *str, char **f, t_as **all, int counter)
 
 	if (counter == 16)
 		invalid_comm(all, &f, str);
-	str = str + ft_strlen(op_tab[counter].op_name);
-	if (ft_strstr(str, "#"))
+	if (ft_strstr(str = str + ft_strlen(op_tab[counter].op_name), "#"))
 		*ft_strstr(str, "#") = '\0';
 	if ((after = ft_strccount(str, SEPARATOR_CHAR))
 	+ 1 != op_tab[counter].arg_count)
