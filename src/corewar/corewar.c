@@ -109,10 +109,10 @@ static void	draw_arena(t_core *core)
 
 //            attribute = core->map[i * 64 + j];
 //            attribute = 1;
-            wattron(core->visual->arena, 5);
-            wbkgd(core->visual->arena, COLOR_PAIR(YELLOW_CURSOR));
+            wattron(core->visual->arena, 0);
+//            wbkgd(core->visual->arena, COLOR_PAIR(YELLOW_CURSOR));
             wprintw(core->visual->arena, "%.2hhx", core->map[i * 64 + j]);
-            wattroff(core->visual->arena, 5);
+            wattroff(core->visual->arena, 0);
             waddch(core->visual->arena, ' ');
             j++;
         }
