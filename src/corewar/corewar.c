@@ -156,15 +156,16 @@ static void	draw_border(WINDOW *win)
 
 void		draw(t_core *core)
 {
-//    printf("%p", core->visual->arena);
     werase(core->visual->arena);
-//    werase(vm->vs->win_info);
-//    werase(vm->vs->win_help);
+    werase(core->visual->win_info);
+    werase(core->visual->win_help);
     draw_arena(core);
 //    draw_info(vm);
     draw_border(core->visual->arena);
 //    wrefresh(vm->vs->win_info);
     wrefresh(core->visual->arena);
+    wrefresh(core->visual->win_info);
+    wrefresh(core->visual->win_help);
 //    wrefresh(vm->vs->win_help);
 }
 
