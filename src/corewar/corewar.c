@@ -75,6 +75,28 @@ void		init_colors(void)
 }
 
 
+void	draw_cursor(t_core *core, t_list *cursor)
+{
+    if (core->visual->map[cursor->content_size].index >= 0
+        && core->visual->map[cursor->content_size].index <= MAX_PLAYER_ID)
+        core->visual->map[cursor->content_size].index =
+                INDEX_CURSOR(core->visual->map[cursor->content_size].index);
+}
+
+static void	init_cursors(t_core *core)
+{
+    t_list *carriage;
+
+    carriage = core->carriages;
+
+    while (carriage)
+    {
+        draw_cursor(core, carriage);
+        printf("core = %d\n", CRG->position);
+        carriage = carriage->next;
+    }
+}
+
 void        configure_visual(t_core *core)
 {
     initscr();
@@ -88,6 +110,9 @@ void        configure_visual(t_core *core)
     init_colors();
     init_map(core);
     core->visual->arena = newwin(HEIGHT, WIDTH + 4, 1, 2);
+    core->visual->win_info = newwin(HEIGHT, WIDTH / 4 + 10, 1, WIDTH + 6);
+    core->visual->win_help = newwin(HEIGHT / 5, WIDTH, HEIGHT + 2, 2);
+    init_cursors(core);
 }
 
 static void	draw_arena(t_core *core)
@@ -161,7 +186,7 @@ int			main(int ac, char **av)
 	init_carriages(&core);
 	set_exec_code(&core);
 //	print_map(&core, 1);
-//	start_game(&core);
+	start_game(&core);
 //	if (core.visual)
 //    {
 	    make_visual(&core);

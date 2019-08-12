@@ -167,6 +167,7 @@ void			create_lab(t_as **all, char *str, char **f, t_label **lab);
 # define ARG_TYPE CRG->op_info->arg_type
 # define OPER_ARGS CRG->op_info->args
 # define GET_VAL(pos, size) (ft_reverse_bytes(*((size *)(pos)), sizeof(size)))
+# define INDEX_CURSOR(X)		((X) + 5)
 
 typedef struct		s_arg
 {
@@ -199,34 +200,38 @@ typedef struct		s_carriage
 	t_op			*op_info;
 }					t_carriage;
 
-typedef struct 		visual
-{
-    WINDOW          *arena;
-}					t_visual;
-
 typedef struct		s_attr
 {
-    int32_t			index;
-    ssize_t			wait_cycles_store;
-    ssize_t			wait_cycles_live;
+	int32_t			index;
+	ssize_t			wait_cycles_store;
+	ssize_t			wait_cycles_live;
 //    t_player		*player_live;
 }					t_attr;
 
-typedef struct		s_core
+typedef struct 		visual
 {
-    t_attr			map1[MEM_SIZE];
-	char			map[MEM_SIZE];
-	t_list			*input;
-	t_list			*carriages;
-	t_visual		*visual;
-	t_warrior		*warriors[MAX_PLAYERS + 1];
-	int				cycle_to_die;
-	int				cycle_to_die_delta;
-	int				live_count;
-	int				live_check_count;
-	int				war_count;
-	unsigned long	cycle_after_start;
-}					t_core;
+    WINDOW          *arena;
+	WINDOW			*win_arena;
+	WINDOW			*win_info;
+	WINDOW			*win_help;
+	t_attr			map[MEM_SIZE];
+
+}					t_visual;
+
+typedef struct			s_core
+{
+	char				map[MEM_SIZE];
+	t_list				*input;
+	t_list				*carriages;
+	t_visual		    *visual;
+	t_warrior			*warriors[MAX_PLAYERS + 1];
+	int					cycle_to_die;
+	int					cycle_to_die_delta;
+	int					live_count;
+	int					live_check_count;
+	int					war_count;
+	unsigned long		cycle_after_start;
+}						t_core;
 
 void		        get_visual(int *ac, t_core *core, int *i);
 void				cw_clear_exit(t_core *core, const char *message, const int fd);
