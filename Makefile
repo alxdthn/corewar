@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/03 20:54:43 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/11 12:13:32 by nalexand         ###   ########.fr        #
+#    Updated: 2019/08/12 21:35:26 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,6 @@ COM_SRC =	print_memory.c \
 			op.c \
 			byte_functions.c \
 			db_print_operation_info.c \
-			get_arg_value.c \
 			op_a_live.c \
 			op_b_ld.c \
 			op_c_st.c \
@@ -64,8 +63,7 @@ COR_SRC =	corewar.c \
 			init_warriors.c \
 			init_carriages.c \
 			validate_operation.c \
-			game_process.c \
-			get_arg_value.c
+			game_process.c
 
 ASM_SRC =	asm.c \
 			first_validation.c \

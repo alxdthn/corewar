@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 18:45:18 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/12 20:13:36 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 00:14:59 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,20 +90,23 @@ void	print_warriros(t_core *core)
 	}
 }
 
-void	print_carriage(t_list *carriage)
+void	print_carriages(t_list *carriage, int count)
 {
 	int		i;
 
-	ft_printf("CARRIAGE INFO:\n");
-	ft_printf("number: %d\nposition: %d\ncycle_for_op: %d\n"\
-	"carry: %d\noperation %d\nregisters:\n",
-	CRG->nb, CRG->position, CRG->cycle_for_op,
-	CRG->carry, CRG->op_info->op_name);
-	i = 0;
-	while (i < REG_NUMBER)
-		ft_printf("%.*x ", REG_SIZE, CRG->reg[i++]);
-	ft_putchar('\n');
-	ft_putstr("--------------------------------\n");
+	ft_printf(" number | position | live_cycle | op_cycle | carry | operation | registers\n");
+	while (carriage && count)
+	{
+		ft_printf("%8d|%10d|%12d|%10d|%7d|%11s| ",
+		CRG->nb, CRG->position, CRG->cycle, CRG->cycle_for_op,
+		CRG->carry, (CRG->op_info) ? CRG->op_info->op_name : "NULL");
+		i = 0;
+		while (i < REG_NUMBER)
+			ft_printf("%.*x ", REG_SIZE, CRG->reg[i++]);
+		ft_putchar('\n');
+		carriage = carriage->next;
+		--count;
+	}
 }
 
 int		print_process_header(t_core *core, t_list *carriage)
@@ -115,4 +118,17 @@ int		print_process_header(t_core *core, t_list *carriage)
 	ret += ft_printf("P%5d |", CRG->nb);
 	ft_printf(" %s ", CRG->op_info->op_name);
 	return (ret);
+}
+
+void		print_mov(t_list *carriage, int new)
+{
+	int		i;
+	int		size;
+
+	size = get_function_size(BYTE(ARG_BYTE), CRG->op_info);
+	ft_printf("ADV %d (%.4p -> %.4p) ", size, CURRENT, new);
+	i = 0;
+	while (i < size)
+		ft_printf("%.2hhx ",  BYTE(CURRENT + i++));
+	ft_putchar('\n');
 }

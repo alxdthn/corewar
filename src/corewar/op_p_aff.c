@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:41:59 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/11 20:53:18 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/12 22:49:41 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,14 @@
 void	cw_aff(void *core, t_list *carriage)
 {
 	t_arg	arg;
+	int		new_pos;
 
 	init_args(&arg, carriage, 1);
 //	write(1, &CRG->reg[arg.value - 1], 1);
 //	if (((t_core *)core)->out == 4)
 //		print_process(carriage, &arg, 1);
-	CRG->position = adr(CURRENT + 2 + arg.size);
+	new_pos = adr(CURRENT + 2 + arg.size);
+	if (((t_core *)core)->out == 16)
+		print_mov(carriage, new_pos);	
+	CRG->position = new_pos;
 }

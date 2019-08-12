@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    sam_2.0.s                                          :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+         #
+#    By: bguy <bguy@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/03/02 20:48:59 by bguy              #+#    #+#              #
-#    Updated: 2019/08/08 20:14:48 by skrystin         ###   ########.fr        #
+#    Updated: 2014/03/02 20:49:07 by bguy             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ wall_prep:
 	ld		%0, r2
 	ld		%0, r16
 
-wall: #fd
+wall:
 	live	%4902343
 	st		r2, -50
 	st		r2, -59
@@ -35,7 +35,7 @@ wall: #fd
 	st		r2, -95
 	st		r2, -104
 	st		r2, -113
-	st		r2, :wall
+	st		r2, -122
 	st		r2, -131
 	st		r2, -140
 	st		r2, -149
@@ -61,15 +61,15 @@ shield:
 	st		r2, 124
 	st		r2, 124
 	st		r2, 124
-	st		r2, 1
 	st		r2, 124
 	st		r2, 124
 	st		r2, 124
-	zjmp	%2147483647
+	st		r2, 124
+	zjmp	%:shield
 
 machine_gun_init:
 	st		r1, 6
-test:
+
 machine_gun_gen:
 	live	%42
-	fork	%:test
+	fork	%:machine_gun_gen

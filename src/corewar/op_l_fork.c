@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:38:47 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/12 20:05:43 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/12 23:38:59 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,11 @@ void	fork_print_process(t_core *core, t_list *carriage, t_arg *args, int pos)
 
 void	cw_fork(void *core, t_list *carriage)
 {
-	t_arg	arg;
-	t_list	*node;
+	t_arg		arg;
+	t_list		*node;
+	int			new_pos;
 
-	if (!(node = ft_lstnew(carriage->content, carriage->content_size)))
+	if (!(node = ft_lstnew(carriage->content, sizeof(t_carriage))))
 		cw_clear_exit((t_core *)core, MEM_ERROR, 2);
 	init_args(&arg, carriage, 1);
 	((t_carriage *)node->content)->cycle_for_op = 0;
@@ -45,7 +46,10 @@ void	cw_fork(void *core, t_list *carriage)
 	((t_carriage *)node->content)->nb = ++((t_core *)core)->global_process_count;
 	((t_core *)core)->current_process_count++;
 	ft_lstadd(&((t_core *)core)->carriages, node);
+	new_pos = adr(CURRENT + 1 + arg.size);
 	if (((t_core *)core)->out == 4)
 		fork_print_process((t_core *)core, carriage, &arg, ((t_carriage *)node->content)->position);
-	CRG->position = adr(CURRENT + 1 + arg.size);
+	else if (((t_core *)core)->out == 16)
+		print_mov(carriage, new_pos);
+	CRG->position = new_pos;
 }

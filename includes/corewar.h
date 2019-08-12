@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:12:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/12 20:06:11 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 00:10:50 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,8 +170,8 @@ typedef struct		s_carriage
 	t_bool			carry;
 	int				reg[REG_NUMBER];
 	int				nb;
+	int				cycle;
 	int				cycle_for_op;
-	int				cycle_after_live;
 	int				position;
 	unsigned char	*map;
 	t_warrior		*owner;
@@ -186,7 +186,6 @@ typedef struct		s_core
 	t_list			*carriages;
 	t_warrior		*warriors[MAX_PLAYERS + 1];
 	int				cycle_to_die;
-	int				cycle_to_die_delta;
 	int				live_count;
 	int				game_check_count;
 	int				war_count;
@@ -236,7 +235,8 @@ void				print_info_header(t_list *carriage);
 void				print_warriros(t_core *core);
 void				print_map(t_core *core, int bar);
 void				print_input(t_list *tmp);
-void				print_carriage(t_list *carriage);
+void				print_carriages(t_list *carriage, int count);
+void				print_mov(t_list *carriage, int new);
 int					print_process_header(t_core *core, t_list *carriage);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:30:00 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/12 20:27:28 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/12 22:41:23 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,17 @@ static void	print_process(t_core *core, t_list *carriage, t_arg *args)
 void		cw_st(void *core, t_list *carriage)
 {
 	t_arg	args[2];
+	int		new_pos;
 
 	init_args((t_arg *)args, carriage, 2);
 	if (args[1].type == T_IND)
 		set_value_to_adr(carriage, args[1].value, IDX_MOD, CRG->reg[args[0].value - 1]);
 	else
 		CRG->reg[args[1].value - 1] = CRG->reg[args[0].value - 1];
+	new_pos = adr(CURRENT + 2 + args[0].size + args[1].size);
 	if (((t_core *)core)->out == 4)
 		print_process((t_core *)core, carriage, (t_arg *)args);
-	CRG->position = adr(CURRENT + 2 + args[0].size + args[1].size);
+	else if (((t_core *)core)->out == 16)
+		print_mov(carriage, new_pos);
+	CRG->position = new_pos;
 }

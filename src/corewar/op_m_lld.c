@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:39:31 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/12 20:31:38 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/12 22:47:54 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,19 @@ static void	lld_print_process(t_core *core, t_list *carriage, t_arg *args, int a
 void		cw_lld(void *core, t_list *carriage)
 {
 	t_arg	args[2];
+	int		new_pos;
 
 	init_args((t_arg *)args, carriage, 2);
-	CRG->reg[args[1].value - 1] = get_operand(args[0], carriage, 0);
+	args[0].value = get_operand(args[0], carriage, 0);
+	CRG->reg[args[1].value - 1] = args[0].value;
 	if (CRG->reg[args[1].value - 1] == 0)
 		CRG->carry = TRUE;
 	else
 		CRG->carry = FALSE;
+	new_pos = adr(CURRENT + 2 + args[0].size + args[1].size);
 	if (((t_core *)core)->out == 4)
 		lld_print_process((t_core *)core, carriage, (t_arg *)args, 2);
-	CRG->position = adr(CURRENT + 2 + args[0].size + args[1].size);
+	else if (((t_core *)core)->out == 16)
+		print_mov(carriage, new_pos);
+	CRG->position = new_pos;
 }
