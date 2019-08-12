@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
+#    By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/03 20:54:43 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/10 19:19:19 by nalexand         ###   ########.fr        #
+#    Updated: 2019/08/12 14:45:28 by breolson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-VPATH = src/corewar:src/asm:src/common:includes
+VPATH = src/corewar:src/asm:src/common:includes:src/visual
 
-.SECONDARY: $(COR_OBJ) $(ASM_OBJ) $(COM_OBJ)
+.SECONDARY: $(COR_OBJ) $(ASM_OBJ) $(COM_OBJ) $(VSL_OBJ)
 
 override ARFLAGS = rcs
 
@@ -65,6 +65,8 @@ COR_SRC =	corewar.c \
 			validate_operation.c \
 			game_process.c \
 			cw_debug.c \
+			init_visual.c \
+			cw_debug.c \
 			get_arg_value.c \
 			op_a_live.c \
 			op_b_ld.c \
@@ -81,7 +83,7 @@ COR_SRC =	corewar.c \
 			op_m_lld.c \
 			op_n_lldi.c \
 			op_o_lfork.c \
-			op_p_aff.c 
+			op_p_aff.c
 
 ASM_SRC =	asm.c \
 			first_validation.c \
@@ -91,7 +93,8 @@ ASM_SRC =	asm.c \
 			print_basic.c \
 			printer_asm.c \
 			deleter.c \
-			error_parse.c \
+			error_parse.c
+# VSL_SRC =
 
 COM_OBJ = $(addprefix $(OBJ_DIR), $(patsubst %.c, %.o, $(COM_SRC)))
 COR_OBJ = $(addprefix $(OBJ_DIR), $(patsubst %.c, %.o, $(COR_SRC)))
@@ -100,9 +103,9 @@ ASM_OBJ = $(addprefix $(OBJ_DIR), $(patsubst %.c, %.o, $(ASM_SRC)))
 all: $(CORE) $(ASM)
 
 $(CORE): $(COM_LIB) $(COR_LIB) $(LIBFT)
-	gcc $(CFLAGS) -o $@ $^
+	gcc $(CFLAGS) -lncurses -o $@ $^
 $(ASM): $(COM_LIB) $(ASM_LIB) $(LIBFT)
-	gcc $(CFLAGS) -o $@ $^
+	gcc $(CFLAGS) -lncurses -o $@ $^
 
 $(COR_LIB):: $(OBJ_DIR) $(LIB_DIR)
 $(COR_LIB):: $(COR_LIB)($(COR_OBJ))

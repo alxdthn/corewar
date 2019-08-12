@@ -56,7 +56,7 @@ static void	fd_error_exit(t_core *core, const char *file)
 	cw_clear_exit(core, NULL, 2);
 }
 
-void		read_input(t_core *core, const int ac, const char **av)
+void		read_input(t_core *core, int ac, const char **av)
 {
 	int		fd;
 	int		i;
@@ -70,6 +70,8 @@ void		read_input(t_core *core, const int ac, const char **av)
 		cw_clear_exit(core, "Too many champions", 1);
 	while (++i < ac)
 	{
+//        if (!ft_strcmp(av[i], "-v"))
+            get_visual(&ac, core, &i);
 		if ((fd = open(av[i], O_RDONLY)) < 3)
 			fd_error_exit(core, av[i]);
 		if (!(node = ft_lstnew(NULL, 0))

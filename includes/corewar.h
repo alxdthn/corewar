@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:12:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/11 10:25:47 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/09 17:41:31 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define COREWAR_H
 # include "libft.h"
 # include "ft_printf.h"
+# include "ncurses.h"
 # include "op.h"
 
 # define MEM_ERROR "Error: mem alloc error!"
@@ -131,6 +132,26 @@ void			create_lab(t_as **all, char *str, char **f, t_label **lab);
 **	corewar part
 */
 
+#define USAGE "usage:"
+#define CRG ((t_carriage *)carriage->content)
+#define CRG_NEXT ((t_carriage *)carriage->next->content)
+#define OPERATION_CODE 0
+#define ARG_BYTE 1
+# define INDEX(X)		((X) - 1)
+# define MAX_PLAYER_ID			4
+
+# define COLOR_GRAY				8
+# define GRAY					9
+# define YELLOW					11
+# define LIVE_YELLOW			20
+# define YELLOW_CURSOR			16
+# define LIVE_CYAN				22
+
+# define HEIGHT					(MEM_SIZE / 64 + 4)
+# define WIDTH					(64 * 3 + 5)
+# define DEFAULT_INDENT			5
+# define BAR_LENGTH				50
+# define TAB_LEN				4
 # define PRINT_ARG_OFSET 20
 # define USAGE "usage:"
 # define REG_OFSET 1
@@ -178,11 +199,26 @@ typedef struct		s_carriage
 	t_op			*op_info;
 }					t_carriage;
 
+typedef struct 		visual
+{
+    WINDOW          *arena;
+}					t_visual;
+
+typedef struct		s_attr
+{
+    int32_t			index;
+    ssize_t			wait_cycles_store;
+    ssize_t			wait_cycles_live;
+//    t_player		*player_live;
+}					t_attr;
+
 typedef struct		s_core
 {
+    t_attr			map1[MEM_SIZE];
 	char			map[MEM_SIZE];
 	t_list			*input;
 	t_list			*carriages;
+	t_visual		*visual;
 	t_warrior		*warriors[MAX_PLAYERS + 1];
 	int				cycle_to_die;
 	int				cycle_to_die_delta;
@@ -192,8 +228,9 @@ typedef struct		s_core
 	unsigned long	cycle_after_start;
 }					t_core;
 
+void		        get_visual(int *ac, t_core *core, int *i);
 void				cw_clear_exit(t_core *core, const char *message, const int fd);
-void				read_input(t_core *core, const int ac, const char **av);
+void				read_input(t_core *core, int ac, const char **av);
 void				init_warriors(t_core *core);
 void				init_carriages(t_core *core);
 int					validate_operation(t_core *core, t_list *carriage);
@@ -230,5 +267,13 @@ void				print_warriros(t_core *core);
 void				print_map(t_core *core, int bar);
 void				print_input(t_list *tmp);
 void				print_carriage(t_list *carriage);
+
+
+
+/*
+visual
+*/
+
+
 
 #endif
