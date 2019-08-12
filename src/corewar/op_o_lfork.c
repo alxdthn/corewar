@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:41:17 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/11 21:19:42 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/11 22:05:23 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	cw_lfork(void *core, t_list *carriage)
 	init_args(&arg, carriage, 1);
 	((t_carriage *)node->content)->cycle = 0;
 	((t_carriage *)node->content)->cycle_for_op = 0;
-	((t_carriage *)node->content)->live = 0;
 	((t_carriage *)node->content)->op_info = NULL;
 	((t_carriage *)node->content)->op = 0;
 	((t_carriage *)node->content)->position = adr(CURRENT + arg.value);

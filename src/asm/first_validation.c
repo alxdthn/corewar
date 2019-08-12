@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 15:04:16 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/08 21:40:13 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/11 17:11:40 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ void	ft_write_it(t_as **all, int *y, char **f, int x)
 {
 	while (f[*y][x])
 	{
-		if ((*all)->read == 'N')
+		if ((*all)->read == 'N' && f[*y][x] != '"')
 		{
 			(*all)->name[(*all)->name_i] = f[*y][x];
 			(*all)->name_i++;
 		}
-		if ((*all)->read == 'C')
+		if ((*all)->read == 'C' && f[*y][x] != '"')
 		{
 			(*all)->comment[(*all)->com_i] = f[*y][x];
 			(*all)->com_i++;

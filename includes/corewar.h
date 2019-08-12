@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:12:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/11 21:03:13 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/11 22:09:42 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,7 @@ typedef struct		s_core
 	int				process_count;
 	int				dump;
 	int				out;
+	int				death;
 	int				arg_ofset;
 	unsigned long	cycle_after_start;
 }					t_core;

@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 20:01:46 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/11 19:06:14 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/11 22:21:17 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	cw_live(void *core, t_list *carriage)
 		i++;
 	}
 	CRG->live = TRUE;
-	CRG->cycle = ((t_core *)core)->cycle_after_start;
+	CRG->cycle = 0;
 	((t_core *)core)->live_count++;
 	if (((t_core *)core)->out == 4)
 		print_process(carriage, &arg, 1);

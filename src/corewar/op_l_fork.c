@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:38:47 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/11 21:17:38 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/11 22:20:25 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void	cw_fork(void *core, t_list *carriage)
 		cw_clear_exit((t_core *)core, MEM_ERROR, 2);
 	init_args(&arg, carriage, 1);
 	((t_carriage *)node->content)->cycle_for_op = 0;
-	((t_carriage *)node->content)->live = 0;
 	((t_carriage *)node->content)->op_info = NULL;
 	((t_carriage *)node->content)->op = 0;
+	((t_carriage *)node->content)->cycle = 0;
 	((t_carriage *)node->content)->position = adr(CURRENT + arg.value % IDX_MOD);
 	((t_carriage *)node->content)->nb = ++((t_core *)core)->process_count;
 	ft_lstadd(&((t_core *)core)->carriages, node);

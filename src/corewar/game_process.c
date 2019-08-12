@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 19:12:39 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/11 20:18:59 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/11 22:32:51 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ static void	game_check(t_core *core, int *cycle_to_die)
 	{
 		if (CRG->live == FALSE)
 		{
+			if (core->out == 8)
+				ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n", CRG->nb, CRG->cycle, *cycle_to_die);
 			if (core->process_count == 1)
 				print_winner(core);
 			ft_lstdelnode(&core->carriages, carriage);
@@ -126,6 +128,8 @@ static void carriage_process(t_core *core)
 					CRG->op_info = NULL;
 				}
 			}
+		if (CRG->live == FALSE)
+			CRG->cycle++;
 		}
 //		if (ofset == 1)
 //			cw_clear_exit(core, NULL, 1);

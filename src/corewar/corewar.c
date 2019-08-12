@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:19:35 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/11 18:28:38 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/11 22:15:19 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void		parce_flags(t_core *core, int ac, char **av)
 			if (ac > 3)
 				core->out = ft_atoi(av[2]);
 	}
-	if (core->out == 4 || core->dump >= 0)
+	if (core->out || core->dump >= 0)
 		core->arg_ofset = 2;
 }
 

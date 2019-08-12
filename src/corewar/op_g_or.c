@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:33:43 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/11 19:28:03 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/11 22:54:16 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	or_print_process(t_list *carriage, t_arg *args, int arg_count)
 	{
 		if (args[i].type == T_REG && i > 1)
 			ft_putchar('r');
-		ft_printf("%d", (i < 2) ? CRG->reg[args[i].value - 1] : args[i].value);
+		ft_printf("%d", args[i].value);;
 		if (i + 1 < arg_count)
 			ft_putchar(' ');
 		i++;
@@ -40,13 +40,11 @@ static void	or_print_process(t_list *carriage, t_arg *args, int arg_count)
 void		cw_or(void *core, t_list *carriage)
 {
 	t_arg	args[3];
-	int		a;
-	int		b;
 
 	init_args((t_arg *)args, carriage, 3);
-	a = get_operand(args[0], carriage, IDX_MOD);
-	b = get_operand(args[1], carriage, IDX_MOD);
-	CRG->reg[args[2].value - 1] = a | b;
+	args[0].value = get_operand(args[0], carriage, IDX_MOD);
+	args[1].value = get_operand(args[1], carriage, IDX_MOD);
+	CRG->reg[args[2].value - 1] = args[0].value | args[1].value;
 	if (CRG->reg[args[2].value - 1] == 0)
 		CRG->carry = TRUE;
 	else

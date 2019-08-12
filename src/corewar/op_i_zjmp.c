@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:35:06 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/11 19:31:18 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/11 21:38:47 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	zjmp_print_process(t_list *carriage, t_arg *args, int arg_count)
 		i++;
 	}
 	if (CRG->carry == 1)
-		ft_printf(" SUCSESS");
+		ft_printf(" OK");
 	else
 		ft_printf(" FAILED");
 	ft_putchar('\n');

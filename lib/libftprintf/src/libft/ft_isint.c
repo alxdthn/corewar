@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isint.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 17:16:30 by nalexand          #+#    #+#             */
-/*   Updated: 2019/07/16 16:27:29 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/11 17:20:21 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,9 @@ int			ft_isint(char *nb)
 	len = get_len(nb);
 	if (len > 10 || len == 0)
 		return (0);
+	if ((unsigned int)ft_atoi(nb) <= (unsigned int)4294967295
+	&& (unsigned int)ft_atoi(nb) > (unsigned int)2147483647)
+		return (1);
 	if (check_min_max(nb, len, sign))
 		return (0);
 	return (1);

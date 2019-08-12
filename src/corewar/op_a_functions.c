@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 19:06:33 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/11 21:26:18 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/11 21:30:00 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ int		get_value(unsigned char *mem, int pos, int size)
 	}
 	if (tmp_size == 2)
 		return ((short)res);
-	else if (tmp_size == 1)
-		return ((char)res);
 	return (res);
 }
 
