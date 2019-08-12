@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:30:00 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/11 19:03:24 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/12 20:27:28 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,13 @@
 **		в память по полученному адресу.
 */
 
-void	cw_st(void *core, t_list *carriage)
+static void	print_process(t_core *core, t_list *carriage, t_arg *args)
+{
+	print_process_header(core, carriage);
+	ft_printf("r%d %d\n", args[0].value, args[1].value);
+}
+
+void		cw_st(void *core, t_list *carriage)
 {
 	t_arg	args[2];
 
@@ -39,6 +45,6 @@ void	cw_st(void *core, t_list *carriage)
 	else
 		CRG->reg[args[1].value - 1] = CRG->reg[args[0].value - 1];
 	if (((t_core *)core)->out == 4)
-		print_process(carriage, (t_arg *)args, 2);
+		print_process((t_core *)core, carriage, (t_arg *)args);
 	CRG->position = adr(CURRENT + 2 + args[0].size + args[1].size);
 }

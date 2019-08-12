@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:26:36 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/11 19:03:20 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/12 20:25:43 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,13 @@
 **		Если было записано не нулевое значение, то устанавливаем carry в 0.
 */
 
-void	cw_ld(void *core, t_list *carriage)
+static void	print_process(t_core *core, t_list *carriage, t_arg *args)
+{
+	print_process_header(core, carriage);
+	ft_printf("%d r%d\n", args[0].value, args[1].value);
+}
+
+void		cw_ld(void *core, t_list *carriage)
 {
 	t_arg	args[2];
 
@@ -47,6 +53,6 @@ void	cw_ld(void *core, t_list *carriage)
 	else
 		CRG->carry = 0;
 	if (((t_core *)core)->out == 4)
-		print_process(carriage, (t_arg *)args, 2);
+		print_process((t_core *)core, carriage, (t_arg *)args);
 	CRG->position = adr(CURRENT + 2 + args[0].size + args[1].size);
 }

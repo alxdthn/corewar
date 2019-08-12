@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:35:06 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/11 21:38:47 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/12 19:14:00 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,26 +27,14 @@
 **	Если значение carry равно нулю, перемещение не выполняется.
 */
 
-static void	zjmp_print_process(t_list *carriage, t_arg *args, int arg_count)
+static void	zjmp_print_process(t_core *core, t_list *carriage, t_arg *args)
 {
-	int		i;
-
-	ft_printf("P%5d | %s ", CRG->nb, CRG->op_info->op_name);
-	i = 0;
-	while (i < arg_count)
-	{
-		if (args[i].type == T_REG)
-			ft_putchar('r');
-		ft_printf("%d", args[i].value);
-		if (i + 1 < arg_count)
-			ft_putchar(' ');
-		i++;
-	}
+	print_process_header(core, carriage);
+	ft_printf("%d", args->value);
 	if (CRG->carry == 1)
-		ft_printf(" OK");
+		ft_printf(" OK\n");
 	else
-		ft_printf(" FAILED");
-	ft_putchar('\n');
+		ft_printf(" FAILED\n");
 }
 
 void	cw_zjmp(void *core, t_list *carriage)
@@ -62,5 +50,5 @@ void	cw_zjmp(void *core, t_list *carriage)
 	else
 		CRG->position = adr(CURRENT + 1 + arg.size);
 	if (((t_core *)core)->out == 4)
-		zjmp_print_process(carriage, &arg, 1);
+		zjmp_print_process((t_core *)core, carriage, &arg);
 }

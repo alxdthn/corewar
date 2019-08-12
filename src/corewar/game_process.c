@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 19:12:39 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/11 22:32:51 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/12 20:07:35 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,11 @@ static void	introduce(t_core *core)
 	int		i;
 
 	i = 0;
+	if (core->out != 8)
+		ft_printf("Introducing contestants...\n");
 	while (core->warriors[i])
 	{
-		ft_printf("Introducing contestants...\n* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n",
+		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n",
 		core->warriors[i]->nb, core->warriors[i]->code_size,
 		core->warriors[i]->name, core->warriors[i]->comment);
 		i++;
@@ -84,21 +86,23 @@ static void	game_check(t_core *core, int *cycle_to_die)
 	{
 		core->cycle_to_die -= core->cycle_to_die_delta;
 		core->game_check_count = 0;
+		if (core->out == 2)
+			ft_printf("Cycle to die is now %d\n", core->cycle_to_die);
 	}
 	*cycle_to_die = core->cycle_to_die;
 	carriage = core->carriages;
 	while (carriage)
 	{
-		if (CRG->live == FALSE)
+		if (CRG->cycle_after_live >= core->cycle_to_die || core->cycle_to_die <= 0)
 		{
 			if (core->out == 8)
-				ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n", CRG->nb, CRG->cycle, *cycle_to_die);
-			if (core->process_count == 1)
+				ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n", CRG->nb, CRG->cycle_after_live, *cycle_to_die);
+			if (core->current_process_count == 1)
 				print_winner(core);
 			ft_lstdelnode(&core->carriages, carriage);
-			core->process_count--;
+			core->current_process_count--;
 		}
-		CRG->live = 0;
+		CRG->cycle_after_live = 0;
 		carriage = carriage->next;
 	}
 	core->live_count = 0;
@@ -112,6 +116,8 @@ static void carriage_process(t_core *core)
 	carriage = core->carriages;
 	while (carriage)
 	{
+		if (CRG->cycle_after_live)
+			CRG->cycle_after_live++;
 		if (!CRG->op)
 			validate_op_code(carriage);
 		if (CRG->op_info)
@@ -128,13 +134,17 @@ static void carriage_process(t_core *core)
 					CRG->op_info = NULL;
 				}
 			}
-		if (CRG->live == FALSE)
-			CRG->cycle++;
 		}
 //		if (ofset == 1)
 //			cw_clear_exit(core, NULL, 1);
 		carriage = carriage->next;
 	}
+}
+
+void	print_dump(t_core *core)
+{
+	print_map(core, 1);
+	cw_clear_exit(core, NULL, 1);
 }
 
 void 	start_game(t_core *core)
@@ -148,16 +158,14 @@ void 	start_game(t_core *core)
 	introduce(core);
 	while (core->carriages)
 	{
-		if (core->cycle_after_start == 1104)
-			test = 0;
 		if (core->cycle_after_start == core->dump)
-		{
-			print_map(core, 1);
-			cw_clear_exit(core, NULL, 1);
-		}
+			print_dump(core);
 		carriage_process(core);
-		if (--cycle_to_die <= 0)
+		if (cycle_to_die <= 0)
 			game_check(core, &cycle_to_die);
 		core->cycle_after_start++;
+		cycle_to_die--;
+		if (core->out == 2)
+			ft_printf("It is now cycle %d\n", core->cycle_after_start);
 	}
 }

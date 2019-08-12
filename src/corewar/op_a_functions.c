@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 19:06:33 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/11 21:30:00 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/12 19:06:18 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,24 +84,6 @@ int		adr(int current_adr)
 	else if (current_adr < 0)
 		return (MEM_SIZE + current_adr % MEM_SIZE);
 	return (current_adr);
-}
-
-void	print_process(t_list *carriage, t_arg *args, int arg_count)
-{
-	int		i;
-
-	ft_printf("P%5d | %s ", CRG->nb, CRG->op_info->op_name);
-	i = 0;
-	while (i < arg_count)
-	{
-		if (args[i].type == T_REG)
-			ft_putchar('r');
-		ft_printf("%d", args[i].value);
-		if (i + 1 < arg_count)
-			ft_putchar(' ');
-		i++;
-	}
-	ft_putchar('\n');
 }
 
 void	init_args(t_arg *args, t_list *carriage, int count)

@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:32:01 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/11 19:06:00 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/12 20:28:26 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@
 **	Если результат был не нулевой, то сделать равным 0.
 */
 
+static void	print_process(t_core *core, t_list *carriage, t_arg *args)
+{
+	print_process_header(core, carriage);
+	ft_printf("%d %d r%d\n", args[0].value, args[1].value, args[2].value);
+}
+
 void	cw_sub(void *core, t_list *carriage)
 {
 	t_arg	args[3];
@@ -36,6 +42,6 @@ void	cw_sub(void *core, t_list *carriage)
 	else
 		CRG->carry = FALSE;
 	if (((t_core *)core)->out == 4)
-		print_process(carriage, (t_arg *)args, 3);
+		print_process((t_core *)core, carriage, (t_arg *)args);
 	CRG->position = adr(CURRENT + 2 + args[0].size + args[1].size + args[2].size);
 }

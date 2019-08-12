@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 18:45:18 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/11 18:57:25 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/12 20:13:36 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,13 +95,24 @@ void	print_carriage(t_list *carriage)
 	int		i;
 
 	ft_printf("CARRIAGE INFO:\n");
-	ft_printf("number: %d\nposition: %d\ncycle_for_op: %d\ncycle: %d\n"\
+	ft_printf("number: %d\nposition: %d\ncycle_for_op: %d\n"\
 	"carry: %d\noperation %d\nregisters:\n",
-	CRG->nb, CRG->position, CRG->cycle_for_op, CRG->cycle,
+	CRG->nb, CRG->position, CRG->cycle_for_op,
 	CRG->carry, CRG->op_info->op_name);
 	i = 0;
 	while (i < REG_NUMBER)
 		ft_printf("%.*x ", REG_SIZE, CRG->reg[i++]);
 	ft_putchar('\n');
 	ft_putstr("--------------------------------\n");
+}
+
+int		print_process_header(t_core *core, t_list *carriage)
+{
+	int		ret;
+
+	ret = 0;
+//	ret += ft_printf("%-5d ", core->cycle_after_start);
+	ret += ft_printf("P%5d |", CRG->nb);
+	ft_printf(" %s ", CRG->op_info->op_name);
+	return (ret);
 }

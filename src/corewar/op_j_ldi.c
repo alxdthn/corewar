@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:35:52 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/11 21:59:24 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/12 20:30:04 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,23 +37,18 @@
 **		нужно считать 4 байта по адресу — текущая позиция + <ПЕРВЫЙ_АРГУМЕНТ> % IDX_MOD.
 */
 
-static void	ldi_print_process(t_list *carriage, t_arg *args)
+static void	ldi_print_process(t_core *core, t_list *carriage, t_arg *args)
 {
-	int		i;
+	int		ofset;
 
-	ft_printf("P%5d | %s ", CRG->nb, CRG->op_info->op_name);
-	i = 0;
-	while (i < 3)
-	{
-		if (args[i].type == T_REG && i > 1)
-			ft_putchar('r');
-		ft_printf("%d", args[i].value);
-		if (i + 1 < 3)
-			ft_putchar(' ');
-		i++;
-	}
-	ft_putchar('\n');
-	ft_printf("       | -> load from %d + %d = %d (with pc and mod %d)\n", args[0].value, args[1].value, args[0].value + args[1].value, CURRENT + args[0].value + args[1].value);
+	ofset = print_process_header(core, carriage);
+	ft_printf("%d %d r%d\n", args[0].value, args[1].value, args[2].value);
+	while (--ofset)
+		ft_putchar(' ');
+	ft_printf("| -> load from %d + %d = %d (with pc and mod %d)\n",
+	args[0].value, args[1].value,
+	args[0].value + args[1].value,
+	CURRENT + args[0].value + args[1].value);
 }
 
 void		cw_ldi(void *core, t_list *carriage)
@@ -65,6 +60,6 @@ void		cw_ldi(void *core, t_list *carriage)
 	args[1].value = get_operand(args[1], carriage, IDX_MOD);
 	CRG->reg[args[2].value - 1] = get_value_from_adr(carriage, args[0].value + args[1].value, IDX_MOD);
 	if (((t_core *)core)->out == 4)
-		ldi_print_process(carriage, (t_arg *)args);
+		ldi_print_process((t_core *)core, carriage, (t_arg *)args);
 	CRG->position = adr(CURRENT + 2 + args[0].size + args[1].size + args[2].size);
 }
