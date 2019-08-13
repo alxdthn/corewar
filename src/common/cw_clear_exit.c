@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 18:01:23 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/07 18:50:09 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 17:04:59 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	clear_warriors(t_core *core)
 void		cw_clear_exit(t_core *core, const char *message, const int fd)
 {
 	ft_lstdel(&core->input, ft_lstclear);
-	ft_lstdel(&core->carriages, ft_lstclear);
+	ft_lstdel(&core->pcs, ft_lstclear);
 	clear_warriors(core);
 	if (message)
 		ft_putendl_fd(message, fd);

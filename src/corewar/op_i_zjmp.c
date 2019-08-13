@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:35:06 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/12 23:00:24 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 17:04:50 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,29 +27,29 @@
 **	Если значение carry равно нулю, перемещение не выполняется.
 */
 
-static void	zjmp_print_process(t_core *core, t_list *carriage, t_arg *args)
+static void	zjmp_print_process(t_core *core, t_list *pc, t_arg *args)
 {
-	print_process_header(core, carriage);
+	print_process_header(core, pc);
 	ft_printf("%d", args->value);
-	if (CRG->carry == 1)
+	if (PC->carry == 1)
 		ft_printf(" OK\n");
 	else
 		ft_printf(" FAILED\n");
 }
 
-void	cw_zjmp(void *core, t_list *carriage)
+void	cw_zjmp(void *core, t_list *pc)
 {
 	t_arg	arg;
 	int		new_pos;
 
-	init_args(&arg, carriage, 1);
-	if (CRG->carry)
+	init_args(&arg, pc, 1);
+	if (PC->carry)
 		new_pos = adr(CURRENT + arg.value % IDX_MOD);
 	else
 		new_pos = adr(CURRENT + 1 + arg.size);
-	if (((t_core *)core)->out == 4)
-		zjmp_print_process((t_core *)core, carriage, &arg);
-	else if (((t_core *)core)->out == 16 && !CRG->carry)
-		print_mov(carriage, new_pos);
-	CRG->position = new_pos;
+	if (((t_core *)core)->out == 4 || ((t_core *)core)->out == 5)
+		zjmp_print_process((t_core *)core, pc, &arg);
+	else if (((t_core *)core)->out == 16 && !PC->carry)
+		print_mov(pc, new_pos);
+	PC->position = new_pos;
 }

@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:12:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 00:10:50 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 18:19:53 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,15 +136,15 @@ void			create_lab(t_as **all, char *str, char **f, t_label **lab);
 # define REG_OFSET 1
 # define IND_OFSET 2
 # define DIR_OFSET op->t_dir_size
-# define CRG ((t_carriage *)carriage->content)
-# define CRG_NEXT ((t_carriage *)carriage->next->content)
+# define PC ((t_pc *)pc->content)
+# define PC_NEXT ((t_pc *)pc->next->content)
 # define OPERATION_CODE 0
-# define ARG_BYTE CRG->position + 1
-# define PROCESS CRG->op_info->process
-# define BYTE(pos) (CRG->map[adr(pos)])
-# define CURRENT CRG->position
-# define ARG_TYPE CRG->op_info->arg_type
-# define OPER_ARGS CRG->op_info->args
+# define ARG_BYTE PC->position + 1
+# define PROCESS PC->op_info->process
+# define BYTE(pos) (PC->map[adr(pos)])
+# define CURRENT PC->position
+# define ARG_TYPE PC->op_info->arg_type
+# define OPER_ARGS PC->op_info->args
 # define GET_VAL(pos, size) (ft_reverse_bytes(*((size *)(pos)), sizeof(size)))
 
 typedef struct		s_arg
@@ -165,7 +165,7 @@ typedef struct		s_warrior
 	char			live;
 }					t_warrior;
 
-typedef struct		s_carriage
+typedef struct		s_pc
 {
 	t_bool			carry;
 	int				reg[REG_NUMBER];
@@ -177,13 +177,13 @@ typedef struct		s_carriage
 	t_warrior		*owner;
 	t_op			*op_info;
 	char			op;
-}					t_carriage;
+}					t_pc;
 
 typedef struct		s_core
 {
 	unsigned char	map[MEM_SIZE];
 	t_list			*input;
-	t_list			*carriages;
+	t_list			*pcs;
 	t_warrior		*warriors[MAX_PLAYERS + 1];
 	int				cycle_to_die;
 	int				live_count;
@@ -193,6 +193,7 @@ typedef struct		s_core
 	int				global_process_count;
 	int				dump;
 	int				out;
+	int				print_pc;
 	int				death;
 	int				arg_ofset;
 	unsigned long	cycle_after_start;
@@ -201,42 +202,43 @@ typedef struct		s_core
 void				cw_clear_exit(t_core *core, const char *message, const int fd);
 void				read_input(t_core *core, const int ac, const char **av);
 void				init_warriors(t_core *core);
-void				init_carriages(t_core *core);
-int					validate_operation(t_core *core, t_list *carriage);
+void				init_pcs(t_core *core);
+int					validate_operation(t_list *pc);
 void 				start_game(t_core *core);
+void				game_check(t_core *core, int *cycle_to_die);
 
-void				init_args(t_arg *args, t_list *carriage, int count);
-int					get_operand(t_arg arg, t_list *carriage, int mod);
+void				init_args(t_arg *args, t_list *pc, int count);
+int					get_operand(t_arg arg, t_list *pc, int mod);
 
 void				set_value(unsigned char *mem, int pos, int size, int value);
-void				set_value_to_adr(t_list *carriage, int arg_value, int mod, int value);
+void				set_value_to_adr(t_list *pc, int arg_value, int mod, int value);
 
 int					get_value(unsigned char *mem, int pos, int size);
-int					get_value_from_adr(t_list *carriage, int arg_value, int mod);
+int					get_value_from_adr(t_list *pc, int arg_value, int mod);
 
-void				cw_live(void *core, t_list *carriage);
-void				cw_ld(void *core, t_list *carriage);
-void				cw_st(void *core, t_list *carriage);
-void				cw_add(void *core, t_list *carriage);
-void				cw_sub(void *core, t_list *carriage);
-void				cw_and(void *core, t_list *carriage);
-void				cw_or(void *core, t_list *carriage);
-void				cw_xor(void *core, t_list *carriage);
-void				cw_zjmp(void *core, t_list *carriage);
-void				cw_ldi(void *core, t_list *carriage);
-void				cw_sti(void *core, t_list *carriage);
-void				cw_fork(void *core, t_list *carriage);
-void				cw_lld(void *core, t_list *carriage);
-void				cw_lldi(void *core, t_list *carriage);
-void				cw_lfork(void *core, t_list *carriage);
-void				cw_aff(void *core, t_list *carriage);
+void				cw_live(void *core, t_list *pc);
+void				cw_ld(void *core, t_list *pc);
+void				cw_st(void *core, t_list *pc);
+void				cw_add(void *core, t_list *pc);
+void				cw_sub(void *core, t_list *pc);
+void				cw_and(void *core, t_list *pc);
+void				cw_or(void *core, t_list *pc);
+void				cw_xor(void *core, t_list *pc);
+void				cw_zjmp(void *core, t_list *pc);
+void				cw_ldi(void *core, t_list *pc);
+void				cw_sti(void *core, t_list *pc);
+void				cw_fork(void *core, t_list *pc);
+void				cw_lld(void *core, t_list *pc);
+void				cw_lldi(void *core, t_list *pc);
+void				cw_lfork(void *core, t_list *pc);
+void				cw_aff(void *core, t_list *pc);
 
-void				print_info_header(t_list *carriage);
+void				print_info_header(t_list *pc);
 void				print_warriros(t_core *core);
 void				print_map(t_core *core, int bar);
 void				print_input(t_list *tmp);
-void				print_carriages(t_list *carriage, int count);
-void				print_mov(t_list *carriage, int new);
-int					print_process_header(t_core *core, t_list *carriage);
+void				print_pcs(t_core *core, t_list *pc, int count);
+void				print_mov(t_list *pc, int new);
+int					print_process_header(t_core *core, t_list *pc);
 
 #endif

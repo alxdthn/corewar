@@ -6,46 +6,11 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 19:12:39 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 00:24:05 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 18:25:43 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-void	ft_lstdelnode(t_list **lst, t_list *node)
-{
-	t_list	*tmp;
-
-	tmp = *lst;
-	if (*lst == node)
-	{
-		*lst = node->next;
-		free(node->content);
-		free(node);
-		return ;
-	}
-	while (tmp)
-	{
-		if (tmp->next == node)
-		{
-			tmp->next = node->next;
-			free(node->content);
-			free(node);
-			return ;
-		}
-		tmp = tmp->next;
-	}
-}
-
-static void	print_winner(t_core *core)
-{
-	t_list	*carriage;
-
-	carriage = core->carriages;
-	ft_printf("Contestant %d, \"%s\", has won !\n",
-	CRG->owner->nb, CRG->owner->name);
-	cw_clear_exit(core, NULL, 1);
-}
 
 static void	introduce(t_core *core)
 {
@@ -62,79 +27,71 @@ static void	introduce(t_core *core)
 	}
 }
 
-void		validate_op_code(t_list *carriage)
+void		validate_op_code(t_core *core, t_list *pc)
 {
-	CRG->op = BYTE(CURRENT);
-	if (CRG->op > 0 && CRG->op < 17)
+	int		new_pos;
+	
+	PC->op = BYTE(CURRENT);
+	if (PC->op > 0 && PC->op < 17)
 	{
-		CRG->op_info = &op_tab[CRG->op - 1];
-		CRG->cycle_for_op = CRG->op_info->cycle;
+		PC->op_info = &op_tab[PC->op - 1];
+		PC->cycle_for_op = PC->op_info->cycle;
 	}
 	else
-		CRG->position = adr(CURRENT + 1);
+	{
+		new_pos = adr(CURRENT + 1);
+		PC->op = 0;
+		if (((t_core *)core)->out == 16)
+			print_mov(pc, new_pos);
+		PC->position = new_pos;
+	}
 }
 
-static void	game_check(t_core *core, int *cycle_to_die)
+static void	solve_operation(t_core *core, t_list *pc)
 {
-	t_list	*carriage;
-	t_list	*tmp;
-
-	carriage = core->carriages;
-	while (carriage)
-	{
-		if (CRG->cycle >= core->cycle_to_die || core->cycle_to_die <= 0)
-		{
-			//print_carriages(carriage, -1);
-			//cw_clear_exit(core, NULL, 2);
-			if (core->current_process_count == 1)
-				print_winner(core);
-			if (core->out == 8)
-				ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n", CRG->nb, CRG->cycle, core->cycle_to_die);
-			ft_lstdelnode(&core->carriages, carriage);
-			core->current_process_count--;
-		}
-		else
-			carriage = carriage->next;
-	}
-	core->game_check_count++;
-	if (core->live_count >= NBR_LIVE || core->game_check_count >= MAX_CHECKS)
-	{
-		core->cycle_to_die -= CYCLE_DELTA;
-		core->game_check_count = 0;
-		if (core->out == 2)
-			ft_printf("Cycle to die is now %d\n", core->cycle_to_die);
-	}
-	*cycle_to_die = core->cycle_to_die;
-	core->live_count = 0;
-}
-
-static void carriage_process(t_core *core)
-{
-	t_list	*carriage;
+	int		new_pos;
 	int		ofset;
 
-	carriage = core->carriages;
-	while (carriage)
+	PC->cycle_for_op--;
+	if (PC->cycle_for_op == 0)
 	{
-		CRG->cycle++;
-		if (!CRG->op)
-			validate_op_code(carriage);
-		if (CRG->op_info)
+		if ((ofset = validate_operation(pc)))
 		{
-			CRG->cycle_for_op--;
-			if (CRG->cycle_for_op == 0)
-			{
-				if ((ofset = validate_operation(core, carriage)))
-					CRG->position = adr(CURRENT + ofset);
-				else
-				{
-					CRG->op_info->process(core, carriage);
-					CRG->op = 0;
-					CRG->op_info = NULL;
-				}
-			}
+			new_pos = adr(CURRENT + ofset);
+			PC->op = 0;
+			PC->op_info = NULL;
+			if (((t_core *)core)->out == 16)
+				print_mov(pc, new_pos);
+			PC->position = new_pos;
 		}
-		carriage = carriage->next;
+		else
+		{
+			PC->op_info->process(core, pc);
+			PC->op = 0;
+			PC->op_info = NULL;
+		}
+	}
+}
+
+static void	pc_process(t_core *core)
+{
+	t_list	*pc;
+
+	int s;
+
+	pc = core->pcs;
+	while (pc)
+	{
+		if (core->cycle_after_start == 2723 && PC->nb == 5)
+			s = 0;
+		PC->cycle++;
+		if (!PC->op)
+			validate_op_code(core, pc);
+		if (PC->op_info)
+			solve_operation(core, pc);
+		if (PC->nb == core->print_pc)
+			print_pcs(core, pc, 1);
+		pc = pc->next;
 	}
 }
 
@@ -152,13 +109,15 @@ void 	start_game(t_core *core)
 	core->cycle_to_die = CYCLE_TO_DIE;
 	cycle_to_die = core->cycle_to_die;
 	introduce(core);
-	while (core->carriages)
+	if (core->print_pc)
+		ft_printf(" g_cycle | number | position | live_cycle | op_cycle | carry | operation | registers\n");
+	while (core->pcs)
 	{
 		if (core->cycle_after_start == core->dump)
 			print_dump(core);
 		if (cycle_to_die <= 0)
 			game_check(core, &cycle_to_die);
-		carriage_process(core);
+		pc_process(core);
 		core->cycle_after_start++;
 		cycle_to_die--;
 		if (core->out == 2)

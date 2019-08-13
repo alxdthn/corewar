@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 01:55:55 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/07 16:27:48 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 15:12:12 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,6 @@ size_t				ft_power(int n, int p);
 int					ft_check_file_format(char *file, char *format);
 int					ft_strindex(const char *str, int c);
 char				*ft_itoa_base(uintmax_t value, long int base);
+void				ft_lstdelnode(t_list **lst, t_list *node);
 
 #endif

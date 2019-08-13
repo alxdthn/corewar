@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/11 16:58:18 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/07 16:28:12 by nalexand         ###   ########.fr        #
+#    Updated: 2019/08/13 15:15:48 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -110,7 +110,8 @@ LFT_SRC =	ft_arraydel.c \
 			ft_check_file_format.c \
 			ft_lstcount.c \
 			ft_strindex.c \
-			ft_itoa_base.c
+			ft_itoa_base.c \
+			ft_lstdelnode.c
 
 GNL_SRC =	get_next_line.c \
 			clear_fd_node.c
