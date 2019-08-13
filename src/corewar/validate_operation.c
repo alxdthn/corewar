@@ -29,7 +29,7 @@ int		validate_operation(t_list *pc)
 		arg_type = get_arg_type(argbyte);
 		if (!arg_type || (arg_type & OPER_ARGS[i]) != arg_type)
 			return (size);
-		if (arg_type == T_REG && (BYTE(CURRENT + byte_ofset) < 0
+		if (arg_type == T_REG && (BYTE(CURRENT + byte_ofset) <= 0
 		|| BYTE(CURRENT + byte_ofset) > REG_NUMBER))
 			return (size);
 		i++;

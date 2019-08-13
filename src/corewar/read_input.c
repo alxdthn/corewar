@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 18:45:02 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/11 21:52:57 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 20:58:12 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void		read_input(t_core *core, const int ac, const char **av)
 	i = core->arg_ofset;
 	if (ac < 2)
 		cw_clear_exit(core, USAGE, 1);
-	else if (ac - 1 > MAX_PLAYERS)
+	else if (ac - 1 > (MAX_PLAYERS + core->arg_ofset))
 		cw_clear_exit(core, "Too many champions", 1);
 	while (++i < ac)
 	{

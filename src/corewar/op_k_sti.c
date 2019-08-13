@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:37:16 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 18:08:01 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 21:08:13 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	sti_print_process(t_core *core, t_list *pc, t_arg *args)
 	ft_printf("| -> store to %d + %d = %d (with pc and mod %d)\n",
 	args[1].value, args[2].value,
 	args[1].value + args[2].value,
-	CURRENT + args[1].value + args[2].value);
+	CURRENT + (args[1].value + args[2].value) % IDX_MOD);
 }
 
 void		cw_sti(void *core, t_list *pc)

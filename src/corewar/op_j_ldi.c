@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:35:52 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 18:08:08 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 21:08:39 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	ldi_print_process(t_core *core, t_list *pc, t_arg *args)
 	ft_printf("| -> load from %d + %d = %d (with pc and mod %d)\n",
 	args[0].value, args[1].value,
 	args[0].value + args[1].value,
-	CURRENT + args[0].value + args[1].value);
+	CURRENT + (args[0].value + args[1].value) % IDX_MOD);
 }
 
 void		cw_ldi(void *core, t_list *pc)
