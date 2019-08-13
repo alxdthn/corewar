@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:39:31 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/11 10:25:03 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/12 22:47:54 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,26 +25,28 @@
 **	Не применяя усечение по модулю.
 */
 
-static void	debug_info(t_list *carriage, t_arg *args)
+static void	lld_print_process(t_core *core, t_list *carriage, t_arg *args, int arg_count)
 {
-	int		ofset;
-
-	ft_printf("%10s > lld:   ", CRG->owner->name);
-	ofset = print_args(args, 1);
-	while (--ofset)
-		ft_putchar(' ');
-	ft_printf("| no ifno\n");
+	print_process_header(core, carriage);
+	ft_printf("%d r%d\n", args[0].value, args[1].value);
 }
 
-void	cw_lld(void *core, t_list *carriage)
+void		cw_lld(void *core, t_list *carriage)
 {
 	t_arg	args[2];
+	int		new_pos;
 
 	init_args((t_arg *)args, carriage, 2);
-	CRG->reg[args[1].value - 1] = get_operand(args[0], carriage, 0);
-	CRG->position = adr(CURRENT + 2 + args[0].size + args[1].size);
-//################## DEBUG: ####################
-	if (DEBUG)
-		debug_info(carriage, (t_arg *)args);
-//##############################################
+	args[0].value = get_operand(args[0], carriage, 0);
+	CRG->reg[args[1].value - 1] = args[0].value;
+	if (CRG->reg[args[1].value - 1] == 0)
+		CRG->carry = TRUE;
+	else
+		CRG->carry = FALSE;
+	new_pos = adr(CURRENT + 2 + args[0].size + args[1].size);
+	if (((t_core *)core)->out == 4)
+		lld_print_process((t_core *)core, carriage, (t_arg *)args, 2);
+	else if (((t_core *)core)->out == 16)
+		print_mov(carriage, new_pos);
+	CRG->position = new_pos;
 }

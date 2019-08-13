@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 20:01:46 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/11 10:23:25 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/12 22:39:45 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,36 +21,39 @@
 **	Например, если значение аргумента равно -2, значит игрок с номером 2 жив.
 */
 
-static void	debug_info(t_list *carriage, t_arg *arg)
+static void	print_process(t_core *core, t_list *carriage, t_arg *arg)
 {
-	int		ofset;
-
-	ft_printf("%10s > live: ", CRG->owner->name);
-	ofset = print_args(arg, 1);
-	while (--ofset)
-		ft_putchar(' ');
-	if (CRG->live)
-		ft_printf("| player №%d %s "GRE"live"EOC"\n", CRG->owner->nb, CRG->owner->name);
-	else
-		ft_printf("| player №%d %s "RED"not live"EOC"\n", CRG->owner->nb, CRG->owner->name);
+	print_process_header(core, carriage);
+	ft_printf("%d", arg->value);
+	ft_putchar('\n');
 }
 
-void	cw_live(void *core, t_list *carriage)
+void		cw_live(void *core, t_list *carriage)
 {
-	t_arg	arg;
+	t_warrior	**wars;
+	t_arg		arg;
+	int			i;
+	int			new_pos;
 
 	init_args(&arg, carriage, 1);
-	if (arg.value == -CRG->owner->nb)
+	wars = ((t_core *)core)->warriors;
+	i = 0;
+	while (wars[i])
 	{
-		CRG->live = TRUE;
-		CRG->cycle = ((t_core *)core)->cycle_after_start;
-		((t_core *)core)->live_count++;
+		if (arg.value == -wars[i]->nb)
+		{
+			wars[i]->live = TRUE;
+			if (((t_core *)core)->out == 1)
+				ft_printf("Player %d (%s) is said to be alive\n", wars[i]->nb, wars[i]->name);
+		}
+		i++;
 	}
-
-//################## DEBUG: ####################
-	if (DEBUG)
-		debug_info(carriage, &arg);
-//##############################################
-
-	CRG->position = adr(CURRENT + 1 + arg.size);
+	new_pos = adr(CURRENT + 1 + arg.size);
+	if (((t_core *)core)->out == 4)
+		print_process((t_core *)core, carriage, &arg);
+	else if (((t_core *)core)->out == 16)
+		print_mov(carriage, new_pos);
+	CRG->cycle = 0;
+	((t_core *)core)->live_count++;
+	CRG->position = new_pos;
 }

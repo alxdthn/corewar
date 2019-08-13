@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 19:06:33 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/11 09:51:29 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/12 19:06:18 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		get_operand(t_arg arg, t_list *carriage, int mod)
 		return (get_value_from_adr(carriage, arg.value, mod));
 }
 
-void	set_value(char *mem, int pos, int size, int value)
+void	set_value(unsigned char *mem, int pos, int size, int value)
 {
 	int		i;
 
@@ -39,19 +39,21 @@ void	set_value(char *mem, int pos, int size, int value)
 void	set_value_to_adr(t_list *carriage, int arg_value, int mod, int value)
 {
 	if (mod)
-		set_value(CRG->map, adr((CURRENT + arg_value) % mod), sizeof(int), value);
+		set_value(CRG->map, adr(CURRENT + arg_value % mod), sizeof(int), value);
 	else
 		set_value(CRG->map, adr(CURRENT + arg_value), sizeof(int), value);
 }
 
 
-int		get_value(char *mem, int pos, int size)
+int		get_value(unsigned char *mem, int pos, int size)
 {
 	int		i;
 	int		res;
+	int		tmp_size;
 
 	i = pos;
 	res = 0;
+	tmp_size = size;
 	while (size--)
 	{
 		if (i >= MEM_SIZE)
@@ -59,6 +61,8 @@ int		get_value(char *mem, int pos, int size)
 		res <<= 8;
 		res |= mem[i++];
 	}
+	if (tmp_size == 2)
+		return ((short)res);
 	return (res);
 }
 
@@ -80,27 +84,6 @@ int		adr(int current_adr)
 	else if (current_adr < 0)
 		return (MEM_SIZE + current_adr % MEM_SIZE);
 	return (current_adr);
-}
-
-int		print_args(t_arg *args, int count)
-{
-	int		i;
-	int		ofset;
-	char	type;
-
-	i = 0;
-	ofset = 0;
-	while (i < count)
-	{
-		if (args[i].type == T_DIR)
-			ofset += ft_printf("%%");
-		else if (args[i].type == T_REG)
-			ofset += ft_printf("r");
-		ofset += ft_printf("%d(%d) ", args[i].value, args[i].size);
-		i++;
-	}
-	ofset = PRINT_ARG_OFSET - ofset;
-	return (ofset);
 }
 
 void	init_args(t_arg *args, t_list *carriage, int count)

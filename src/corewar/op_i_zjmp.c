@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:35:06 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/11 10:24:43 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/12 23:00:24 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,34 +27,29 @@
 **	Если значение carry равно нулю, перемещение не выполняется.
 */
 
-static void	debug_info(t_list *carriage, t_arg *args, int old_pos)
+static void	zjmp_print_process(t_core *core, t_list *carriage, t_arg *args)
 {
-	int		ofset;
-
-	ft_printf("%10s > zjmp: ", CRG->owner->name);
-	ofset = print_args(args, 1);
-	while (--ofset)
-		ft_putchar(' ');
-	if (CRG->carry)
-		ft_printf("| get jump: %d to %d\n", old_pos, adr((CURRENT + args[0].value) % IDX_MOD));
+	print_process_header(core, carriage);
+	ft_printf("%d", args->value);
+	if (CRG->carry == 1)
+		ft_printf(" OK\n");
 	else
-		ft_printf("| no carry, current pos: %d\n", old_pos);
+		ft_printf(" FAILED\n");
 }
 
 void	cw_zjmp(void *core, t_list *carriage)
 {
-	t_arg	args[1];
-	int		old_pos;
+	t_arg	arg;
+	int		new_pos;
 
-	old_pos = CRG->position;
-
-	init_args((t_arg *)args, carriage, 1);
+	init_args(&arg, carriage, 1);
 	if (CRG->carry)
-		CRG->position = adr((CURRENT + args[0].value) % IDX_MOD);
-
-//################## DEBUG: ####################
-	if (DEBUG)
-		debug_info(carriage, (t_arg *)args, old_pos);
-//##############################################
-
+		new_pos = adr(CURRENT + arg.value % IDX_MOD);
+	else
+		new_pos = adr(CURRENT + 1 + arg.size);
+	if (((t_core *)core)->out == 4)
+		zjmp_print_process((t_core *)core, carriage, &arg);
+	else if (((t_core *)core)->out == 16 && !CRG->carry)
+		print_mov(carriage, new_pos);
+	CRG->position = new_pos;
 }
