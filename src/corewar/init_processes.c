@@ -20,12 +20,12 @@ void	init_pcs(t_core *core)
 
 	i = 0;
 	ft_bzero(&new, sizeof(t_pc));
-	while (core->warriors[i])
+	while (core->players[i])
 	{
 		new.nb = i + 1;
-		new.reg[0] = -core->warriors[i]->nb;
-		new.owner = core->warriors[i];
-		new.position = core->warriors[i++]->start_position;
+		new.reg[0] = -core->players[i]->nb;
+		new.owner = core->players[i];
+		new.position = core->players[i++]->start_position;
 		new.map = core->map;
 		core->current_process_count++;
 		core->global_process_count++;

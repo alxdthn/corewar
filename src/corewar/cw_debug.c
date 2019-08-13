@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 18:45:18 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 18:32:13 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 20:07:33 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,14 @@ void	print_warriros(t_core *core)
 
 	i = 0;
 
-	while (core->warriors[i])
+	while (core->players[i])
 	{
-		ft_printf("number: %d\n", core->warriors[i]->nb);
-		ft_printf("name: %s\n", core->warriors[i]->name);
-		ft_printf("comment: %s\n", core->warriors[i]->comment);
-		ft_printf("start_position: %d\n", core->warriors[i]->start_position);
-		ft_printf("code_size: %d\n", core->warriors[i]->code_size);
-		print_memory(core->warriors[i]->exec_code, core->warriors[i]->code_size);
+		ft_printf("number: %d\n", core->players[i]->nb);
+		ft_printf("name: %s\n", core->players[i]->name);
+		ft_printf("comment: %s\n", core->players[i]->comment);
+		ft_printf("start_position: %d\n", core->players[i]->start_position);
+		ft_printf("code_size: %d\n", core->players[i]->code_size);
+		print_memory(core->players[i]->exec_code, core->players[i]->code_size);
 		ft_printf("--------------------------------------\n");
 		++i;
 	}

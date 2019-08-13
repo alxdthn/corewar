@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 18:01:23 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 17:04:59 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 20:07:33 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,20 @@
 **	Функция выхода из программы.
 */
 
-static void	clear_warriors(t_core *core)
+static void	clear_players(t_core *core)
 {
 	int		i;
 
 	i = MAX_PLAYERS - 1;
 	while (i >= 0)
-		free(core->warriors[--i]);
+		free(core->players[--i]);
 }
 
 void		cw_clear_exit(t_core *core, const char *message, const int fd)
 {
 	ft_lstdel(&core->input, ft_lstclear);
 	ft_lstdel(&core->pcs, ft_lstclear);
-	clear_warriors(core);
+	clear_players(core);
 	if (message)
 		ft_putendl_fd(message, fd);
 	if (fd == 2)

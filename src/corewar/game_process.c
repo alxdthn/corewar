@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 19:12:39 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 18:25:43 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 20:07:33 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ static void	introduce(t_core *core)
 
 	i = 0;
 	ft_printf("Introducing contestants...\n");
-	while (core->warriors[i])
+	while (core->players[i])
 	{
 		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n",
-		core->warriors[i]->nb, core->warriors[i]->code_size,
-		core->warriors[i]->name, core->warriors[i]->comment);
+		core->players[i]->nb, core->players[i]->code_size,
+		core->players[i]->name, core->players[i]->comment);
 		i++;
 	}
 }
@@ -82,7 +82,7 @@ static void	pc_process(t_core *core)
 	pc = core->pcs;
 	while (pc)
 	{
-		if (core->cycle_after_start == 2723 && PC->nb == 5)
+		if (core->cycle_after_start == 6406 && PC->nb == 26)
 			s = 0;
 		PC->cycle++;
 		if (!PC->op)

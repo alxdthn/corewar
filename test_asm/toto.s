@@ -1,5 +1,5 @@
 #
-# Warrior qui a gagne
+# player qui a gagne
 # l'annee derniere
 #     VOALA
 #

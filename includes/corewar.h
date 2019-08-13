@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:12:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 18:19:53 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 20:09:53 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ typedef struct		s_arg
 	int				value;
 }					t_arg;
 
-typedef struct		s_warrior
+typedef struct		s_player
 {
 	int				code_size;
 	int				nb;
@@ -162,8 +162,7 @@ typedef struct		s_warrior
 	char			*name;
 	char			*comment;
 	char			*exec_code;
-	char			live;
-}					t_warrior;
+}					t_player;
 
 typedef struct		s_pc
 {
@@ -174,7 +173,7 @@ typedef struct		s_pc
 	int				cycle_for_op;
 	int				position;
 	unsigned char	*map;
-	t_warrior		*owner;
+	t_player		*owner;
 	t_op			*op_info;
 	char			op;
 }					t_pc;
@@ -184,7 +183,8 @@ typedef struct		s_core
 	unsigned char	map[MEM_SIZE];
 	t_list			*input;
 	t_list			*pcs;
-	t_warrior		*warriors[MAX_PLAYERS + 1];
+	t_player		*players[MAX_PLAYERS + 1];
+	t_player		*last_player;
 	int				cycle_to_die;
 	int				live_count;
 	int				game_check_count;
@@ -201,7 +201,7 @@ typedef struct		s_core
 
 void				cw_clear_exit(t_core *core, const char *message, const int fd);
 void				read_input(t_core *core, const int ac, const char **av);
-void				init_warriors(t_core *core);
+void				init_players(t_core *core);
 void				init_pcs(t_core *core);
 int					validate_operation(t_list *pc);
 void 				start_game(t_core *core);

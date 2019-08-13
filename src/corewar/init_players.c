@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_warriors.c                                    :+:      :+:    :+:   */
+/*   init_players.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -19,17 +19,17 @@ static void	set_start_position(t_core *core)
 
 	i = 0;
 	start = 0;
-	while (core->warriors[i])
+	while (core->players[i])
 	{
-		core->warriors[i++]->start_position = start;
+		core->players[i++]->start_position = start;
 		start += MEM_SIZE / core->war_count;
 	}
 }
 
-void		init_warriors(t_core *core)
+void		init_players(t_core *core)
 {
 	t_list		*input;
-	t_warrior	*new;
+	t_player	*new;
 	int			nb;
 	int			i;
 
@@ -38,14 +38,14 @@ void		init_warriors(t_core *core)
 	i = nb;
 	while (input)
 	{
-		if (!(new = (t_warrior *)malloc(sizeof(t_warrior))))
+		if (!(new = (t_player *)malloc(sizeof(t_player))))
 			cw_clear_exit(core, MEM_ERROR, 2);
 		new->nb = nb--;
 		new->name = STR(input) + NAME_OFSET;
 		new->comment = STR(input) + COMMENT_OFSET;
 		new->code_size = ft_reverse_bytes(*((int *)(input->content + CODE_SIZE_OFSET)), sizeof(int));
 		new->exec_code = STR(input) + EXEC_CODE_OFSET;
-		core->warriors[--i] = new;
+		core->players[--i] = new;
 		input = input->next;
 	}
 	set_start_position(core);

@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/03 20:54:43 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/13 17:04:59 by nalexand         ###   ########.fr        #
+#    Updated: 2019/08/13 20:30:28 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,8 +60,8 @@ COM_SRC =	print_memory.c \
 
 COR_SRC =	corewar.c \
 			read_input.c \
-			init_warriors.c \
-			init_pcs.c \
+			init_players.c \
+			init_processes.c \
 			validate_operation.c \
 			game_process.c \
 			game_check.c
@@ -114,6 +114,9 @@ clean:
 	@rm -f $(ASM_LIB)
 	@rm -f $(LIBFT)
 	@rm -rf *.dSYM
+	@rm -f *.txt
+	@rm -f *.diff
+	@rm -f *.cor
 
 fclean: clean
 	@rm -f $(CORE)

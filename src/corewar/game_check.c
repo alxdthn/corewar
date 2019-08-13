@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 15:03:46 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 17:04:59 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 20:27:59 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,16 @@
 
 static void	print_winner(t_core *core)
 {
-	int		i;
-
-	i = 0;
-	while (core->warriors[i])
+	if (core->last_player)
 	{
-		if (core->warriors[i]->live == TRUE)
-		{
-			ft_printf("Contestant %d, \"%s\", has won !\n",
-			core->warriors[i]->nb, core->warriors[i]->name);
-			cw_clear_exit(core, NULL, 1);
-		}
-		i++;
+		ft_printf("Contestant %d, \"%s\", has won !\n",
+		core->last_player->nb, core->last_player->name);
 	}
-	ft_printf("Contestant %d, \"%s\", has won !\n",
-	core->warriors[0]->nb, core->warriors[0]->name);
+	else
+	{
+		ft_printf("Contestant %d, \"%s\", has won !\n",
+		core->players[0]->nb, core->players[0]->name);
+	}
 	cw_clear_exit(core, NULL, 1);
 }
 
@@ -36,7 +31,6 @@ static void	remove_pcs(t_core *core)
 {
 	t_list	*pc;
 	t_list	*tmp;
-	int		i;
 
 	pc = core->pcs;
 	while (pc)
@@ -56,9 +50,6 @@ static void	remove_pcs(t_core *core)
 	}
 	if (core->current_process_count == 0)
 		print_winner(core);
-	i = 0;
-	while (core->warriors[i])
-		core->warriors[i++]->live = FALSE;
 }
 
 void		game_check(t_core *core, int *cycle_to_die)

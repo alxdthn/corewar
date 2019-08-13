@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:19:35 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 17:04:59 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 20:07:33 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ static void	set_exec_code(t_core *core)
 	int		i;
 
 	i = 0;
-	while (core->warriors[i])
+	while (core->players[i])
 	{
-		ft_memcpy(core->map + core->warriors[i]->start_position,
-		core->warriors[i]->exec_code,
-		core->warriors[i]->code_size);
+		ft_memcpy(core->map + core->players[i]->start_position,
+		core->players[i]->exec_code,
+		core->players[i]->code_size);
 		i++;
 	}
 }
@@ -55,7 +55,7 @@ int			main(int ac, char **av)
 	ft_bzero(&core, sizeof(t_core));
 	parce_flags(&core, ac, av);
 	read_input(&core, (const int)ac, (const char **)av);
-	init_warriors(&core);
+	init_players(&core);
 	init_pcs(&core);
 //	print_pcs(&core, core.pcs, -1);
 	set_exec_code(&core);
