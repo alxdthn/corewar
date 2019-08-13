@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 19:12:39 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 20:07:33 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 22:04:42 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ static void	introduce(t_core *core)
 	}
 }
 
-void		validate_op_code(t_core *core, t_list *pc)
+static void	validate_op_code(t_core *core, t_list *pc)
 {
 	int		new_pos;
-	
+
 	PC->op = BYTE(CURRENT);
 	if (PC->op > 0 && PC->op < 17)
 	{
-		PC->op_info = &op_tab[PC->op - 1];
+		PC->op_info = &g_op_tab[PC->op - 1];
 		PC->cycle_for_op = PC->op_info->cycle;
 	}
 	else
@@ -77,13 +77,9 @@ static void	pc_process(t_core *core)
 {
 	t_list	*pc;
 
-	int s;
-
 	pc = core->pcs;
 	while (pc)
 	{
-		if (core->cycle_after_start == 6406 && PC->nb == 26)
-			s = 0;
 		PC->cycle++;
 		if (!PC->op)
 			validate_op_code(core, pc);
@@ -95,13 +91,7 @@ static void	pc_process(t_core *core)
 	}
 }
 
-void	print_dump(t_core *core)
-{
-	print_map(core, 1);
-	cw_clear_exit(core, NULL, 1);
-}
-
-void 	start_game(t_core *core)
+void		start_game(t_core *core)
 {
 	int		cycle_to_die;
 	int		test;
@@ -110,11 +100,12 @@ void 	start_game(t_core *core)
 	cycle_to_die = core->cycle_to_die;
 	introduce(core);
 	if (core->print_pc)
-		ft_printf(" g_cycle | number | position | live_cycle | op_cycle | carry | operation | registers\n");
+		ft_printf(" g_cycle | number | position | live_cycle |"\
+		" op_cycle | carry | operation | registers\n");
 	while (core->pcs)
 	{
 		if (core->cycle_after_start == core->dump)
-			print_dump(core);
+			print_dump(core, 1, 1);
 		if (cycle_to_die <= 0)
 			game_check(core, &cycle_to_die);
 		pc_process(core);

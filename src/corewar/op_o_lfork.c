@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:41:17 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 21:10:12 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 21:54:43 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 **	15: lfork {T_DIR} DSIZE 2
 **
 **	По своей сути эта операция аналогична операции fork.
-**	За исключением того факта, что новая каретка в этом случае создается по адресу: 
+**	За исключением того факта,
+**	что новая каретка в этом случае создается по адресу:
 **		текущая позиция + <ПЕРВЫЙ_АРГУМЕНТ>.
 **	В операции lfork усечение по модулю делать не нужно.
 */
@@ -28,7 +29,7 @@ static void	lfork_print_process(t_core *core, t_list *pc, t_arg *args)
 	ft_printf(" (%d)\n", PC->position + args->value);
 }
 
-void	cw_lfork(void *core, t_list *pc)
+void		cw_lfork(void *core, t_list *pc)
 {
 	t_arg	arg;
 	t_list	*node;
@@ -48,6 +49,6 @@ void	cw_lfork(void *core, t_list *pc)
 	if (((t_core *)core)->out == 4 || ((t_core *)core)->out == 5)
 		lfork_print_process((t_core *)core, pc, &arg);
 	else if (((t_core *)core)->out == 16)
-		print_mov(pc, new_pos);	
+		print_mov(pc, new_pos);
 	PC->position = new_pos;
 }

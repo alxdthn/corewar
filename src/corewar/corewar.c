@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:19:35 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 20:07:33 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 22:04:27 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,22 +56,9 @@ int			main(int ac, char **av)
 	parce_flags(&core, ac, av);
 	read_input(&core, (const int)ac, (const char **)av);
 	init_players(&core);
-	init_pcs(&core);
-//	print_pcs(&core, core.pcs, -1);
+	init_processes(&core);
 	set_exec_code(&core);
 	start_game(&core);
-//	ft_printf("%d\n", core.cycle_after_start);
-//	ft_printf("dump: %d\n", core.dump);
-	//print_map(&core, 1);
-
-	//print_carriage(core.pcs);
-	//print_warriros(&core);
-
-	//print_memory(core.input->content, core.input->content_size);
-
 	cw_clear_exit(&core, NULL, 1);
 	return (0);
 }
-
-	//print_warriros(&core);
-	//print_map(core.map);

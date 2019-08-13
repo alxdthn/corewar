@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_players.c                                    :+:      :+:    :+:   */
+/*   init_players.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/05 18:41:13 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/09 16:29:50 by nalexand         ###   ########.fr       */
+/*   Created: 2019/08/13 21:35:29 by nalexand          #+#    #+#             */
+/*   Updated: 2019/08/13 21:36:24 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void		init_players(t_core *core)
 		new->nb = nb--;
 		new->name = STR(input) + NAME_OFSET;
 		new->comment = STR(input) + COMMENT_OFSET;
-		new->code_size = ft_reverse_bytes(*((int *)(input->content + CODE_SIZE_OFSET)), sizeof(int));
+		new->code_size = GET_VAL(input->content + CODE_SIZE_OFSET, int);
 		new->exec_code = STR(input) + EXEC_CODE_OFSET;
 		core->players[--i] = new;
 		input = input->next;

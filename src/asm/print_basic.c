@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 17:51:19 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/13 20:41:29 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 21:32:17 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int		print_basic(t_as *all, char *file, char *head, int size)
 	new_f[ft_strlen(file) + 1] = 'r';
 	new_f[ft_strlen(file)] = 'o';
 	new_f[ft_strlen(file) - 1] = 'c';
-	fd = open(new_f, O_CREAT, S_IWRITE | S_IREAD);
+	fd = open(new_f, O_CREAT | O_RDWR, S_IWRITE | S_IREAD);
 	ft_printf("Writing output program to %s\n", new_f);
 	return (fd);
 }

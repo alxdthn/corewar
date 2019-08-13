@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 22:04:27 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/10 19:37:45 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 22:04:14 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ t_op	*get_cmd(char *cmd)
 	int		i;
 
 	i = 0;
-	while (op_tab[i].op_name)
+	while (g_op_tab[i].op_name)
 	{
-		if (ft_strequ(cmd, op_tab[i].op_name))
-			return (&op_tab[i]);
+		if (ft_strequ(cmd, g_op_tab[i].op_name))
+			return (&g_op_tab[i]);
 		i++;
 	}
 	return (NULL);
@@ -66,7 +66,7 @@ int		get_function_size(char arg_byte, t_op *op)
 {
 	int		size;
 	int		i;
- 
+
 	size = 1;
 	if (!op->arg_type)
 		return (1 + get_arg_ofset(op->args[0], op));

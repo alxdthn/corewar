@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printer_asm.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 22:05:51 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/10 20:27:46 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/13 22:06:23 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,17 @@ void	write_operations(int s, char *str, t_comm *com, int counter)
 {
 	while (counter < 16)
 	{
-		if (!ft_strcmp(com->instr, op_tab[counter].op_name))
+		if (!ft_strcmp(com->instr, g_op_tab[counter].op_name))
 			break ;
 		counter++;
 	}
-	str[s++] = op_tab[counter].op_code;
-	if (op_tab[counter].arg_type)
+	str[s++] = g_op_tab[counter].op_code;
+	if (g_op_tab[counter].arg_type)
 		str[s++] = com->arg_type;
 	while (com->arg_type)
 	{
 		if ((com->arg_type >= 192 || (com->arg_type >= 128 &&
-		op_tab[counter].t_dir_size == 2)))
+		g_op_tab[counter].t_dir_size == 2)))
 		{
 			s = s + 2;
 			set_size_short(str, com->arg_f, s - 2, 16);

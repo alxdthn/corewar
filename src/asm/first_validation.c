@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   first_validation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 15:04:16 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/11 17:11:40 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/13 22:05:03 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	check_to_valid(char *str, int x, t_as **all, char **f)
 		flag = 1;
 	while (c < 16 && !(*all)->read && (*all)->comment[0] && (*all)->name[0])
 	{
-		if (ft_strstr(str, op_tab[c].op_name) == str + x)
+		if (ft_strstr(str, g_op_tab[c].op_name) == str + x)
 			return ;
 		c++;
 	}

@@ -6,13 +6,13 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:43:01 by zaz               #+#    #+#             */
-/*   Updated: 2019/08/13 19:03:31 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 21:58:28 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-t_op    		op_tab[17] =
+t_op	g_op_tab[17] =
 {
 	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 4, 0, &cw_live},
 	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 4, 1, &cw_ld},
@@ -38,4 +38,3 @@ t_op    		op_tab[17] =
 	{"aff", 1, {T_REG}, 16, 2, "aff", 1, 4, 0, &cw_aff},
 	{0, 0, {0}, 0, 0, 0, 0, 0, 0, 0}
 };
-

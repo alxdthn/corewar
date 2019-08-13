@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 20:01:46 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 20:10:24 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 22:07:56 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 **	1: live {T_DIR} DSIZE 4
 **
 **	Засчитывает, что каретка, которая выполняет операцию live, жива.
-**	Если указанный в качестве аргумента операции live номер совпадает с номером игрока,
+**	Если указанный в качестве аргумента операции
+**	live номер совпадает с номером игрока,
 **	то она засчитывает, что это игрок жив.
 **	Например, если значение аргумента равно -2, значит игрок с номером 2 жив.
 */
@@ -55,7 +56,7 @@ void		cw_live(void *core, t_list *pc)
 	int			new_pos;
 
 	init_args(&arg, pc, 1);
-	find_player((t_core *)core , arg.value);
+	find_player((t_core *)core, arg.value);
 	new_pos = adr(CURRENT + 1 + arg.size);
 	if (((t_core *)core)->out == 4 || ((t_core *)core)->out == 5)
 		print_process((t_core *)core, pc, &arg);
