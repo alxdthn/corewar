@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:19:35 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 22:04:27 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 23:10:25 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,33 @@ static void	set_exec_code(t_core *core)
 	}
 }
 
+static void	get_flag(t_core *core, int *flag, int value, int arg_ofset)
+{
+	core->arg_ofset += arg_ofset;
+	*flag = value;
+}
+
 void		parce_flags(t_core *core, int ac, char **av)
 {
 	int		i;
 
 	i = 1;
+	core->d = -1;
 	core->dump = -1;
-	if (ac > 2)
+	while (i < ac)
 	{
-		if (ft_strequ("-d", av[1]))
-			if (ac > 3)
-				core->dump = ft_atoi(av[2]);
-		if (ft_strequ("-v", av[1]))
-			if (ac > 3)
-				core->out = ft_atoi(av[2]);
-		if (ft_strequ("-c", av[1]))
-			if (ac > 3)
-				core->print_pc = ft_atoi(av[2]);
+		if (ft_strequ("-d", av[i]) && i + 1 < ac)
+			get_flag(core, &core->d, ft_atoi(av[++i]), 2);
+		if (ft_strequ("-dump", av[i]) && i + 1 < ac)
+			get_flag(core, &core->dump, ft_atoi(av[++i]), 2);
+		else if (ft_strequ("-v", av[i]) && i + 1 < ac)
+			get_flag(core, &core->out, ft_atoi(av[++i]), 2);
+		else if (ft_strequ("-c", av[i]) && i + 1 < ac)
+			get_flag(core, &core->print_pc, ft_atoi(av[++i]), 2);
+		else if (ft_strequ("-a", av[i]) && i + 1 < ac)
+			get_flag(core, &core->print_aff, 1, 1);
+		i++;
 	}
-	if (core->out || core->dump >= 0 || core->print_pc)
-		core->arg_ofset = 2;
 }
 
 int			main(int ac, char **av)
@@ -54,8 +61,8 @@ int			main(int ac, char **av)
 
 	ft_bzero(&core, sizeof(t_core));
 	parce_flags(&core, ac, av);
-	read_input(&core, (const int)ac, (const char **)av);
-	init_players(&core);
+	read_input(&core, ac, av);
+	init_players(&core, ac, av);
 	init_processes(&core);
 	set_exec_code(&core);
 	start_game(&core);

@@ -33,7 +33,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/corewar",
-			"args": ["-v", "16", "toto.cor", "toto.cor"],
+			"args": ["-v", "2", "-n", "12", "bigzork.cor", "-n", "12", "toto.cor"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],

@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:12:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 22:03:45 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 23:38:10 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,6 @@ void			create_lab(t_as **all, char *str, char **f, t_label **lab);
 # define PRINT_ARG_OFSET 30
 # define PRINT_NAME_OFSET 10
 # define CHAR_FOR_NAME 10
-# define USAGE "usage:"
 # define REG_OFSET 1
 # define IND_OFSET 2
 # define DIR_OFSET op->t_dir_size
@@ -191,17 +190,20 @@ typedef struct		s_core
 	int				war_count;
 	int				current_process_count;
 	int				global_process_count;
+	int				d;
 	int				dump;
 	int				out;
 	int				print_pc;
+	int				print_aff;
 	int				death;
 	int				arg_ofset;
 	unsigned long	cycle_after_start;
 }					t_core;
 
+int					put_usage(int fd);
 void				cw_clear_exit(t_core *core, const char *message, const int fd);
-void				read_input(t_core *core, const int ac, const char **av);
-void				init_players(t_core *core);
+void				read_input(t_core *core, int ac, char **av);
+void				init_players(t_core *core, int ac, char **av);
 void				init_processes(t_core *core);
 int					validate_operation(t_list *pc);
 void 				start_game(t_core *core);
@@ -236,8 +238,8 @@ void				print_info_header(t_list *pc);
 void				print_warriros(t_core *core);
 void				print_dump(t_core *core, int bar, int exit);
 void				print_input(t_list *tmp);
-void				print_pcs(t_core *core, t_list *pc, int count);
 void				print_mov(t_list *pc, int new);
+void				print_processes(t_core *core, t_list *pc, int count);
 int					print_process_header(t_core *core, t_list *pc);
 
 #endif

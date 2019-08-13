@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/03 20:54:43 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/13 21:57:20 by nalexand         ###   ########.fr        #
+#    Updated: 2019/08/13 23:38:28 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,7 @@ COR_SRC =	corewar.c \
 			validate_operation.c \
 			game_process.c \
 			game_check.c \
+			usage.c
 
 ASM_SRC =	asm.c \
 			first_validation.c \

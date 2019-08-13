@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 18:45:02 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 21:55:29 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 23:38:53 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ static int	puterr(const char *file, const char *error)
 	return (0);
 }
 
-static int	validate_input(const char *input,
-const ssize_t size, const char *file)
+static int	validate_input(char *input, ssize_t size, char *file)
 {
 	if (size < EXEC_CODE_OFSET)
 		return (puterr(file, " is too small to be a champion"));
@@ -57,7 +56,7 @@ static void	fd_error_exit(t_core *core, const char *file)
 	cw_clear_exit(core, NULL, 2);
 }
 
-void		read_input(t_core *core, const int ac, const char **av)
+void		read_input(t_core *core, int ac, char **av)
 {
 	int		fd;
 	int		i;
@@ -65,21 +64,26 @@ void		read_input(t_core *core, const int ac, const char **av)
 	ssize_t	ret;
 
 	i = core->arg_ofset;
-	if (ac < 2)
-		cw_clear_exit(core, USAGE, 1);
-	else if (ac - 1 > (MAX_PLAYERS + core->arg_ofset))
-		cw_clear_exit(core, "Too many champions", 1);
+	if (ac < 2 || core->arg_ofset == ac - 1)
+		cw_clear_exit(core, NULL, put_usage(1));
 	while (++i < ac)
 	{
-		if ((fd = open(av[i], O_RDONLY)) < 3)
-			fd_error_exit(core, av[i]);
-		if (!(node = ft_lstnew(NULL, 0))
-		|| (ret = ft_read_to_str(fd, (char **)&node->content, 10)) < 0)
-			cw_clear_exit(core, MEM_ERROR, 2);
-		if (!(validate_input(node->content, ret, av[i])))
-			cw_clear_exit(core, NULL, 2);
-		node->content_size = ret;
-		ft_lstadd(&core->input, node);
-		core->war_count++;
+		if (ft_strequ("-n", av[i]) && i + 1 < ac)
+			i++;
+		else
+		{
+			if ((fd = open(av[i], O_RDONLY)) < 3)
+				fd_error_exit(core, av[i]);
+			if (!(node = ft_lstnew(NULL, 0))
+			|| (ret = ft_read_to_str(fd, (char **)&node->content, 10)) < 0)
+				cw_clear_exit(core, MEM_ERROR, 2);
+			if (!(validate_input(node->content, ret, av[i])))
+				cw_clear_exit(core, NULL, 2);
+			node->content_size = ret;
+			core->war_count++;
+			if (core->war_count > MAX_PLAYERS)
+				cw_clear_exit(core, "Too many champions", 1);
+			ft_lstadd(&core->input, node);
+		}
 	}
 }

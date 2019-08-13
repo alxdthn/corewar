@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 18:45:18 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 21:32:02 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 22:58:13 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,15 @@ void	print_dump(t_core *core, int bar, int exit)
 	unsigned int	i;
 	unsigned int	j;
 	unsigned int	line_size;
+	unsigned int	delim;
 
-	line_size = MEM_SIZE / 64;
+	line_size = MEM_SIZE / ((core->dump >= 0) ? 128 : 64);
 	i = 0;
 	j = line_size;
+	delim = (core->dump >= 0) ? 32 : 64;
 	while (i < MEM_SIZE / bar)
 	{
-		if (!i || (i >= 64 && !(i % 64)))
+		if (!i || (i >= delim && !(i % delim)))
 			ft_printf("%#.4p : ", i);
 		ft_printf("%.2hhx ", core->map[i++]);
 		if (!--j)
@@ -54,7 +56,7 @@ void	print_warriros(t_core *core)
 	}
 }
 
-void	print_pcs(t_core *core, t_list *pc, int count)
+void	print_processes(t_core *core, t_list *pc, int count)
 {
 	int		i;
 

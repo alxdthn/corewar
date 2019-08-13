@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 19:12:39 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 22:04:42 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 23:40:48 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static void	pc_process(t_core *core)
 		if (PC->op_info)
 			solve_operation(core, pc);
 		if (PC->nb == core->print_pc)
-			print_pcs(core, pc, 1);
+			print_processes(core, pc, 1);
 		pc = pc->next;
 	}
 }
@@ -104,7 +104,8 @@ void		start_game(t_core *core)
 		" op_cycle | carry | operation | registers\n");
 	while (core->pcs)
 	{
-		if (core->cycle_after_start == core->dump)
+		if (core->cycle_after_start == core->dump
+		|| core->cycle_after_start == core->d)
 			print_dump(core, 1, 1);
 		if (cycle_to_die <= 0)
 			game_check(core, &cycle_to_die);
