@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 18:57:50 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/14 19:33:45 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/14 20:38:54 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,21 @@ static void		print_arena_content(t_core *core, int i, int y, int x)
 //    }
 	if (id != -1)
 	{
-		attron(COLOR_PAIR(core->visual.map[i].index + 5));
+		attron(COLOR_PAIR(GRAY_CURSOR));
 		mvprintw(y, x, "%02x", core->map[i]);
-		attroff(COLOR_PAIR(core->visual.map[i].index + 5));
+		attroff(COLOR_PAIR(GRAY_CURSOR));
+		//attron(COLOR_PAIR(core->visual.map[i].index));
+		//mvprintw(y, x, "%02x", core->map[i]);
+		//attroff(COLOR_PAIR(core->visual.map[i].index));
 	}
 	else
 	{
-		attron(COLOR_PAIR(core->visual.map[i].index));
+		attron(COLOR_PAIR(GRAY));
 		mvprintw(y, x, "%02x", core->map[i]);
-		attroff(COLOR_PAIR(core->visual.map[i].index));
+		attroff(COLOR_PAIR(GRAY));
+		//attron(COLOR_PAIR(core->visual.map[i].index));
+		//mvprintw(y, x, "%02x", core->map[i]);
+		//attroff(COLOR_PAIR(core->visual.map[i].index));
 	}
 }
 
@@ -78,26 +84,6 @@ void			render_arena(t_core *core)
 			x = 1;
 		}
 		i++;
-	}
-}
-
-void		print_arena(t_core *core, int print_mode)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < MEM_SIZE)
-	{
-		ft_printf("%.4p : ", i);
-		j = 0;
-		while (j < print_mode)
-		{
-			ft_printf("%.2x ", core->map[i + j]);
-			j++;
-		}
-		ft_printf("\n");
-		i += print_mode;
 	}
 }
 
@@ -141,17 +127,14 @@ void		render_window(t_core *core)
 	refresh();
 }
 
-void        handle_buttons(t_core *core)
-{
-	if (core->visual.button == 27)
-		cw_clear_exit(core, NULL, 1);
-	if (core->visual.button == ' ')
-		core->visual.running = !(core->visual.running);
-}
-
 void		show_fight_field(t_core *core)
 {
 	render_window(core);
+	if (core->visual.button == ESC)
+		cw_clear_exit(core, NULL, 1);
+	else if (core->visual.button == SPACE)
+		while ((core->visual.button = getch()) != SPACE)
+			if (core->visual.button == ESC)
+				cw_clear_exit(core, NULL, 1);
 	core->visual.button = getch();
-	handle_buttons(core);
 }

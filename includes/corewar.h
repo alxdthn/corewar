@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:12:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/14 18:58:54 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/14 20:24:58 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,36 @@ void			create_lab(t_as **all, char *str, char **f, t_label **lab);
 # define OPER_ARGS PC->op_info->args
 # define GET_VAL(pos, size) (ft_reverse_bytes(*((size *)(pos)), sizeof(size)))
 # define FT_ABS(X)		(((X) < 0) ? (-(X)) : (X))
+# define ESC 27
+# define SPACE 32
+
+# define COLOR_GRAY				8
+# define GRAY					9
+# define GREEN					10
+# define YELLOW					11
+# define REDD					12
+# define CYAN					13
+# define GRAY_CURSOR			14
+# define GREEN_CURSOR			15
+# define YELLOW_CURSOR			16
+# define RED_CURSOR				17
+# define CYAN_CURSOR			18
+# define LIVE_GREEN				19
+# define LIVE_YELLOW			20
+# define LIVE_RED				21
+# define LIVE_CYAN				22
+static int g_colors_players[15] = {
+	COLOR_PAIR(GRAY),
+	COLOR_PAIR(GREEN),
+	COLOR_PAIR(YELLOW),
+	COLOR_PAIR(REDD),
+	COLOR_PAIR(CYAN),
+	COLOR_PAIR(GRAY_CURSOR),
+	COLOR_PAIR(GREEN_CURSOR),
+	COLOR_PAIR(YELLOW_CURSOR),
+	COLOR_PAIR(RED_CURSOR),
+	COLOR_PAIR(CYAN_CURSOR)
+};
 
 typedef struct		s_arg
 {

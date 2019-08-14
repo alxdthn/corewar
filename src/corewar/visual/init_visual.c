@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 18:47:35 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/14 19:14:26 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/14 20:24:50 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,32 +43,38 @@ static void	init_attr(t_core *core)
 
 void		init_colors(void)
 {
-    init_color(5, 250, 250, 250);
-    init_pair(1, 1, COLOR_BLACK);
-    init_pair(2, 4, COLOR_BLACK);
-    init_pair(3, 6, COLOR_BLACK);
-    init_pair(4, 3, COLOR_BLACK);
-    init_pair(5, 0, COLOR_RED);
-    init_pair(6, 0, COLOR_BLUE);
-    init_pair(7, 0, COLOR_CYAN);
-    init_pair(8, 0, COLOR_YELLOW);
-    init_pair(9, 5, COLOR_BLACK);
-    init_pair(10, 0, COLOR_MAGENTA);
-}
-
-void	init_window(t_core *core)
-{
-    initscr();
-    getmaxyx(stdscr, core->visual.row, core->visual.col);
-    if (core->visual.row <= 64 || core->visual.col <= 256)
-        cw_clear_exit(core, "Make terminal more pls.", 1);
-    start_color();
-    init_colors();
+	init_color(COLOR_GRAY, 355, 355, 355);
+	init_pair(GRAY, COLOR_GRAY, 0);
+	init_pair(GREEN, COLOR_GREEN, 0);
+	init_pair(YELLOW, COLOR_YELLOW, 0);
+	init_pair(REDD, COLOR_RED, 0);
+	init_pair(CYAN, COLOR_CYAN, 0);
+	init_pair(GRAY_CURSOR, COLOR_BLACK, COLOR_GRAY);
+	init_pair(GREEN_CURSOR, COLOR_BLACK, COLOR_GREEN);
+	init_pair(YELLOW_CURSOR, COLOR_BLACK, COLOR_YELLOW);
+	init_pair(RED_CURSOR, COLOR_BLACK, COLOR_RED);
+	init_pair(CYAN_CURSOR, COLOR_BLACK, COLOR_CYAN);
+	init_pair(LIVE_GREEN, COLOR_WHITE, COLOR_GREEN);
+	init_pair(LIVE_YELLOW, COLOR_WHITE, COLOR_YELLOW);
+	init_pair(LIVE_RED, COLOR_WHITE, COLOR_RED);
+	init_pair(LIVE_CYAN, COLOR_WHITE, COLOR_CYAN);
 }
 
 void	init_visual(t_core *core)
 {
-	init_window(core);
+	initscr();
+	keypad(stdscr, true);
+	nodelay(stdscr, true);
+	curs_set(false);
+	cbreak();
+	noecho();
+	use_default_colors();
+    getmaxyx(stdscr, core->visual.row, core->visual.col);
+    if (core->visual.row <= 64 || core->visual.col <= 256)
+        cw_clear_exit(core, "Make terminal more pls.", 1);
+	init_colors();
+    start_color();
 	core->dump_print_mode = 32;
+	core->visual.button = SPACE;
 	init_attr(core);
 }
