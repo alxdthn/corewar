@@ -91,11 +91,156 @@ static void	pc_process(t_core *core)
 	}
 }
 
+// ****************** Visual ****************** //
+
+int				is_carry_here(t_core *core, int i)
+{
+    t_list	    *pc;
+    int			j;
+
+    j = 0;
+    pc = core->pcs;
+    while (pc)
+    {
+        if (pc->content_size == i)
+            return (j);
+        j++;
+        pc = pc->next;
+    }
+    return (-1);
+}
+//
+#define MAX_COLOR_NUM 4
+//
+static void		print_arena_content(t_core *core, int i, int y, int x)
+{
+    int id;
+
+    id = is_carry_here(core, i);
+    if (id == -2)
+    {
+        attron(COLOR_PAIR(3));
+        mvprintw(y, x, "%02x", core->map[i]);
+        attroff(COLOR_PAIR(3));
+    }
+    if (id != -1)
+    {
+        attron(COLOR_PAIR(id % MAX_COLOR_NUM));
+        mvprintw(y, x, "%02x", core->map[i]);
+        attroff(COLOR_PAIR(id % MAX_COLOR_NUM));
+    }
+    else
+    {
+        attron(COLOR_PAIR(9));
+        mvprintw(y, x, "%02x", core->map[i]);
+        attroff(COLOR_PAIR(9));
+    }
+}
+
+void			print_arena_visu(t_core *core)
+{
+    int		i;
+    int		x;
+    int		y;
+
+    i = 0;
+    x = 1;
+    y = 1;
+    while (i < MEM_SIZE)
+    {
+        print_arena_content(core, i, y, x);
+        x = x + 2;
+        mvprintw(y, x, " ");
+        x++;
+        if (i && (i + 1) % 64 == 0)
+        {
+            y++;
+            x = 1;
+        }
+        i++;
+    }
+}
+
+void	info_joueur(t_core *core)
+{
+    int		i;
+    int		z;
+    int		c;
+
+    i = 0;
+    z = 0;
+    c = 0;
+    while (i < core->war_count)
+    {
+        if (core->players[i]->nb == (core->war_count - \
+		(core->war_count - core->players[i]->nb)))
+        {
+            attron(COLOR_PAIR(1 + c));
+            mvprintw(3 + z, 198, "Player %d:", core->players[i]->nb);
+            attroff(COLOR_PAIR(1 + c));
+            mvprintw(4 + z, 198, core->players[i]->name);
+            mvprintw(5 + z, 198, "Last live: %d", core->cycle_after_start);
+        }
+        i++;
+        z = z + 10;
+        c++;
+    }
+}
+
+void	print_visu(t_core *core)
+{
+	info_joueur(core);
+	print_arena_visu(core);
+	mvprintw(50, 198, "Cycle : %d", core->cycle_after_start);
+	mvprintw(52, 198, "Cycle to die : %d", core->cycle_to_die);
+	mvprintw(53, 198, "Cycle delta : %d", CYCLE_DELTA);
+	mvprintw(54, 198, "Lives : %d", core->live_count);
+	mvprintw(55, 198, "Checks : %d / %d", core->game_check_count, MAX_CHECKS);
+	usleep(10000);
+	refresh();
+}
+
+void		print_arena(t_core *core, int print_mode)
+{
+    int	i;
+    int	j;
+
+    i = 0;
+    while (i < MEM_SIZE)
+    {
+        ft_printf("%.4p : ", i);
+        j = 0;
+        while (j < print_mode)
+        {
+            ft_printf("%.2x ", core->map[i + j]);
+            j++;
+        }
+        ft_printf("\n");
+        i += print_mode;
+    }
+}
+
+void		show_fight_field(t_core *core)
+{
+    if (core->dump == core->cycle_after_start)
+    {
+        print_arena(core, core->dump_print_mode);
+        exit(0);
+    }
+    if (core->visual == 'v')
+    {
+        print_visu(core);
+    }
+}
+
+// ******************************************** //
+
+
 void		start_game(t_core *core)
 {
 	int		cycle_to_die;
-	int		test;
 
+	core->dump_print_mode = 32;
 	core->cycle_to_die = CYCLE_TO_DIE;
 	cycle_to_die = core->cycle_to_die;
 	introduce(core);
@@ -104,6 +249,7 @@ void		start_game(t_core *core)
 		" op_cycle | carry | operation | registers\n");
 	while (core->pcs)
 	{
+        show_fight_field(core);
 		if (core->cycle_after_start == core->dump
 		|| core->cycle_after_start == core->d)
 			print_dump(core, 1, 1);

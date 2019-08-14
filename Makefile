@@ -84,9 +84,9 @@ ASM_OBJ = $(addprefix $(OBJ_DIR), $(patsubst %.c, %.o, $(ASM_SRC)))
 all: $(CORE) $(ASM)
 
 $(CORE): $(COM_LIB) $(COR_LIB) $(LIBFT)
-	gcc $(CFLAGS) -o $@ $^
+	gcc $(CFLAGS) -lncurses -o $@ $^
 $(ASM): $(COM_LIB) $(ASM_LIB) $(LIBFT)
-	gcc $(CFLAGS) -o $@ $^
+	gcc $(CFLAGS) -lncurses -o $@ $^
 
 $(COR_LIB):: $(OBJ_DIR) $(LIB_DIR)
 $(COR_LIB):: $(COR_LIB)($(COR_OBJ))

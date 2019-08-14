@@ -15,6 +15,9 @@
 # include "libft.h"
 # include "ft_printf.h"
 # include "op.h"
+# include <stdio.h>
+# include <unistd.h>
+# include <ncurses.h>
 
 # define MEM_ERROR "Error: mem alloc error!"
 
@@ -175,7 +178,13 @@ typedef struct		s_pc
 	t_player		*owner;
 	t_op			*op_info;
 	char			op;
-}					t_pc;
+}					t_pc; // cursors
+
+typedef struct			s_visual
+{
+    int					row;
+    int					col;
+}						t_visual;
 
 typedef struct		s_core
 {
@@ -198,6 +207,8 @@ typedef struct		s_core
 	int				death;
 	int				arg_ofset;
 	unsigned long	cycle_after_start;
+	char			visual;
+    int				dump_print_mode;
 }					t_core;
 
 int					put_usage(int fd);
