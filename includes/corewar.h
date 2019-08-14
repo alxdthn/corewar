@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:12:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 23:38:10 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/14 18:58:54 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,7 @@ typedef struct		s_core
 	int				war_count;
 	int				current_process_count;
 	int				global_process_count;
+	unsigned long	cycle_after_start;
 	int				d;
 	int				dump;
 	int				out;
@@ -218,9 +219,8 @@ typedef struct		s_core
 	int				print_aff;
 	int				death;
 	int				arg_ofset;
-	unsigned long	cycle_after_start;
-	int 			visual;
-	t_visual		visual_str;
+	int 			visu_mod;
+	t_visual		visual;
     int				dump_print_mode;
 }					t_core;
 
@@ -266,8 +266,7 @@ void				print_mov(t_list *pc, int new);
 void				print_processes(t_core *core, t_list *pc, int count);
 int					print_process_header(t_core *core, t_list *pc);
 
-
+void				init_visual(t_core *core);
 void		        show_fight_field(t_core *core);
-void                init_map_visual(t_core *core);
 
 #endif

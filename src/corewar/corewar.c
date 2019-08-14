@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:19:35 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 23:10:25 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/14 18:55:41 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,52 +26,11 @@ static void	set_exec_code(t_core *core)
 	}
 }
 
-
-// ****************** Visual ****************** //
-
-void	init_colors(void)
-{
-    init_color(5, 250, 250, 250);
-    init_pair(1, 1, COLOR_BLACK);
-    init_pair(2, 4, COLOR_BLACK);
-    init_pair(3, 6, COLOR_BLACK);
-    init_pair(4, 3, COLOR_BLACK);
-    init_pair(5, 0, COLOR_RED);
-    init_pair(6, 0, COLOR_BLUE);
-    init_pair(7, 0, COLOR_CYAN);
-    init_pair(8, 0, COLOR_YELLOW);
-    init_pair(9, 5, COLOR_BLACK);
-    init_pair(10, 0, COLOR_MAGENTA);
-}
-
-t_visual	init_visual()
-{
-    t_visual visual;
-
-    initscr();
-    getmaxyx(stdscr, visual.row, visual.col);
-    if (visual.row <= 64 || visual.col <= 256)
-    {
-        clear();
-        endwin();
-        ft_printf("Make terminal more pls.\n");
-        exit(0);
-    }
-    start_color();
-    init_colors();
-    return (visual);
-}
-
 static void	get_flag(t_core *core, int *flag, int value, int arg_ofset)
 {
     core->arg_ofset += arg_ofset;
     *flag = value;
-
-//    if (core->visual)
-//        init_visual();
 }
-
-// ******************************************** //
 
 void		parce_flags(t_core *core, int ac, char **av)
 {
@@ -93,12 +52,9 @@ void		parce_flags(t_core *core, int ac, char **av)
 		else if (ft_strequ("-a", av[i]) && i + 1 < ac)
 			get_flag(core, &core->print_aff, 1, 1);
         else if (ft_strequ("-s", av[i]))
-            get_flag(core, &core->visual, 1, 1);
+            get_flag(core, &core->visu_mod, 1, 1);
 		i++;
 	}
-        if (core->visual)
-            init_visual();
-
 }
 
 void			display_winner(t_core *core)
@@ -122,19 +78,40 @@ void		print_winner(t_core *core)
 	FT_ABS(core->last_player->nb), core->last_player->name);
 }
 
+static void	introduce(t_core *core)
+{
+	int		i;
+
+	i = 0;
+	ft_printf("Introducing contestants...\n");
+	while (core->players[i])
+	{
+		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n",
+		core->players[i]->nb, core->players[i]->code_size,
+		core->players[i]->name, core->players[i]->comment);
+		i++;
+	}
+
+}
+
 int			main(int ac, char **av)
 {
 	t_core	core;
 
 	ft_bzero(&core, sizeof(t_core));
-    printf("!!!!!!!!!!!!!!!!!!%d\n", core.war_count);
     parce_flags(&core, ac, av);
 	read_input(&core, ac, av);
 	init_players(&core, ac, av);
 	init_processes(&core);
 	set_exec_code(&core);
+    introduce(&core);
+    if (core.visu_mod)
+	    init_visual(&core);
+    if (core.print_pc)
+		ft_printf(" g_cycle | number | position | live_cycle |"\
+		" op_cycle | carry | operation | registers\n");
 	start_game(&core);
-	if (core.visual == 'v')
+	if (core.visu_mod)
         display_winner(&core);
 	else
         print_winner(&core);

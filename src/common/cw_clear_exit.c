@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 18:01:23 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 21:56:51 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/14 19:07:53 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static void	clear_players(t_core *core)
 
 void		cw_clear_exit(t_core *core, const char *message, const int fd)
 {
+	clear();
+    endwin();
 	ft_lstdel(&core->input, ft_lstclear);
 	ft_lstdel(&core->pcs, ft_lstclear);
 	clear_players(core);

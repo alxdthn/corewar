@@ -33,11 +33,11 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/corewar",
-			"args": ["-v", "2", "-n", "12", "bigzork.cor", "-n", "12", "toto.cor"],
+			"args": ["-s", "moes.cor"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],
-			"externalConsole": false,
+			"externalConsole": true,
 			"MIMode": "lldb"
 		}
 	]

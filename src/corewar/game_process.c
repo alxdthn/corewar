@@ -6,27 +6,11 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 19:12:39 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 23:40:48 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/14 18:55:16 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-static void	introduce(t_core *core)
-{
-	int		i;
-
-	i = 0;
-	ft_printf("Introducing contestants...\n");
-	while (core->players[i])
-	{
-		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n",
-		core->players[i]->nb, core->players[i]->code_size,
-		core->players[i]->name, core->players[i]->comment);
-		i++;
-	}
-
-}
 
 static void	validate_op_code(t_core *core, t_list *pc)
 {
@@ -96,21 +80,12 @@ void		start_game(t_core *core)
 {
 	int		cycle_to_die;
 
-	printf("????core -visual%d\n", core->visual);
-
-	core->dump_print_mode = 32;
 	core->cycle_to_die = CYCLE_TO_DIE;
 	cycle_to_die = core->cycle_to_die;
-	introduce(core);
-	printf("core -visual%d\n", core->visual);
-	if (core->visual)
-	    init_map_visual(core);
-	if (core->print_pc)
-		ft_printf(" g_cycle | number | position | live_cycle |"\
-		" op_cycle | carry | operation | registers\n");
 	while (core->pcs)
 	{
-        show_fight_field(core);
+		if (core->visu_mod)
+			show_fight_field(core);
 		if (core->cycle_after_start == core->dump
 		|| core->cycle_after_start == core->d)
 			print_dump(core, 1, 1);
