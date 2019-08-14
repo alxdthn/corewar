@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 18:45:18 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 00:14:59 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 20:07:33 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,26 @@
 
 static void	print_carriage_on_map(t_core *core, int i)
 {
-	t_list	*carriage;
+	t_list	*pc;
 	char	*color;
 
-	carriage = core->carriages;
-	while (carriage)
+	pc = core->pcs;
+	while (pc)
 	{
-		if (i == CRG->position)
+		if (i == PC->position)
 		{
-			if (CRG->owner->nb == 1)
+			if (PC->owner->nb == 1)
 				color = GRE;
-			else if (CRG->owner->nb == 2)
+			else if (PC->owner->nb == 2)
 				color = YEL;
-			else if (CRG->owner->nb == 3)
+			else if (PC->owner->nb == 3)
 				color = RED;
-			else if (CRG->owner->nb == 4)
+			else if (PC->owner->nb == 4)
 				color = BLU;
 			ft_printf("%s%.2hhx%s", color, core->map[i], EOC);
 			return ;
 		}
-		carriage = carriage->next;
+		pc = pc->next;
 	}
 	ft_printf("%.2hhx",  core->map[i]);
 }
@@ -77,58 +77,62 @@ void	print_warriros(t_core *core)
 
 	i = 0;
 
-	while (core->warriors[i])
+	while (core->players[i])
 	{
-		ft_printf("number: %d\n", core->warriors[i]->nb);
-		ft_printf("name: %s\n", core->warriors[i]->name);
-		ft_printf("comment: %s\n", core->warriors[i]->comment);
-		ft_printf("start_position: %d\n", core->warriors[i]->start_position);
-		ft_printf("code_size: %d\n", core->warriors[i]->code_size);
-		print_memory(core->warriors[i]->exec_code, core->warriors[i]->code_size);
+		ft_printf("number: %d\n", core->players[i]->nb);
+		ft_printf("name: %s\n", core->players[i]->name);
+		ft_printf("comment: %s\n", core->players[i]->comment);
+		ft_printf("start_position: %d\n", core->players[i]->start_position);
+		ft_printf("code_size: %d\n", core->players[i]->code_size);
+		print_memory(core->players[i]->exec_code, core->players[i]->code_size);
 		ft_printf("--------------------------------------\n");
 		++i;
 	}
 }
 
-void	print_carriages(t_list *carriage, int count)
+void	print_pcs(t_core *core, t_list *pc, int count)
 {
 	int		i;
-
-	ft_printf(" number | position | live_cycle | op_cycle | carry | operation | registers\n");
-	while (carriage && count)
+ 
+	//ft_printf(" number | position | live_cycle | op_cycle | carry | operation | registers\n");
+	while (pc && count)
 	{
-		ft_printf("%8d|%10d|%12d|%10d|%7d|%11s| ",
-		CRG->nb, CRG->position, CRG->cycle, CRG->cycle_for_op,
-		CRG->carry, (CRG->op_info) ? CRG->op_info->op_name : "NULL");
+		ft_printf("%9d|%8d|%10d|%12d|%10d|%7d|%11s| ", core->cycle_after_start,
+		PC->nb, PC->position, PC->cycle, PC->cycle_for_op,
+		PC->carry, (PC->op_info) ? PC->op_info->op_name : "NULL");
 		i = 0;
 		while (i < REG_NUMBER)
-			ft_printf("%.*x ", REG_SIZE, CRG->reg[i++]);
+			ft_printf("%.*x ", REG_SIZE, PC->reg[i++]);
 		ft_putchar('\n');
-		carriage = carriage->next;
+		pc = pc->next;
 		--count;
 	}
 }
 
-int		print_process_header(t_core *core, t_list *carriage)
+int		print_process_header(t_core *core, t_list *pc)
 {
 	int		ret;
 
 	ret = 0;
-//	ret += ft_printf("%-5d ", core->cycle_after_start);
-	ret += ft_printf("P%5d |", CRG->nb);
-	ft_printf(" %s ", CRG->op_info->op_name);
+	if (core->out == 5)
+		ret += ft_printf("%-5d ", core->cycle_after_start);
+	ret += ft_printf("P%5d |", PC->nb);
+	ft_printf(" %s ", PC->op_info->op_name);
 	return (ret);
 }
 
-void		print_mov(t_list *carriage, int new)
+void		print_mov(t_list *pc, int new)
 {
 	int		i;
 	int		size;
 
-	size = get_function_size(BYTE(ARG_BYTE), CRG->op_info);
-	ft_printf("ADV %d (%.4p -> %.4p) ", size, CURRENT, new);
-	i = 0;
-	while (i < size)
-		ft_printf("%.2hhx ",  BYTE(CURRENT + i++));
-	ft_putchar('\n');
+	if (PC->op_info)
+	{
+		size = get_function_size(BYTE(ARG_BYTE), PC->op_info);
+		ft_printf("ADV %d (%.4p -> %.4p) ", size, CURRENT, new);
+		i = 0;
+		while (i < size)
+			ft_printf("%.2hhx ",  BYTE(CURRENT + i++));
+		ft_putchar('\n');
+	}
 }

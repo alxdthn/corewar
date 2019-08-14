@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:39:31 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/12 22:47:54 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 17:04:50 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,28 +25,28 @@
 **	Не применяя усечение по модулю.
 */
 
-static void	lld_print_process(t_core *core, t_list *carriage, t_arg *args, int arg_count)
+static void	lld_print_process(t_core *core, t_list *pc, t_arg *args, int arg_count)
 {
-	print_process_header(core, carriage);
+	print_process_header(core, pc);
 	ft_printf("%d r%d\n", args[0].value, args[1].value);
 }
 
-void		cw_lld(void *core, t_list *carriage)
+void		cw_lld(void *core, t_list *pc)
 {
 	t_arg	args[2];
 	int		new_pos;
 
-	init_args((t_arg *)args, carriage, 2);
-	args[0].value = get_operand(args[0], carriage, 0);
-	CRG->reg[args[1].value - 1] = args[0].value;
-	if (CRG->reg[args[1].value - 1] == 0)
-		CRG->carry = TRUE;
+	init_args((t_arg *)args, pc, 2);
+	args[0].value = get_operand(args[0], pc, 0);
+	PC->reg[args[1].value - 1] = args[0].value;
+	if (PC->reg[args[1].value - 1] == 0)
+		PC->carry = TRUE;
 	else
-		CRG->carry = FALSE;
+		PC->carry = FALSE;
 	new_pos = adr(CURRENT + 2 + args[0].size + args[1].size);
-	if (((t_core *)core)->out == 4)
-		lld_print_process((t_core *)core, carriage, (t_arg *)args, 2);
+	if (((t_core *)core)->out == 4 || ((t_core *)core)->out == 5)
+		lld_print_process((t_core *)core, pc, (t_arg *)args, 2);
 	else if (((t_core *)core)->out == 16)
-		print_mov(carriage, new_pos);
-	CRG->position = new_pos;
+		print_mov(pc, new_pos);
+	PC->position = new_pos;
 }

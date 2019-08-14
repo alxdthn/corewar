@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 21:40:21 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/11 11:19:08 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 20:59:33 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,6 @@ void		set_arg_value(int a1, int a2, int a3, t_op *op, char *res)
 			set_arg(&argbyte, &ofset, res, a2, op);
 		if (argbyte)
 			set_arg(&argbyte, &ofset, res, a3, op);
-
 	}
 }
 

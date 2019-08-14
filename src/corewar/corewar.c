@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:19:35 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/12 17:27:44 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 20:07:33 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ static void	set_exec_code(t_core *core)
 	int		i;
 
 	i = 0;
-	while (core->warriors[i])
+	while (core->players[i])
 	{
-		ft_memcpy(core->map + core->warriors[i]->start_position,
-		core->warriors[i]->exec_code,
-		core->warriors[i]->code_size);
+		ft_memcpy(core->map + core->players[i]->start_position,
+		core->players[i]->exec_code,
+		core->players[i]->code_size);
 		i++;
 	}
 }
@@ -40,8 +40,11 @@ void		parce_flags(t_core *core, int ac, char **av)
 		if (ft_strequ("-v", av[1]))
 			if (ac > 3)
 				core->out = ft_atoi(av[2]);
+		if (ft_strequ("-c", av[1]))
+			if (ac > 3)
+				core->print_pc = ft_atoi(av[2]);
 	}
-	if (core->out || core->dump >= 0)
+	if (core->out || core->dump >= 0 || core->print_pc)
 		core->arg_ofset = 2;
 }
 
@@ -52,15 +55,16 @@ int			main(int ac, char **av)
 	ft_bzero(&core, sizeof(t_core));
 	parce_flags(&core, ac, av);
 	read_input(&core, (const int)ac, (const char **)av);
-	init_warriors(&core);
-	init_carriages(&core);
+	init_players(&core);
+	init_pcs(&core);
+//	print_pcs(&core, core.pcs, -1);
 	set_exec_code(&core);
 	start_game(&core);
 //	ft_printf("%d\n", core.cycle_after_start);
 //	ft_printf("dump: %d\n", core.dump);
 	//print_map(&core, 1);
 
-	//print_carriage(core.carriages);
+	//print_carriage(core.pcs);
 	//print_warriros(&core);
 
 	//print_memory(core.input->content, core.input->content_size);

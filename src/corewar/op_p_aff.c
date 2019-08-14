@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:41:59 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/12 22:49:41 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 17:04:50 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@
 **	Чтобы его включить нужно воспользоваться флагом -a.
 */
 
-void	cw_aff(void *core, t_list *carriage)
+void	cw_aff(void *core, t_list *pc)
 {
 	t_arg	arg;
 	int		new_pos;
 
-	init_args(&arg, carriage, 1);
-//	write(1, &CRG->reg[arg.value - 1], 1);
-//	if (((t_core *)core)->out == 4)
-//		print_process(carriage, &arg, 1);
+	init_args(&arg, pc, 1);
+//	write(1, &PC->reg[arg.value - 1], 1);
+//	if (((t_core *)core)->out == 4 || ((t_core *)core)->out == 5)
+//		print_process(pc, &arg, 1);
 	new_pos = adr(CURRENT + 2 + arg.size);
 	if (((t_core *)core)->out == 16)
-		print_mov(carriage, new_pos);	
-	CRG->position = new_pos;
+		print_mov(pc, new_pos);	
+	PC->position = new_pos;
 }

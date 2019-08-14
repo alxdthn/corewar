@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 20:01:46 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/12 22:39:45 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 20:10:24 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,39 +21,47 @@
 **	Например, если значение аргумента равно -2, значит игрок с номером 2 жив.
 */
 
-static void	print_process(t_core *core, t_list *carriage, t_arg *arg)
+static void	print_process(t_core *core, t_list *pc, t_arg *arg)
 {
-	print_process_header(core, carriage);
+	print_process_header(core, pc);
 	ft_printf("%d", arg->value);
 	ft_putchar('\n');
 }
 
-void		cw_live(void *core, t_list *carriage)
+static void	find_player(t_core *core, int value)
 {
-	t_warrior	**wars;
-	t_arg		arg;
+	t_player	**players;
 	int			i;
-	int			new_pos;
 
-	init_args(&arg, carriage, 1);
-	wars = ((t_core *)core)->warriors;
+	players = ((t_core *)core)->players;
 	i = 0;
-	while (wars[i])
+	while (players[i])
 	{
-		if (arg.value == -wars[i]->nb)
+		if (value == -players[i]->nb)
 		{
-			wars[i]->live = TRUE;
+			((t_core *)core)->last_player = players[i];
 			if (((t_core *)core)->out == 1)
-				ft_printf("Player %d (%s) is said to be alive\n", wars[i]->nb, wars[i]->name);
+				ft_printf("Player %d (%s) is said to be alive\n",
+				players[i]->nb, players[i]->name);
+			break ;
 		}
 		i++;
 	}
+}
+
+void		cw_live(void *core, t_list *pc)
+{
+	t_arg		arg;
+	int			new_pos;
+
+	init_args(&arg, pc, 1);
+	find_player((t_core *)core , arg.value);
 	new_pos = adr(CURRENT + 1 + arg.size);
-	if (((t_core *)core)->out == 4)
-		print_process((t_core *)core, carriage, &arg);
+	if (((t_core *)core)->out == 4 || ((t_core *)core)->out == 5)
+		print_process((t_core *)core, pc, &arg);
 	else if (((t_core *)core)->out == 16)
-		print_mov(carriage, new_pos);
-	CRG->cycle = 0;
+		print_mov(pc, new_pos);
+	PC->cycle = 0;
 	((t_core *)core)->live_count++;
-	CRG->position = new_pos;
+	PC->position = new_pos;
 }

@@ -41,4 +41,4 @@
 #	lfork %666
 #	ld %255, r2
 #	st r2, 30
-	ld 
+	live %-1

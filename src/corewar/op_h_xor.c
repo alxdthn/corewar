@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:34:36 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/12 22:44:11 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 17:04:50 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,29 +19,29 @@
 **	Только в данном случае «побитовое И» заменяется на «побитовое ИСКЛЮЧАЮЩЕЕ ИЛИ».
 */
 
-static void	xor_print_process(t_core *core, t_list *carriage, t_arg *args)
+static void	xor_print_process(t_core *core, t_list *pc, t_arg *args)
 {
-	print_process_header(core, carriage);
+	print_process_header(core, pc);
 	ft_printf("%d %d r%d\n", args[0].value, args[1].value, args[2].value);
 }
 
-void		cw_xor(void *core, t_list *carriage)
+void		cw_xor(void *core, t_list *pc)
 {
 	t_arg	args[3];
 	int		new_pos;
 
-	init_args((t_arg *)args, carriage, 3);
-	args[0].value = get_operand(args[0], carriage, IDX_MOD);
-	args[1].value = get_operand(args[1], carriage, IDX_MOD);
-	CRG->reg[args[2].value - 1] = args[0].value ^ args[1].value;
-	if (CRG->reg[args[2].value - 1] == 0)
-		CRG->carry = TRUE;
+	init_args((t_arg *)args, pc, 3);
+	args[0].value = get_operand(args[0], pc, IDX_MOD);
+	args[1].value = get_operand(args[1], pc, IDX_MOD);
+	PC->reg[args[2].value - 1] = args[0].value ^ args[1].value;
+	if (PC->reg[args[2].value - 1] == 0)
+		PC->carry = TRUE;
 	else
-		CRG->carry = FALSE;
+		PC->carry = FALSE;
 	new_pos =  adr(CURRENT + 2 + args[0].size + args[1].size + args[2].size);
-	if (((t_core *)core)->out == 4)
-		xor_print_process((t_core *)core, carriage, (t_arg *)args);
+	if (((t_core *)core)->out == 4 || ((t_core *)core)->out == 5)
+		xor_print_process((t_core *)core, pc, (t_arg *)args);
 	else if (((t_core *)core)->out == 16)
-		print_mov(carriage, new_pos);
-	CRG->position = new_pos;
+		print_mov(pc, new_pos);
+	PC->position = new_pos;
 }
