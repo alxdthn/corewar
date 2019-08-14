@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 18:08:26 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/09 17:25:01 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 22:08:09 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_memory(const char *mem, ssize_t size)
 {
-	int 	i;
+	int		i;
 	int		j;
 
 	i = 0;

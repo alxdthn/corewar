@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_pcs.c                                   :+:      :+:    :+:   */
+/*   init_processes.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/06 22:36:16 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/12 18:10:45 by nalexand         ###   ########.fr       */
+/*   Created: 2019/08/13 21:36:46 by nalexand          #+#    #+#             */
+/*   Updated: 2019/08/13 22:04:54 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void	init_pcs(t_core *core)
+void	init_processes(t_core *core)
 {
 	t_pc		new;
 	t_list		*node;

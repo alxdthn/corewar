@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 18:39:50 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 20:02:15 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 21:55:51 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ int		validate_operation(t_list *pc)
 		i++;
 		argbyte <<= 2;
 		byte_ofset += get_arg_ofset(arg_type, PC->op_info);
- 	}
+	}
 	return (0);
 }

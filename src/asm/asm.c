@@ -6,7 +6,7 @@
 /*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:10:58 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/11 17:10:35 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/14 16:34:40 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ int		main(int ac, char **av)
 	int		fd;
 
 	if (ac == 1)
+	{
+		ft_printf("Usage: ./asm <sourcefile.s>\n");
 		return (0);
+	}
 	if ((fd = open(av[ac - 1], O_RDONLY)) < 3)
 		first_error("Can't read source file ", av[ac - 1], 0);
 	if (ft_read_to_str(fd, &file, 10) == -1 || !ft_strlen(file)

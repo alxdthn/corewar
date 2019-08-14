@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_val2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/09 17:37:02 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/11 17:06:04 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/13 22:05:26 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int				find_counter(char *str)
 	counter = 0;
 	while (counter < 16)
 	{
-		if (ft_strstr(str, op_tab[counter].op_name) == str
-		&& ((*(str + ft_strlen(op_tab[counter].op_name))) <= 32
-		|| (*(str + ft_strlen(op_tab[counter].op_name))) <= '%'))
+		if (ft_strstr(str, g_op_tab[counter].op_name) == str
+		&& ((*(str + ft_strlen(g_op_tab[counter].op_name))) <= 32
+		|| (*(str + ft_strlen(g_op_tab[counter].op_name))) <= '%'))
 			break ;
 		counter++;
 	}
@@ -40,10 +40,10 @@ int				check_command(char *str, char **f, t_as **all, int counter)
 
 	if (counter == 16)
 		invalid_comm(all, &f, str);
-	if (ft_strstr(str = str + ft_strlen(op_tab[counter].op_name), "#"))
+	if (ft_strstr(str = str + ft_strlen(g_op_tab[counter].op_name), "#"))
 		*ft_strstr(str, "#") = '\0';
 	if ((after = ft_strccount(str, SEPARATOR_CHAR))
-	+ 1 != op_tab[counter].arg_count)
+	+ 1 != g_op_tab[counter].arg_count)
 		invalid_comm(all, &f, str);
 	while (after--)
 		str = str + ft_strindex(str, SEPARATOR_CHAR) + 1;

@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 18:01:23 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 20:07:33 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 21:56:51 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,5 @@ void		cw_clear_exit(t_core *core, const char *message, const int fd)
 		ft_putendl_fd(message, fd);
 	if (fd == 2)
 		exit(EXIT_FAILURE);
-	exit(EXIT_SUCCESS);	
+	exit(EXIT_SUCCESS);
 }

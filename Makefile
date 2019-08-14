@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/03 20:54:43 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/13 20:30:28 by nalexand         ###   ########.fr        #
+#    Updated: 2019/08/13 23:38:28 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,6 @@ COM_SRC =	print_memory.c \
 			cw_clear_exit.c \
 			op.c \
 			byte_functions.c \
-			db_print_operation_info.c \
 			op_a_live.c \
 			op_b_ld.c \
 			op_c_st.c \
@@ -56,6 +55,7 @@ COM_SRC =	print_memory.c \
 			op_o_lfork.c \
 			op_p_aff.c \
 			op_a_functions.c \
+			op_a_init_args.c \
 			cw_debug.c
 
 COR_SRC =	corewar.c \
@@ -64,7 +64,8 @@ COR_SRC =	corewar.c \
 			init_processes.c \
 			validate_operation.c \
 			game_process.c \
-			game_check.c
+			game_check.c \
+			usage.c
 
 ASM_SRC =	asm.c \
 			first_validation.c \

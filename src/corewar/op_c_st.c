@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:30:00 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 17:04:50 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 21:47:30 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void		cw_st(void *core, t_list *pc)
 
 	init_args((t_arg *)args, pc, 2);
 	if (args[1].type == T_IND)
-		set_value_to_adr(pc, args[1].value, IDX_MOD, PC->reg[args[0].value - 1]);
+		set_value(PC->map, adr(CURRENT + args[1].value % IDX_MOD),
+		sizeof(int), PC->reg[args[0].value - 1]);
 	else
 		PC->reg[args[1].value - 1] = PC->reg[args[0].value - 1];
 	new_pos = adr(CURRENT + 2 + args[0].size + args[1].size);

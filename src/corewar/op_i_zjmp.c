@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:35:06 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 17:04:50 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/13 21:50:41 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	zjmp_print_process(t_core *core, t_list *pc, t_arg *args)
 		ft_printf(" FAILED\n");
 }
 
-void	cw_zjmp(void *core, t_list *pc)
+void		cw_zjmp(void *core, t_list *pc)
 {
 	t_arg	arg;
 	int		new_pos;
