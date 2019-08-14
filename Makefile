@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-VPATH = src/corewar:src/asm:src/common:includes
+VPATH = src/corewar:src/asm:src/common:includes:src/corewar/visual
 
 .SECONDARY: $(COR_OBJ) $(ASM_OBJ) $(COM_OBJ)
 
@@ -65,7 +65,8 @@ COR_SRC =	corewar.c \
 			validate_operation.c \
 			game_process.c \
 			game_check.c \
-			usage.c
+			usage.c \
+			init_map.c
 
 ASM_SRC =	asm.c \
 			first_validation.c \

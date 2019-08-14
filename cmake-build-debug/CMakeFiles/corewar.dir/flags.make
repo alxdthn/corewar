@@ -6,5 +6,5 @@ C_FLAGS = -g   -std=gnu11
 
 C_DEFINES = 
 
-C_INCLUDES = -I/Users/gkshleri/Documents/Projects/corewar/includes -I/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/includes 
+C_INCLUDES = -I/Users/breolson/Desktop/core/ggcor/corewar/includes -I/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/includes 
 

@@ -181,8 +181,19 @@ typedef struct		s_pc
 	char			op;
 }					t_pc; // cursors
 
+typedef struct		s_attr
+{
+    int32_t			index;
+    ssize_t			wait_cycles_store;
+    ssize_t			wait_cycles_live;
+    t_player		*player_live;
+}					t_attr;
+
 typedef struct			s_visual
 {
+    char                button;
+    int                 running;
+    t_attr			    map[MEM_SIZE];
     int					row;
     int					col;
 }						t_visual;
@@ -209,6 +220,7 @@ typedef struct		s_core
 	int				arg_ofset;
 	unsigned long	cycle_after_start;
 	int 			visual;
+	t_visual		visual_str;
     int				dump_print_mode;
 }					t_core;
 
@@ -253,5 +265,9 @@ void				print_input(t_list *tmp);
 void				print_mov(t_list *pc, int new);
 void				print_processes(t_core *core, t_list *pc, int count);
 int					print_process_header(t_core *core, t_list *pc);
+
+
+void		        show_fight_field(t_core *core);
+void                init_map_visual(t_core *core);
 
 #endif

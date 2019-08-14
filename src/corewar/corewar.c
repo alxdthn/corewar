@@ -132,7 +132,7 @@ int			main(int ac, char **av)
 	init_players(&core, ac, av);
 	init_processes(&core);
 	set_exec_code(&core);
-	printf("%d\n", core.war_count);
+	printf("!!!!!!!!!!!!!!!!!!%d\n", core.war_count);
 	start_game(&core);
 	if (core.visual == 'v')
         display_winner(&core);

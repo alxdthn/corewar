@@ -8,44 +8,44 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/Users/gkshleri/Documents/Projects/corewar/cmake-build-debug"/>
+				<Option working_dir="/Users/breolson/Desktop/core/ggcor/corewar/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/gkshleri/Documents/Projects/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/gkshleri/Documents/Projects/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/gkshleri/Documents/Projects/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/gkshleri/Documents/Projects/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/breolson/Desktop/core/ggcor/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/breolson/Desktop/core/ggcor/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/breolson/Desktop/core/ggcor/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/breolson/Desktop/core/ggcor/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/Users/gkshleri/Documents/Projects/corewar/cmake-build-debug"/>
+				<Option working_dir="/Users/breolson/Desktop/core/ggcor/corewar/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/gkshleri/Documents/Projects/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/gkshleri/Documents/Projects/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/gkshleri/Documents/Projects/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/gkshleri/Documents/Projects/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/breolson/Desktop/core/ggcor/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/breolson/Desktop/core/ggcor/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/breolson/Desktop/core/ggcor/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/breolson/Desktop/core/ggcor/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/Users/gkshleri/Documents/Projects/corewar/cmake-build-debug"/>
+				<Option working_dir="/Users/breolson/Desktop/core/ggcor/corewar/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/gkshleri/Documents/Projects/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/gkshleri/Documents/Projects/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/gkshleri/Documents/Projects/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/gkshleri/Documents/Projects/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/breolson/Desktop/core/ggcor/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/breolson/Desktop/core/ggcor/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/breolson/Desktop/core/ggcor/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/breolson/Desktop/core/ggcor/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="corewar">
-				<Option output="/Users/gkshleri/Documents/Projects/corewar/cmake-build-debug/corewar" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/gkshleri/Documents/Projects/corewar/cmake-build-debug"/>
+				<Option output="/Users/breolson/Desktop/core/ggcor/corewar/cmake-build-debug/corewar" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/breolson/Desktop/core/ggcor/corewar/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Users/gkshleri/Documents/Projects/corewar/includes"/>
-					<Add directory="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/includes"/>
+					<Add directory="/Users/breolson/Desktop/core/ggcor/corewar/includes"/>
+					<Add directory="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/includes"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
@@ -54,21 +54,21 @@
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/gkshleri/Documents/Projects/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 corewar"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/gkshleri/Documents/Projects/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/gkshleri/Documents/Projects/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/gkshleri/Documents/Projects/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/breolson/Desktop/core/ggcor/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 corewar"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/breolson/Desktop/core/ggcor/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/breolson/Desktop/core/ggcor/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/breolson/Desktop/core/ggcor/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="corewar/fast">
-				<Option output="/Users/gkshleri/Documents/Projects/corewar/cmake-build-debug/corewar" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/gkshleri/Documents/Projects/corewar/cmake-build-debug"/>
+				<Option output="/Users/breolson/Desktop/core/ggcor/corewar/cmake-build-debug/corewar" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/breolson/Desktop/core/ggcor/corewar/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Users/gkshleri/Documents/Projects/corewar/includes"/>
-					<Add directory="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/includes"/>
+					<Add directory="/Users/breolson/Desktop/core/ggcor/corewar/includes"/>
+					<Add directory="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/includes"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
@@ -77,497 +77,500 @@
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/gkshleri/Documents/Projects/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 corewar/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/gkshleri/Documents/Projects/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/gkshleri/Documents/Projects/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/gkshleri/Documents/Projects/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/breolson/Desktop/core/ggcor/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 corewar/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/breolson/Desktop/core/ggcor/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/breolson/Desktop/core/ggcor/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/breolson/Desktop/core/ggcor/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/destr_src/destr.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/destr_src/destr.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/includes/corewar.h">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/includes/corewar.h">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/includes/op.h">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/includes/op.h">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/includes/ft_printf.h">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/includes/ft_printf.h">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/includes/get_next_line.h">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/includes/get_next_line.h">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/includes/libft.h">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/includes/libft.h">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/ft_printf/ft_printf.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/ft_printf/ft_printf.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/ft_printf/pf_add_lnbr.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/ft_printf/pf_add_lnbr.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/ft_printf/pf_colors.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/ft_printf/pf_colors.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/ft_printf/pf_debug.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/ft_printf/pf_debug.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/ft_printf/pf_fun.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/ft_printf/pf_fun.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/ft_printf/pf_get_float_div.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/ft_printf/pf_get_float_div.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/ft_printf/pf_get_float_mod.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/ft_printf/pf_get_float_mod.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/ft_printf/pf_get_ldbl.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/ft_printf/pf_get_ldbl.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/ft_printf/pf_get_params.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/ft_printf/pf_get_params.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/ft_printf/pf_lnbr.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/ft_printf/pf_lnbr.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/ft_printf/pf_ltoa_base.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/ft_printf/pf_ltoa_base.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/ft_printf/pf_multi_lnbr.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/ft_printf/pf_multi_lnbr.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/ft_printf/pf_parce.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/ft_printf/pf_parce.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/ft_printf/pf_set_arg_digit.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/ft_printf/pf_set_arg_digit.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/ft_printf/pf_set_params.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/ft_printf/pf_set_params.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/ft_printf/pf_set_task.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/ft_printf/pf_set_task.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/ft_printf/pf_set_zero.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/ft_printf/pf_set_zero.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/ft_printf/pf_solve_bits.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/ft_printf/pf_solve_bits.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/ft_printf/pf_solve_digit.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/ft_printf/pf_solve_digit.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/ft_printf/pf_solve_float.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/ft_printf/pf_solve_float.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/ft_printf/pf_solve_pcsn.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/ft_printf/pf_solve_pcsn.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/ft_printf/pf_solve_unicode.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/ft_printf/pf_solve_unicode.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/ft_printf/pf_unicode.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/ft_printf/pf_unicode.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/gnl/clear_fd_node.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/gnl/clear_fd_node.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/gnl/get_next_line.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/gnl/get_next_line.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_arraydel.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_arraydel.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_atoi.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_atoi.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_atoi_base.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_atoi_base.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_btoa.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_btoa.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_bzero.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_bzero.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_check_file_format.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_check_file_format.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_emalloc.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_emalloc.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_intlen.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_intlen.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_isalnum.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_isalnum.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_isalpha.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_isalpha.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_isascii.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_isascii.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_isdigit.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_isdigit.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_isint.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_isint.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_isprint.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_isprint.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_itoa.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_itoa.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_itoa_base.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_itoa_base.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_lstadd.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_lstadd.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_lstclear.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_lstclear.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_lstcount.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_lstcount.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_lstdel.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_lstdel.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_lstdelnode.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_lstdelnode.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_lstdelone.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_lstdelone.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_lstiter.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_lstiter.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_lstmap.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_lstmap.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_lstnew.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_lstnew.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_lstpushback.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_lstpushback.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_lstsort.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_lstsort.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_lstswap.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_lstswap.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_memalloc.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_memalloc.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_memccpy.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_memccpy.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_memchr.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_memchr.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_memcmp.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_memcmp.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_memcpy.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_memcpy.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_memdel.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_memdel.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_memdup.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_memdup.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_memjoin.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_memjoin.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_memmove.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_memmove.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_memrev.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_memrev.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_memset.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_memset.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_power.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_power.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_putchar.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_putchar.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_putchar_fd.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_putchar_fd.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_putendl.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_putendl.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_putendl_fd.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_putendl_fd.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_puterr.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_puterr.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_putnbr.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_putnbr.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_putnbr_fd.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_putnbr_fd.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_putstr.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_putstr.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_putstr_fd.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_putstr_fd.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_read_to_str.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_read_to_str.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_reverse_bits.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_reverse_bits.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_reverse_bytes.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_reverse_bytes.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_satoi.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_satoi.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_strcat.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_strcat.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_strccount.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_strccount.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_strchr.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_strchr.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_strclen.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_strclen.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_strclr.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_strclr.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_strcmp.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_strcmp.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_strcpy.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_strcpy.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_strcskp.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_strcskp.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_strdel.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_strdel.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_strdup.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_strdup.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_strequ.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_strequ.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_strindex.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_strindex.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_striter.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_striter.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_striteri.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_striteri.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_strjoin.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_strjoin.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_strlcat.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_strlcat.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_strlen.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_strlen.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_strmap.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_strmap.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_strmapi.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_strmapi.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_strncat.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_strncat.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_strncmp.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_strncmp.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_strncpy.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_strncpy.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_strndup.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_strndup.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_strnequ.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_strnequ.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_strnew.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_strnew.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_strnstr.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_strnstr.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_strrchr.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_strrchr.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_strrev.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_strrev.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_strsplit.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_strsplit.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_strsskp.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_strsskp.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_strstr.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_strstr.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_strsub.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_strsub.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_strtrim.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_strtrim.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_swap.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_swap.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_tolower.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_tolower.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_toupper.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_toupper.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/lib/libftprintf/src/libft/ft_wrdcount.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/lib/libftprintf/src/libft/ft_wrdcount.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/asm/asm.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/asm/asm.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/asm/command_val.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/asm/command_val.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/asm/command_val2.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/asm/command_val2.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/asm/command_val3.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/asm/command_val3.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/asm/deleter.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/asm/deleter.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/asm/error_parse.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/asm/error_parse.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/asm/first_validation.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/asm/first_validation.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/asm/print_basic.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/asm/print_basic.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/asm/printer_asm.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/asm/printer_asm.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/common/byte_functions.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/common/byte_functions.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/common/cw_clear_exit.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/common/cw_clear_exit.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/common/op.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/common/op.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/common/print_memory.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/common/print_memory.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/corewar/corewar.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/corewar/corewar.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/corewar/cw_debug.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/corewar/cw_debug.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/corewar/game_check.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/corewar/game_check.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/corewar/game_process.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/corewar/game_process.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/corewar/init_players.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/corewar/init_players.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/corewar/init_processes.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/corewar/init_processes.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/corewar/op_a_functions.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/corewar/op_a_functions.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/corewar/op_a_init_args.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/corewar/op_a_init_args.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/corewar/op_a_live.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/corewar/op_a_live.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/corewar/op_b_ld.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/corewar/op_b_ld.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/corewar/op_c_st.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/corewar/op_c_st.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/corewar/op_d_add.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/corewar/op_d_add.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/corewar/op_e_sub.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/corewar/op_e_sub.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/corewar/op_f_and.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/corewar/op_f_and.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/corewar/op_g_or.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/corewar/op_g_or.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/corewar/op_h_xor.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/corewar/op_h_xor.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/corewar/op_i_zjmp.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/corewar/op_i_zjmp.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/corewar/op_j_ldi.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/corewar/op_j_ldi.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/corewar/op_k_sti.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/corewar/op_k_sti.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/corewar/op_l_fork.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/corewar/op_l_fork.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/corewar/op_m_lld.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/corewar/op_m_lld.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/corewar/op_n_lldi.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/corewar/op_n_lldi.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/corewar/op_o_lfork.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/corewar/op_o_lfork.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/corewar/op_p_aff.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/corewar/op_p_aff.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/corewar/read_input.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/corewar/read_input.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/corewar/usage.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/corewar/usage.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/src/corewar/validate_operation.c">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/corewar/validate_operation.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/gkshleri/Documents/Projects/corewar/CMakeLists.txt">
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/src/corewar/visual/init_map.c">
+			<Option target="corewar"/>
+		</Unit>
+		<Unit filename="/Users/breolson/Desktop/core/ggcor/corewar/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

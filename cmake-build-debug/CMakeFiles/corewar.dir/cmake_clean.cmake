@@ -128,6 +128,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/corewar.dir/src/common/cw_clear_exit.c.o"
   "CMakeFiles/corewar.dir/src/common/op.c.o"
   "CMakeFiles/corewar.dir/src/common/print_memory.c.o"
+  "CMakeFiles/corewar.dir/src/corewar/visual/init_map.c.o"
   "CMakeFiles/corewar.dir/src/corewar/corewar.c.o"
   "CMakeFiles/corewar.dir/src/corewar/cw_debug.c.o"
   "CMakeFiles/corewar.dir/src/corewar/game_check.c.o"

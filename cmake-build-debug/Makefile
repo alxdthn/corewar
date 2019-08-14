@@ -39,19 +39,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /Users/gkshleri/Documents/Программы/CLion.app/Contents/bin/cmake/mac/bin/cmake
+CMAKE_COMMAND = /Users/breolson/Desktop/CLion.app/Contents/bin/cmake/mac/bin/cmake
 
 # The command to remove a file.
-RM = /Users/gkshleri/Documents/Программы/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
+RM = /Users/breolson/Desktop/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/gkshleri/Documents/Projects/corewar
+CMAKE_SOURCE_DIR = /Users/breolson/Desktop/core/ggcor/corewar
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/gkshleri/Documents/Projects/corewar/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/breolson/Desktop/core/ggcor/corewar/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /Users/gkshleri/Documents/Projects/corewar/cmake-build-debug
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/Users/gkshleri/Documents/Программы/CLion.app/Contents/bin/cmake/mac/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/Users/breolson/Desktop/CLion.app/Contents/bin/cmake/mac/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/Users/gkshleri/Documents/Программы/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/Users/breolson/Desktop/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/gkshleri/Documents/Projects/corewar/cmake-build-debug/CMakeFiles /Users/gkshleri/Documents/Projects/corewar/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/breolson/Desktop/core/ggcor/corewar/cmake-build-debug/CMakeFiles /Users/breolson/Desktop/core/ggcor/corewar/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/gkshleri/Documents/Projects/corewar/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/breolson/Desktop/core/ggcor/corewar/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -4335,6 +4335,33 @@ src/corewar/validate_operation.c.s:
 	$(MAKE) -f CMakeFiles/corewar.dir/build.make CMakeFiles/corewar.dir/src/corewar/validate_operation.c.s
 .PHONY : src/corewar/validate_operation.c.s
 
+src/corewar/visual/init_map.o: src/corewar/visual/init_map.c.o
+
+.PHONY : src/corewar/visual/init_map.o
+
+# target to build an object file
+src/corewar/visual/init_map.c.o:
+	$(MAKE) -f CMakeFiles/corewar.dir/build.make CMakeFiles/corewar.dir/src/corewar/visual/init_map.c.o
+.PHONY : src/corewar/visual/init_map.c.o
+
+src/corewar/visual/init_map.i: src/corewar/visual/init_map.c.i
+
+.PHONY : src/corewar/visual/init_map.i
+
+# target to preprocess a source file
+src/corewar/visual/init_map.c.i:
+	$(MAKE) -f CMakeFiles/corewar.dir/build.make CMakeFiles/corewar.dir/src/corewar/visual/init_map.c.i
+.PHONY : src/corewar/visual/init_map.c.i
+
+src/corewar/visual/init_map.s: src/corewar/visual/init_map.c.s
+
+.PHONY : src/corewar/visual/init_map.s
+
+# target to generate assembly for a file
+src/corewar/visual/init_map.c.s:
+	$(MAKE) -f CMakeFiles/corewar.dir/build.make CMakeFiles/corewar.dir/src/corewar/visual/init_map.c.s
+.PHONY : src/corewar/visual/init_map.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -4812,6 +4839,9 @@ help:
 	@echo "... src/corewar/validate_operation.o"
 	@echo "... src/corewar/validate_operation.i"
 	@echo "... src/corewar/validate_operation.s"
+	@echo "... src/corewar/visual/init_map.o"
+	@echo "... src/corewar/visual/init_map.i"
+	@echo "... src/corewar/visual/init_map.s"
 .PHONY : help
 
 
