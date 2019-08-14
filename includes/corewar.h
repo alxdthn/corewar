@@ -221,6 +221,8 @@ typedef struct		s_attr
 
 typedef struct			s_visual
 {
+	WINDOW			*win_arena;
+	WINDOW			*win_info;
     char                button;
     int                 running;
     t_attr			    map[MEM_SIZE];

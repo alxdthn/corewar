@@ -99,8 +99,20 @@ void	render_info(t_core *core)
 	}
 }
 
+# define HEIGHT					(MEM_SIZE / 64 + 4)
+# define WIDTH					(64 * 3 + 5)
+
 void		render_window(t_core *core)
 { 
+	initscr();
+	keypad(stdscr, true);
+	nodelay(stdscr, true);
+	curs_set(false);
+	cbreak();
+	noecho();
+	core->visual.win_arena = newwin(HEIGHT, WIDTH + 4, 1, 2);
+	core->visual.win_info = newwin(HEIGHT, WIDTH / 4 + 10, 1, WIDTH + 6);
+
 	render_info(core);
 	render_arena(core);
 	mvprintw(50, 198, "Cycle : %d", core->cycle_after_start);
