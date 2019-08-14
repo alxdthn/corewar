@@ -127,12 +127,12 @@ int			main(int ac, char **av)
 	t_core	core;
 
 	ft_bzero(&core, sizeof(t_core));
-	parce_flags(&core, ac, av);
+    printf("!!!!!!!!!!!!!!!!!!%d\n", core.war_count);
+    parce_flags(&core, ac, av);
 	read_input(&core, ac, av);
 	init_players(&core, ac, av);
 	init_processes(&core);
 	set_exec_code(&core);
-	printf("!!!!!!!!!!!!!!!!!!%d\n", core.war_count);
 	start_game(&core);
 	if (core.visual == 'v')
         display_winner(&core);

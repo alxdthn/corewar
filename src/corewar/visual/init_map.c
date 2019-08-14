@@ -139,21 +139,25 @@ void        handle_buttons(t_core *core)
 {
     if (core->visual_str.button == 27)
         cw_clear_exit(core, NULL, 1);
-//    if (core->visual_str.button == ' ')
-//        core
+    if (core->visual_str.button == ' ')
+        core->visual_str.running = !(core->visual_str.running);
 }
 
 void		show_fight_field(t_core *core)
 {
-    core->visual_str.button = getch();
     printf("%d", core->visual_str.button);
-        handle_buttons(core);
+
         if (core->dump == core->cycle_after_start) {
             print_arena(core, core->dump_print_mode);
             exit(0);
         }
         if (core->visual)
             print_visu(core);
+        if (!(core->visual_str.running))
+        {
+            core->visual_str.button = getch();
+            handle_buttons(core);
+        }
 }
 
 static void	fill_map(t_core *core, int32_t pc, int32_t len, int32_t player_id)
