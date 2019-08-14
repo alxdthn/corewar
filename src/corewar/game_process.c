@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 19:12:39 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/14 18:55:16 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/14 22:28:13 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,14 @@ static void	solve_operation(t_core *core, t_list *pc)
 		if ((ofset = validate_operation(pc)))
 		{
 			new_pos = adr(CURRENT + ofset);
-			PC->op = 0;
-			PC->op_info = NULL;
 			if (((t_core *)core)->out == 16)
 				print_mov(pc, new_pos);
 			PC->position = new_pos;
 		}
 		else
-		{
 			PC->op_info->process(core, pc);
-			PC->op = 0;
-			PC->op_info = NULL;
-		}
+		PC->op_info = NULL;
+		PC->op = 0;
 	}
 }
 

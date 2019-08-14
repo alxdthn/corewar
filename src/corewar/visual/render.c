@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 18:57:50 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/14 21:39:29 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/14 22:31:06 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,33 +33,9 @@ int				is_carry_here(t_core *core, int i)
 //
 static void		print_arena_content(t_core *core, int i, int y, int x)
 {
-	int id;
-
-	id = is_carry_here(core, i);
-//    if (id == -2)
-//    {
-//        attron(COLOR_PAIR(10));
-//        mvprintw(y, x, "%02x", core->map[i]);
-//        attroff(COLOR_PAIR(10));
-//    }
-	if (id != -1)
-	{
-		//attron(COLOR_PAIR(GRAY_CURSOR));
-		//mvprintw(y, x, "%02x", core->map[i]);
-		//attroff(COLOR_PAIR(GRAY_CURSOR));
-		attron(COLOR_PAIR(core->visual.map[i].index));
-		mvprintw(y, x, "%02x", core->map[i]);
-		attroff(COLOR_PAIR(core->visual.map[i].index));
-	}
-	else
-	{
-		//attron(COLOR_PAIR(GRAY));
-		//mvprintw(y, x, "%02x", core->map[i]);
-		//attroff(COLOR_PAIR(GRAY));
-		attron(COLOR_PAIR(core->visual.map[i].index));
-		mvprintw(y, x, "%02x", core->map[i]);
-		attroff(COLOR_PAIR(core->visual.map[i].index));
-	}
+	attron(COLOR_PAIR(core->visual.map[i]));
+	mvprintw(y, x, "%02x", core->map[i]);
+	attroff(COLOR_PAIR(core->visual.map[i]));
 }
 
 void			render_arena(t_core *core)
@@ -100,9 +76,9 @@ void	render_info(t_core *core)
 		if (core->players[i]->nb == (core->war_count
 		- (core->war_count - core->players[i]->nb)))
 		{
-			attron(COLOR_PAIR(1 + c));
+			attron(COLOR_PAIR(GRAY + core->players[i]->id));
 			mvprintw(3 + z, 198, "Player %d:", core->players[i]->nb);
-			attroff(COLOR_PAIR(1 + c));
+			attroff(COLOR_PAIR(GRAY + core->players[i]->id));
 			mvprintw(4 + z, 198, core->players[i]->name);
 		}
 		i++;
@@ -113,8 +89,8 @@ void	render_info(t_core *core)
 
 void		render_window(t_core *core)
 {
-	render_info(core);
 	render_arena(core);
+	render_info(core);
 	mvprintw(50, 198, "Cycle : %d", core->cycle_after_start);
 	mvprintw(52, 198, "Cycle to die : %d", core->cycle_to_die);
 	mvprintw(53, 198, "Cycle delta : %d", CYCLE_DELTA);

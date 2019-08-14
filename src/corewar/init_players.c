@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 21:35:29 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 23:19:42 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/14 22:18:37 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void		init_players(t_core *core, int ac, char **av)
 	{
 		if (!(new = (t_player *)malloc(sizeof(t_player))))
 			cw_clear_exit(core, MEM_ERROR, 2);
-		new->nb = nb--;
+		new->nb = nb;
+		new->id = nb--;
 		new->name = STR(input) + NAME_OFSET;
 		new->comment = STR(input) + COMMENT_OFSET;
 		new->code_size = GET_VAL(input->content + CODE_SIZE_OFSET, int);
