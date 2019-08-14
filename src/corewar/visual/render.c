@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 18:57:50 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/14 20:38:54 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/14 21:39:29 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,21 @@ static void		print_arena_content(t_core *core, int i, int y, int x)
 //    }
 	if (id != -1)
 	{
-		attron(COLOR_PAIR(GRAY_CURSOR));
-		mvprintw(y, x, "%02x", core->map[i]);
-		attroff(COLOR_PAIR(GRAY_CURSOR));
-		//attron(COLOR_PAIR(core->visual.map[i].index));
+		//attron(COLOR_PAIR(GRAY_CURSOR));
 		//mvprintw(y, x, "%02x", core->map[i]);
-		//attroff(COLOR_PAIR(core->visual.map[i].index));
+		//attroff(COLOR_PAIR(GRAY_CURSOR));
+		attron(COLOR_PAIR(core->visual.map[i].index));
+		mvprintw(y, x, "%02x", core->map[i]);
+		attroff(COLOR_PAIR(core->visual.map[i].index));
 	}
 	else
 	{
-		attron(COLOR_PAIR(GRAY));
-		mvprintw(y, x, "%02x", core->map[i]);
-		attroff(COLOR_PAIR(GRAY));
-		//attron(COLOR_PAIR(core->visual.map[i].index));
+		//attron(COLOR_PAIR(GRAY));
 		//mvprintw(y, x, "%02x", core->map[i]);
-		//attroff(COLOR_PAIR(core->visual.map[i].index));
+		//attroff(COLOR_PAIR(GRAY));
+		attron(COLOR_PAIR(core->visual.map[i].index));
+		mvprintw(y, x, "%02x", core->map[i]);
+		attroff(COLOR_PAIR(core->visual.map[i].index));
 	}
 }
 
@@ -71,7 +71,6 @@ void			render_arena(t_core *core)
 	i = 0;
 	x = 1;
 	y = 1;
-//    init_attr(core);
 	while (i < MEM_SIZE)
 	{
 		print_arena_content(core, i, y, x);
@@ -98,15 +97,13 @@ void	render_info(t_core *core)
 	c = 0;
 	while (core->players[i])
 	{
-//        printf("ss %d\n", core->war_count);
-		if (core->players[i]->nb == (core->war_count - \
-		(core->war_count - core->players[i]->nb)))
+		if (core->players[i]->nb == (core->war_count
+		- (core->war_count - core->players[i]->nb)))
 		{
 			attron(COLOR_PAIR(1 + c));
 			mvprintw(3 + z, 198, "Player %d:", core->players[i]->nb);
 			attroff(COLOR_PAIR(1 + c));
 			mvprintw(4 + z, 198, core->players[i]->name);
-//            mvprintw(5 + z, 198, "Last live: %d", core->last_player);
 		}
 		i++;
 		z = z + 10;
