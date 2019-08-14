@@ -65,9 +65,10 @@ t_visual	init_visual()
 static void	get_flag(t_core *core, int *flag, int value, int arg_ofset)
 {
     core->arg_ofset += arg_ofset;
-    if (core->visual == 'v')
-        init_visual();
     *flag = value;
+
+//    if (core->visual)
+//        init_visual();
 }
 
 // ******************************************** //
@@ -86,16 +87,39 @@ void		parce_flags(t_core *core, int ac, char **av)
 		if (ft_strequ("-dump", av[i]) && i + 1 < ac)
 			get_flag(core, &core->dump, ft_atoi(av[++i]), 2);
 		else if (ft_strequ("-v", av[i]) && i + 1 < ac)
-        {
-		    core->visual = 'v';
             get_flag(core, &core->out, ft_atoi(av[++i]), 2);
-        }
 		else if (ft_strequ("-c", av[i]) && i + 1 < ac)
 			get_flag(core, &core->print_pc, ft_atoi(av[++i]), 2);
 		else if (ft_strequ("-a", av[i]) && i + 1 < ac)
 			get_flag(core, &core->print_aff, 1, 1);
+        else if (ft_strequ("-s", av[i]))
+            get_flag(core, &core->visual, 1, 1);
 		i++;
 	}
+        if (core->visual)
+            init_visual();
+
+}
+
+void			display_winner(t_core *core)
+{
+    int	winner;
+
+    winner = core->last_player->nb;
+    attron(COLOR_PAIR(winner + 1));
+    mvprintw(40, 198, "!!!!!!!!! %s win !!!!!!!!\n",
+             core->last_player->name);
+    refresh();
+    sleep(1000);
+    endwin();
+    curs_set(1);
+    exit(0);
+}
+
+void		print_winner(t_core *core)
+{
+    ft_printf("Contestant %d, \"%s\", has won !\n", \
+	FT_ABS(core->last_player->nb), core->last_player->name);
 }
 
 int			main(int ac, char **av)
@@ -108,7 +132,12 @@ int			main(int ac, char **av)
 	init_players(&core, ac, av);
 	init_processes(&core);
 	set_exec_code(&core);
+	printf("%d\n", core.war_count);
 	start_game(&core);
+	if (core.visual == 'v')
+        display_winner(&core);
+	else
+        print_winner(&core);
 	cw_clear_exit(&core, NULL, 1);
 	return (0);
 }

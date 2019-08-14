@@ -170,8 +170,9 @@ void	info_joueur(t_core *core)
     i = 0;
     z = 0;
     c = 0;
-    while (i < core->war_count)
+    while (core->players[i])
     {
+//        printf("ss %d\n", core->war_count);
         if (core->players[i]->nb == (core->war_count - \
 		(core->war_count - core->players[i]->nb)))
         {
@@ -179,7 +180,7 @@ void	info_joueur(t_core *core)
             mvprintw(3 + z, 198, "Player %d:", core->players[i]->nb);
             attroff(COLOR_PAIR(1 + c));
             mvprintw(4 + z, 198, core->players[i]->name);
-            mvprintw(5 + z, 198, "Last live: %d", core->cycle_after_start);
+            mvprintw(5 + z, 198, "Last live: %d", core->last_player);
         }
         i++;
         z = z + 10;
@@ -196,7 +197,7 @@ void	print_visu(t_core *core)
 	mvprintw(53, 198, "Cycle delta : %d", CYCLE_DELTA);
 	mvprintw(54, 198, "Lives : %d", core->live_count);
 	mvprintw(55, 198, "Checks : %d / %d", core->game_check_count, MAX_CHECKS);
-	usleep(10000);
+//	usleep(10000);
 	refresh();
 }
 
@@ -222,15 +223,16 @@ void		print_arena(t_core *core, int print_mode)
 
 void		show_fight_field(t_core *core)
 {
+    t_list	*pc;
+
+    pc = core->pcs;
     if (core->dump == core->cycle_after_start)
     {
         print_arena(core, core->dump_print_mode);
         exit(0);
     }
-    if (core->visual == 'v')
-    {
+    if (core->visual)
         print_visu(core);
-    }
 }
 
 // ******************************************** //

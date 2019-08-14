@@ -148,6 +148,7 @@ void			create_lab(t_as **all, char *str, char **f, t_label **lab);
 # define ARG_TYPE PC->op_info->arg_type
 # define OPER_ARGS PC->op_info->args
 # define GET_VAL(pos, size) (ft_reverse_bytes(*((size *)(pos)), sizeof(size)))
+# define FT_ABS(X)		(((X) < 0) ? (-(X)) : (X))
 
 typedef struct		s_arg
 {
@@ -207,7 +208,7 @@ typedef struct		s_core
 	int				death;
 	int				arg_ofset;
 	unsigned long	cycle_after_start;
-	char			visual;
+	int 			visual;
     int				dump_print_mode;
 }					t_core;
 
