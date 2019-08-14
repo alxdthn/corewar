@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 19:06:33 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 21:38:26 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/14 22:53:54 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,18 @@ int		adr(int current_adr)
 	else if (current_adr < 0)
 		return (MEM_SIZE + current_adr % MEM_SIZE);
 	return (current_adr);
+}
+
+void		mov_pc(t_core *core, t_list *pc, int new_pos)
+{
+	if (core->visu_mod)
+	{
+		if (core->visual.map[CURRENT] >= 14)
+			core->visual.map[CURRENT] -= 5;
+		if (core->visual.map[new_pos] < 14) 
+			core->visual.map[new_pos] += 5;
+	}
+	if (((t_core *)core)->out == 16)
+		print_mov(pc, new_pos);
+	PC->position = new_pos;
 }

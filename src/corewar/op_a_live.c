@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 20:01:46 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 22:07:56 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/14 22:45:23 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,12 @@ static void	find_player(t_core *core, int value)
 void		cw_live(void *core, t_list *pc)
 {
 	t_arg		arg;
-	int			new_pos;
 
 	init_args(&arg, pc, 1);
 	find_player((t_core *)core, arg.value);
-	new_pos = adr(CURRENT + 1 + arg.size);
 	if (((t_core *)core)->out == 4 || ((t_core *)core)->out == 5)
 		print_process((t_core *)core, pc, &arg);
-	else if (((t_core *)core)->out == 16)
-		print_mov(pc, new_pos);
 	PC->cycle = 0;
 	((t_core *)core)->live_count++;
-	PC->position = new_pos;
+	mov_pc((t_core *)core, pc, adr(CURRENT + 1 + arg.size));
 }

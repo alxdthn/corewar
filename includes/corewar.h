@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:12:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/14 22:18:12 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/14 22:38:49 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,6 +269,7 @@ void				init_args(t_arg *args, t_list *pc, int count);
 int					get_operand(t_arg arg, t_list *pc, int mod);
 
 void				set_value(unsigned char *mem, int pos, int size, int value);
+void				mov_pc(t_core *core, t_list *pc, int new_pos);
 
 int					get_value(unsigned char *mem, int pos, int size);
 int					get_value_from_adr(t_list *pc, int arg_value, int mod);

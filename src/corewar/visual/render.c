@@ -6,31 +6,14 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 18:57:50 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/14 22:31:06 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/14 22:32:10 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int				is_carry_here(t_core *core, int i)
-{
-	t_list	    *pc;
-//    int			j;
-
-//    j = 0;
-	pc = core->pcs;
-	while (pc)
-	{
-		if (PC->position == i)
-			return (i);
-//        j++;
-		pc = pc->next;
-	}
-	return (-1);
-}
-//
 #define MAX_COLOR_NUM 4
-//
+
 static void		print_arena_content(t_core *core, int i, int y, int x)
 {
 	attron(COLOR_PAIR(core->visual.map[i]));

@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:38:47 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 21:52:46 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/14 22:52:06 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	cw_fork(void *core, t_list *pc)
 {
 	t_arg		arg;
 	t_list		*node;
-	int			new_pos;
 
 	if (!(node = ft_lstnew(pc->content, sizeof(t_pc))))
 		cw_clear_exit((t_core *)core, MEM_ERROR, 2);
@@ -43,14 +42,14 @@ void	cw_fork(void *core, t_list *pc)
 	((t_pc *)node->content)->op_info = NULL;
 	((t_pc *)node->content)->op = 0;
 	((t_pc *)node->content)->position = adr(CURRENT + arg.value % IDX_MOD);
+	if (((t_core *)core)->visu_mod
+	&& ((t_core *)core)->visual.map[((t_pc *)node->content)->position] < 14)
+		((t_core *)core)->visual.map[((t_pc *)node->content)->position] += 5;
 	((t_pc *)node->content)->nb = ++((t_core *)core)->global_process_count;
 	((t_core *)core)->current_process_count++;
 	ft_lstadd(&((t_core *)core)->pcs, node);
-	new_pos = adr(CURRENT + 1 + arg.size);
 	if (((t_core *)core)->out == 4 || ((t_core *)core)->out == 5)
 		fork_print_process((t_core *)core, pc, &arg,
 		((t_pc *)node->content)->position);
-	else if (((t_core *)core)->out == 16)
-		print_mov(pc, new_pos);
-	PC->position = new_pos;
+	mov_pc((t_core *)core, pc, adr(CURRENT + 1 + arg.size));
 }
