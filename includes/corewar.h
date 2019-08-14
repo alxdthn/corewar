@@ -211,7 +211,7 @@ typedef struct		s_pc
 	t_player		*owner;
 	t_op			*op_info;
 	char			op;
-}					t_pc; // cursors
+}					t_pc;
 
 typedef struct		s_attr
 {

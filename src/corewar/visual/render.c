@@ -89,6 +89,13 @@ void	render_info(t_core *core)
 
 void		render_window(t_core *core)
 {
+	initscr();
+	keypad(stdscr, true);
+	nodelay(stdscr, true);
+	curs_set(false);
+	cbreak();
+	noecho();
+
 	render_arena(core);
 	render_info(core);
 	mvprintw(50, 198, "Cycle : %d", core->cycle_after_start);
