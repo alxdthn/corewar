@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 18:47:35 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/15 16:23:29 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 00:16:35 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ static void	init_attr(t_core *core)
 	}
 }
 
+#define BORDER 7
+
 void		init_colors(void)
 {
 	init_color(COLOR_GRAY, 355, 355, 355);
@@ -57,39 +59,55 @@ void		init_colors(void)
 	init_pair(LIVE_YELLOW, COLOR_YELLOW, 0);
 	init_pair(LIVE_RED, COLOR_RED, 0);
 	init_pair(LIVE_CYAN, COLOR_CYAN, 0);
+	init_pair(BORDER, 0, COLOR_GRAY);
+}
+
+static void	draw_border(t_core *core)
+{
+	int		y;
+
+	wattron(core->visual.win, COLOR_PAIR(BORDER));
+	wborder(core->visual.win, ' ', ' ',' ', ' ',' ', ' ', ' ',' ' );
+	y = WIN_POSY;
+	while (y < WIN_HEIGHT)
+		mvwprintw(core->visual.win, y++, WIN_INFO_POSX, " ");
+	wattroff(core->visual.win, COLOR_PAIR(BORDER));
+}
+
+static void	draw_players(t_core *core)
+{
+	int		i;
+	int		x;
+
+	i = 0;
+	core->visual.y_ofset = 2;
+	x = WIN_INFO_POSX + 4;
+	while (core->players[i])
+	{
+		wattron(core->visual.win, COLOR_PAIR(GRAY + core->players[i]->id));
+		mvwprintw(core->visual.win, core->visual.y_ofset++, x, "Player %d: %s",
+		core->players[i]->nb, core->players[i]->name);
+		mvwprintw(core->visual.win, core->visual.y_ofset++, x, "Comment: %s", core->players[i]->comment);
+		mvwprintw(core->visual.win, core->visual.y_ofset++, x, "Size: %d", core->players[i]->code_size);
+		wattroff(core->visual.win, COLOR_PAIR(GRAY + core->players[i++]->id));
+		core->visual.y_ofset++;
+	}
+	core->visual.y_ofset++;
 }
 
 void	init_visual(t_core *core)
 {
 	core->dump_print_mode = 32;
 	initscr();
-	keypad(stdscr, true);
-	nodelay(stdscr, true);
+	core->visual.win = newwin(WIN_HEIGHT, WIN_WIDTH, WIN_POSY, WIN_POSX);
+	nodelay(core->visual.win, true);
 	curs_set(false);
-	cbreak();
 	noecho();
 	use_default_colors();
 	start_color();
 	init_colors();
-	getmaxyx(stdscr, core->visual.row, core->visual.col);
-	if (core->visual.row <= 64 || core->visual.col <= 256)
-		cw_clear_exit(core, "Make terminal more pls.", 1);
 	core->visual.button = SPACE;
 	init_attr(core);
+	draw_border(core);
+	draw_players(core);
 }
-/*
-	initscr();
-	keypad(stdscr, true);
-	nodelay(stdscr, true);
-	curs_set(false);
-	cbreak();
-	noecho();
-	use_default_colors();
-	start_color();
-	init_colors();
-	init_map(vm);
-	vm->vs->win_arena = newwin(HEIGHT, WIDTH + 4, 1, 2);
-	vm->vs->win_info = newwin(HEIGHT, WIDTH / 4 + 10, 1, WIDTH + 6);
-	vm->vs->win_help = newwin(HEIGHT / 5, WIDTH, HEIGHT + 2, 2);
-	init_cursors(vm);
-*/

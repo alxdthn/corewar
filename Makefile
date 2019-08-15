@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/03 20:54:43 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/15 15:35:47 by nalexand         ###   ########.fr        #
+#    Updated: 2019/08/15 22:07:11 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,6 +68,7 @@ COR_SRC =	corewar.c \
 			game_check.c \
 			usage.c \
 			init_visual.c \
+			display_winner.c \
 			render.c
 
 ASM_SRC =	asm.c \

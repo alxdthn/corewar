@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 19:12:39 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/15 16:38:38 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/15 23:08:20 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,13 @@ void		game_cycle(t_core *core)
 	cycle_to_die = core->cycle_to_die;
 	while (core->pcs)
 	{
-		if (core->visu_mod)
-			show_fight_field(core);
 		if (core->cycle_after_start == core->dump
 		|| core->cycle_after_start == core->d)
 			print_dump(core, 1, 1);
 		if (cycle_to_die <= 0)
 			game_check(core, &cycle_to_die);
+		if (core->visu_mod)
+			show_fight_field(core);
 		pc_process(core);
 		core->cycle_after_start++;
 		cycle_to_die--;

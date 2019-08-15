@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:12:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/15 16:38:52 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 00:14:32 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ void			create_lab(t_as **all, char *str, char **f, t_label **lab);
 # define ARG_TYPE PC->op_info->arg_type
 # define OPER_ARGS PC->op_info->args
 # define GET_VAL(pos, size) (ft_reverse_bytes(*((size *)(pos)), sizeof(size)))
-# define FT_ABS(X)		(((X) < 0) ? (-(X)) : (X))
+
 # define ESC 27
 # define SPACE 32
 
@@ -168,18 +168,11 @@ void			create_lab(t_as **all, char *str, char **f, t_label **lab);
 # define LIVE_RED				21
 # define LIVE_CYAN				22
 
-static int g_colors_players[15] = {
-	COLOR_PAIR(GRAY),
-	COLOR_PAIR(GREEN),
-	COLOR_PAIR(YELLOW),
-	COLOR_PAIR(REDD),
-	COLOR_PAIR(CYAN),
-	COLOR_PAIR(GRAY_CURSOR),
-	COLOR_PAIR(GREEN_CURSOR),
-	COLOR_PAIR(YELLOW_CURSOR),
-	COLOR_PAIR(RED_CURSOR),
-	COLOR_PAIR(CYAN_CURSOR)
-};
+# define WIN_WIDTH 244
+# define WIN_HEIGHT 68
+# define WIN_POSX 2
+# define WIN_POSY 1
+# define WIN_INFO_POSX 198
 
 typedef struct		s_arg
 {
@@ -224,6 +217,8 @@ typedef struct		s_attr
 typedef struct			s_visual
 {
     t_attr				attrs[MEM_SIZE];
+	WINDOW				*win;
+	int					y_ofset;
     char                button;
     int                 running;
     int					row;
@@ -302,5 +297,6 @@ int					print_process_header(t_core *core, t_list *pc);
 void				init_visual(t_core *core);
 void		        show_fight_field(t_core *core);
 void				colorize_mem(t_core *core, int pos, int color);
+void				display_winner(t_core *core);
 
 #endif

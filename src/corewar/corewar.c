@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:19:35 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/15 16:40:00 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/15 22:05:41 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ static void	set_exec_code(t_core *core)
 
 static void	get_flag(t_core *core, int *flag, int value, int arg_ofset)
 {
-    core->arg_ofset += arg_ofset;
-    *flag = value;
+	core->arg_ofset += arg_ofset;
+	*flag = value;
 }
 
 void		parce_flags(t_core *core, int ac, char **av)
@@ -41,37 +41,20 @@ void		parce_flags(t_core *core, int ac, char **av)
 	core->dump = -1;
 	while (i < ac)
 	{
-        if (ft_strequ("-d", av[i]) && i + 1 < ac)
+		if (ft_strequ("-d", av[i]) && i + 1 < ac)
 			get_flag(core, &core->d, ft_atoi(av[++i]), 2);
 		if (ft_strequ("-dump", av[i]) && i + 1 < ac)
 			get_flag(core, &core->dump, ft_atoi(av[++i]), 2);
 		else if (ft_strequ("-v", av[i]) && i + 1 < ac)
-            get_flag(core, &core->out, ft_atoi(av[++i]), 2);
+			get_flag(core, &core->out, ft_atoi(av[++i]), 2);
 		else if (ft_strequ("-c", av[i]) && i + 1 < ac)
 			get_flag(core, &core->print_pc, ft_atoi(av[++i]), 2);
 		else if (ft_strequ("-a", av[i]) && i + 1 < ac)
 			get_flag(core, &core->print_aff, 1, 1);
-        else if (ft_strequ("-s", av[i]))
-            get_flag(core, &core->visu_mod, 1, 1);
+		else if (ft_strequ("-s", av[i]))
+			get_flag(core, &core->visu_mod, 1, 1);
 		i++;
 	}
-}
-
-void			display_winner(t_core *core)
-{
-    int	winner;
-
-    winner = core->last_player->nb;
-    attron(COLOR_PAIR(winner + 1));
-    mvprintw(40, 198, "!!!!!!!!! %s win !!!!!!!!\n",
-             core->last_player->name);
-    refresh();
-    sleep(1000);
-    endwin();
-    curs_set(1);
-	while (core->visual.button != ESC)
-		core->visual.button = getch();
-	cw_clear_exit(core, NULL, 0);
 }
 
 static void	print_winner(t_core *core)
@@ -110,22 +93,22 @@ int			main(int ac, char **av)
 	t_core	core;
 
 	ft_bzero(&core, sizeof(t_core));
-    parce_flags(&core, ac, av);
+	parce_flags(&core, ac, av);
 	read_input(&core, ac, av);
 	init_players(&core, ac, av);
 	init_processes(&core);
 	set_exec_code(&core);
-    introduce(&core);
-    if (core.visu_mod)
-	    init_visual(&core);
-    if (core.print_pc)
+	introduce(&core);
+	if (core.visu_mod)
+		init_visual(&core);
+	if (core.print_pc)
 		ft_printf(" g_cycle | number | position | live_cycle |"\
 		" op_cycle | carry | operation | registers\n");
 	game_cycle(&core);
 	if (core.visu_mod)
-        display_winner(&core);
+		display_winner(&core);
 	else
-        print_winner(&core);
+		print_winner(&core);
 	cw_clear_exit(&core, NULL, 1);
 	return (0);
 }

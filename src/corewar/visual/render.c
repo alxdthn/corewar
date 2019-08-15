@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 18:57:50 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/15 16:20:54 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 00:16:48 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ static void		print_arena_content(t_core *core, int i, int y, int x)
 		else
 			currnet_attr = COLOR_PAIR(attr->index + attr->pc_here);
 	}
-	attron(currnet_attr);
-	mvprintw(y, x, "%02x", core->map[i]);
-	attroff(currnet_attr);
+	wattron(core->visual.win, currnet_attr);
+	mvwprintw(core->visual.win, y, x, "%02x", core->map[i]);
+	wattroff(core->visual.win, currnet_attr);
 }
 
 void			render_arena(t_core *core)
@@ -44,18 +44,17 @@ void			render_arena(t_core *core)
 	int		y;
 
 	i = 0;
-	x = 1;
-	y = 1;
+	x = 4;
+	y = 2;
 	while (i < MEM_SIZE)
 	{
 		print_arena_content(core, i, y, x);
-		x = x + 2;
-		mvprintw(y, x, " ");
-		x++;
+		x += 3;
+//		mvwprintw(core->visual.win, y, x++, " ");
 		if (i && (i + 1) % 64 == 0)
 		{
 			y++;
-			x = 1;
+			x = 4;
 		}
 		i++;
 	}
@@ -63,50 +62,42 @@ void			render_arena(t_core *core)
 
 void	render_info(t_core *core)
 {
-	int		i;
-	int		z;
-	int		c;
-
-	i = 0;
-	z = 0;
-	c = 0;
-	while (core->players[i])
-	{
-		if (core->players[i]->nb == (core->war_count
-		- (core->war_count - core->players[i]->nb)))
-		{
-			attron(COLOR_PAIR(GRAY + core->players[i]->id));
-			mvprintw(3 + z, 198, "Player %d:", core->players[i]->nb);
-			attroff(COLOR_PAIR(GRAY + core->players[i]->id));
-			mvprintw(4 + z, 198, core->players[i]->name);
-		}
-		i++;
-		z = z + 10;
-		c++;
-	}
+	mvwprintw(core->visual.win, core->visual.y_ofset + 1, WIN_INFO_POSX + 4, "Cycle : %d", core->cycle_after_start);
+	mvwprintw(core->visual.win, core->visual.y_ofset + 2, WIN_INFO_POSX + 4, "Cycle to die : %-4d", core->cycle_to_die);
+	mvwprintw(core->visual.win, core->visual.y_ofset + 3, WIN_INFO_POSX + 4, "Cycle delta : %d", CYCLE_DELTA);
+	mvwprintw(core->visual.win, core->visual.y_ofset + 4, WIN_INFO_POSX + 4, "Lives : %-10d", core->live_count);
+	mvwprintw(core->visual.win, core->visual.y_ofset + 5, WIN_INFO_POSX + 4, "Checks : %-2d / %-2d", core->game_check_count, MAX_CHECKS);
 }
 
 void		render_window(t_core *core)
 {
 	render_arena(core);
 	render_info(core);
-	mvprintw(50, 198, "Cycle : %d", core->cycle_after_start);
-	mvprintw(52, 198, "Cycle to die : %d", core->cycle_to_die);
-	mvprintw(53, 198, "Cycle delta : %d", CYCLE_DELTA);
-	mvprintw(54, 198, "Lives : %d", core->live_count);
-	mvprintw(55, 198, "Checks : %d / %d", core->game_check_count, MAX_CHECKS);
 //	usleep(10000);
-	refresh();
+}
+
+#define S_BTN 's'
+
+static void	handle_buttons(t_core *core)
+{
+	core->visual.button = wgetch(core->visual.win);
+	if (core->visual.button == ESC)
+		cw_clear_exit(core, NULL, 1);
+	else if (core->visual.button == SPACE)
+		core->visual.running = !core->visual.running;
+	else if (core->visual.button == S_BTN)
+		core->visual.running = 1;
 }
 
 void		show_fight_field(t_core *core)
 {
 	render_window(core);
-	if (core->visual.button == ESC)
-		cw_clear_exit(core, NULL, 1);
-	else if (core->visual.button == SPACE)
-		while ((core->visual.button = getch()) != SPACE)
-			if (core->visual.button == ESC)
-				cw_clear_exit(core, NULL, 1);
-	core->visual.button = getch();
+	wrefresh(core->visual.win);
+	if (core->visual.button == S_BTN)
+		core->visual.running = 0;
+	if (!core->visual.running)
+		while (!core->visual.running)
+			handle_buttons(core);
+	else
+		handle_buttons(core);
 }
