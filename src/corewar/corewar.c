@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:19:35 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/14 18:55:41 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/15 16:40:00 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,24 @@ void			display_winner(t_core *core)
     sleep(1000);
     endwin();
     curs_set(1);
-    exit(0);
+	while (core->visual.button != ESC)
+		core->visual.button = getch();
+	cw_clear_exit(core, NULL, 0);
 }
 
-void		print_winner(t_core *core)
+static void	print_winner(t_core *core)
 {
-    ft_printf("Contestant %d, \"%s\", has won !\n", \
-	FT_ABS(core->last_player->nb), core->last_player->name);
+	if (core->last_player)
+	{
+		ft_printf("Contestant %d, \"%s\", has won !\n",
+		core->last_player->nb, core->last_player->name);
+	}
+	else
+	{
+		ft_printf("Contestant %d, \"%s\", has won !\n",
+		core->players[0]->nb, core->players[0]->name);
+	}
+	cw_clear_exit(core, NULL, 1);
 }
 
 static void	introduce(t_core *core)
@@ -110,7 +121,7 @@ int			main(int ac, char **av)
     if (core.print_pc)
 		ft_printf(" g_cycle | number | position | live_cycle |"\
 		" op_cycle | carry | operation | registers\n");
-	start_game(&core);
+	game_cycle(&core);
 	if (core.visu_mod)
         display_winner(&core);
 	else

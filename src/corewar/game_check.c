@@ -6,26 +6,11 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 15:03:46 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 20:27:59 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/15 16:39:41 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-static void	print_winner(t_core *core)
-{
-	if (core->last_player)
-	{
-		ft_printf("Contestant %d, \"%s\", has won !\n",
-		core->last_player->nb, core->last_player->name);
-	}
-	else
-	{
-		ft_printf("Contestant %d, \"%s\", has won !\n",
-		core->players[0]->nb, core->players[0]->name);
-	}
-	cw_clear_exit(core, NULL, 1);
-}
 
 static void	remove_pcs(t_core *core)
 {
@@ -48,13 +33,22 @@ static void	remove_pcs(t_core *core)
 		else
 			pc = pc->next;
 	}
-	if (core->current_process_count == 0)
-		print_winner(core);
+}
+
+static void	clear_lives(t_core *core)
+{
+	int		i;
+
+	i = 0;
+	while (i < MEM_SIZE)
+		core->visual.attrs[i++].live_player_id = 0;
 }
 
 void		game_check(t_core *core, int *cycle_to_die)
 {
 	remove_pcs(core);
+	if (core->visu_mod)
+		clear_lives(core);
 	core->game_check_count++;
 	if (core->live_count >= NBR_LIVE || core->game_check_count >= MAX_CHECKS)
 	{

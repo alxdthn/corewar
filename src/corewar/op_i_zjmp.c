@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:35:06 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 21:50:41 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/14 22:42:36 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,9 @@ void		cw_zjmp(void *core, t_list *pc)
 
 	init_args(&arg, pc, 1);
 	if (PC->carry)
-		new_pos = adr(CURRENT + arg.value % IDX_MOD);
+		mov_pc((t_core *)core, pc, adr(CURRENT + arg.value % IDX_MOD));
 	else
-		new_pos = adr(CURRENT + 1 + arg.size);
+		mov_pc((t_core *)core, pc, adr(CURRENT + 1 + arg.size));
 	if (((t_core *)core)->out == 4 || ((t_core *)core)->out == 5)
 		zjmp_print_process((t_core *)core, pc, &arg);
-	else if (((t_core *)core)->out == 16 && !PC->carry)
-		print_mov(pc, new_pos);
-	PC->position = new_pos;
 }

@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:39:31 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 21:53:14 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/14 22:40:42 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static void	lld_print_process(t_core *core, t_list *pc, t_arg *args)
 void		cw_lld(void *core, t_list *pc)
 {
 	t_arg	args[2];
-	int		new_pos;
 
 	init_args((t_arg *)args, pc, 2);
 	args[0].value = get_operand(args[0], pc, 0);
@@ -43,10 +42,7 @@ void		cw_lld(void *core, t_list *pc)
 		PC->carry = TRUE;
 	else
 		PC->carry = FALSE;
-	new_pos = adr(CURRENT + 2 + args[0].size + args[1].size);
 	if (((t_core *)core)->out == 4 || ((t_core *)core)->out == 5)
 		lld_print_process((t_core *)core, pc, (t_arg *)args);
-	else if (((t_core *)core)->out == 16)
-		print_mov(pc, new_pos);
-	PC->position = new_pos;
+	mov_pc((t_core *)core, pc, adr(CURRENT + 2 + args[0].size + args[1].size));
 }

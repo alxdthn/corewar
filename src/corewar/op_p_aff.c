@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:41:59 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 22:39:19 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/14 22:38:25 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static void	print_process(t_core *core, t_list *pc, t_arg *arg)
 void		cw_aff(void *core, t_list *pc)
 {
 	t_arg	arg;
-	int		new_pos;
 
 	init_args(&arg, pc, 1);
 	if (((t_core *)core)->print_aff)
@@ -42,8 +41,5 @@ void		cw_aff(void *core, t_list *pc)
 		if (((t_core *)core)->out == 4 || ((t_core *)core)->out == 5)
 			print_process((t_core *)core, pc, &arg);
 	}
-	new_pos = adr(CURRENT + 2 + arg.size);
-	if (((t_core *)core)->out == 16)
-		print_mov(pc, new_pos);
-	PC->position = new_pos;
+	mov_pc((t_core *)core, pc, adr(CURRENT + 2 + arg.size));
 }

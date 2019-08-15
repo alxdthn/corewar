@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:31:08 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 21:48:13 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/14 22:44:02 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static void	print_process(t_core *core, t_list *pc, t_arg *args)
 void		cw_add(void *core, t_list *pc)
 {
 	t_arg	args[3];
-	int		new_pos;
 
 	init_args((t_arg *)args, pc, 3);
 	PC->reg[args[2].value - 1] = PC->reg[args[0].value - 1]
@@ -44,10 +43,7 @@ void		cw_add(void *core, t_list *pc)
 		PC->carry = TRUE;
 	else
 		PC->carry = FALSE;
-	new_pos = adr(CURRENT + 2 + args[0].size + args[1].size + args[2].size);
 	if (((t_core *)core)->out == 4 || ((t_core *)core)->out == 5)
 		print_process((t_core *)core, pc, (t_arg *)args);
-	else if (((t_core *)core)->out == 16)
-		print_mov(pc, new_pos);
-	PC->position = new_pos;
+	mov_pc((t_core *)core, pc, adr(CURRENT + 2 + args[0].size + args[1].size + args[2].size));
 }

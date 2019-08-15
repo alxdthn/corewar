@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 19:12:39 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/14 22:28:13 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/15 16:38:38 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,8 @@ static void	validate_op_code(t_core *core, t_list *pc)
 	}
 	else
 	{
-		new_pos = adr(CURRENT + 1);
+		mov_pc(core, pc, adr(CURRENT + 1));
 		PC->op = 0;
-		if (((t_core *)core)->out == 16)
-			print_mov(pc, new_pos);
-		PC->position = new_pos;
 	}
 }
 
@@ -41,12 +38,7 @@ static void	solve_operation(t_core *core, t_list *pc)
 	if (PC->cycle_for_op == 0)
 	{
 		if ((ofset = validate_operation(pc)))
-		{
-			new_pos = adr(CURRENT + ofset);
-			if (((t_core *)core)->out == 16)
-				print_mov(pc, new_pos);
-			PC->position = new_pos;
-		}
+			mov_pc(core, pc, adr(CURRENT + ofset));
 		else
 			PC->op_info->process(core, pc);
 		PC->op_info = NULL;
@@ -72,7 +64,7 @@ static void	pc_process(t_core *core)
 	}
 }
 
-void		start_game(t_core *core)
+void		game_cycle(t_core *core)
 {
 	int		cycle_to_die;
 
