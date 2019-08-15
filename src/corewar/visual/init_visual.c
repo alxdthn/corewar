@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 18:47:35 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/14 20:24:50 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/14 22:26:28 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	fill_map(t_core *core, int pc, int len, int player_id)
 	value = ((player_id - 1) % 4) + 1;
 	while (i < len + pc)
 	{
-		core->visual.map[i].index = value + 1;
+		core->visual.map[i] = GRAY + player_id;
 		i++;
 	}
 }
@@ -33,9 +33,11 @@ static void	init_attr(t_core *core)
 
 	pc = 0;
 	id = 1;
+	ft_memset(core->visual.map, GRAY, MEM_SIZE);
 	while (id <= core->war_count)
 	{
 		fill_map(core, pc, core->players[id - 1]->code_size, id);
+		core->visual.map[pc] += 5;
 		pc += MEM_SIZE / core->war_count;
 		id++;
 	}
@@ -62,6 +64,7 @@ void		init_colors(void)
 
 void	init_visual(t_core *core)
 {
+	core->dump_print_mode = 32;
 	initscr();
 	keypad(stdscr, true);
 	nodelay(stdscr, true);
@@ -69,12 +72,27 @@ void	init_visual(t_core *core)
 	cbreak();
 	noecho();
 	use_default_colors();
-    getmaxyx(stdscr, core->visual.row, core->visual.col);
-    if (core->visual.row <= 64 || core->visual.col <= 256)
-        cw_clear_exit(core, "Make terminal more pls.", 1);
+	start_color();
 	init_colors();
-    start_color();
-	core->dump_print_mode = 32;
+	getmaxyx(stdscr, core->visual.row, core->visual.col);
+	if (core->visual.row <= 64 || core->visual.col <= 256)
+		cw_clear_exit(core, "Make terminal more pls.", 1);
 	core->visual.button = SPACE;
 	init_attr(core);
 }
+/*
+	initscr();
+	keypad(stdscr, true);
+	nodelay(stdscr, true);
+	curs_set(false);
+	cbreak();
+	noecho();
+	use_default_colors();
+	start_color();
+	init_colors();
+	init_map(vm);
+	vm->vs->win_arena = newwin(HEIGHT, WIDTH + 4, 1, 2);
+	vm->vs->win_info = newwin(HEIGHT, WIDTH / 4 + 10, 1, WIDTH + 6);
+	vm->vs->win_help = newwin(HEIGHT / 5, WIDTH, HEIGHT + 2, 2);
+	init_cursors(vm);
+*/

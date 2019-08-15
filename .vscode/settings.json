@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"corewar.h": "c",
-		"libft.h": "c"
+		"libft.h": "c",
+		"curses.h": "c"
 	}
 }

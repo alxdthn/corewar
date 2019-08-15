@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/03 20:54:43 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/14 19:00:30 by nalexand         ###   ########.fr        #
+#    Updated: 2019/08/14 21:42:48 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -119,7 +119,6 @@ clean:
 	@rm -rf *.dSYM
 	@rm -f *.txt
 	@rm -f *.diff
-	@rm -f *.cor
 
 fclean: clean
 	@rm -f $(CORE)

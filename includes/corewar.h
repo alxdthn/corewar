@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:12:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/14 20:24:58 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/14 22:18:12 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ void			create_lab(t_as **all, char *str, char **f, t_label **lab);
 # define LIVE_YELLOW			20
 # define LIVE_RED				21
 # define LIVE_CYAN				22
+
 static int g_colors_players[15] = {
 	COLOR_PAIR(GRAY),
 	COLOR_PAIR(GREEN),
@@ -191,6 +192,7 @@ typedef struct		s_player
 {
 	int				code_size;
 	int				nb;
+	int				id;
 	int				start_position;
 	char			*name;
 	char			*comment;
@@ -225,7 +227,7 @@ typedef struct			s_visual
 	WINDOW			*win_info;
     char                button;
     int                 running;
-    t_attr			    map[MEM_SIZE];
+    unsigned char		map[MEM_SIZE];
     int					row;
     int					col;
 }						t_visual;
@@ -245,6 +247,9 @@ typedef struct		s_core
 	int				global_process_count;
 	unsigned long	cycle_after_start;
 	int				d;
+
+	int				flag;
+
 	int				dump;
 	int				out;
 	int				print_pc;
