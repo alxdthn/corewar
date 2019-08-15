@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/03 20:54:43 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/14 21:42:48 by nalexand         ###   ########.fr        #
+#    Updated: 2019/08/15 15:35:47 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ COM_SRC =	print_memory.c \
 			op_p_aff.c \
 			op_a_functions.c \
 			op_a_init_args.c \
+			colorize_mem.c \
 			cw_debug.c
 
 COR_SRC =	corewar.c \

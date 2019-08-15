@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 19:12:39 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/14 23:09:04 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/15 16:38:38 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	pc_process(t_core *core)
 	}
 }
 
-void		start_game(t_core *core)
+void		game_cycle(t_core *core)
 {
 	int		cycle_to_die;
 

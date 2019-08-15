@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:12:57 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/14 22:38:49 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/15 16:38:52 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,17 +215,17 @@ typedef struct		s_pc
 
 typedef struct		s_attr
 {
-    int32_t			index;
-    ssize_t			wait_cycles_store;
-    ssize_t			wait_cycles_live;
-    t_player		*player_live;
+	int				index;
+	int				light;
+	int				live_player_id;
+	char			pc_here;
 }					t_attr;
 
 typedef struct			s_visual
 {
+    t_attr				attrs[MEM_SIZE];
     char                button;
     int                 running;
-    unsigned char		map[MEM_SIZE];
     int					row;
     int					col;
 }						t_visual;
@@ -262,7 +262,7 @@ void				read_input(t_core *core, int ac, char **av);
 void				init_players(t_core *core, int ac, char **av);
 void				init_processes(t_core *core);
 int					validate_operation(t_list *pc);
-void 				start_game(t_core *core);
+void 				game_cycle(t_core *core);
 void				game_check(t_core *core, int *cycle_to_die);
 
 void				init_args(t_arg *args, t_list *pc, int count);
@@ -301,5 +301,6 @@ int					print_process_header(t_core *core, t_list *pc);
 
 void				init_visual(t_core *core);
 void		        show_fight_field(t_core *core);
+void				colorize_mem(t_core *core, int pos, int color);
 
 #endif
