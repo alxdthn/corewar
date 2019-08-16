@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/03 20:54:43 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/15 22:07:11 by nalexand         ###   ########.fr        #
+#    Updated: 2019/08/16 05:35:35 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,9 +35,22 @@ OBJ_DIR = obj/
 LIB_DIR = lib/
 
 COM_SRC =	print_memory.c \
-			cw_clear_exit.c \
-			op.c \
 			byte_functions.c \
+
+COR_SRC =	corewar.c \
+			cw_op_tab.c \
+			cw_clear_exit.c \
+			read_input.c \
+			init_players.c \
+			init_processes.c \
+			validate_operation.c \
+			game_process.c \
+			game_check.c \
+			usage.c \
+			init_visual.c \
+			display_winner.c \
+			render_info.c \
+			render.c \
 			op_a_live.c \
 			op_b_ld.c \
 			op_c_st.c \
@@ -59,19 +72,8 @@ COM_SRC =	print_memory.c \
 			colorize_mem.c \
 			cw_debug.c
 
-COR_SRC =	corewar.c \
-			read_input.c \
-			init_players.c \
-			init_processes.c \
-			validate_operation.c \
-			game_process.c \
-			game_check.c \
-			usage.c \
-			init_visual.c \
-			display_winner.c \
-			render.c
-
 ASM_SRC =	asm.c \
+			asm_op_tab.c \
 			first_validation.c \
 			command_val.c \
 			command_val2.c \
@@ -88,9 +90,9 @@ ASM_OBJ = $(addprefix $(OBJ_DIR), $(patsubst %.c, %.o, $(ASM_SRC)))
 all: $(CORE) $(ASM)
 
 $(CORE): $(COM_LIB) $(COR_LIB) $(LIBFT)
-	gcc $(CFLAGS) -lncurses -o $@ $^
+	gcc $(CFLAGS) -o $@ $^ -lncurses
 $(ASM): $(COM_LIB) $(ASM_LIB) $(LIBFT)
-	gcc $(CFLAGS) -lncurses -o $@ $^
+	gcc $(CFLAGS) -o $@ $^
 
 $(COR_LIB):: $(OBJ_DIR) $(LIB_DIR)
 $(COR_LIB):: $(COR_LIB)($(COR_OBJ))

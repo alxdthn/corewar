@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:26:36 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/14 22:44:41 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 05:00:33 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void		cw_ld(void *core, t_list *pc)
 
 	init_args((t_arg *)args, pc, 2);
 	if (args[0].type == T_IND)
-		args[0].value = get_value_from_adr(pc, args[0].value, IDX_MOD);
+		args[0].value = get_value(PC->map,
+		adr(CURRENT + args[0].value % IDX_MOD), sizeof(int));
 	PC->reg[args[1].value - 1] = args[0].value;
 	if (PC->reg[args[1].value - 1] == 0)
 		PC->carry = 1;

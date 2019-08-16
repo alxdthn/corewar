@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:40:20 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/14 22:40:24 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 05:02:17 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void		cw_lldi(void *core, t_list *pc)
 	args[0].value = get_operand(args[0], pc, IDX_MOD);
 	args[1].value = get_operand(args[1], pc, IDX_MOD);
 	PC->reg[args[2].value - 1] =
-	get_value_from_adr(pc, args[0].value + args[1].value, 0);
+	get_value(PC->map, adr(CURRENT
+	+ args[0].value + args[1].value), sizeof(int));
 	if (PC->reg[args[2].value - 1] == 0)
 		PC->carry = TRUE;
 	else

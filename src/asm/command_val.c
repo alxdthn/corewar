@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   command_val.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 17:10:00 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/11 17:13:02 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/16 05:27:03 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "asm.h"
 #define COM ((t_comm *)tmp->content)
 #define COM2 &((t_comm *)tmp->content)
 #define KOS tmp[op_tab.arg_count - 1]

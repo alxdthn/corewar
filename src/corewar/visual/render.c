@@ -6,22 +6,21 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 18:57:50 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/16 00:16:48 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 05:16:35 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-#define MAX_COLOR_NUM 4
-
-static void		print_arena_content(t_core *core, int i, int y, int x)
+static void	print_arena_content(t_core *core, int i, int y, int x)
 {
 	t_attr	*attr;
 	int		currnet_attr;
 
 	attr = &core->visual.attrs[i];
 	if (attr->live_player_id)
-		currnet_attr = COLOR_PAIR(attr->live_player_id) | A_BOLD;
+		currnet_attr = COLOR_PAIR(attr->live_player_id
+		+ attr->pc_here) | A_BOLD;
 	else
 	{
 		if (attr->light)
@@ -37,7 +36,7 @@ static void		print_arena_content(t_core *core, int i, int y, int x)
 	wattroff(core->visual.win, currnet_attr);
 }
 
-void			render_arena(t_core *core)
+static void	render_arena(t_core *core)
 {
 	int		i;
 	int		x;
@@ -50,7 +49,6 @@ void			render_arena(t_core *core)
 	{
 		print_arena_content(core, i, y, x);
 		x += 3;
-//		mvwprintw(core->visual.win, y, x++, " ");
 		if (i && (i + 1) % 64 == 0)
 		{
 			y++;
@@ -59,24 +57,6 @@ void			render_arena(t_core *core)
 		i++;
 	}
 }
-
-void	render_info(t_core *core)
-{
-	mvwprintw(core->visual.win, core->visual.y_ofset + 1, WIN_INFO_POSX + 4, "Cycle : %d", core->cycle_after_start);
-	mvwprintw(core->visual.win, core->visual.y_ofset + 2, WIN_INFO_POSX + 4, "Cycle to die : %-4d", core->cycle_to_die);
-	mvwprintw(core->visual.win, core->visual.y_ofset + 3, WIN_INFO_POSX + 4, "Cycle delta : %d", CYCLE_DELTA);
-	mvwprintw(core->visual.win, core->visual.y_ofset + 4, WIN_INFO_POSX + 4, "Lives : %-10d", core->live_count);
-	mvwprintw(core->visual.win, core->visual.y_ofset + 5, WIN_INFO_POSX + 4, "Checks : %-2d / %-2d", core->game_check_count, MAX_CHECKS);
-}
-
-void		render_window(t_core *core)
-{
-	render_arena(core);
-	render_info(core);
-//	usleep(10000);
-}
-
-#define S_BTN 's'
 
 static void	handle_buttons(t_core *core)
 {
@@ -87,12 +67,19 @@ static void	handle_buttons(t_core *core)
 		core->visual.running = !core->visual.running;
 	else if (core->visual.button == S_BTN)
 		core->visual.running = 1;
+	else if (core->visual.button == R_BTN && core->visual.speed < START_SLEEP)
+		core->visual.speed <<= 1;
+	else if (core->visual.button == F_BTN && core->visual.speed > 1)
+		core->visual.speed >>= 1;
+	render_info(core);
 }
 
 void		show_fight_field(t_core *core)
 {
-	render_window(core);
+	render_arena(core);
+	render_info(core);
 	wrefresh(core->visual.win);
+	usleep(START_SLEEP / core->visual.speed);
 	if (core->visual.button == S_BTN)
 		core->visual.running = 0;
 	if (!core->visual.running)

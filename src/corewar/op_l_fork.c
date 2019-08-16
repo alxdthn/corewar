@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:38:47 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/15 15:33:52 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 05:02:04 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,9 @@ static void	set_params(t_core *core, t_pc *pc, int pos)
 	pc->position = pos;
 	pc->nb = ++core->global_process_count;
 	core->current_process_count++;
-
 }
 
-void	cw_fork(void *core, t_list *pc)
+void		cw_fork(void *core, t_list *pc)
 {
 	t_arg		arg;
 	t_list		*node;

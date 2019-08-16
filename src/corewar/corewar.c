@@ -6,25 +6,11 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:19:35 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/15 22:05:41 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 04:44:30 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-static void	set_exec_code(t_core *core)
-{
-	int		i;
-
-	i = 0;
-	while (core->players[i])
-	{
-		ft_memcpy(core->map + core->players[i]->start_position,
-		core->players[i]->exec_code,
-		core->players[i]->code_size);
-		i++;
-	}
-}
 
 static void	get_flag(t_core *core, int *flag, int value, int arg_ofset)
 {
@@ -85,7 +71,6 @@ static void	introduce(t_core *core)
 		core->players[i]->name, core->players[i]->comment);
 		i++;
 	}
-
 }
 
 int			main(int ac, char **av)
@@ -97,7 +82,6 @@ int			main(int ac, char **av)
 	read_input(&core, ac, av);
 	init_players(&core, ac, av);
 	init_processes(&core);
-	set_exec_code(&core);
 	introduce(&core);
 	if (core.visu_mod)
 		init_visual(&core);

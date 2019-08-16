@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 15:03:46 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/15 17:54:23 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 02:34:35 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ static void	clear_lives(t_core *core)
 	i = 0;
 	while (i < MEM_SIZE)
 		core->visual.attrs[i++].live_player_id = 0;
+	i = 0;
+	while (core->players[i])
+		core->players[i++]->lives = 0;
 }
 
 void		game_check(t_core *core, int *cycle_to_die)
