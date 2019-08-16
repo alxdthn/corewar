@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 17:10:00 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/16 18:02:16 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 18:03:08 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int				add_label(t_as **all, char **f, char *str, int y)
 	t_label	*lab;
 
 	i = 0;
-	while (*str == ' ' || *str == '\t')
-		str++;
+	while (str[i] == ' ' || str[i] == '\t')
+		i++;
 	while (ft_strindex(LABEL_CHARS, str[i]) != -1)
 		i++;
 	if (str[i] != LABEL_CHAR)
