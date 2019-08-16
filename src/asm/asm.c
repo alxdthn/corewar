@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:10:58 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/16 17:38:30 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 18:06:21 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	translator(char **f, int y, char *file, t_as *all)
 	while (f[y])
 	{
 		check_to_valid(f[y], 0, &all, f);
-		ft_printf("%s\n", f[y]);
 		if (to_ignore(f[y], 0) && y++ != -2)
 			continue;
 		if (ft_strstr(f[y], NAME_CMD_STRING) || ft_strstr(f[y],

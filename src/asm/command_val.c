@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_val.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 17:10:00 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/16 18:03:08 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 18:05:42 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 
 int				add_label(t_as **all, char **f, char *str, int y)
 {
-	char	*new;
 	t_list	*tmp;
 	int		i;
 	t_label	*lab;
@@ -38,7 +37,6 @@ int				add_label(t_as **all, char **f, char *str, int y)
 	create_lab(all, str, f, &lab);
 	if (!(tmp = ft_lstnew(lab, sizeof(t_label))))
 	{
-		free(new);
 		free(lab);
 		invalid_comm(all, 0, str);
 	}
