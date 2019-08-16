@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 20:01:46 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 22:07:56 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/15 15:59:53 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,23 @@ static void	print_process(t_core *core, t_list *pc, t_arg *arg)
 	ft_putchar('\n');
 }
 
-static void	find_player(t_core *core, int value)
+static void	find_player(t_core *core, int value, int pos)
 {
 	t_player	**players;
 	int			i;
 
-	players = ((t_core *)core)->players;
+	players = core->players;
 	i = 0;
 	while (players[i])
 	{
 		if (value == -players[i]->nb)
 		{
-			((t_core *)core)->last_player = players[i];
-			if (((t_core *)core)->out == 1)
+			core->last_player = players[i];
+			if (core->out == 1)
 				ft_printf("Player %d (%s) is said to be alive\n",
 				players[i]->nb, players[i]->name);
+			if (core->visu_mod)
+				core->visual.attrs[pos].live_player_id = players[i]->id + CYAN_CURSOR;
 			break ;
 		}
 		i++;
@@ -53,16 +55,12 @@ static void	find_player(t_core *core, int value)
 void		cw_live(void *core, t_list *pc)
 {
 	t_arg		arg;
-	int			new_pos;
 
 	init_args(&arg, pc, 1);
-	find_player((t_core *)core, arg.value);
-	new_pos = adr(CURRENT + 1 + arg.size);
+	find_player((t_core *)core, arg.value, CURRENT);
 	if (((t_core *)core)->out == 4 || ((t_core *)core)->out == 5)
 		print_process((t_core *)core, pc, &arg);
-	else if (((t_core *)core)->out == 16)
-		print_mov(pc, new_pos);
 	PC->cycle = 0;
 	((t_core *)core)->live_count++;
-	PC->position = new_pos;
+	mov_pc((t_core *)core, pc, adr(CURRENT + 1 + arg.size));
 }

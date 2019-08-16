@@ -6,36 +6,38 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 18:57:50 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/14 22:31:06 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/15 16:20:54 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int				is_carry_here(t_core *core, int i)
-{
-	t_list	    *pc;
-   int			j;
-
-   j = 0;
-	pc = core->pcs;
-	while (pc)
-	{
-		if (PC->position == i)
-			return (i);
-       j++;
-		pc = pc->next;
-	}
-	return (-1);
-}
-//
 #define MAX_COLOR_NUM 4
-//
+
 static void		print_arena_content(t_core *core, int i, int y, int x)
 {
-	attron(COLOR_PAIR(core->visual.map[i]));
+	t_attr	*attr;
+	int		currnet_attr;
+
+	attr = &core->visual.attrs[i];
+	if (attr->live_player_id)
+		currnet_attr = COLOR_PAIR(attr->live_player_id) | A_BOLD;
+	else
+	{
+		if (attr->light)
+		{
+			currnet_attr = COLOR_PAIR(attr->index + attr->pc_here) | A_BOLD;
+			attr->light--;
+		}
+		else
+			currnet_attr = COLOR_PAIR(attr->index + attr->pc_here);
+	}
+	attron(currnet_attr);
+				// wattron(core->visual.win_arena, 3);
+
+			// wprintw(core->visual.win_arena, "%.2x", core->map[i]);
 	mvprintw(y, x, "%02x", core->map[i]);
-	attroff(COLOR_PAIR(core->visual.map[i]));
+	attroff(currnet_attr);
 }
 
 void			render_arena(t_core *core)
@@ -49,6 +51,7 @@ void			render_arena(t_core *core)
 	y = 1;
 	while (i < MEM_SIZE)
 	{
+
 		print_arena_content(core, i, y, x);
 		x = x + 2;
 		mvprintw(y, x, " ");
@@ -102,11 +105,11 @@ static void	draw_arena(t_core *core)
 	while (i < 64)
 	{
 		j = 0;
-		wmove(core->visual.win_arena, i + 2, 5);
+		// wmove(core->visual.win_arena, i + 2, 5);
 		while (j < 64)
 		{
 			// attribute = get_attribute(vm, &vm->vs->map[i * 64 + j], cycles);
-			// wattron(core->visual.win_arena, 3);
+			wattron(core->visual.win_arena, 3);
 			wprintw(core->visual.win_arena, "%.2x", core->map[i * 64 + j]);
 			// wattroff(core->visual.win_arena, attribute);
 			waddch(core->visual.win_arena, ' ');
@@ -132,7 +135,7 @@ void		render_window(t_core *core)
 	mvprintw(53, 198, "Cycle delta : %d", CYCLE_DELTA);
 	mvprintw(54, 198, "Lives : %d", core->live_count);
 	mvprintw(55, 198, "Checks : %d / %d", core->game_check_count, MAX_CHECKS);
-	usleep(10000);
+//	usleep(10000);
 	refresh();
 }
 

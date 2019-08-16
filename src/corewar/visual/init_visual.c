@@ -6,40 +6,66 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 18:47:35 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/14 22:26:28 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/15 16:23:29 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
+
+# define HEIGHT					(MEM_SIZE / 64 + 4)
+# define WIDTH					(64 * 2 + 5)
+
+
+static void	draw_border(WINDOW *win)
+{
+	wattron(win, COLOR_PAIR(GRAY));
+	box(win, 0, 0);
+	wattroff(win, COLOR_PAIR(GRAY));
+}
+
+void		draw(t_core *core)
+{
+	draw_border(core->visual.win_arena);
+	// wrefresh(core->visual.win_info);
+	wrefresh(core->visual.win_arena);
+}
+
+void create_frame(t_core *core)
+{
+	initscr();
+	core->visual.win_arena = newwin(4096 + 30, WIDTH + 4, 1, 2);
+	// core->visual.win_info = newwin(HEIGHT, WIDTH / 4 + 10, 1, WIDTH + 6);
+	// werase(core->visual.win_arena);
+	// werase(core->visual.win_info);
+}
+
+
 static void	fill_map(t_core *core, int pc, int len, int player_id)
 {
-	int i;
-	int value;
+	int		i;
 
 	i = pc;
-	value = ((player_id - 1) % 4) + 1;
 	while (i < len + pc)
-	{
-		core->visual.map[i] = GRAY + player_id;
-		i++;
-	}
+		core->visual.attrs[i++].index = GRAY + player_id;
 }
 
 static void	init_attr(t_core *core)
 {
-	int	pc;
-	int	id;
+	int		pos;
+	int		i;
 
-	pc = 0;
-	id = 1;
-	ft_memset(core->visual.map, GRAY, MEM_SIZE);
-	while (id <= core->war_count)
+	i = 0;
+	while (i < MEM_SIZE)
+		core->visual.attrs[i++].index = GRAY;
+	pos = 0;
+	i = 1;
+	while (i <= core->war_count)
 	{
-		fill_map(core, pc, core->players[id - 1]->code_size, id);
-		core->visual.map[pc] += 5;
-		pc += MEM_SIZE / core->war_count;
-		id++;
+		fill_map(core, pos, core->players[i - 1]->code_size, i);
+		core->visual.attrs[pos].pc_here = 5;
+		pos += MEM_SIZE / core->war_count;
+		i++;
 	}
 }
 
@@ -56,10 +82,10 @@ void		init_colors(void)
 	init_pair(YELLOW_CURSOR, COLOR_BLACK, COLOR_YELLOW);
 	init_pair(RED_CURSOR, COLOR_BLACK, COLOR_RED);
 	init_pair(CYAN_CURSOR, COLOR_BLACK, COLOR_CYAN);
-	init_pair(LIVE_GREEN, COLOR_WHITE, COLOR_GREEN);
-	init_pair(LIVE_YELLOW, COLOR_WHITE, COLOR_YELLOW);
-	init_pair(LIVE_RED, COLOR_WHITE, COLOR_RED);
-	init_pair(LIVE_CYAN, COLOR_WHITE, COLOR_CYAN);
+	init_pair(LIVE_GREEN, COLOR_GREEN, 0);
+	init_pair(LIVE_YELLOW, COLOR_YELLOW, 0);
+	init_pair(LIVE_RED, COLOR_RED, 0);
+	init_pair(LIVE_CYAN, COLOR_CYAN, 0);
 }
 
 void	init_visual(t_core *core)

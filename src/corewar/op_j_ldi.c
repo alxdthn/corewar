@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 21:35:52 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 21:51:53 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/14 22:41:49 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,13 @@ static void	ldi_print_process(t_core *core, t_list *pc, t_arg *args)
 void		cw_ldi(void *core, t_list *pc)
 {
 	t_arg	args[3];
-	int		new_pos;
 
 	init_args((t_arg *)args, pc, 3);
 	args[0].value = get_operand(args[0], pc, IDX_MOD);
 	args[1].value = get_operand(args[1], pc, IDX_MOD);
 	PC->reg[args[2].value - 1] =
 	get_value_from_adr(pc, args[0].value + args[1].value, IDX_MOD);
-	new_pos = adr(CURRENT + 2 + args[0].size + args[1].size + args[2].size);
 	if (((t_core *)core)->out == 4 || ((t_core *)core)->out == 5)
 		ldi_print_process((t_core *)core, pc, (t_arg *)args);
-	else if (((t_core *)core)->out == 16)
-		print_mov(pc, new_pos);
-	PC->position = new_pos;
+	mov_pc((t_core *)core, pc, adr(CURRENT + 2 + args[0].size + args[1].size + args[2].size));
 }

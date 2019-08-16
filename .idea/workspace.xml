@@ -24,10 +24,10 @@
     <splitter split-orientation="horizontal" split-proportion="0.45296866">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/includes/corewar.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="4158">
+                <state relative-caret-position="906">
                   <caret line="198" column="24" selection-start-line="198" selection-start-column="24" selection-end-line="198" selection-end-column="24" />
                 </state>
               </provider>
@@ -36,17 +36,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/corewar/game_process.c">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="150">
+                <state relative-caret-position="567">
                   <caret line="27" selection-start-line="27" selection-end-line="27" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/corewar/visual/init_map.c">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="838">
-                  <caret line="156" column="25" selection-start-line="156" selection-start-column="25" selection-end-line="156" selection-end-column="25" />
                 </state>
               </provider>
             </entry>
@@ -63,8 +54,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/corewar/corewar.c">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="627">
-                  <caret line="129" column="53" selection-start-line="129" selection-start-column="53" selection-end-line="129" selection-end-column="53" />
+                <state relative-caret-position="2709">
+                  <caret line="129" column="31" lean-forward="true" selection-start-line="129" selection-start-column="31" selection-end-line="129" selection-end-column="31" />
                 </state>
               </provider>
             </entry>
@@ -99,7 +90,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file:///usr/include/ncurses.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="18018">
+                <state relative-caret-position="21084">
                   <caret line="1004" column="8" selection-start-line="1004" selection-start-column="8" selection-end-line="1004" selection-end-column="8" />
                 </state>
               </provider>
@@ -113,7 +104,7 @@
             <entry file="file://$PROJECT_DIR$/src/corewar/game_process.c">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="469">
-                  <caret line="106" column="17" lean-forward="true" selection-start-line="106" selection-start-column="17" selection-end-line="106" selection-end-column="17" />
+                  <caret line="106" column="12" lean-forward="true" selection-start-line="106" selection-start-column="12" selection-end-line="106" selection-end-column="12" />
                 </state>
               </provider>
             </entry>
@@ -240,17 +231,17 @@
       <workItem from="1565789004597" duration="1823000" />
       <workItem from="1565791095241" duration="3913000" />
       <workItem from="1565795066416" duration="805000" />
+      <workItem from="1565943852199" duration="2000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16774000" />
+    <option name="totallyTimeSpent" value="16776000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1788" height="1360" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18613975" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18785796" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -264,7 +255,7 @@
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.24684542" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" />
-      <window_info active="true" anchor="bottom" id="CMake" order="11" visible="true" weight="0.20447284" />
+      <window_info active="true" anchor="bottom" id="CMake" order="11" visible="true" weight="0.20425868" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -324,9 +315,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="12" column="44" selection-start-line="12" selection-start-column="44" selection-end-line="12" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/corewar/visual/init_map.c" />
     <entry file="file://$PROJECT_DIR$/includes/corewar.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4158">
+        <state relative-caret-position="906">
           <caret line="198" column="24" selection-start-line="198" selection-start-column="24" selection-end-line="198" selection-end-column="24" />
         </state>
       </provider>
@@ -335,6 +334,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="672">
           <caret line="32" selection-start-line="32" selection-end-line="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/corewar/corewar.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2709">
+          <caret line="129" column="31" lean-forward="true" selection-start-line="129" selection-start-column="31" selection-end-line="129" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -361,36 +367,15 @@
     </entry>
     <entry file="file:///usr/include/ncurses.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18018">
+        <state relative-caret-position="21084">
           <caret line="1004" column="8" selection-start-line="1004" selection-start-column="8" selection-end-line="1004" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="12" column="44" selection-start-line="12" selection-start-column="44" selection-end-line="12" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/corewar/corewar.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="627">
-          <caret line="129" column="53" selection-start-line="129" selection-start-column="53" selection-end-line="129" selection-end-column="53" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/corewar/game_process.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/corewar/visual/init_map.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="838">
-          <caret line="156" column="25" selection-start-line="156" selection-start-column="25" selection-end-line="156" selection-end-column="25" />
+        <state relative-caret-position="469">
+          <caret line="106" column="12" lean-forward="true" selection-start-line="106" selection-start-column="12" selection-end-line="106" selection-end-column="12" />
         </state>
       </provider>
     </entry>
