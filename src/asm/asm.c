@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:10:58 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/16 18:06:21 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/16 18:12:40 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	translator(char **f, int y, char *file, t_as *all)
 	}
 	label_to_nbr(&all, all->labels, all->comm, 0);
 	print_to_bytecode(all, file, all->comm, code_size(all->comm, 0));
-	delete_asm_all(&all, &file, &f);
+	delete_asm_all(&all, &f);
 }
 
 int		main(int ac, char **av)

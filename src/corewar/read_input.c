@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 18:45:02 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/16 18:00:29 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 18:13:12 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ static int	validate_input(char *input, ssize_t size, char *file)
 		return (put_size_error(size - EXEC_CODE_OFSET, file));
 	if (GET_VAL(input, int) != COREWAR_EXEC_MAGIC)
 		return (puterr(file, " has an invalid header"));
-	if (GET_VAL(input + CODE_SIZE_OFSET, int) != size - (ssize_t)EXEC_CODE_OFSET)
+	if (GET_VAL(input + CODE_SIZE_OFSET, int)
+	!= size - (ssize_t)EXEC_CODE_OFSET)
 		return (puterr(file, " has a code size that differ"\
 		" from what its header says"));
 	return (1);
