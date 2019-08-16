@@ -6,13 +6,15 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 05:20:53 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/16 05:47:53 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 06:02:30 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ASM_H
 # define ASM_H
 # include "common.h"
+
+typedef unsigned char t_arg_byte;
 
 typedef	struct	s_as
 {
@@ -37,7 +39,7 @@ typedef	struct	s_comm
 	int			arg_s;
 	int			arg_t;
 	int			len;
-	char		arg_type;
+	t_arg_byte	arg_type;
 }				t_comm;
 
 typedef	struct	s_label
