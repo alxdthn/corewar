@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 05:20:53 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/16 18:11:46 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 18:16:53 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define ASM_H
 # include "common.h"
 
-typedef unsigned char t_arg_byte;
+typedef unsigned char	t_arg_byte;
 
 typedef	struct	s_as
 {
