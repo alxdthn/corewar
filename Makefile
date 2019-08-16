@@ -6,13 +6,13 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/03 20:54:43 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/16 18:14:52 by nalexand         ###   ########.fr        #
+#    Updated: 2019/08/16 23:32:23 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 VPATH = src/corewar:src/asm:src/common:includes:src/corewar/visual
 
-CFLAGS = -Wall -Werror -Wextra -O3
+CFLAGS = -Wall -Werror -Wextra -g
 
 HEADER = -I includes -I lib/libftprintf/includes
 INCLUDES = corewar.h op.h
