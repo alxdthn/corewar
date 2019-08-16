@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   deleter.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 16:39:44 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/08 20:42:08 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/16 05:27:13 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "asm.h"
 
 void	del_com(t_as **all, t_list *comm)
 {

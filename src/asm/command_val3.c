@@ -6,11 +6,11 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/09 17:38:38 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/13 22:05:59 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 05:27:10 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "asm.h"
 #define COM ((t_comm *)tmp->content)
 #define COM2 &((t_comm *)tmp->content)
 #define KOS tmp[op_tab.arg_count - 1]

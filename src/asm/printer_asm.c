@@ -6,11 +6,11 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 22:05:51 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/13 22:06:23 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 05:27:29 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "asm.h"
 
 void	set_size_short(char *buf, int size, int i, int ofset)
 {

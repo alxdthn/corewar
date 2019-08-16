@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 19:06:33 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/15 15:23:01 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 04:59:54 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,20 @@
 
 int		get_operand(t_arg arg, t_list *pc, int mod)
 {
+	int		pos;
+
 	if (arg.type == T_REG)
 		return (PC->reg[arg.value - 1]);
 	else if (arg.type == T_DIR)
 		return (arg.value);
 	else
-		return (get_value_from_adr(pc, arg.value, mod));
+	{
+		if (mod)
+			pos = adr(CURRENT + arg.value % mod);
+		else
+			pos = adr(CURRENT + arg.value);
+		return (get_value(PC->map, pos, sizeof(int)));
+	}
 }
 
 void	set_value(unsigned char *mem, int pos, int size, int value)
@@ -57,17 +65,6 @@ int		get_value(unsigned char *mem, int pos, int size)
 	return (res);
 }
 
-int		get_value_from_adr(t_list *pc, int arg_value, int mod)
-{
-	int		pos;
-
-	if (mod)
-		pos = adr(PC->position + arg_value % mod);
-	else
-		pos = adr(PC->position + arg_value);
-	return (get_value(PC->map, pos, sizeof(int)));
-}
-
 int		adr(int current_adr)
 {
 	if (current_adr >= MEM_SIZE)
@@ -77,7 +74,7 @@ int		adr(int current_adr)
 	return (current_adr);
 }
 
-void		mov_pc(t_core *core, t_list *pc, int new_pos)
+void	mov_pc(t_core *core, t_list *pc, int new_pos)
 {
 	if (core->visu_mod)
 	{

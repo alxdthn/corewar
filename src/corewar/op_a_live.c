@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 20:01:46 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/15 15:59:53 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 05:00:25 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,12 @@ static void	find_player(t_core *core, int value, int pos)
 				ft_printf("Player %d (%s) is said to be alive\n",
 				players[i]->nb, players[i]->name);
 			if (core->visu_mod)
-				core->visual.attrs[pos].live_player_id = players[i]->id + CYAN_CURSOR;
+			{
+				core->visual.attrs[pos].live_player_id =
+				players[i]->id + CYAN_CURSOR;
+				players[i]->last_live = core->cycle_after_start;
+				players[i]->lives++;
+			}
 			break ;
 		}
 		i++;

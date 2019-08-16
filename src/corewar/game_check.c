@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 15:03:46 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/15 16:39:41 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 02:34:35 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static void	remove_pcs(t_core *core)
 				ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
 				PC->nb, PC->cycle, core->cycle_to_die);
 			ft_lstdelnode(&core->pcs, pc);
+			if (core->visu_mod)
+				core->visual.attrs[CURRENT].pc_here = 0;
 			core->current_process_count--;
 			pc = tmp;
 		}
@@ -42,6 +44,9 @@ static void	clear_lives(t_core *core)
 	i = 0;
 	while (i < MEM_SIZE)
 		core->visual.attrs[i++].live_player_id = 0;
+	i = 0;
+	while (core->players[i])
+		core->players[i++]->lives = 0;
 }
 
 void		game_check(t_core *core, int *cycle_to_die)
