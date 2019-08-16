@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 18:45:18 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 22:58:13 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 18:01:36 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	print_dump(t_core *core, int bar, int exit)
 {
-	unsigned int	i;
-	unsigned int	j;
-	unsigned int	line_size;
-	unsigned int	delim;
+	int		i;
+	int		j;
+	int		line_size;
+	int		delim;
 
 	line_size = MEM_SIZE / ((core->dump >= 0) ? 128 : 64);
 	i = 0;

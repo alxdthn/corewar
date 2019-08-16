@@ -6,18 +6,16 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/11 16:58:18 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/13 15:15:48 by nalexand         ###   ########.fr        #
+#    Updated: 2019/08/16 17:47:12 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY: debug all clean fclean re
-.SECONDARY: $(LFT_OBJ) $(PF_OBJ) $(GNL_OBJ)
-override ARFLAGS = rcs
 HEADDERS = get_next_line.h libft.h ft_printf.h
 VPATH = src/libft:src/ft_printf:src/gnl:includes
 FT_PRINTF = libftprintf.a
 LIBFT = libft.a
-override CFLAGS += -Wall -Werror -Wextra -g
+CFLAGS = -Wall -Werror -Wextra
 HEADER = -I includes
 
 OBJ_DIR = obj/
@@ -154,10 +152,12 @@ debug:: all
 endif
 
 $(FT_PRINTF):: $(OBJ_DIR)
-$(FT_PRINTF):: $(FT_PRINTF)($(LFT_OBJ) $(PF_OBJ) $(GNL_OBJ))
+$(FT_PRINTF):: $(LFT_OBJ) $(PF_OBJ) $(GNL_OBJ)
+	@ar rc $@ $^
 
 $(LIBFT):: $(OBJ_DIR)
-$(LIBFT):: $(LIBFT)($(LFT_OBJ) $(GNL_OBJ))
+$(LIBFT):: $(LFT_OBJ) $(GNL_OBJ)
+	@ar rc $@ $^
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)

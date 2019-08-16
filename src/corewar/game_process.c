@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 19:12:39 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/16 01:35:25 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 18:01:05 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 static void	validate_op_code(t_core *core, t_list *pc)
 {
-	int		new_pos;
-
 	PC->op = BYTE(CURRENT);
 	if (PC->op > 0 && PC->op < 17)
 	{
@@ -31,7 +29,6 @@ static void	validate_op_code(t_core *core, t_list *pc)
 
 static void	solve_operation(t_core *core, t_list *pc)
 {
-	int		new_pos;
 	int		ofset;
 
 	PC->cycle_for_op--;

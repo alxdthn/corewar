@@ -6,18 +6,14 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/03 20:54:43 by nalexand          #+#    #+#              #
-#    Updated: 2019/08/16 05:35:35 by nalexand         ###   ########.fr        #
+#    Updated: 2019/08/16 17:59:14 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 VPATH = src/corewar:src/asm:src/common:includes:src/corewar/visual
 
-.SECONDARY: $(COR_OBJ) $(ASM_OBJ) $(COM_OBJ)
-
-override ARFLAGS = rcs
-
 #МЫ НЕ ЗАБУДЕМ ДОБАВИТЬ ФЛАГИ -Wall -Werror -Wextra
-CFLAGS = -g
+CFLAGS = -Wall -Werror -Wextra -O3
 
 HEADER = -I includes -I lib/libftprintf/includes
 INCLUDES = corewar.h op.h
@@ -28,8 +24,7 @@ ASM = asm
 COM_LIB = lib/common.a
 COR_LIB = lib/corewar.a
 ASM_LIB = lib/asm.a
-LIBFT = lib/libftprintf.a
-LIBFT_PATH = lib/libftprintf/
+LIBFT = lib/libftprintf/libftprintf.a
 
 OBJ_DIR = obj/
 LIB_DIR = lib/
@@ -95,16 +90,17 @@ $(ASM): $(COM_LIB) $(ASM_LIB) $(LIBFT)
 	gcc $(CFLAGS) -o $@ $^
 
 $(COR_LIB):: $(OBJ_DIR) $(LIB_DIR)
-$(COR_LIB):: $(COR_LIB)($(COR_OBJ))
+$(COR_LIB):: $(COR_OBJ)
+	@ar rc $@ $^
 $(ASM_LIB):: $(OBJ_DIR) $(LIB_DIR)
-$(ASM_LIB):: $(ASM_LIB)($(ASM_OBJ))
+$(ASM_LIB):: $(ASM_OBJ)
+	@ar rc $@ $^
 $(COM_LIB):: $(OBJ_DIR) $(LIB_DIR)
-$(COM_LIB):: $(COM_LIB)($(COM_OBJ))
-$(LIBFT): $(LIBFT_PATH)libftprintf.a
-	cp $< lib/
+$(COM_LIB):: $(COM_OBJ)
+	@ar rc $@ $^
 
-$(LIBFT_PATH)libftprintf.a:
-	make -C $(LIBFT_PATH)
+$(LIBFT):
+	make -C lib/libftprintf
 
 $(OBJ_DIR):
 	mkdir -p $@
@@ -112,14 +108,13 @@ $(LIB_DIR):
 	mkdir -p $@
 
 $(OBJ_DIR)%.o: %.c $(INCLUDES)
-	@gcc $(CFLAGS) -c $< -o $@ $(HEADER)
+	gcc $(CFLAGS) -c $< -o $@ $(HEADER)
 
 clean:
 	@rm -rf $(OBJ_DIR)
 	@rm -f $(COM_LIB)
 	@rm -f $(COR_LIB)
 	@rm -f $(ASM_LIB)
-	@rm -f $(LIBFT)
 	@rm -rf *.dSYM
 	@rm -f *.txt
 	@rm -f *.diff
