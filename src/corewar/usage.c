@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 23:36:03 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 23:41:53 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 19:32:19 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int		put_usage(int fd)
 	"\t                - 1 : Show lives\n"\
 	"\t                - 2 : Show cycles\n"\
 	"\t                - 4 : Show operations (Params are NOT litteral ...)\n"\
+	"\t                - 5 : Show operations widh cycle number\n"\
 	"\t                - 8 : Show deaths\n"\
 	"\t                - 16 : Show PC movements (Except for jumps)\n");
 	return (fd);

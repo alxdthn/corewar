@@ -45,7 +45,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/corewar",
-			"args": ["-s", "le_pet_de_nonne.cor"],
+			"args": ["-s", "bots/toto.cor", "2018/mbenjell3/wave.cor", "2018/sboulet/ForgottenOne.cor", "2018/chaydont/Horace.cor"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],

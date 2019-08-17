@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 21:35:29 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/16 04:48:47 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 18:00:45 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	check_new_numbers(t_core *core, int ac, char **av)
 	}
 }
 
-static void	set_params(t_core *core, t_player *player, t_list *input)
+static void	set_params(t_player *player, t_list *input)
 {
 	player->last_live = 0;
 	player->lives = 0;
@@ -84,7 +84,7 @@ void		init_players(t_core *core, int ac, char **av)
 			cw_clear_exit(core, MEM_ERROR, 2);
 		new->nb = nb;
 		new->id = nb--;
-		set_params(core, new, input);
+		set_params(new, input);
 		core->players[--i] = new;
 		input = input->next;
 	}
