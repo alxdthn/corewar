@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 18:45:02 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/13 23:38:53 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 05:13:09 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void		read_input(t_core *core, int ac, char **av)
 	if (ac < 2 || core->arg_ofset == ac - 1)
 		cw_clear_exit(core, NULL, put_usage(1));
 	while (++i < ac)
-	{
 		if (ft_strequ("-n", av[i]) && i + 1 < ac)
 			i++;
 		else
@@ -79,11 +78,9 @@ void		read_input(t_core *core, int ac, char **av)
 				cw_clear_exit(core, MEM_ERROR, 2);
 			if (!(validate_input(node->content, ret, av[i])))
 				cw_clear_exit(core, NULL, 2);
-			node->content_size = ret;
 			core->war_count++;
 			if (core->war_count > MAX_PLAYERS)
 				cw_clear_exit(core, "Too many champions", 1);
 			ft_lstadd(&core->input, node);
 		}
-	}
 }

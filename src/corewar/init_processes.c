@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 21:36:46 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/15 15:17:05 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 03:49:32 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	init_processes(t_core *core)
 	while (core->players[i])
 	{
 		new.nb = i + 1;
-		new.reg[0] = -core->players[i]->nb;
+		new.reg[0] = (core->players[i]->nb < 0)
+		? core->players[i]->nb : -core->players[i]->nb;
 		new.owner = core->players[i];
 		new.position = core->players[i++]->start_position;
 		new.map = core->map;

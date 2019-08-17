@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   error_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 16:37:21 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/08 20:41:46 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/16 05:27:20 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "asm.h"
 
 void	first_error(char *str, char *file, char **todel)
 {

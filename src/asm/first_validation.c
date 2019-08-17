@@ -6,11 +6,11 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 15:04:16 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/13 22:05:03 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 05:27:24 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "asm.h"
 #define KOSTYL (*all)->comment[0]
 
 int		to_ignore(char *str, int x)

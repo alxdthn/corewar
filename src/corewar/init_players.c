@@ -6,11 +6,25 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 21:35:29 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/14 22:18:37 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 04:48:47 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
+static void	set_exec_code(t_core *core)
+{
+	int		i;
+
+	i = 0;
+	while (core->players[i])
+	{
+		ft_memcpy(core->map + core->players[i]->start_position,
+		core->players[i]->exec_code,
+		core->players[i]->code_size);
+		i++;
+	}
+}
 
 static void	set_start_position(t_core *core)
 {
@@ -44,6 +58,16 @@ static void	check_new_numbers(t_core *core, int ac, char **av)
 	}
 }
 
+static void	set_params(t_core *core, t_player *player, t_list *input)
+{
+	player->last_live = 0;
+	player->lives = 0;
+	player->name = STR(input) + NAME_OFSET;
+	player->comment = STR(input) + COMMENT_OFSET;
+	player->code_size = GET_VAL(input->content + CODE_SIZE_OFSET, int);
+	player->exec_code = STR(input) + EXEC_CODE_OFSET;
+}
+
 void		init_players(t_core *core, int ac, char **av)
 {
 	t_list		*input;
@@ -60,13 +84,11 @@ void		init_players(t_core *core, int ac, char **av)
 			cw_clear_exit(core, MEM_ERROR, 2);
 		new->nb = nb;
 		new->id = nb--;
-		new->name = STR(input) + NAME_OFSET;
-		new->comment = STR(input) + COMMENT_OFSET;
-		new->code_size = GET_VAL(input->content + CODE_SIZE_OFSET, int);
-		new->exec_code = STR(input) + EXEC_CODE_OFSET;
+		set_params(core, new, input);
 		core->players[--i] = new;
 		input = input->next;
 	}
 	set_start_position(core);
 	check_new_numbers(core, ac, av);
+	set_exec_code(core);
 }

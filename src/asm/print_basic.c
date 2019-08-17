@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   print_basic.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 17:51:19 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/14 15:48:22 by skrystin         ###   ########.fr       */
+/*   Updated: 2019/08/16 05:27:26 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "asm.h"
 
 void	set_magic(char *buf)
 {
