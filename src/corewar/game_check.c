@@ -6,35 +6,49 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 15:03:46 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/16 23:35:01 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/17 17:03:12 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
+static void	put_info(t_core *core, t_list *pc)
+{
+	if (core->out == 8)
+		ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
+		PC->nb, PC->cycle, core->cycle_to_die);
+
+}
+
 static void	remove_pcs(t_core *core)
 {
 	t_list	*pc;
+	t_list	*prev;
 	t_list	*tmp;
 
 	pc = core->pcs;
+	prev = NULL;
 	while (pc)
-	{
 		if (PC->cycle >= core->cycle_to_die || core->cycle_to_die <= 0)
 		{
-			tmp = pc->next;
-			if (core->out == 8)
-				ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
-				PC->nb, PC->cycle, core->cycle_to_die);
+			if (core->pcs == pc)
+				core->pcs = core->pcs->next;
+			if (prev)
+				prev->next = pc->next;
+			put_info(core, pc);
 			if (core->visu_mod)
 				core->visual.attrs[CURRENT].pc_here = 0;
-			ft_lstdelnode(&core->pcs, pc);
 			core->current_process_count--;
+			tmp = pc->next;
+			free(pc->content);
+			free(pc);
 			pc = tmp;
 		}
 		else
+		{
+			prev = pc;
 			pc = pc->next;
-	}
+		}
 }
 
 static void	clear_lives(t_core *core)
