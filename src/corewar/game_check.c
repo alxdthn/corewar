@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 15:03:46 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/17 17:03:12 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/17 17:08:32 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,10 @@ static void	put_info(t_core *core, t_list *pc)
 	if (core->out == 8)
 		ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
 		PC->nb, PC->cycle, core->cycle_to_die);
-
 }
 
-static void	remove_pcs(t_core *core)
+static void	remove_pcs(t_core *core, t_list *pc, t_list *prev)
 {
-	t_list	*pc;
-	t_list	*prev;
 	t_list	*tmp;
 
 	pc = core->pcs;
@@ -65,7 +62,7 @@ static void	clear_lives(t_core *core)
 
 void		game_check(t_core *core, int *cycle_to_die)
 {
-	remove_pcs(core);
+	remove_pcs(core, core->pcs, NULL);
 	if (core->visu_mod)
 		clear_lives(core);
 	core->game_check_count++;
