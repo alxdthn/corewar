@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 16:39:44 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/16 05:27:13 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 18:11:31 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	del_labels(t_as **all, t_list *lab)
 	}
 }
 
-void	delete_asm_all(t_as **all, char **file, char ***f)
+void	delete_asm_all(t_as **all, char ***f)
 {
 	if (f && *f)
 		ft_arraydel((void ***)f);

@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/09 17:38:38 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/16 05:27:10 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 18:11:18 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,12 @@ void			add_arg(t_comm *com, char *str, t_as **all, t_op op_tab)
 {
 	int		x;
 	int		c;
-	char	*label;
 	char	**tmp;
 
 	x = 0;
 	while (*str == ' ' || *str == '\t')
 		str++;
-	(com)->arg_type = find_type_arg(all, str, 0, op_tab);
+	(com)->arg_type = find_type_arg(all, str, op_tab);
 	tmp = ft_strsplit(str, SEPARATOR_CHAR);
 	while (tmp[x])
 	{
@@ -48,7 +47,7 @@ int				check_arg(char *str, t_op op_tab, t_as **all)
 	int		i;
 	int		x;
 
-	if (ft_strccount(str, SEPARATOR_CHAR) != KOS4 || (i = 0) == -1)
+	if (ft_strccount(str, SEPARATOR_CHAR) != (size_t)KOS4 || (i = 0) == -1)
 		return (0);
 	tmp = ft_strsplit(str, SEPARATOR_CHAR);
 	while (tmp[i] && (x = 0) == 0)

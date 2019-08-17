@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/09 17:37:02 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/16 05:27:07 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 18:09:41 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int				find_counter(char *str)
 int				check_command(char *str, char **f, t_as **all, int counter)
 {
 	int		after;
-	char	**args;
 
 	if (counter == 16)
 		invalid_comm(all, &f, str);
@@ -62,7 +61,7 @@ int				check_command(char *str, char **f, t_as **all, int counter)
 	return (counter);
 }
 
-unsigned char	find_type_arg(t_as **all, char *str, int i, t_op op_tb)
+unsigned char	find_type_arg(t_as **all, char *str, t_op op_tb)
 {
 	unsigned char	res;
 	int				arg;

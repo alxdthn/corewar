@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 15:04:16 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/16 05:27:24 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 18:03:04 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ void	ft_write_it(t_as **all, int *y, char **f, int x)
 
 void	add_names(t_as **all, int *y, char **f, int x)
 {
-	char	*str;
-
 	while (f[*y][x] == '\t' || f[*y][x] == ' ')
 		x++;
 	if (ft_strstr(f[*y], NAME_CMD_STRING) == f[*y] + x &&

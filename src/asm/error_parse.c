@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 16:37:21 by skrystin          #+#    #+#             */
-/*   Updated: 2019/08/16 05:27:20 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 18:12:09 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	valid_errors(char *line, char ***todel, t_as **all, int flag)
 		ft_printf("Invalid name or comment\n");
 	if (todel && *todel)
 		ft_arraydel((void ***)todel);
-	delete_asm_all(all, 0, 0);
+	delete_asm_all(all, NULL);
 	exit(0);
 }
 
@@ -43,6 +43,6 @@ void	invalid_comm(t_as **all, char ***todel, char *str)
 	ft_printf("Invalid command, arguments or label - %s\n", str);
 	if (todel && *todel)
 		ft_arraydel((void ***)todel);
-	delete_asm_all(all, 0, 0);
+	delete_asm_all(all, NULL);
 	exit(0);
 }

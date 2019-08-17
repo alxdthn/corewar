@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_read_to_str.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skrystin <skrystin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 21:48:03 by nalexand          #+#    #+#             */
-/*   Updated: 2019/08/04 17:48:59 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/08/16 18:17:31 by skrystin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static ssize_t	list_to_str(t_list **lst, ssize_t size, char **str)
 	return (size);
 }
 
-ssize_t		ft_read_to_str(int fd, char **str, size_t b_size)
+ssize_t			ft_read_to_str(int fd, char **str, size_t b_size)
 {
 	char	buf[b_size];
 	ssize_t	ret;
